@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hidden History Compendium — Vol. III: Suppressed Cosmologies & Forbidden Geographies</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=IM+Fell+English:ital@0;1&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --parchment: #1a1508;
+    --parchment-mid: #221b0a;
+    --parchment-light: #2e2510;
+    --gold: #c9a84c;
+    --gold-bright: #e8c96d;
+    --gold-dim: #8a6e2a;
+    --gold-glow: rgba(201,168,76,0.15);
+    --crimson: #8b2020;
+    --crimson-soft: #a83232;
+    --ink: #e8dfc0;
+    --ink-dim: #b8a878;
+    --ink-faint: #6e5e38;
+    --white-gold: #f5edd8;
+    --sidebar-w: 280px;
+    --accent-teal: #3a7a6e;
+    --accent-purple: #6a3a7a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--parchment);
+    color: var(--ink);
+    font-family: 'Crimson Pro', 'IM Fell English', serif;
+    font-size: 18px;
+    line-height: 1.85;
+    overflow-x: hidden;
+  }
+
+  /* ── NOISE TEXTURE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.4;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0;
+    width: var(--sidebar-w);
+    height: 100vh;
+    background: linear-gradient(180deg, #0f0d05 0%, #1a1508 40%, #0f0d05 100%);
+    border-right: 1px solid var(--gold-dim);
+    overflow-y: auto;
+    z-index: 100;
+    padding: 30px 0 60px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--gold-dim) transparent;
+  }
+
+  #sidebar::-webkit-scrollbar { width: 4px; }
+  #sidebar::-webkit-scrollbar-track { background: transparent; }
+  #sidebar::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
+
+  .sidebar-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    padding: 0 24px 20px;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+
+  .sidebar-title span {
+    display: block;
+    font-size: 11px;
+    color: var(--gold);
+    margin-bottom: 4px;
+  }
+
+  .nav-section {
+    padding: 0 16px 8px;
+  }
+
+  .nav-section-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 7.5px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    padding: 8px 8px 4px;
+    display: block;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 7px 12px;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13.5px;
+    color: var(--ink-dim);
+    text-decoration: none;
+    border-left: 2px solid transparent;
+    transition: all 0.25s ease;
+    line-height: 1.4;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .nav-link:hover {
+    color: var(--gold-bright);
+    border-left-color: var(--gold);
+    background: var(--gold-glow);
+    padding-left: 16px;
+  }
+
+  .nav-link.active {
+    color: var(--gold-bright);
+    border-left-color: var(--gold-bright);
+    background: rgba(201,168,76,0.1);
+  }
+
+  .nav-sub {
+    font-size: 12px;
+    padding: 5px 12px 5px 24px;
+    color: var(--ink-faint);
+    border-left: 1px solid transparent;
+  }
+
+  .nav-sub:hover {
+    color: var(--gold);
+    border-left-color: var(--gold-dim);
+    background: rgba(201,168,76,0.05);
+    padding-left: 28px;
+  }
+
+  /* ── MAIN CONTENT ── */
+  #main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    background: radial-gradient(ellipse at center top, #2a1e05 0%, #0f0d05 60%);
+    padding: 80px 60px;
+  }
+
+  .hero-mandala {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.06;
+    animation: rotateSlow 120s linear infinite;
+  }
+
+  @keyframes rotateSlow {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .hero-inner { position: relative; z-index: 2; max-width: 900px; }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 10px;
+    letter-spacing: 0.4em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    animation: fadeUp 1.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(28px, 4vw, 52px);
+    font-weight: 900;
+    color: var(--gold-bright);
+    line-height: 1.2;
+    text-shadow: 0 0 60px rgba(201,168,76,0.3), 0 0 120px rgba(201,168,76,0.1);
+    margin-bottom: 20px;
+    animation: fadeUp 1.2s 0.2s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(16px, 2vw, 22px);
+    color: var(--ink-dim);
+    margin-bottom: 40px;
+    animation: fadeUp 1.2s 0.4s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 30px 0;
+    animation: fadeUp 1.2s 0.6s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-divider-line { flex: 1; max-width: 180px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-dim)); }
+  .hero-divider-line.r { background: linear-gradient(270deg, transparent, var(--gold-dim)); }
+  .hero-divider-symbol { color: var(--gold); font-size: 20px; }
+
+  .hero-meta {
+    font-family: 'IM Fell English', serif;
+    font-size: 14px;
+    color: var(--ink-faint);
+    letter-spacing: 0.12em;
+    animation: fadeUp 1.2s 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 11px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    font-family: 'Cinzel Decorative', serif;
+    animation: pulse 2.5s ease-in-out infinite, fadeUp 1.5s 1.2s ease forwards;
+    opacity: 0;
+  }
+
+  @keyframes pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── SECTIONS ── */
+  .chapter {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 100px 60px 60px;
+    position: relative;
+  }
+
+  .chapter-separator {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--gold-dim) 20%, var(--gold) 50%, var(--gold-dim) 80%, transparent 100%);
+    margin: 0;
+    position: relative;
+  }
+
+  .chapter-separator::after {
+    content: '✦';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--gold);
+    font-size: 16px;
+    background: var(--parchment);
+    padding: 0 12px;
+  }
+
+  .chapter-number {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 9px;
+    letter-spacing: 0.4em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 12px;
+  }
+
+  .chapter-title {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: clamp(22px, 3vw, 36px);
+    font-weight: 700;
+    color: var(--gold-bright);
+    line-height: 1.25;
+    margin-bottom: 10px;
+    text-shadow: 0 0 40px rgba(201,168,76,0.2);
+  }
+
+  .chapter-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--ink-dim);
+    margin-bottom: 40px;
+    border-left: 3px solid var(--gold-dim);
+    padding-left: 16px;
+  }
+
+  h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+    margin: 44px 0 14px;
+    letter-spacing: 0.04em;
+  }
+
+  h3::before {
+    content: '§ ';
+    color: var(--gold-dim);
+    font-size: 14px;
+    vertical-align: middle;
+  }
+
+  h4 {
+    font-family: 'IM Fell English', serif;
+    font-size: 17px;
+    color: var(--ink-dim);
+    margin: 28px 0 8px;
+    font-style: italic;
+    letter-spacing: 0.05em;
+  }
+
+  p {
+    margin-bottom: 18px;
+    color: var(--ink);
+    font-size: 17.5px;
+  }
+
+  em { color: var(--gold); font-style: italic; }
+  strong { color: var(--white-gold); font-weight: 600; }
+
+  /* ── PULL QUOTES ── */
+  .pullquote {
+    border-left: 3px solid var(--gold);
+    border-right: 3px solid var(--gold);
+    margin: 40px 0;
+    padding: 24px 36px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(201,168,76,0.02));
+    text-align: center;
+    position: relative;
+  }
+
+  .pullquote::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    color: var(--gold-dim);
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    line-height: 1;
+    opacity: 0.5;
+  }
+
+  .pullquote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 21px;
+    color: var(--gold-bright);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .pullquote cite {
+    display: block;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--ink-faint);
+    margin-top: 12px;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+
+  /* ── INFO CARDS ── */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin: 32px 0;
+  }
+
+  .card {
+    background: linear-gradient(135deg, var(--parchment-mid), var(--parchment-light));
+    border: 1px solid var(--gold-dim);
+    border-top: 2px solid var(--gold);
+    padding: 20px;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 0 24px rgba(201,168,76,0.12);
+    transform: translateY(-2px);
+  }
+
+  .card-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 8.5px;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold-bright);
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    font-size: 15px;
+    color: var(--ink-dim);
+    line-height: 1.65;
+    margin-bottom: 0;
+  }
+
+  /* ── THEORY BLOCKS ── */
+  .theory-block {
+    border: 1px solid rgba(201,168,76,0.2);
+    background: rgba(26, 21, 8, 0.8);
+    margin: 28px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .theory-block::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    background: var(--gold);
+  }
+
+  .theory-header {
+    padding: 14px 20px 14px 24px;
+    background: rgba(201,168,76,0.08);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .theory-header:hover { background: rgba(201,168,76,0.12); }
+
+  .theory-badge {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 7.5px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid;
+    white-space: nowrap;
+  }
+
+  .badge-mainstream { border-color: #3a7a6e; color: #3a7a6e; }
+  .badge-fringe { border-color: var(--gold-dim); color: var(--gold-dim); }
+  .badge-esoteric { border-color: #6a3a7a; color: #8a5a9a; }
+  .badge-anomaly { border-color: var(--crimson-soft); color: var(--crimson-soft); }
+  .badge-hypothesis { border-color: #5a7a3a; color: #7a9a5a; }
+
+  .theory-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .theory-body {
+    padding: 16px 20px 16px 24px;
+  }
+
+  .theory-body p {
+    font-size: 16px;
+    color: var(--ink-dim);
+    margin-bottom: 10px;
+  }
+
+  /* ── EVIDENCE LIST ── */
+  .evidence-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0;
+  }
+
+  .evidence-list li {
+    padding: 8px 0 8px 28px;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+    font-size: 16px;
+    color: var(--ink-dim);
+    position: relative;
+  }
+
+  .evidence-list li::before {
+    content: '◈';
+    position: absolute;
+    left: 4px;
+    color: var(--gold-dim);
+    font-size: 12px;
+    top: 10px;
+  }
+
+  .evidence-list li:last-child { border-bottom: none; }
+
+  /* ── CROSS-REFERENCE BOXES ── */
+  .cross-ref {
+    background: rgba(106,58,122,0.12);
+    border: 1px solid rgba(106,58,122,0.4);
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-size: 15px;
+    color: #c0a0cc;
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+  }
+
+  .cross-ref::before {
+    content: '⟳ Cross-Reference: ';
+    color: #8a5a9a;
+    font-style: normal;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── LOKA TABLE ── */
+  .realm-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 15px;
+  }
+
+  .realm-table th {
+    background: rgba(201,168,76,0.15);
+    color: var(--gold);
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--gold-dim);
+  }
+
+  .realm-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+    color: var(--ink-dim);
+    vertical-align: top;
+  }
+
+  .realm-table tr:nth-child(even) td { background: rgba(201,168,76,0.03); }
+  .realm-table tr:hover td { background: rgba(201,168,76,0.06); }
+
+  .realm-upper { color: var(--gold-bright); }
+  .realm-lower { color: #a05050; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 32px;
+    margin: 28px 0;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(180deg, var(--gold-dim), transparent);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(201,168,76,0.08);
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -28px;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    background: var(--gold-dim);
+    border-radius: 50%;
+    border: 2px solid var(--parchment);
+  }
+
+  .timeline-date {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .timeline-event {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  .timeline-desc {
+    font-size: 15px;
+    color: var(--ink-dim);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  /* ── MANDELA EFFECT CARDS ── */
+  .mandela-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid rgba(201,168,76,0.25);
+    margin: 16px 0;
+    overflow: hidden;
+  }
+
+  .mandela-side {
+    padding: 16px 18px;
+  }
+
+  .mandela-side:first-child {
+    background: rgba(139,32,32,0.12);
+    border-right: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .mandela-side:last-child {
+    background: rgba(58,122,110,0.1);
+  }
+
+  .mandela-label {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 7.5px;
+    letter-spacing: 0.25em;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+  }
+
+  .label-false { color: var(--crimson-soft); }
+  .label-true { color: #3a7a6e; }
+
+  .mandela-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* ── ANNOTATION BOX ── */
+  .annotation {
+    border: 1px dashed var(--gold-dim);
+    padding: 16px 20px;
+    margin: 20px 0;
+    background: rgba(201,168,76,0.04);
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: var(--ink-faint);
+    position: relative;
+  }
+
+  .annotation::before {
+    content: 'Researcher's Note';
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 8px;
+    letter-spacing: 0.25em;
+    color: var(--gold-dim);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    font-style: normal;
+  }
+
+  /* ── STATUS BADGES ── */
+  .status-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 18px 0;
+  }
+
+  .status-pill {
+    padding: 4px 14px;
+    border-radius: 20px;
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 8px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .pill-open { background: rgba(201,168,76,0.12); border: 1px solid var(--gold-dim); color: var(--gold); }
+  .pill-contested { background: rgba(139,32,32,0.15); border: 1px solid var(--crimson-soft); color: var(--crimson-soft); }
+  .pill-emerging { background: rgba(58,122,110,0.15); border: 1px solid #3a7a6e; color: #5aaaa0; }
+  .pill-suppressed { background: rgba(106,58,122,0.15); border: 1px solid #6a3a7a; color: #8a5a9a; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--gold-dim);
+    padding: 60px;
+    text-align: center;
+    background: linear-gradient(180deg, var(--parchment), #0a0905);
+  }
+
+  footer p {
+    font-family: 'Cinzel Decorative', serif;
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+  }
+
+  .footer-sigil {
+    font-size: 28px;
+    color: var(--gold-dim);
+    margin: 20px 0;
+    letter-spacing: 0.3em;
+    opacity: 0.6;
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    :root { --sidebar-w: 0px; }
+    #sidebar { display: none; }
+    #main { margin-left: 0; }
+    .chapter { padding: 60px 28px 40px; }
+    .hero { padding: 60px 28px; }
+    .mandela-card { grid-template-columns: 1fr; }
+    .mandela-side:first-child { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.2); }
+  }
+
+  /* ── ACTIVE GLOW ORNAMENT ── */
+  .chapter-ornament {
+    text-align: center;
+    color: var(--gold-dim);
+    font-size: 22px;
+    letter-spacing: 0.5em;
+    margin: 20px 0 40px;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════
+     SIDEBAR NAVIGATION
+════════════════════════════════════════════════════ -->
+<nav id="sidebar">
+  <div class="sidebar-title">
+    <span>Hidden History Compendium</span>
+    Volume III — Suppressed Cosmologies<br>& Forbidden Geographies
+  </div>
+
+  <div class="nav-section">
+    <span class="nav-section-label">Chapters</span>
+    <a href="#tartaria" class="nav-link">I. Tartaria & Mud Floods</a>
+    <a href="#tartaria-structures" class="nav-sub">Architecture & Free Energy</a>
+    <a href="#tartaria-mudflood" class="nav-sub">Mud Flood Evidence</a>
+    <a href="#tartaria-britannica" class="nav-sub">Tartaria & Britannica</a>
+
+    <a href="#meru" class="nav-link">II. Mount Meru & Jambudvipa</a>
+    <a href="#meru-cosmology" class="nav-sub">Cosmic Geography</a>
+    <a href="#meru-real" class="nav-sub">Real-World Candidates</a>
+    <a href="#meru-species" class="nav-sub">Species & Inhabitants</a>
+
+    <a href="#flatearth" class="nav-link">III. Flat Earth & Higher Dimensions</a>
+    <a href="#flatearth-cosmology" class="nav-sub">Sun & Moon Chariots</a>
+    <a href="#flatearth-lokas" class="nav-sub">14 Realms — Hindu</a>
+    <a href="#flatearth-other" class="nav-sub">Other Traditions</a>
+    <a href="#flatearth-shasta" class="nav-sub">Mt. Shasta & Lemurians</a>
+    <a href="#flatearth-ilavrta" class="nav-sub">Ilavrta-Varsha</a>
+
+    <a href="#maldek" class="nav-link">IV. Maldek & Lost Planet</a>
+    <a href="#maldek-destruction" class="nav-sub">Destruction Event</a>
+    <a href="#maldek-souls" class="nav-sub">Soul Migration</a>
+
+    <a href="#mandela" class="nav-link">V. Mandela Effect</a>
+    <a href="#mandela-examples" class="nav-sub">Notable Examples</a>
+    <a href="#mandela-theories" class="nav-sub">Theoretical Frameworks</a>
+
+    <a href="#planet9" class="nav-link">VI. Planet X & Annunaki</a>
+    <a href="#planet9-orbital" class="nav-sub">Orbital Anomalies</a>
+    <a href="#planet9-nibiru" class="nav-sub">Nibiru & Sitchin</a>
+    <a href="#planet9-thor" class="nav-sub">Commander Valiant Thor</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════════════ -->
+<main id="main">
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <svg class="hero-mandala" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="200" cy="200" r="180" stroke="#c9a84c" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="150" stroke="#c9a84c" stroke-width="0.3"/>
+    <circle cx="200" cy="200" r="120" stroke="#c9a84c" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="90" stroke="#c9a84c" stroke-width="0.3"/>
+    <circle cx="200" cy="200" r="60" stroke="#c9a84c" stroke-width="0.5"/>
+    <circle cx="200" cy="200" r="30" stroke="#c9a84c" stroke-width="0.3"/>
+    <line x1="200" y1="20" x2="200" y2="380" stroke="#c9a84c" stroke-width="0.3"/>
+    <line x1="20" y1="200" x2="380" y2="200" stroke="#c9a84c" stroke-width="0.3"/>
+    <line x1="72" y1="72" x2="328" y2="328" stroke="#c9a84c" stroke-width="0.3"/>
+    <line x1="328" y1="72" x2="72" y2="328" stroke="#c9a84c" stroke-width="0.3"/>
+    <polygon points="200,30 370,140 370,260 200,370 30,260 30,140" stroke="#c9a84c" stroke-width="0.4" fill="none"/>
+    <polygon points="200,50 200,50 350,155 350,245 200,350 50,245 50,155" stroke="#c9a84c" stroke-width="0.2" fill="none" transform="rotate(30,200,200)"/>
+    <text x="200" y="206" text-anchor="middle" fill="#c9a84c" font-size="14" font-family="serif">✦</text>
+  </svg>
+
+  <div class="hero-inner">
+    <p class="hero-eyebrow">Hidden History Compendium · Volume III</p>
+    <h1 class="hero-title">Suppressed Cosmologies<br>&amp; Forbidden Geographies</h1>
+    <p class="hero-subtitle">Tartaria · Mount Meru · Flat Earth Metaphysics · Maldek ·<br>The Mandela Effect · Planet X &amp; the Annunaki</p>
+    <div class="hero-divider">
+      <div class="hero-divider-line"></div>
+      <span class="hero-divider-symbol">☿</span>
+      <div class="hero-divider-line r"></div>
+    </div>
+    <p class="hero-meta">Compiled by Asita · Research Archive · Open Questions Only · 2025</p>
+  </div>
+  <div class="hero-scroll-hint">↓ Descend ↓</div>
+</section>
+
+<!-- ════════════════════════
+     CHAPTER I — TARTARIA
+════════════════════════ -->
+<div class="chapter-separator"></div>
+<section id="tartaria" class="chapter">
+  <div class="reveal">
+    <span class="chapter-number">Chapter I</span>
+    <h2 class="chapter-title">Tartaria, Mud Floods<br>&amp; the Erased Empire</h2>
+    <p class="chapter-subtitle">A civilization of impossible scale, buried under layers of sediment and official silence — and the empire that may have inherited its ruins.</p>
+    <div class="chapter-ornament">⟡ ✦ ⟡</div>
+
+    <div class="status-row">
+      <span class="status-pill pill-open">Open Question</span>
+      <span class="status-pill pill-contested">Contested History</span>
+      <span class="status-pill pill-suppressed">Suppressed Cartography</span>
+    </div>
+
+    <p>On historical maps from the 16th–18th centuries — Mercator (1569), Ortelius (1570), Blaeu (1645) — a vast territory appears spanning from Eastern Europe deep into Siberia and Central Asia, labeled <em>Tartaria Magna</em>, <em>Tartaria Sinica</em>, and <em>Tartaria Independe</em>. These were not marginal annotations; Tartary was listed in Denis Diderot's <em>Encyclopédie</em> (1765) as the largest country in the world. By 1850, the name had virtually vanished from academic geography. The question is not whether Tartaria existed — cartographic evidence is overwhelming — but what it truly was, and what erased it.</p>
+
+    <div class="pullquote">
+      <p>If a civilization of this size was real, its disappearance from the historical record within a single century is not a story of conquest. It is a story of erasure.</p>
+      <cite>— Asita Research Notes</cite>
+    </div>
+  </div>
+
+  <!-- Architecture -->
+  <div id="tartaria-structures" class="reveal">
+    <h3>Architecture, Free Energy Nodes &amp; Star Forts</h3>
+    <p>The alternative-history community points to a global pattern of 19th-century buildings with anomalous characteristics: immense scale impossible with documented labor capacity, architectural homogeneity across supposedly unconnected cultures, and recurring motifs — domes, obelisks, arched colonnades, and resonant chambers — that the mainstream attributes to a unified global neoclassical style yet offers no coherent transmission mechanism for.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Architectural Anomaly</div>
+        <div class="card-title">The Star Forts</div>
+        <p>Hundreds of identical star-shaped fortifications appear globally — from European citadels to American forts to Middle Eastern garrison towns — with geometries that double as resonant field amplifiers in certain electromagnetic models. Official history attributes them purely to defensive artillery architecture (Vauban system, 17th c.), yet many predate the documented introduction of the system they supposedly required.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Energy Infrastructure Theory</div>
+        <div class="card-title">Domes as Tesla Arrays</div>
+        <p>Researcher Sylvie Ivanowa and others propose that the ubiquitous dome-and-spire architecture of 18th–19th century buildings served as atmospheric electricity harnessing nodes — receivers in a pre-existing wireless energy distribution network akin to Tesla's later Wardenclyffe Tower, operating on Schumann-resonance principles. Spires as antennas; domes as resonant collectors.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Scale Problem</div>
+        <div class="card-title">The Construction Paradox</div>
+        <p>Buildings like the U.S. Capitol, Palace of Versailles extensions, and thousands of city halls across colonial-era America and Europe were supposedly built within decades using hand labor and horse-drawn carts, with contemporaneous population records showing insufficient manpower. Tartarian hypothesis: these were <em>inherited</em> structures, not built — repurposed after the previous civilization's collapse.</p>
+      </div>
+    </div>
+
+    <h4>The Orphan Train Hypothesis & Repopulation</h4>
+    <p>A controversial sub-theory proposes that the "orphan train" movements of the 19th century (1850–1929), which relocated 250,000+ children across the American continent under charitable cover, were actually a state repopulation effort following a catastrophic event that had depopulated vast regions. The children had no documented parents because the parents had been killed or dispersed in the event. This remains entirely speculative but cross-references with suspicious gaps in pre-1850 population census data for many "frontier" regions.</p>
+  </div>
+
+  <!-- Mud Flood -->
+  <div id="tartaria-mudflood" class="reveal">
+    <h3>The Global Mud Flood</h3>
+    <p>The "mud flood" theory holds that a massive, rapid sediment event in the early-to-mid 19th century (or possibly a series of them) buried the ground floors — and in some cases multiple stories — of existing structures worldwide, simultaneously killing or displacing populations on a continental scale and creating the historical tabula rasa that the "new order" civilizations then built their false histories upon.</p>
+
+    <h4>Physical Evidence Presented</h4>
+    <ul class="evidence-list">
+      <li><strong>Buried first floors globally:</strong> Thousands of buildings in Europe, Russia, North America, and the Middle East show "ground floors" that are functionally basements — with windows half-underground, doors opening below street level, and excavation records documenting original street levels meters below current grade. Cities including St. Petersburg, Munich, and Chicago show documented official "grade-raising" events.</li>
+      <li><strong>Chicago grade raising (1856–1858):</strong> The city of Chicago officially raised its street level by 1.2–2.7 meters to address drainage. Critics argue this was not construction but rather cleaning up and covering over an existing buried layer from a prior event.</li>
+      <li><strong>St. Petersburg "White Nights" anomaly:</strong> The city's official founding (1703, Peter the Great) is challenged by the existence of stone infrastructure of a scale and quality that pre-dates any documented construction activity by decades.</li>
+      <li><strong>Sediment core anomalies:</strong> Multiple geological surveys show abrupt stratigraphic transitions in urban soil profiles dating to roughly 1750–1850 CE — a thin, anomalous clay-rich or loess layer appearing globally at approximately the same chronological horizon.</li>
+      <li><strong>Depopulation gaps in historical records:</strong> Census data, church records, and tax registers in many regions show population "resets" — sharp drops followed by rapid growth from apparent immigration — in the 1820s–1860s with no documented cause (no war, no famine, no plague in those specific localities).</li>
+    </ul>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-fringe">Fringe Theory</span>
+        <span class="theory-name">Plasma Event / Cosmic Catastrophism</span>
+      </div>
+      <div class="theory-body">
+        <p>Building on Immanuel Velikovsky's catastrophism and more recently on researcher Douglas Vogt's "nova trigger" hypothesis, this model proposes that the mud flood was not geological but the result of a solar micro-nova or plasma discharge event. In this framework, the Sun periodically undergoes a brief but catastrophic energy release (a "nova" event on a smaller scale) that electromagnetically disrupts Earth's magnetosphere, triggering rapid atmospheric condensation, floods, plasma strikes, and a global electromagnetic pulse that collapses complex electrical infrastructure.</p>
+        <p>The Ben Davidson / Suspicious Observers research program has compiled evidence for a ~12,000-year micronova cycle correlating with mass extinction events, interleaved with smaller-scale recurrences. The last major Tartarian-era event would fall within this pattern at approximately 1200–1500 CE, with a secondary smaller event in the early 19th century.</p>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-hypothesis">Hypothesis</span>
+        <span class="theory-name">Tartarian Weapons / Internal Warfare</span>
+      </div>
+      <div class="theory-body">
+        <p>Some researchers suggest the mud layer was not natural but anthropogenic — the result of warfare using advanced (and subsequently suppressed) weapons. The "Vitrified Forts" of Scotland, the glassy desert surfaces (trinitite-like formations pre-dating nuclear testing) found in the Sahara, Gobi, and Atacama deserts, and the "fulgurite"-like structures embedded in pre-Columbian ruins are presented as evidence of high-temperature weapons discharges. The Tartarian empire may have destroyed itself — or been deliberately targeted — before the British imperial project inherited its surviving infrastructure.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Britannica Connection -->
+  <div id="tartaria-britannica" class="reveal">
+    <h3>Tartaria &amp; the British Empire — Inheritance or Conquest?</h3>
+    <p>One of the most provocative threads in Tartarian research concerns the relationship between the vanished empire and the British imperial expansion of the 18th–19th centuries. The timeline of Tartaria's disappearance from maps correlates precisely with the expansion of British, Russian, and Qing Chinese administrative control into Tartarian territory — suggesting not independent parallel development but rather a deliberate partition and absorption of a prior polity's infrastructure, resources, and territory.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Administrative Correlation</div>
+        <div class="card-title">The Great Game as Cleanup</div>
+        <p>The Anglo-Russian "Great Game" (1830–1907) over Central Asian influence is typically framed as imperial competition over trade routes and buffer states. An alternative reading: both powers were systematically establishing administrative control over territories still showing evidence of a prior civilization — building fictions of "discovery" and "civilizing" over existing settled populations and infrastructure.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Cartographic Erasure</div>
+        <div class="card-title">The 1835 Boundary</div>
+        <p>After approximately 1835, Tartary disappears almost entirely from Western cartography, replaced by "Siberia," "Central Asia," and "Turkestan" — administrative designations with no cultural or historical continuity to prior usage. The erasure of a geographic name from all major atlases within a 20-year window is without parallel in modern cartographic history for a territory of that size.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Architectural Fingerprint</div>
+        <div class="card-title">Colonial Gothic = Tartarian Gothic?</div>
+        <p>The "Gothic revival" architecture of the British Empire — parliament buildings, railway stations, court houses deposited globally — shows suspicious congruence with pre-existing Tartarian architectural grammar. The hypothesis: British architects weren't reviving a style; they were replicating a template from buildings they had actually observed in inherited Tartarian territories.</p>
+      </div>
+    </div>
+
+    <div class="annotation">
+      The Romanov dynasty's own legitimacy narrative — claiming rule over "all the Russias" including territories that were cartographically Tartarian within living memory — required the active rewriting of prior political geography. The systematic reclassification of Tartarian populations as "Mongol hordes" or "nomadic tribes" rather than as citizens of an administrative state served this political purpose regardless of whether it reflected historical reality.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     CHAPTER II — MOUNT MERU
+════════════════════════ -->
+<div class="chapter-separator"></div>
+<section id="meru" class="chapter">
+  <div class="reveal">
+    <span class="chapter-number">Chapter II</span>
+    <h2 class="chapter-title">Mount Meru, the Black Rock<br>&amp; the Axis of the World</h2>
+    <p class="chapter-subtitle">At the center of every ancient cosmology stands a mountain — magnetic, divine, impossible. Is it metaphor, memory, or a physical location we have simply lost?</p>
+    <div class="chapter-ornament">⟡ ✦ ⟡</div>
+
+    <div class="status-row">
+      <span class="status-pill pill-open">Active Investigation</span>
+      <span class="status-pill pill-emerging">Geographic Candidates</span>
+      <span class="status-pill pill-suppressed">Vedic Cosmology</span>
+    </div>
+  </div>
+
+  <div id="meru-cosmology" class="reveal">
+    <h3>The Mountain at the Center of the World</h3>
+    <p>Mount Meru (also Sumeru in Pali/Buddhist tradition, Mahameru in Javanese tradition, and the <em>Axis Mundi</em> in comparative mythology) appears across Hindu, Buddhist, Jain, and Norse traditions as a golden mountain at the center of the cosmological map — the pivot around which stars and planets revolve, the home of the gods, and the point at which the cosmic axis (Skambha) meets the terrestrial plane.</p>
+
+    <p>In the <em>Vishnu Purana</em>, Meru is described as 84,000 yojanas high, made of gold, and surrounded by concentric rings of mountains and oceans. The <em>Srimad Bhagavatam</em> describes it as the nave of the wheel of the universe. In Buddhist cosmology (the <em>Abhidharmakosha</em>), Mount Sumeru rises 80,000 yojanas above sea level and 80,000 below — its base anchored in the cosmic ocean. Jain texts describe it as the navel of Jambudvipa, the innermost continent of a disc-shaped world.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Vedic Description</div>
+        <div class="card-title">The Five Peaks (Panchashringa)</div>
+        <p>The five peaks of Meru — Manda, Vamana, Kurara, Kukudman, and Kapila — correspond to directional emanations. In Tibetan geography (kailash-centered cosmology) these map to five directional mountains arranged around a central summit, with Mt. Kailash as the most likely physical correlate for the primary peak in the Himalayan tradition.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Norse Parallel</div>
+        <div class="card-title">Yggdrasil = Meru</div>
+        <p>The Norse cosmic tree Yggdrasil — connecting the nine worlds, rooted in three wells, with an eagle at its crown and a serpent at its roots — is structurally identical to Meru as axis mundi. Both share: a vertical layered cosmos, divine beings at the summit, chthonic forces at the base, and a bridge between mortal and divine realms ascending its spine. The Aesir-Vanir split may echo the Deva-Asura split of Vedic tradition.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Sumerian Parallel</div>
+        <div class="card-title">Ekur — House of the Mountain</div>
+        <p>Enlil's temple in Nippur was called Ekur — "Mountain House" — and served as the omphalos of Sumerian civilization. The <em>ziggurat</em> form itself is a built representation of the cosmic mountain. The Babylonian <em>Etemenanki</em> (House of the Foundation of Heaven and Earth) — likely the model for the Tower of Babel — was explicitly a representation of the axis mundi in architectural form.</p>
+      </div>
+    </div>
+
+    <h4>The Black Rock / Svayambhu Linga</h4>
+    <p>In certain Shaivite traditions, the summit of Meru is occupied not by a palace but by a <em>Svayambhu Linga</em> — a naturally formed black stone manifestation of Shiva that has always existed, uncreated and indestructible. This bears remarkable similarity to the <em>Hajar al-Aswad</em> (the Black Stone of the Kaaba in Mecca), which Islamic tradition holds was originally white but blackened by the sins of humanity — and which pre-Islamic Arabian religion treated as a sacred fallen sky-stone. The Ka'ba itself means "Cube" and the circumambulation (Tawaf) around it replicates the orbital pattern of stars around Polaris — the axis-mundi star.</p>
+
+    <div class="cross-ref">
+      The Omphalos stones of Greek tradition (Delphi), the Lingam of Shiva, the Black Stone of Cybele (Rome), the Kaaba stone, the Lia Fáil of Ireland — all are black stones at the center of a cosmological system representing the navel or anchor of the world. A common origin or common archetype? The pattern is global and prehistoric.
+    </div>
+  </div>
+
+  <div id="meru-real" class="reveal">
+    <h3>Geographic Candidates for Mount Meru</h3>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">Primary Candidate</div>
+        <div class="timeline-event">Mount Kailash, Tibet (6,638m)</div>
+        <p class="timeline-desc">The most consistent candidate across traditions. Sacred to Hindu, Buddhist, Jain, and Bon faiths simultaneously — the only mountain in the world to hold this distinction. Kailash has never been climbed; all expeditions since the 1980s have been officially prohibited by China. Its four faces align near-perfectly with the cardinal directions. It sits at the headwaters of four of Asia's greatest rivers (Indus, Sutlej, Brahmaputra, Karnali/Ganges tributary) — a hydrological anomaly consistent with Meru's description as the source of the four rivers of the world. Its geological profile — a dark peak surrounded by subsidiary ranges — matches ancient descriptions closely.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Alternative: Arctic</div>
+        <div class="timeline-event">Hyperborean Mountain / Polaris Alignment</div>
+        <p class="timeline-desc">A significant branch of researchers, including Bal Gangadhar Tilak (<em>The Arctic Home in the Vedas</em>, 1903), argues that the original Meru was located at or near the North Pole. Vedic descriptions of the sun circling Meru without setting match Arctic conditions during summer solstice. Polaris — the pole star — was directly overhead at the summit, explaining why Meru is described as the pivot of the heavens. Ancient maps (including the 1595 Mercator map) show a massive circular continent divided into four quadrants at the North Pole, with a central black magnetic mountain.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Alternative: Pamir Plateau</div>
+        <div class="timeline-event">Bam-i-Dunya — Roof of the World</div>
+        <p class="timeline-desc">The Pamir Plateau (Tajikistan) was historically called <em>Bam-i-Dunya</em> — "Roof of the World" — and serves as the geographic center of the Asian continent. Multiple river systems originate here. The region contains the Wakhan Corridor, associated with pre-Zoroastrian sacred geography. Some scholars identify the Pamir as the original <em>Airyana Vaeja</em> (homeland of the Aryans in Zoroastrian texts) and thus the terrestrial model for cosmic geography.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">Fringe: Hollow Earth</div>
+        <div class="timeline-event">Meru as Inner-Earth Access Point</div>
+        <p class="timeline-desc">In a subset of esoteric traditions, Meru is not an external mountain but an inner structure — the vertical axis of a hollow Earth. The "opening" at the poles (referenced in Tibetan, Norse, and certain Native American traditions) is Meru's base. The inner sun provides the "light without shadow" described for the summit. This maps onto hollow Earth theories (Edmond Halley, John Cleves Symmes, Admiral Byrd testimonies) and certain Tibetan Buddhist descriptions of Shambhala as an interior kingdom.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="meru-species" class="reveal">
+    <h3>Species &amp; Inhabitants of Jambudvipa</h3>
+    <p>The <em>Jambudvipa</em> (Rose-Apple Continent) of Hindu-Buddhist cosmology is not simply "the Indian subcontinent" as mainstream interpretations claim — it is a continent-scale territory subdivided into nine varshas (regions), with distinct geographic features, peoples, and in some descriptions, non-human inhabitants. The central varsha, <em>Ilavrta</em>, surrounds Meru itself.</p>
+
+    <div class="realm-table">
+      <table class="realm-table">
+        <thead>
+          <tr>
+            <th>Region (Varsha)</th>
+            <th>Direction</th>
+            <th>Inhabitants / Characteristics</th>
+            <th>Possible Geographic Match</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="realm-upper">Ilavrta</td>
+            <td>Central</td>
+            <td>Home of Shiva; inhabited only by Shiva, his shakti, and female attendants. No mortal men may enter.</td>
+            <td>Tibet / Kailash region</td>
+          </tr>
+          <tr>
+            <td class="realm-upper">Bhadrasva</td>
+            <td>East</td>
+            <td>Beautiful forest, inhabitants worship Hayagriva (horse-headed Vishnu avatar)</td>
+            <td>Southeast Asia / Pacific rim</td>
+          </tr>
+          <tr>
+            <td class="realm-upper">Ketumala</td>
+            <td>West</td>
+            <td>Pleasure-filled, inhabitants worship Kamadeva; equal lifespan of 10,000 years</td>
+            <td>Mediterranean / Western lands</td>
+          </tr>
+          <tr>
+            <td class="realm-upper">Uttarakuru</td>
+            <td>North</td>
+            <td>Paradise realm; inhabitants live 10,000 years, no disease, no sorrow. Described as having blue skin and eating spontaneously-growing rice.</td>
+            <td>Siberia / Hyperborea</td>
+          </tr>
+          <tr>
+            <td>Bharata</td>
+            <td>South</td>
+            <td>The "karma-field" — only region where liberation is possible; inhabited by mortals. All other regions have fixed-fate inhabitants.</td>
+            <td>Indian subcontinent</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h4>Gandharvas, Apsaras &amp; Non-Human Intelligence</h4>
+    <p>The slopes of Meru and the lower regions of Jambudvipa are described as inhabited by Gandharvas (celestial musicians, possibly associated with sound-based technology or the science of Nada), Apsaras (celestial dancers), Yakshas (nature spirits, guardians of underground wealth), Kinnaras (half-human musicians), Nagas (serpent beings with advanced civilization underground), and Siddhas (perfected beings). Whether these are metaphorical, archetypal, or represent actual non-human intelligences encountered by ancient seers in altered states or in physical reality remains one of the compendium's deepest open questions.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     CHAPTER III — FLAT EARTH / HIGHER DIMENSIONS
+════════════════════════ -->
+<div class="chapter-separator"></div>
+<section id="flatearth" class="chapter">
+  <div class="reveal">
+    <span class="chapter-number">Chapter III</span>
+    <h2 class="chapter-title">Flat Earth, Higher Dimensions<br>&amp; the 14 Realms</h2>
+    <p class="chapter-subtitle">What if "flat earth" is not a naive primitive cosmology but an attempt to describe a higher-dimensional reality — one in which our 3D globe is merely a cross-section?</p>
+    <div class="chapter-ornament">⟡ ✦ ⟡</div>
+  </div>
+
+  <div id="flatearth-cosmology" class="reveal">
+    <h3>The Chariots of Sun &amp; Moon — Does Vedic Cosmology Describe a Flat Plane?</h3>
+    <p>Hindu, Buddhist, and Jain cosmologies describe the Sun and Moon as chariots driven by divine beings across a flat disc-shaped plane above Jambudvipa. In the <em>Vishnu Purana</em>, the Sun (Surya) travels in a chariot pulled by seven horses, circling Mount Meru at varying heights through the year. The Moon (Chandra) follows a similar path. Both are carried on the same cosmic wheel (the <em>Manasottara Mountain</em> functions as the outer edge of the sun's path).</p>
+
+    <p>This cosmological model is categorically irreconcilable with a heliocentric 3D solar system — yet it appears in some of the most mathematically sophisticated astronomical traditions (the same texts that correctly calculated planetary periods, predicted eclipses, and described gravitational effects). The question becomes: were ancient astronomers simultaneously describing two different orders of reality — the empirical/exoteric (what you can measure) and the metaphysical/esoteric (what the cosmos is structurally)?</p>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-esoteric">Esoteric Reframe</span>
+        <span class="theory-name">Flat Earth as 4D Cross-Section Model</span>
+      </div>
+      <div class="theory-body">
+        <p>In higher-dimensional geometry, a 3D sphere is the "surface" of a 4D hypersphere — just as a 2D circle is the surface of a 3D sphere. If consciousness perceives reality through a 3D "slice" of a higher-dimensional manifold, then describing the Sun and Moon as circling a flat plane above us could be an accurate description of what a 4D solar system <em>looks like from within a 3D cross-section</em>. The apparent dome of the sky, the behavior of light at the horizon, and the mechanics of seasons could all be explained by a higher-dimensional geometry that projects as flat-with-a-dome when perceived from within.</p>
+        <p>This is not the same as claiming the Earth is a literal flat disc. It is claiming that ancient cosmology may have been attempting to describe a topological reality that our current physics is only now approaching through string theory, brane cosmology (in which our 4D universe is a "brane" floating in higher-dimensional bulk space), and holographic principle.</p>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-fringe">Physical Theory</span>
+        <span class="theory-name">The Ice Wall — Antarctica as Boundary Keeper</span>
+      </div>
+      <div class="theory-body">
+        <p>Modern flat earth proponents argue that Antarctica is not a continent but a circumferential ice wall around a flat disc — a ring of ice and land that the Antarctic Treaty (1959, signed by 12 nations) prevents civilian access to and exploration of. The "dome" of the sky becomes a literal physical boundary. Key curiosities the flat earth camp cites: the Antarctic Treaty's remarkable comprehensiveness for a supposedly uninhabited continent; no unguided civilian expeditions are permitted; all flights rerouted to avoid transantarctic paths that would expose curvature data; and Admiral Byrd's Operation Highjump (1946–47) military expedition to Antarctica with 4,700 men and warships, whose stated purpose ("scientific exploration") has never been satisfactorily explained given the military scale.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="flatearth-lokas" class="reveal">
+    <h3>The 14 Realms — Hindu Cosmological Layering</h3>
+    <p>The Hindu system of <em>Lokas</em> (realms of existence) divides the cosmos into 14 planes — 7 upper (<em>Sapta Vyahritis</em> or upper Lokas) and 7 lower (<em>Sapta Patalas</em>) — with Earth (<em>Bhuloka</em>) occupying the middle ground. This is not metaphor in the original Puranic context; it is a precise ontological map of planes of existence with defined characteristics, inhabitants, and modes of experience.</p>
+
+    <div class="realm-table">
+      <table class="realm-table">
+        <thead>
+          <tr>
+            <th>Realm</th>
+            <th>Name</th>
+            <th>Inhabitants</th>
+            <th>Characteristic</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="realm-upper">Upper 7</td><td class="realm-upper">Satyaloka / Brahmaloka</td><td>Brahma, liberated souls</td><td>Realm of pure consciousness; no physical form; dissolution at pralaya</td></tr>
+          <tr><td class="realm-upper">↑</td><td class="realm-upper">Tapaloka</td><td>Vairagis, tapasic beings</td><td>Realm of intense spiritual heat; those beyond ego</td></tr>
+          <tr><td class="realm-upper">↑</td><td class="realm-upper">Janaloka</td><td>Sons of Brahma (Sanaka, etc.)</td><td>Realm of creative intelligence; mental beings</td></tr>
+          <tr><td class="realm-upper">↑</td><td class="realm-upper">Maharloka</td><td>Saptarishis, great sages</td><td>Realm of the great rishis; survives minor dissolutions</td></tr>
+          <tr><td class="realm-upper">↑</td><td class="realm-upper">Svargaloka / Devaloka</td><td>Devas, Indra's court</td><td>Pleasure realm; heaven of post-death good-karma experiences</td></tr>
+          <tr><td class="realm-upper">↑</td><td class="realm-upper">Bhuvarloka</td><td>Siddhas, munis, subtle beings</td><td>Atmospheric realm between earth and sun</td></tr>
+          <tr><td><strong>CENTER</strong></td><td><strong>Bhuloka</strong></td><td><strong>Humans, animals, plants</strong></td><td><strong>Physical Earth — the karma-generating realm</strong></td></tr>
+          <tr><td class="realm-lower">↓</td><td class="realm-lower">Atala</td><td>Demon Bala and his daughters</td><td>Realm of maya and illusion; great mineral wealth</td></tr>
+          <tr><td class="realm-lower">↓</td><td class="realm-lower">Vitala</td><td>Shiva as Hatkeshvara</td><td>Realm of gold; joy without wisdom</td></tr>
+          <tr><td class="realm-lower">↓</td><td class="realm-lower">Sutala</td><td>Bali (demon king)</td><td>Realm of righteous demons; Vishnu guards the entrance</td></tr>
+          <tr><td class="realm-lower">↓</td><td class="realm-lower">Talatala</td><td>Maya Danava (architect of demons)</td><td>Realm of sorcery; Shiva gives protection here</td></tr>
+          <tr><td class="realm-lower">↓</td><td class="realm-lower">Mahatala</td><td>Multi-headed Nagas (Krodhavasha clan)</td><td>Realm of serpent beings; constant fear of Garuda</td></tr>
+          <tr><td class="realm-lower">↓</td><td class="realm-lower">Rasatala</td><td>Danavas and Daityas</td><td>Realm of primordial enemies of gods</td></tr>
+          <tr><td class="realm-lower">Lower 7</td><td class="realm-lower">Patala</td><td>Vasuki and Nagas; Shesha Naga</td><td>Deepest realm; Shesha holds the universe on his hoods; Vishnu rests here</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="flatearth-other" class="reveal">
+    <h3>Multi-Realm Cosmologies Across Traditions</h3>
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Norse Tradition</div>
+        <div class="card-title">Nine Worlds of Yggdrasil</div>
+        <p>Asgard (gods), Midgard (humans), Jotunheim (giants), Alfheim (elves), Svartalfheim (dark elves/dwarves), Nidavellir, Helheim (the dead), Muspelheim (fire), Niflheim (ice/mist). All connected by Yggdrasil and accessible in shamanic trance states — suggesting these are not purely allegorical but map onto navigable states of consciousness.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Buddhist</div>
+        <div class="card-title">31 Planes of Existence</div>
+        <p>The Buddhist Abhidhamma describes 31 planes across four realms: sensual planes (11), form planes (16), formless planes (4). Rebirth occurs across these based on karmic weight. The formless planes correspond structurally to the Hindu upper Lokas — consciousness without material substrate. Notably, the gods of sensual planes (Devas) are still subject to death and rebirth, making Buddhist cosmology more empirical than theistic.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Gnostic / Hermetic</div>
+        <div class="card-title">The Archontic Layers</div>
+        <p>In Gnostic cosmology, between the pure divine Pleroma and the material Earth lie seven planetary spheres ruled by Archons — corrupted demiurgic intelligences who imprison souls in matter. The soul's liberation involves ascending through these layers, shedding material accretions at each. The structure parallels both Hindu Lokas and the seven planetary spheres of Hermetic tradition, suggesting a shared experiential cartography of inner space.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Kabbalistic</div>
+        <div class="card-title">The Four Worlds / Ten Sephiroth</div>
+        <p>The Tree of Life describes four worlds (Atziluth, Beriah, Yetzirah, Assiah) and ten Sephiroth as emanations from the Ein Sof (infinite). The descent into matter parallels the descent through the Lokas; the path of return through the Sephiroth parallels the ascending Loka journey. Both are maps of consciousness as well as cosmological structure.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="flatearth-shasta" class="reveal">
+    <h3>Mount Shasta &amp; the Lemurian Survivors</h3>
+    <p>Mount Shasta (California, 4,317m) occupies a unique position in both Native American sacred geography and in 19th–20th century esoteric tradition as a site of alleged underground or inner-mountain habitation by beings surviving from Lemuria (Mu) — a hypothetical continent in the Pacific Ocean that supposedly predated both Atlantis and the current civilizational cycle.</p>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-esoteric">Esoteric Tradition</span>
+        <span class="theory-name">Telos — The Lemurian City Beneath Shasta</span>
+      </div>
+      <div class="theory-body">
+        <p>The Telos tradition (popularized by Aurelia Louise Jones' books and by earlier Theosophical sources including William Dudley Pelley's 1931 account) holds that 25,000 years ago, as Lemuria was sinking, 25,000 survivors were given permission by the Agartha Network to create underground cities beneath mountain ranges. Telos — beneath Mount Shasta — is described as a city of one to two million inhabitants living at a fifth-dimensional vibration, using free energy and advanced technology, with a deliberate policy of non-contact with surface humanity until collective consciousness rises sufficiently.</p>
+        <p>Physical reports: Multiple independent accounts from the late 19th–early 20th century describe encounters on Shasta's slopes with tall, white-robed beings with large foreheads who moved with superhuman speed and communicated telepathically. A 1904 Siskiyou News report describes a "strange people" near the summit. The Rosicrucian order maintained Shasta as a sacred site from the 1880s onward.</p>
+      </div>
+    </div>
+
+    <div class="cross-ref">
+      The Shasta accounts connect to the broader Agartha tradition (underground civilization accessed through polar and mountain openings) which also appears in Tibetan Buddhism as Shambhala, in Hindu tradition as the underground kingdoms of the Nagas (Patala), and in certain Sufi traditions as the hidden Qutb — the spiritual pole that physically manifests at sacred mountains. The recurrence across independent traditions is the data point.
+    </div>
+  </div>
+
+  <div id="flatearth-ilavrta" class="reveal">
+    <h3>Ilavrta-Varsha — The Central Kingdom Around Meru</h3>
+    <p>The central region of Jambudvipa — <em>Ilavrta-Varsha</em> — surrounds Mount Meru and is, according to the <em>Srimad Bhagavatam</em>, so saturated with the divine presence of Shiva that no male being other than Shiva himself may enter without being immediately transformed into a female form. This is either: a mythological encoding of a prohibition (the inner sanctum of a mystery tradition), a literal description of a consciousness-affecting resonant environment (extreme electromagnetic or scalar field effect), or a topological statement about the nature of the inner axis — that it is a field of primordial feminine energy (Shakti) that dissolves individual will at the threshold.</p>
+
+    <p>In terms of geographic layering, Ilavrta sits inside four subsidiary mountain ranges (Nila, Nishadha, Gandhamadana, Malyavan) which create the barriers between the central varsha and the outer territories. The Srimad Bhagavatam provides compass bearings and river-flow data that, if taken literally, would place Ilavrta over the Tibetan plateau — consistent with the Kailash identification but scaling far beyond any single mountain to the entire plateau region.</p>
+
+    <div class="pullquote">
+      <p>The geography of the Puranas is not the geography of the survey map. It is the geography of the enlightened — the world as seen from the perspective of the soul moving through dimensions of experience.</p>
+      <cite>— Swami Prabhupada, commentary on Srimad Bhagavatam 5.16</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     CHAPTER IV — MALDEK
+════════════════════════ -->
+<div class="chapter-separator"></div>
+<section id="maldek" class="chapter">
+  <div class="reveal">
+    <span class="chapter-number">Chapter IV</span>
+    <h2 class="chapter-title">Maldek — The Fifth Planet<br>&amp; the Asteroid Belt Memory</h2>
+    <p class="chapter-subtitle">Between Mars and Jupiter sits a graveyard of rock. Was it once a world? And did its people survive — reborn in new forms, carrying ancient trauma in their cellular memory?</p>
+    <div class="chapter-ornament">⟡ ✦ ⟡</div>
+
+    <div class="status-row">
+      <span class="status-pill pill-open">Open Question</span>
+      <span class="status-pill pill-contested">Astronomical Anomaly</span>
+      <span class="status-pill pill-suppressed">Suppressed Channeling Record</span>
+    </div>
+  </div>
+
+  <div class="reveal">
+    <h3>The Astronomical Case for a Former Planet</h3>
+    <p>In 1766, Johann Daniel Titius identified a numerical pattern in the spacing of solar system planets (later formalized as the <em>Titius-Bode Law</em>). The pattern predicted a planet at approximately 2.8 AU from the Sun — a position occupied by the asteroid belt, not by a single planet. When Ceres was discovered in 1801 followed by hundreds of additional asteroids in the same orbital region, the question arose: were these the debris of a failed planetary formation, or the remains of a planet that once existed?</p>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-mainstream">Mainstream Position</span>
+        <span class="theory-name">Jupiter's Gravity Prevented Formation</span>
+      </div>
+      <div class="theory-body">
+        <p>Standard planetary science holds that Jupiter's immense gravitational influence in the early solar system prevented the material in the asteroid belt from coalescing into a planet. Computer simulations support this. The total mass of the asteroid belt (~4% of the Moon's mass) is too small to have formed a planet even before accounting for ejection. This is the consensus position.</p>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-fringe">Alternative Theory</span>
+        <span class="theory-name">Exploded Planet Hypothesis (Tom Van Flandern)</span>
+      </div>
+      <div class="theory-body">
+        <p>The late astronomer Tom Van Flandern of the U.S. Naval Observatory published peer-reviewed work arguing that the asteroid belt's orbital mechanics are more consistent with an exploded former planet than with accretion debris. Key evidence: the systematic distribution of asteroid orbital parameters, the presence of carbonaceous chondrite meteorites containing biological-organic precursor molecules, and the specific pattern of cometary orbits that Van Flandern traced to a point of common origin. He named the hypothetical former planet "Planet V." In alternative research circles this planet is called <em>Maldek</em> (also Tiamat in some readings of Babylonian mythology).</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="maldek-destruction" class="reveal">
+    <h3>Theories of Destruction</h3>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Catastrophist Theory</div>
+        <div class="card-title">Nuclear Self-Destruction</div>
+        <p>The primary claim in channeled material (Ra Material / Law of One, Cayce readings, Dolores Cannon QHHT transcripts) is that Maldek destroyed itself through nuclear or equivalent weapons technology, triggered by planetary-scale warfare between factions. The explosion was so complete that the planet's etheric body was also shattered — trapping souls in a "complex" of trauma and preventing normal evolutionary progression.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">External Impact</div>
+        <div class="card-title">The Nibiru / Binary System Passage</div>
+        <p>Zecharia Sitchin's Babylonian reading of the <em>Enuma Elish</em> describes a primordial cosmic battle in which "Marduk" (a rogue planet on an elliptical orbit entering the inner solar system) collided with "Tiamat" — a proto-planetary body between Mars and Jupiter — creating both the asteroid belt and Earth from the remnants. This places the destruction as external and primordial rather than civilizational.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Ra Material</div>
+        <div class="card-title">The Quarantine of Earth</div>
+        <p>The Ra Material (channeled 1981–1984, Don Elkins/Carla Rueckert) describes Maldek's former inhabitants as having become trapped in a "knot" of group fear and guilt after destroying their planet. Over millions of years they gradually incarnated first as ape-forms on Earth, then as humans, carrying unconscious trauma that manifests as humanity's persistent self-destructive tendencies. Earth functions as a "third-density" school — a planet specifically designed for the healing of this karmic complex.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="maldek-souls" class="reveal">
+    <h3>Maldekian Soul Migration &amp; the Earth Experiment</h3>
+    <p>Across multiple channeling traditions (Ra Material, Bashar/Darryl Anka, Michael Teachings, Dolores Cannon) a consistent claim emerges: Earth is not a "normal" evolutionary planet but a deliberate healing facility — a place where souls from multiple destroyed or damaged planetary systems (Maldek, Mars, and others) were gathered under a quarantine protocol to work through evolutionary lessons that could not be completed in situ.</p>
+
+    <p>The implication is that Earth humans carry within them the unresolved patterning of multiple prior civilizations — explaining the persistent paradox that humanity simultaneously creates extraordinary beauty and catastrophic destruction, and that each generation seems to face the same fundamental choices as the last. The "experiment" is whether the combined karmic weight of these civilizations can be resolved within a single planetary crucible.</p>
+
+    <div class="annotation">
+      Whether one accepts the literal framework or not, the metaphor is precise: if Earth is understood as a place where the unresolved patterns of fallen civilizations are being reworked, then the study of suppressed history is not merely academic — it is an exercise in understanding the inheritance we carry and the patterns we are attempting to break. The Tartarian collapse, the Maldekian catastrophe, and the current civilizational crisis all rhyme. That is the data point.
+    </div>
+
+    <h4>Martian Refugees — The Secondary Migration</h4>
+    <p>A parallel strand in the Ra Material and Cayce readings holds that Mars was also habitable in a prior epoch (consistent with current evidence of ancient river systems, polar ice caps, and a thicker former atmosphere on Mars) and that its population — facing planetary catastrophe caused in part by interference from Maldekian conflict — also migrated to Earth. The hybrid population of Earth thus contains at minimum three origin streams: indigenous Earth souls, Maldekian refugees, and Martian refugees. The tensions between these origin-streams manifest in recurring civilizational conflicts whose psychological dynamics no purely Earth-based historical framework can account for.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     CHAPTER V — MANDELA EFFECT
+════════════════════════ -->
+<div class="chapter-separator"></div>
+<section id="mandela" class="chapter">
+  <div class="reveal">
+    <span class="chapter-number">Chapter V</span>
+    <h2 class="chapter-title">The Mandela Effect</h2>
+    <p class="chapter-subtitle">Millions of people share identical false memories. Either human memory is collectively broken in precise, patterned ways — or something in the structure of reality has changed.</p>
+    <div class="chapter-ornament">⟡ ✦ ⟡</div>
+
+    <div class="status-row">
+      <span class="status-pill pill-open">Open Investigation</span>
+      <span class="status-pill pill-contested">Neurological vs. Ontological</span>
+      <span class="status-pill pill-emerging">Quantum Branching Interest</span>
+    </div>
+
+    <p>The term "Mandela Effect" was coined by Fiona Broome in 2009 after she discovered that many people — independently and across demographics — shared a vivid false memory of Nelson Mandela dying in prison in the 1980s. He had in fact been released in 1990 and died in 2013. The phenomenon was named and catalogued, revealing thousands of other shared misrememberings that are too specific, too consistent, and too cross-cultural to be attributed simply to poor individual memory.</p>
+  </div>
+
+  <div id="mandela-examples" class="reveal">
+    <h3>Notable Examples</h3>
+
+    <div class="mandela-card">
+      <div class="mandela-side">
+        <div class="mandela-label label-false">Collective Memory</div>
+        <div class="mandela-text">The Berenstain Bears</div>
+        <p style="font-size:14px;color:#b08080;margin-top:6px;">Millions remember "Berenstein" — rhyming with "Einstein" — a common Jewish surname pattern</p>
+      </div>
+      <div class="mandela-side">
+        <div class="mandela-label label-true">Documented Reality</div>
+        <div class="mandela-text">Always "Berenstain" — ending in "-ain"</div>
+        <p style="font-size:14px;color:#80a8a0;margin-top:6px;">All physical books, original manuscripts, and creator records confirm "-ain"</p>
+      </div>
+    </div>
+
+    <div class="mandela-card">
+      <div class="mandela-side">
+        <div class="mandela-label label-false">Collective Memory</div>
+        <div class="mandela-text">Monopoly Man wears a monocle</div>
+      </div>
+      <div class="mandela-side">
+        <div class="mandela-label label-true">Documented Reality</div>
+        <div class="mandela-text">Rich Uncle Pennybags has never had a monocle in any official artwork</div>
+      </div>
+    </div>
+
+    <div class="mandela-card">
+      <div class="mandela-side">
+        <div class="mandela-label label-false">Collective Memory</div>
+        <div class="mandela-text">"Luke, I am your father" — Star Wars</div>
+      </div>
+      <div class="mandela-side">
+        <div class="mandela-label label-true">Documented Reality</div>
+        <div class="mandela-text">"No — I am your father." The word "Luke" is not in the line.</div>
+      </div>
+    </div>
+
+    <div class="mandela-card">
+      <div class="mandela-side">
+        <div class="mandela-label label-false">Collective Memory</div>
+        <div class="mandela-text">Chartreuse is a dark red/maroon color</div>
+      </div>
+      <div class="mandela-side">
+        <div class="mandela-label label-true">Documented Reality</div>
+        <div class="mandela-text">Chartreuse is a yellow-green. Always has been.</div>
+      </div>
+    </div>
+
+    <div class="mandela-card">
+      <div class="mandela-side">
+        <div class="mandela-label label-false">Collective Memory</div>
+        <div class="mandela-text">New Zealand is northeast of Australia</div>
+      </div>
+      <div class="mandela-side">
+        <div class="mandela-label label-true">Documented Reality</div>
+        <div class="mandela-text">New Zealand is southeast of Australia</div>
+      </div>
+    </div>
+
+    <div class="mandela-card">
+      <div class="mandela-side">
+        <div class="mandela-label label-false">Collective Memory</div>
+        <div class="mandela-text">Sinbad played a genie in a 1990s movie called "Shazaam"</div>
+      </div>
+      <div class="mandela-side">
+        <div class="mandela-label label-true">Documented Reality</div>
+        <div class="mandela-text">No such film exists. Thousands of people share a detailed memory of it, including specific scenes.</div>
+      </div>
+    </div>
+
+    <div class="mandela-card">
+      <div class="mandela-side">
+        <div class="mandela-label label-false">Collective Memory</div>
+        <div class="mandela-text">The human heart is on the left side of the chest</div>
+      </div>
+      <div class="mandela-side">
+        <div class="mandela-label label-true">Documented Reality</div>
+        <div class="mandela-text">The heart is center-left — mostly in the center of the chest, tilted slightly left. Many medical professionals remember learning it was fully left.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="mandela-theories" class="reveal">
+    <h3>Theoretical Frameworks</h3>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-mainstream">Mainstream Position</span>
+        <span class="theory-name">Confabulation &amp; Source Monitoring Error</span>
+      </div>
+      <div class="theory-body">
+        <p>Cognitive psychology's explanation: human memory is reconstructive, not archival. The brain fills gaps using pattern-matching, social conformity, and plausible inference. The "Berenstein" memory is explained by the overwhelming prevalence of "-stein" endings in Jewish surnames, creating a strong prior. The heart example: people learn anatomical diagrams that slightly exaggerate leftward placement. Social contagion (one person's false memory propagating via the internet) accounts for cross-demographic consistency. This is the official position and explains many — but not all — Mandela Effect examples.</p>
+        <p><strong>Weakness:</strong> Does not account for examples like "Shazaam" (no media prototype to confabulate from) or the New Zealand geographic orientation (no obvious directional bias to produce southeast vs northeast confusion).</p>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-fringe">Quantum Theory</span>
+        <span class="theory-name">Many-Worlds / Timeline Convergence</span>
+      </div>
+      <div class="theory-body">
+        <p>The Many-Worlds interpretation of quantum mechanics (Everett, 1957) holds that every quantum event spawns branching parallel universes. If timelines occasionally "merge" — if parallel quantum branches undergo decoherence into a single classical state — then populations from different branches would retain memories of their original timeline while finding themselves in a convergent reality where those memories no longer correspond to physical evidence. The "Berenstein" memory is real — it is a memory from a timeline that merged with the "Berenstain" timeline. The physical evidence corresponds to the dominant timeline; the memory to the minority timeline now absorbed.</p>
+        <p><strong>Problem:</strong> No known physical mechanism for timeline merger. Standard Many-Worlds explicitly prevents such merging. However, newer work in quantum decoherence and cosmological inflation allows for bubble universe collisions — rare events with exactly this signature.</p>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-fringe">CERN Theory</span>
+        <span class="theory-name">Large Hadron Collider — Dimensional Perturbation</span>
+      </div>
+      <div class="theory-body">
+        <p>The popular online theory: CERN's LHC (operational 2008, major upgrades 2015, 2022) periodically creates micro-singularities or dimensional resonances that slightly alter the "base state" of our timeline, causing small retroactive changes to physical reality. Because these changes are applied to material reality but not to biological memory (which stores information as physical neural patterns, and may operate on a slightly different quantum substrate), consciousness retains memories of the prior state while the physical record has been altered.</p>
+        <p>The correlation: many prominent Mandela Effects began circulating online post-2008. Critics note this is also when internet memory-sharing platforms made cross-demographic shared memories visible for the first time — a purely sociological explanation that cannot be dismissed.</p>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-esoteric">Simulation Theory</span>
+        <span class="theory-name">Database Error / Reality Update Patch</span>
+      </div>
+      <div class="theory-body">
+        <p>Within the simulation hypothesis framework: reality is a computational substrate, and Mandela Effects are the observable fingerprint of a "patch" — a retroactive correction to the simulation's data layer. Just as a software update can change a game's assets (textures, text strings, object properties) without altering the player's save data, a simulation patch might update the "physical" layer of reality while consciousness — as a distinct computational process — retains the prior state in its cache. The inconsistency between memory and evidence is literally a version mismatch.</p>
+        <p>This reframes Mandela Effect research as a diagnostic tool: catalogue the anomalies precisely enough, and you build a map of where the "patches" have been applied — and by inference, what the system administrators needed to change and why.</p>
+      </div>
+    </div>
+
+    <div class="annotation">
+      The most honest position is that the Mandela Effect presents a genuine epistemological challenge. The mainstream explanation (collective confabulation) is plausible for many examples but leaves a residue of cases that don't fit. The alternative theories are speculative but are consistent with ongoing developments in physics (Many-Worlds, brane cosmology, holographic principle). This is an open file. The researcher's task is to catalogue meticulously and theorize carefully.
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     CHAPTER VI — PLANET X / ANNUNAKI / VALIANT THOR
+════════════════════════ -->
+<div class="chapter-separator"></div>
+<section id="planet9" class="chapter">
+  <div class="reveal">
+    <span class="chapter-number">Chapter VI</span>
+    <h2 class="chapter-title">Planet X, the Annunaki<br>&amp; Commander Valiant Thor</h2>
+    <p class="chapter-subtitle">The ninth planet, if it exists, follows an orbit that should have been noticed. If it is inhabited, its people may have been visiting far longer than we know.</p>
+    <div class="chapter-ornament">⟡ ✦ ⟡</div>
+
+    <div class="status-row">
+      <span class="status-pill pill-open">Astronomically Active</span>
+      <span class="status-pill pill-contested">Orbital Evidence</span>
+      <span class="status-pill pill-suppressed">Suppressed Contact Claims</span>
+    </div>
+  </div>
+
+  <div id="planet9-orbital" class="reveal">
+    <h3>Planet Nine — The Orbital Evidence</h3>
+    <p>In 2016, Caltech astronomers Konstantin Batygin and Mike Brown published peer-reviewed evidence for an undiscovered planet — tentatively called "Planet Nine" — in the outer solar system. The evidence: six trans-Neptunian objects (TNOs) in the Kuiper Belt share anomalous orbital alignments that have a 1-in-15,000 probability of occurring by chance. These clustered orbits are most parsimoniously explained by the gravitational influence of a massive undetected body — estimated at 5–10 Earth masses — on a highly elliptical orbit with a period of approximately 10,000–20,000 Earth years, taking it as far as 1,200 AU from the Sun at aphelion.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">Orbital Parameters (Estimated)</div>
+        <div class="card-title">Planet Nine / Nibiru Comparison</div>
+        <p><strong>Planet Nine (Batygin/Brown):</strong> Mass 5–10 Earth masses; orbital period ~10,000–20,000 years; aphelion ~1,200 AU; inclination ~30°; semi-major axis ~700 AU.<br><br><strong>Nibiru (Sitchin):</strong> 3,600-year orbit; passes through inner solar system; inhabited by the Annunaki. The parameter mismatch is significant but the general structure (a large body on an extreme elliptical orbit) is consistent.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Alternative Explanation</div>
+        <div class="card-title">Primordial Black Hole</div>
+        <p>A 2019 paper by Scholtz and Unwin proposed that "Planet Nine" could be a primordial black hole of 5–10 Earth masses — an ultra-dense remnant from the Big Bang era, wandering the outer solar system invisibly except for its gravitational effects. A black hole of this type would be approximately the size of a grapefruit. This would explain why direct observation has failed while gravitational evidence persists.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="planet9-nibiru" class="reveal">
+    <h3>Nibiru, the Annunaki &amp; Zecharia Sitchin</h3>
+    <p>Zecharia Sitchin's controversial translations of Sumerian cuneiform texts (beginning with <em>The Twelfth Planet</em>, 1976) argue that the Sumerian pantheon was not mythological but historical — records of actual extraterrestrial beings from a planet called <em>Nibiru</em> (or <em>Marduk</em>) on a 3,600-year elliptical orbit that periodically brings it through the inner solar system.</p>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-date">~450,000 BCE (Sitchin Chronology)</div>
+        <div class="timeline-event">Annunaki First Arrive on Earth</div>
+        <p class="timeline-desc">The Annunaki ("those who came from heaven to earth") arrive on Earth from Nibiru, led by Enki and Enlil. Their stated purpose: mining gold to repair Nibiru's deteriorating atmosphere by seeding gold particulates into it (a speculative but physically coherent mechanism — gold nanoparticles as atmospheric reflectors). They establish bases in the Abzu (southern Africa, where the oldest known large-scale mines are located).</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">~300,000 BCE</div>
+        <div class="timeline-event">Creation of Homo Sapiens</div>
+        <p class="timeline-desc">Annunaki workers (Igigi) revolt against the labor of mining. Enki and the birth goddess Ninhursag genetically engineer a hybrid species — combining Annunaki genetics with Homo Erectus — to serve as a labor force. The Sumerian term is <em>Lulu Amelu</em> — "the mixed worker." Sitchin identifies this as the historical basis for the creation narrative in Genesis. Modern genetics anomalies (the "Great Leap Forward" of human cognition ~70,000 years ago, the mysterious insertion of chromosome 2 via fusion in the human genome, the 223 "alien genes" identified in the Human Genome Project findings) are cited as supporting evidence.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">~13,000 BCE</div>
+        <div class="timeline-event">The Deluge — Deliberate Withholding</div>
+        <p class="timeline-desc">As Nibiru's orbital passage causes the Antarctic ice sheet to slip (the "Earth crust displacement" mechanism), triggering massive floods, Enlil (who views humans as a pest population) votes to withhold warning from humanity. Enki defies this decision by warning Ziusudra/Utnapishtim/Noah to build the ark. The flood narrative appears across 200+ independent cultural traditions globally — the common event hypothesis requires a genuine global catastrophe of approximately this chronological range, which geological evidence (Younger Dryas boundary, 12,900 BCE) partially supports.</p>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-date">~3,000–500 BCE</div>
+        <div class="timeline-event">Withdrawal &amp; the End of Open Contact</div>
+        <p class="timeline-desc">The Annunaki gradually withdraw from direct rule of human civilization, transitioning to indirect influence through priest-king systems (Sumer, Egypt, Mesoamerica). The transition from polytheistic god-kings as literal rulers to symbolic/mythological figures marks this withdrawal in the historical record. Sitchin's claim: this was not a mythological development but an actual change in operational policy — the Annunaki stopped physically administering their colonies and delegated to human proxies.</p>
+      </div>
+    </div>
+
+    <div class="annotation">
+      Sitchin's translations are contested by mainstream Sumerologists who argue his readings are not philologically defensible — that he mistranslated key terms (particularly "Nibiru," which most scholars read as "crossing point" in the sense of a planetary alignment, not a planet's name) and invented narrative connections not supported by the texts. This scholarly critique is legitimate and cannot be dismissed. The question is whether the underlying pattern — massive gold mining operations in pre-historical Africa, sudden appearance of complex civilization in Mesopotamia, flood narratives correlating with real geological events — survives even without Sitchin's specific interpretations.
+    </div>
+  </div>
+
+  <div id="planet9-thor" class="reveal">
+    <h3>Commander Valiant Thor — The Pentagon Visitor</h3>
+    <p>The case of "Commander Valiant Thor" is one of the most specific and verifiable-or-falsifiable claims in the UFO contact literature. The primary source is Frank Stranges, a Christian minister and author of <em>Stranger at the Pentagon</em> (1967), who claimed to have personally met an extraterrestrial being named Valiant Thor who had been living in the Pentagon under the Eisenhower and Kennedy administrations from 1957 to 1960.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-label">The Claim</div>
+        <div class="card-title">Physical Description &amp; Background</div>
+        <p>Thor was described as humanoid, approximately 6 feet tall, with notable physical differences from humans: no fingerprints, a pulse of 242 beats per minute, blood pressure of 189 over 80, 6-fingered hands in some versions, IQ of approximately 1200. He was said to originate from Venus — specifically from a subterranean civilization on Venus beyond the reach of surface instruments. He arrived in a craft that landed near Alexandria, Virginia and was escorted directly to the Pentagon by police and government officials.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">The Policy Interaction</div>
+        <div class="card-title">Medical Cure Offer Rejected</div>
+        <p>Thor's alleged message: he offered a technological package to eliminate all known diseases and to provide free energy technology to humanity. The offer was declined by the Eisenhower administration. The given reason (per Stranges): the economic disruption to the pharmaceutical and energy industries would be catastrophic. This narrative prefigures the "suppressed technology" thesis by several decades and remains its most specific single claim — a named individual, a named institution, a specific offer, a specific rejection, and a documented consequence.</p>
+      </div>
+      <div class="card">
+        <div class="card-label">Corroborating Claims</div>
+        <div class="card-title">Eisenhower's Meetings</div>
+        <p>Multiple independent sources (William Cooper's <em>Behold a Pale Horse</em>, the claimed 1954 Muroc/Edwards AFB meeting accounts, and several ex-military testimonies) describe Eisenhower meeting with extraterrestrial beings in the 1954–1958 period. The Edwards AFB meeting claim describes at least two groups of ETs making contact — one group offering technology with ethical conditions (rejected), another group (the "Greys") signing a treaty exchanging technology for abduction oversight. While specific to different beings, the policy dynamic exactly mirrors the Valiant Thor narrative.</p>
+      </div>
+    </div>
+
+    <div class="theory-block">
+      <div class="theory-header">
+        <span class="theory-badge badge-esoteric">Assessment</span>
+        <span class="theory-name">What Can Be Verified</span>
+      </div>
+      <div class="theory-body">
+        <p>Frank Stranges was a real person (1927–2008) with a consistent public record. He maintained his account without material profit incentive for over 40 years. The photograph he produced showing himself with a man identified as "Valiant Thor" at the Pentagon remains unidentified — the other individual has never been publicly named or debunked. No official records confirm or deny the meetings (which itself is ambiguous — absence of records in classified government operations is not evidence of absence).</p>
+        <p>What is structurally notable: the claim is falsifiable. Either the government has records of an unusual individual residing in or near the Pentagon from 1957–60, or it does not. The systematic failure of FOIA requests to produce any records — including records definitively denying the claim — is the current status. The case remains open.</p>
+      </div>
+    </div>
+
+    <div class="cross-ref">
+      The Valiant Thor case sits at the intersection of the Annunaki question (are there humanoid beings from within our solar system with advanced technology and an ongoing interest in human development?), the suppressed technology question (has functional free energy or medical technology been deliberately withheld from humanity?), and the contact policy question (what has actually been the nature of ET contact with Earth governments since the mid-20th century?). All three questions remain unanswered in public record.
+    </div>
+
+    <div class="pullquote">
+      <p>The question is not whether extraterrestrial intelligence exists. The question is whether the governments of Earth have already established ongoing relations with it — and what was traded, and what was refused, and who decided, and on whose behalf.</p>
+      <cite>— Asita Research Archive</cite>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════
+     FOOTER
+════════════════════════ -->
+<div class="chapter-separator"></div>
+<footer>
+  <div class="footer-sigil">✦ ☿ ✦</div>
+  <p>Hidden History Compendium · Volume III</p>
+  <br>
+  <p>Suppressed Cosmologies &amp; Forbidden Geographies</p>
+  <br>
+  <p style="font-size:8px; letter-spacing:0.15em; max-width:600px; margin:16px auto; line-height:2; color:var(--ink-faint);">
+    All claims within this document are presented as open research questions, not settled conclusions. 
+    Contested historical claims are framed as hypotheses requiring further evidence. 
+    The purpose of this compendium is to map the questions, not foreclose them.
+    Compiled by Asita · Independent Research Archive · 2025
+  </p>
+  <div class="footer-sigil" style="font-size:16px;">⟡ · ⟡ · ⟡</div>
+</footer>
+
+</main>
+
+<script>
+  // ── SCROLL REVEAL
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  revealEls.forEach(el => observer.observe(el));
+
+  // ── ACTIVE NAV HIGHLIGHTING
+  const sections = document.querySelectorAll('section[id], div[id]');
+  const navLinks = document.querySelectorAll('.nav-link, .nav-sub');
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + id) {
+            link.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.2, rootMargin: '-100px 0px -60% 0px' });
+
+  sections.forEach(s => navObserver.observe(s));
+
+  // ── SMOOTH SCROLL
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+</body>
+</html>

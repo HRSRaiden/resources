@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Andaman — Apr 27 to May 6</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F2EB;--paper:#FEFCF8;--ink:#1C2B35;--muted:#6B7E88;--line:#E4D9CB;
+  --pb:#1C4E68;--pb2:#E3EFF5;
+  --hv:#2A6444;--hv2:#E3F2EB;
+  --nl:#B85430;--nl2:#F9EEE6;
+  --work:#B07A1A;--work2:#FDF3E0;
+  --gold:#C8813A;
+  --water:#1A7A9A;--water2:#E0F4FA;
+  --hack:#0D5C48;--hack2:#E2F4EF;
+  --fun:#8C2F5A;--fun2:#FCEEF4;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.68}
+a{color:var(--pb)}
+
+/* HERO */
+.hero{background:var(--ink);padding:48px 18px 38px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 65% 55% at 20% 80%,rgba(28,78,104,.55),transparent 65%),
+  radial-gradient(ellipse 45% 40% at 80% 25%,rgba(42,100,68,.38),transparent 60%)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,7vw,3.8rem);color:#fff;font-weight:600;line-height:1.05;position:relative}
+.hero h1 em{font-style:italic;color:#EED4A0}
+.hero-meta{font-size:.72rem;color:rgba(255,255,255,.4);letter-spacing:2.5px;text-transform:uppercase;margin-top:10px;position:relative}
+.hero-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:7px;margin-top:18px;position:relative}
+.ht{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.7);padding:3px 12px;border-radius:20px;font-size:.7rem}
+.hero-stripe{position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--pb),var(--hv),var(--nl),var(--gold))}
+
+/* FLIGHT BAR */
+.flightbar{background:#162330;padding:12px 18px;display:flex;flex-wrap:wrap;justify-content:center;gap:12px;align-items:center}
+.fb-item{text-align:center}
+.fb-label{font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:2px;text-transform:uppercase;margin-bottom:2px}
+.fb-val{font-size:.82rem;font-weight:600;color:#fff}
+.fb-note{font-size:.65rem;color:rgba(255,255,255,.4);margin-top:1px}
+.fb-sep{color:rgba(255,255,255,.15);font-size:1.2rem}
+
+/* BOOKINGS GRID */
+.bookings{background:#163828;padding:14px 16px}
+.bg-title{font-size:.58rem;color:rgba(255,255,255,.3);letter-spacing:3px;text-transform:uppercase;text-align:center;margin-bottom:10px}
+.bg-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(148px,1fr));gap:7px}
+.bc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.09);border-radius:8px;padding:9px 11px}
+.bc-l{font-size:.57rem;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px}
+.bc-v{font-size:.79rem;font-weight:600;color:#fff;line-height:1.3}
+.bc-n{font-size:.66rem;color:rgba(255,255,255,.4);margin-top:1px}
+
+/* PHASE HEADER */
+.phase{padding:20px 16px 6px;display:flex;gap:11px;align-items:flex-start}
+.ph-icon{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;margin-top:2px}
+.ph-text h2{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;line-height:1.1}
+.ph-sub{font-size:.72rem;color:var(--muted);margin-top:2px}
+
+/* DAY CARD */
+.day{background:var(--paper);border-radius:14px;margin:8px 13px;overflow:hidden;box-shadow:0 2px 14px rgba(0,0,0,.06)}
+.day-head{padding:13px 17px 10px;display:flex;gap:11px;align-items:flex-start;border-bottom:1px solid var(--line)}
+.dpill{border-radius:9px;padding:6px 8px;text-align:center;min-width:50px;flex-shrink:0;color:#fff}
+.dp-d{font-size:.52rem;text-transform:uppercase;letter-spacing:1px;opacity:.7}
+.dp-n{font-size:1.25rem;font-weight:700;line-height:1}
+.dp-dt{font-size:.55rem;opacity:.55;margin-top:1px}
+.day-title h3{font-size:.94rem;font-weight:700;line-height:1.35}
+.day-title .ds{font-family:'Cormorant Garamond',serif;font-size:.88rem;font-style:italic;color:var(--muted);margin-top:2px}
+
+/* TIMELINE */
+.tl{padding:3px 0}
+.ev{display:flex}
+.tc{width:58px;flex-shrink:0;padding:10px 5px 10px 13px;display:flex;flex-direction:column;align-items:flex-end}
+.tb{font-size:.6rem;font-weight:600;color:#fff;border-radius:5px;padding:2px 5px;text-align:center;white-space:nowrap;line-height:1.4}
+.dc{width:18px;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
+.dot{width:8px;height:8px;border-radius:50%;margin-top:14px;flex-shrink:0}
+.vl{width:2px;flex:1;background:var(--line);min-height:6px}
+.ev:last-child .vl{display:none}
+.ec{flex:1;padding:9px 14px 9px 5px}
+.etit{font-weight:600;font-size:.87rem;display:flex;align-items:center;flex-wrap:wrap;gap:5px;line-height:1.4}
+.edesc{font-size:.79rem;color:#4A5F6A;margin-top:4px;line-height:1.6}
+
+/* WORK BLOCK */
+.work-ev .ec{border-left:3px solid var(--work);margin-left:2px;padding-left:10px;background:var(--work2);border-radius:0 8px 8px 0}
+.work-ev .etit{color:var(--work)}
+
+/* TAGS */
+.tag{font-size:.62rem;padding:2px 7px;border-radius:5px;font-weight:600;white-space:nowrap}
+.t-sun{background:#FEF3C7;color:#92400E}
+.t-water{background:var(--water2);color:var(--water)}
+.t-food{background:#FCE7F3;color:#9D174D}
+.t-hist{background:#F1F5F9;color:#334155}
+.t-spi{background:#EDE9FE;color:#4C1D95}
+.t-fun{background:var(--fun2);color:var(--fun)}
+.t-rest{background:#FEE2E2;color:#7F1D1D}
+.t-resort{background:var(--hv2);color:var(--hv)}
+.t-work{background:var(--work2);color:var(--work)}
+.ctag{font-size:.66rem;background:#DCFCE7;color:#14532D;padding:2px 8px;border-radius:5px;font-weight:600;white-space:nowrap}
+.conf{font-size:.66rem;background:#DCFCE7;color:#14532D;padding:2px 8px;border-radius:5px;font-weight:700}
+.free{font-size:.66rem;background:#E0F2FE;color:#075985;padding:2px 7px;border-radius:5px;font-weight:600}
+.wtag{font-size:.66rem;background:#FEF9C3;color:#854D0E;padding:2px 7px;border-radius:5px;font-weight:600}
+
+/* CALLOUT BOXES */
+.box{border-left:4px solid;border-radius:0 10px 10px 0;margin:5px 13px 10px;padding:11px 15px}
+.box h5{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px}
+.box ul{padding-left:13px}
+.box li{font-size:.78rem;margin-bottom:4px;line-height:1.55}
+.hack{background:var(--hack2);border-color:var(--hack)} .hack h5{color:var(--hack)} .hack li{color:#1A4A3A}
+.food-box{background:#FEF9ED;border-color:var(--gold)} .food-box h5{color:#8B5A1A} .food-box li{color:#5A3810}
+.fun-box{background:var(--fun2);border-color:var(--fun)} .fun-box h5{color:var(--fun)} .fun-box li{color:#6B1A3A}
+.water-box{background:var(--water2);border-color:var(--water)} .water-box h5{color:var(--water)} .water-box li{color:#0A4A62}
+.work-box{background:var(--work2);border-color:var(--work)} .work-box h5{color:var(--work)} .work-box li{color:#5A3D08}
+
+/* CONFIRMED BADGE */
+.conf-card{background:linear-gradient(135deg,#0D3D22,#165E36);border-radius:12px;margin:8px 13px;padding:13px 15px;position:relative;overflow:hidden}
+.conf-card::after{content:'✓ CONFIRMED';position:absolute;top:10px;right:13px;font-size:.54rem;letter-spacing:2px;color:rgba(255,255,255,.2);font-weight:700}
+.cc-l{font-size:.58rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.cc-n{font-weight:700;font-size:.9rem;color:#fff}
+.cc-row{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:5px}
+.cc-i{font-size:.76rem;color:rgba(255,255,255,.6)} .cc-i strong{color:#4ADE80}
+
+/* FERRY */
+.ferry{background:var(--pb);color:#fff;border-radius:13px;margin:12px 13px;padding:15px}
+.ferry h3{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#90C4F9;margin-bottom:9px}
+.ft{width:100%;border-collapse:collapse}
+.ft tr{border-bottom:1px solid rgba(255,255,255,.07)}
+.ft tr:last-child{border-bottom:none}
+.ft td{padding:5px 0;font-size:.77rem;vertical-align:top;color:rgba(255,255,255,.78)}
+.ft td:first-child{font-weight:600;color:#7EB8D4;width:78px;padding-right:8px}
+.fops{display:flex;flex-wrap:wrap;gap:7px;margin-top:9px}
+.fop{background:rgba(255,255,255,.07);border-radius:7px;padding:8px 10px;flex:1;min-width:115px}
+.fo-n{font-size:.71rem;font-weight:700;color:#90C4F9;margin-bottom:2px}
+.fo-p{font-size:.86rem;font-weight:700;color:#4ADE80}
+.fo-d{font-size:.66rem;color:rgba(255,255,255,.45);margin-top:1px}
+.fo-l{font-size:.66rem;color:#93C5FD;display:block;margin-top:3px}
+
+/* STAY */
+.stay{background:var(--paper);border-radius:11px;margin:7px 13px;padding:13px;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.stay h4{font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:9px}
+.so{padding:8px 0;border-bottom:1px solid var(--line)}
+.so:last-child{border-bottom:none;padding-bottom:0}
+.sn{font-weight:700;font-size:.87rem}
+.sm{display:flex;justify-content:space-between;flex-wrap:wrap;gap:3px;margin-top:3px}
+.sp{font-size:.8rem;font-weight:700;color:var(--hv)}
+.st{font-size:.65rem;background:var(--line);color:var(--muted);padding:2px 7px;border-radius:4px}
+.sd{font-size:.76rem;color:var(--muted);margin-top:4px;line-height:1.5}
+.sa{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.sl{font-size:.67rem;background:var(--pb2);color:var(--pb);padding:2px 9px;border-radius:5px;font-weight:600}
+
+/* RESORT */
+.resort-card{background:linear-gradient(135deg,#0C1F2E,#0E3248);border-radius:14px;margin:8px 13px;padding:17px;position:relative;overflow:hidden}
+.resort-card::after{content:'RESORT';position:absolute;top:13px;right:14px;font-size:.55rem;letter-spacing:3px;color:rgba(255,255,255,.15);font-weight:700}
+.rc-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:#90CAF9;font-style:italic;margin-bottom:3px}
+.rc-sub{font-size:.69rem;color:rgba(255,255,255,.35);margin-bottom:11px}
+.rc-opt{border-bottom:1px solid rgba(255,255,255,.07);padding:10px 0;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:flex-start}
+.rc-opt:last-child{border-bottom:none;padding-bottom:0}
+.rc-name{font-weight:700;font-size:.88rem;color:#fff}
+.rc-stars{font-size:.76rem;color:#F59E0B;margin-top:1px}
+.rc-why{font-size:.7rem;color:#81D4C4;margin-top:3px;font-weight:600}
+.rc-note{font-size:.73rem;color:rgba(255,255,255,.48);margin-top:3px;line-height:1.45}
+.rc-price{font-weight:700;font-size:.86rem;color:#4ADE80;text-align:right;flex-shrink:0}
+.rc-link{font-size:.65rem;color:#93C5FD;display:block;margin-top:3px;text-align:right}
+
+/* BUDGET */
+.budget{background:var(--paper);border-radius:14px;margin:13px;padding:17px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.budget h3{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;color:var(--pb);margin-bottom:11px}
+.brow{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--line);gap:8px;align-items:center}
+.brow:last-child{border-bottom:none}
+.bk{font-size:.81rem;color:var(--muted)}
+.bv{font-size:.81rem;font-weight:700;color:var(--hv);text-align:right;white-space:nowrap}
+.btot{background:var(--ink);border-radius:9px;padding:13px 15px;margin-top:11px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+.btl{font-size:.76rem;color:rgba(255,255,255,.5)}
+.bta{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:#F59E0B}
+
+/* LINKS */
+.links{background:var(--paper);border-radius:13px;margin:13px;padding:15px;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.links h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--pb);margin-bottom:11px}
+.lr{padding:6px 0;border-bottom:1px solid var(--line);display:flex;gap:9px;align-items:flex-start}
+.lr:last-child{border-bottom:none;padding-bottom:0}
+.lic{font-size:1.05rem;flex-shrink:0;width:22px;margin-top:1px}
+.ln{font-weight:600;font-size:.82rem;color:var(--pb)}
+.ls{font-size:.71rem;color:var(--muted);margin-top:1px}
+.lp{font-size:.69rem;color:var(--hv);font-weight:600;margin-top:2px}
+
+/* WATER ACTIVITIES CHECKLIST */
+.water-check{background:var(--paper);border-radius:13px;margin:13px;padding:15px;box-shadow:0 1px 8px rgba(0,0,0,.05)}
+.water-check h3{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--water);margin-bottom:11px}
+.wc-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.wc-item{background:var(--water2);border-radius:7px;padding:8px 10px;display:flex;align-items:flex-start;gap:7px}
+.wc-check{color:var(--water);font-size:1rem;flex-shrink:0;margin-top:1px}
+.wc-info .wc-name{font-size:.79rem;font-weight:600;color:var(--ink)}
+.wc-info .wc-day{font-size:.67rem;color:var(--muted);margin-top:1px}
+
+/* THEMES */
+.pb-t .dpill,.pb-t .dot,.pb-t .tb{background:var(--pb)}
+.pb-t .ph-icon{background:var(--pb2)}
+.pb-t .day{border-top:3px solid var(--pb)}
+.hv-t .dpill,.hv-t .dot,.hv-t .tb{background:var(--hv)}
+.hv-t .ph-icon{background:var(--hv2)}
+.hv-t .day{border-top:3px solid var(--hv)}
+.nl-t .dpill,.nl-t .dot,.nl-t .tb{background:var(--nl)}
+.nl-t .ph-icon{background:var(--nl2)}
+.nl-t .day{border-top:3px solid var(--nl)}
+.return-t .dpill,.return-t .dot,.return-t .tb{background:#5C3F8F}
+.return-t .day{border-top:3px solid #5C3F8F}
+
+footer{background:var(--ink);color:rgba(255,255,255,.3);text-align:center;padding:26px 18px;font-size:.73rem;margin-top:6px}
+footer em{color:rgba(255,255,255,.6);font-style:italic}
+footer p+p{margin-top:4px}
+
+@media(max-width:400px){.wc-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Andaman &amp; <em>Nicobar</em></h1>
+  <div class="hero-meta">April 27 – May 6 · 10 Days · Your Complete Guide</div>
+  <div class="hero-tags">
+    <span class="ht">🐠 Jolly Buoy</span><span class="ht">🤿 Scuba + Sea Walk</span>
+    <span class="ht">🌟 Bioluminescent Kayaking</span><span class="ht">🌅 3 Sunrises · 5 Sunsets</span>
+    <span class="ht">💼 Workation Friendly</span><span class="ht">🏨 World Orchid + Samsara + TSG Aura</span>
+  </div>
+  <div class="hero-stripe"></div>
+</div>
+
+<!-- FLIGHT BAR -->
+<div class="flightbar">
+  <div class="fb-item">
+    <div class="fb-label">Outbound Flight</div>
+    <div class="fb-val">BLR → PB</div>
+    <div class="fb-note">Departs 11:30 AM · Apr 27 · Arrives ~2:00–3:30 PM</div>
+  </div>
+  <div class="fb-sep">·</div>
+  <div class="fb-item">
+    <div class="fb-label">Return Flight</div>
+    <div class="fb-val">PB → BLR</div>
+    <div class="fb-note">Departs 9:00 AM · May 6 · At airport by 7:00 AM</div>
+  </div>
+  <div class="fb-sep">·</div>
+  <div class="fb-item">
+    <div class="fb-label">Note</div>
+    <div class="fb-val">May 6 = Fly Only</div>
+    <div class="fb-note">No activities on departure day</div>
+  </div>
+</div>
+
+<!-- BOOKINGS CONFIRMED -->
+<div class="bookings">
+  <div class="bg-title">✓ All Confirmed Bookings</div>
+  <div class="bg-grid">
+    <div class="bc"><div class="bc-l">Hotel · PB</div><div class="bc-v">Hotel Oceanview</div><div class="bc-n">Apr 27–29 · Phoenix Bay</div></div>
+    <div class="bc"><div class="bc-l">Activity · Apr 28</div><div class="bc-v">Jolly Buoy Island</div><div class="bc-n">10:30 AM ferry · Return ~3 PM</div></div>
+    <div class="bc"><div class="bc-l">Ferry · Apr 29</div><div class="bc-v">Makruzz Premium</div><div class="bc-n">PB 06:00 → HV 07:30</div></div>
+    <div class="bc"><div class="bc-l">Resort · Havelock</div><div class="bc-v">The World Orchid</div><div class="bc-n">Apr 29 – May 3 · 4 nights</div></div>
+    <div class="bc"><div class="bc-l">Stay · Neil</div><div class="bc-v">SeaShells Samsara</div><div class="bc-n">May 3–4 · 1 night</div></div>
+    <div class="bc"><div class="bc-l">Resort · Neil</div><div class="bc-v">TSG Aura</div><div class="bc-n">May 4–5 · Sitapur Beach</div></div>
+  </div>
+</div>
+
+<!-- WATER ACTIVITIES MASTER LIST -->
+<div class="water-check">
+  <h3>🌊 All Water Activities — Nothing Missed</h3>
+  <div class="wc-grid">
+    <div class="wc-item"><div class="wc-check">✦</div><div class="wc-info"><div class="wc-name">Jolly Buoy Snorkeling</div><div class="wc-day">Day 2 · Apr 28 · Confirmed</div></div></div>
+    <div class="wc-item"><div class="wc-check">✦</div><div class="wc-info"><div class="wc-name">Elephant Beach Water Sports</div><div class="wc-day">Day 3 · Apr 29</div></div></div>
+    <div class="wc-item"><div class="wc-check">✦</div><div class="wc-info"><div class="wc-name">Scuba Diving (12m deep)</div><div class="wc-day">Day 4 · Apr 30</div></div></div>
+    <div class="wc-item"><div class="wc-check">✦</div><div class="wc-info"><div class="wc-name">Underwater Sea Walk</div><div class="wc-day">Day 5 · May 1</div></div></div>
+    <div class="wc-item"><div class="wc-check">✦</div><div class="wc-info"><div class="wc-name">Bioluminescent Kayaking</div><div class="wc-day">Day 5 · May 1 · Night</div></div></div>
+    <div class="wc-item"><div class="wc-check">✦</div><div class="wc-info"><div class="wc-name">Radhanagar Swimming</div><div class="wc-day">Days 3–6 · Every Sunset</div></div></div>
+    <div class="wc-item"><div class="wc-check">✦</div><div class="wc-info"><div class="wc-name">Bharatpur Snorkel + Glass Boat</div><div class="wc-day">Day 7 · May 3 · Neil</div></div></div>
+    <div class="wc-item"><div class="wc-check">✦</div><div class="wc-info"><div class="wc-name">Natural Bridge Tidal Walk</div><div class="wc-day">Day 7/8 · Neil · Tide dependent</div></div></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════
+     PORT BLAIR  Days 1–2
+═══════════════════════ -->
+<div class="pb-t">
+<div class="phase">
+  <div class="ph-icon">⚓</div>
+  <div class="ph-text">
+    <h2 style="color:var(--pb)">Port Blair — Sri Vijaya Puram</h2>
+    <div class="ph-sub">Days 1–2 · Apr 27–28 · Hotel Oceanview, Phoenix Bay · Checkout Apr 29 by 5:00 AM</div>
+  </div>
+</div>
+
+<div class="conf-card">
+  <div class="cc-l">🏨 Confirmed · Hotel Oceanview Port Blair</div>
+  <div class="cc-n">MA Road, Opp. Tag Hotel, Phoenix Bay · Check-in Apr 27 · Checkout Apr 29</div>
+  <div class="cc-row">
+    <span class="cc-i">📍 <strong>60-second walk</strong> to Phoenix Bay Makruzz Jetty</span>
+    <span class="cc-i">Apr 29 ferry 6:00 AM — no cab needed, walk out of hotel</span>
+  </div>
+</div>
+
+<div class="stay">
+  <h4>🏠 Port Blair Stay — May 5 Return Night</h4>
+  <div class="so">
+    <div class="sn">Zostel Port Blair ⭐ 4.5</div>
+    <div class="sm"><span class="sp">₹700–900 dorm / ₹2,200 private</span><span class="st">Social hostel</span></div>
+    <div class="sd">Same Phoenix Bay area. Near the jetty. Great rooftop café. Perfect for the final night before 9 AM flight.</div>
+    <div class="sa"><a class="sl" href="https://www.zostel.com/zostel/port-blair/" target="_blank">zostel.com</a><span class="sl">📞 +91 44 4011 4644</span></div>
+  </div>
+</div>
+
+<!-- DAY 1 -->
+<div class="day">
+  <div class="day-head">
+    <div class="dpill"><div class="dp-d">DAY</div><div class="dp-n">1</div><div class="dp-dt">APR 27 SUN</div></div>
+    <div class="day-title"><h3>Land · Corbyn's Cove · Flag Point Sunset · L&S Show</h3><div class="ds">"Gentle arrival. Let the islands find you."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb">2–3:30 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🛬 Land at IXZ · BSNL SIM · Hotel Oceanview <span class="ctag">Prepaid taxi ₹250–350</span></div>
+    <div class="edesc"><strong>At the airport — 3 immediate things:</strong> (1) Get BSNL SIM at terminal counter (₹150–200 with data — only network on all islands). (2) On hotel WiFi later: download offline Google Maps for Havelock + Neil. (3) Screenshot Makruzz ferry ticket for Apr 29. Prepaid taxi to Hotel Oceanview, Phoenix Bay. Hotel is across the road from your Apr 29 jetty — no cab needed that morning.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">4:30 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌊 Corbyn's Cove Beach <span class="tag t-water">First Swim</span> <span class="free">FREE · Auto ₹80</span></div>
+    <div class="edesc">10-min auto ride, 4 km south of Aberdeen. White sand, calm waves, safe zone. Walk in barefoot — no agenda. Float on your back and look at the sky. This is the ocean welcoming you. 45 min. <strong>🏖️ Fun:</strong> Find 3 different types of shells. The one with the most unusual shape becomes your trip mascot.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">5:30 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🚩 Flag Point — Panoramic Sunset <span class="tag t-sun">Sunset 1</span> <span class="free">FREE</span></div>
+    <div class="edesc">3-min walk from Corbyn's Cove. Hilltop view of the entire Port Blair harbour, Ross Island strait, and open sea. Sunset at <strong>6:18 PM</strong> — arrive by 5:30 PM. The sun drops behind layered island silhouettes. <strong>📸 Pose:</strong> "Charlie's Angels" group silhouette. Group jump shot at golden light. Everyone pointing in different directions ("island explorers" pose).</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">7:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍛 Dinner — Aberdeen Bazaar <span class="tag t-food">Veg ✅</span> <span class="ctag">₹120–200/person</span></div>
+    <div class="edesc"><strong>Best veg tonight:</strong> <strong>Annapurna Restaurant</strong> — pure veg thali ₹120–150, always crowded = always fresh. Dal, sabzi, rice, chapati. After dinner: walk the bazaar (alive 7–9 PM). Peek into the <strong>antique lane</strong> — old coins, tribal replica artifacts, shell collections. <strong>Sri Durga Mandir</strong> just off the main road (old, local, quietly beautiful). <strong>Don't buy souvenirs</strong> — Neil market prices are 40% cheaper.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">8:45 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🔦 Cellular Jail — Light &amp; Sound Show <span class="tag t-hist">Sunday = OPEN</span> <span class="ctag">₹100 English show</span></div>
+    <div class="edesc">English show 8:45 PM · Hindi 7:30 PM. <strong>This Sunday slot is the ONLY chance for the L&S show</strong> — jail is closed Monday (Day 2) and you fly at 9 AM on May 6. <strong>Pre-book at andamantourism.gov.in today on hotel WiFi.</strong> The jail walls are lit; freedom fighters narrate their story. One of the most spine-tingling things India has. Sleep in silence after. Tomorrow starts at 7 AM — no rush.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">10:30 PM</span></div><div class="dc"><div class="dot"></div></div>
+    <div class="ec"><div class="etit">🌙 Sleep · Alarm 7:00 AM · Ask Hotel: Wandoor Cab 9:30 AM Tomorrow</div>
+    <div class="edesc">Ask hotel front desk to arrange a cab to Wandoor Jetty for 9:30 AM tomorrow (₹400–500 total for the group). Confirm Jolly Buoy 10:30 AM ferry slot.</div></div></div>
+
+  </div>
+</div>
+
+<!-- DAY 2 -->
+<div class="day">
+  <div class="day-head">
+    <div class="dpill"><div class="dp-d">DAY</div><div class="dp-n">2</div><div class="dp-dt">APR 28 MON</div></div>
+    <div class="day-title"><h3>Jolly Buoy Island · Living Coral · Sand Games · Work Block</h3><div class="ds">"No plastic. No rush. The best coral reef in India."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb">7:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">☕ Sunrise + Chai at Phoenix Bay Waterfront <span class="tag t-sun">Sunrise</span> <span class="free">FREE</span></div>
+    <div class="edesc">Sunrise 5:28 AM — hotel faces east over Phoenix Bay. Quick walk outside to watch the harbour wake up: fishing boats heading out, ferry crews preparing. Chai from the roadside stall (₹10–15). Morning music on the radio. Pack your Jolly Buoy tiffin box: snacks in cloth bag/tiffin (no plastic on island), steel water bottle, reef-safe sunscreen, original ID.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">8:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍽️ Breakfast <span class="tag t-food">Veg ✅</span> <span class="ctag">₹80–150</span></div>
+    <div class="edesc">Hotel restaurant or nearby South Indian stall (idli-sambar, dosa ₹40–70). Eat well — active day. Take your motion sickness tablet now if prone to seasickness (30 min before boarding at 10:30 AM).</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">9:30 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🚗 Cab to Wandoor Jetty (30 km) <span class="ctag">₹400–500 total</span></div>
+    <div class="edesc">45-min coastal drive. Arrive Wandoor by 10:15 AM. Buy forest permit at counter: ₹75/person. Board Jolly Buoy ferry at <strong>10:30 AM</strong>.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">10:30 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🚤 Ferry Departs Wandoor → Jolly Buoy (35–45 min) <span class="conf">CONFIRMED</span></div>
+    <div class="edesc">Sit at the front — channels and open sea en route. Island appears as turquoise water and jungle from a distance. Island closes at 2 PM — all aboard return boat by 2:15 PM. <strong>No food sold on island</strong> — everything from your tiffin.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">11:15 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🐠 Coral Snorkeling + Glass-Bottom Boat + Beach Games <span class="tag t-water">Marine World</span></div>
+    <div class="edesc"><strong>Glass-bottom boat (₹200)</strong> — visible coral from a dry seat. <strong>Snorkeling (₹1,000–2,500)</strong> — clownfish, parrotfish, giant clams in 1–2m water. Living coral visible standing. Do NOT touch coral — ₹10,000 fine, strictly enforced. After snorkeling: <strong>🏰 Sand castle competition</strong> — teams of 2, 30 min, random passerby judges. <strong>Mermaid burial</strong> — sculpt a tail around whoever lies down, photograph overhead. Tiffin lunch under the trees at 12:30 PM. Cards on the beach after eating.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">2:15 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🚤 Board Return Boat (all aboard by 2:15 PM) <span class="wtag">⚠️ Island closes 2 PM</span></div>
+    <div class="edesc">Back at Wandoor ~3 PM. Tender coconut from stall (₹40–50). Cab back to Hotel Oceanview — arrive ~4 PM.</div></div></div>
+
+    <div class="ev work-ev"><div class="tc"><span class="tb" style="background:var(--work)">4:00 PM</span></div><div class="dc"><div class="dot" style="background:var(--work)"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">💼 WORK BLOCK — Hotel Room (AC, good WiFi) <span class="tag t-work">2 hrs</span></div>
+    <div class="edesc">Back at hotel, fresh up, open laptop. Hotel Oceanview Phoenix Bay has reliable WiFi. 2-hour focused work session in cool AC while the afternoon heat makes outdoor time unpleasant anyway. <strong>Personal snacks:</strong> dry fruits, energy bar at the desk.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">6:30 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🛍️ Aberdeen Bazaar + Samudrika Museum (if open) <span class="tag t-hist">Antiques</span></div>
+    <div class="edesc">Antique curio lane off the main bazaar — old shell collections, replica tribal items, British-era artifacts. Sagarika Government Emporium (authentic crafts, fixed prices). <strong>Chatham Saw Mill (1836)</strong> is Asia's oldest working sawmill — on Chatham Island via bridge from PB, open 9 AM–11:30 AM weekdays. If you want to see it, it fits on Day 2 morning before Wandoor (9–9:15 AM quick stop).</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">8:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍛 Dinner + Pack for Havelock <span class="tag t-food">Veg ✅</span></div>
+    <div class="edesc">New Lighthouse Restaurant (good veg options, paneer, dal, ₹150–250) or Annapurna again. After dinner: pack all bags for Havelock. Everything ready by the door. Alarm set for <strong>4:30 AM</strong> — Makruzz is tomorrow.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">9:30 PM</span></div><div class="dc"><div class="dot"></div></div>
+    <div class="ec"><div class="etit">🌙 Sleep — Alarm 4:30 AM <span class="wtag">⚠️ Early start tomorrow</span></div>
+    <div class="edesc">7 hours of sleep before the 6 AM ferry. Hotel is 60 seconds from the jetty — genuinely the most convenient possible setup for this departure.</div></div></div>
+
+  </div>
+</div>
+
+<div class="hack box">
+  <h5>💚 Port Blair Hacks</h5>
+  <ul>
+    <li><strong>Cellular Jail day visit is not possible on this trip</strong> — Closed Mon (Day 2), you ferry at 6 AM Tue (Day 3), Closed Mon again (Day 9), 9 AM flight May 6 (Day 10). The L&S show tonight is your only window. Book it before sleeping on Day 1.</li>
+    <li>Hotel Oceanview location = superpower. Phoenix Bay Jetty is literally across the road. Apr 29: walk out at 5:20 AM, no cab, no stress.</li>
+    <li>Jolly Buoy permit: ask hotel to pre-arrange the night before — saves the Wandoor counter queue.</li>
+    <li>Reef-safe sunscreen only on Jolly Buoy — ₹10,000 fine for regular sunscreen. Or wear a rash guard instead (much better protection anyway).</li>
+    <li>Sugarcane juice from Aberdeen street vendors: ₹20–30, freshly pressed, incredible.</li>
+  </ul>
+</div>
+</div>
+
+<!-- FERRY CONFIRMED -->
+<div class="ferry">
+  <h3>⛴️ Confirmed Ferry — Port Blair → Havelock · April 29</h3>
+  <table class="ft">
+    <tr><td>Vessel</td><td><strong>Makruzz</strong> · Class: Premium · Status: Confirmed ✅</td></tr>
+    <tr><td>Departs</td><td><strong>06:00 AM</strong> · Phoenix Bay Jetty · Hotel is 60 sec walk — arrive jetty 5:20 AM</td></tr>
+    <tr><td>Arrives</td><td><strong>07:30 AM</strong> · Havelock Jetty (Govind Nagar)</td></tr>
+    <tr><td>On the ferry</td><td>Sunrise at 5:28 AM happens mid-crossing — sit port side for open sea view. Dolphins common on this route. 90 min = perfect card game session. Personal snacks + chai in flask.</td></tr>
+  </table>
+</div>
+
+<!-- ═══════════════════════
+     HAVELOCK  Days 3–6
+═══════════════════════ -->
+<div class="hv-t">
+<div class="phase">
+  <div class="ph-icon">🤿</div>
+  <div class="ph-text">
+    <h2 style="color:var(--hv)">Havelock — Swaraj Dweep</h2>
+    <div class="ph-sub">Days 3–6 · Apr 29 – May 3 · 4 nights · The World Orchid</div>
+  </div>
+</div>
+
+<div class="conf-card" style="background:linear-gradient(135deg,#0D3B22,#1A6B3A)">
+  <div class="cc-l">🌿 Confirmed · The World Orchid, Havelock Island</div>
+  <div class="cc-n">The World Orchid Resort, Swaraj Dweep (Havelock)</div>
+  <div class="cc-row">
+    <span class="cc-i">Check-in <strong>Apr 29</strong> (arrive 7:30 AM — ask early check-in on arrival)</span>
+    <span class="cc-i">Checkout <strong>May 3</strong> · 4 nights</span>
+  </div>
+</div>
+
+<div class="stay">
+  <h4>🛵 Scooty Rentals — Havelock</h4>
+  <div class="so">
+    <div class="sd"><strong>Rent 3 scooties at jetty exit</strong> on arrival · ₹500–700/day each · Need original driving licence · <strong>FIRST STOP: Petrol pump near Beach 5 market (~4 km from jetty). Fill all 3 tanks immediately. One pump on the entire island.</strong> Scooties cannot go on ferries — return all before May 3 checkout.</div>
+  </div>
+</div>
+
+<!-- DAY 3 -->
+<div class="day">
+  <div class="day-head">
+    <div class="dpill"><div class="dp-d">DAY</div><div class="dp-n">3</div><div class="dp-dt">APR 29 TUE</div></div>
+    <div class="day-title"><h3>Arrive · Elephant Beach · Radhanagar Sunset · Work Block</h3><div class="ds">"The island delivers three worlds in your first day."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb">5:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">⏰ Wake · Chai · Walk to Phoenix Bay Jetty</div>
+    <div class="edesc">Hotel is across the road. Walk to jetty at 5:20 AM. Makruzz Premium check-in starts ~5:30 AM. Sunrise is already happening as you board (5:28 AM). Find window seats. Personal snacks on the boat — biscuits, dry fruits. 90-min crossing. Deal a round of UNO.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">7:30 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🏝️ Arrive Havelock · Scooties · Petrol · World Orchid Check-In</div>
+    <div class="edesc">Scooties at jetty exit. Petrol pump first (4 km, Beach 5 market). Check into World Orchid — if room isn't ready, leave bags. <strong>At resort desk immediately:</strong> (1) Book Night Kayaking for Day 5 May 1 evening — fills up 48 hrs ahead. (2) Get Barefoot Scuba number for Day 4 booking (+91 9531864680). Breakfast at resort (veg options: poha, upma, toast, eggs on request).</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">10:30 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌿 Trek to Elephant Beach — Free Forest Trail <span class="tag t-water">Water Sports</span> <span class="free">Trek FREE (saves ₹900/person vs boat)</span></div>
+    <div class="edesc">Trailhead near Beach 5, ~2 km from World Orchid direction. 1.5 km jungle trail — mangroves, birds, filtered light, 35 min. Wear water shoes. <strong>At Elephant Beach:</strong> snorkeling ₹500, banana boat ₹400, jet ski ₹600, parasailing ₹1,200, glass-bottom boat ₹400. <strong>Combo deal: snorkeling + 1 activity = 15–20% off.</strong> Living coral in 1–3m of water — clownfish, parrotfish, sea turtles possible. Leave beach by 3 PM (closes 3:30 PM). Boat back: ₹900/person return if you prefer over the walk.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">2:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍛 Lunch at Resort or Dhaba <span class="tag t-food">Veg ✅</span> <span class="ctag">₹150–350</span></div>
+    <div class="edesc"><strong>Veg options Havelock:</strong> Full Moon Café (Beach 3, dal makhani, paneer, veg thali ₹180–300), New Heaven (budget veg thali ₹100–150), World Orchid restaurant (₹250–400, ask for veg dishes). Personal snacks at the table while waiting.</div></div></div>
+
+    <div class="ev work-ev"><div class="tc"><span class="tb" style="background:var(--work)">3:00 PM</span></div><div class="dc"><div class="dot" style="background:var(--work)"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">💼 WORK BLOCK — Resort Room (2 hours) <span class="tag t-work">Workation</span></div>
+    <div class="edesc">You've been up since 4:30 AM. Rest + work in the AC room 3–5 PM. Peak heat outside (33°C), perfect time to be indoors. Reliable resort WiFi for calls and tasks. <strong>Personal snacks:</strong> nuts, energy bar at desk.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">5:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">☕ Chai · Scooty to Radhanagar <span class="tag t-sun">Sunset 2</span></div>
+    <div class="edesc">Chai at resort or roadside stall (₹10–15). 40-min scooty ride to Radhanagar (Beach 7) — fill petrol en route at the pump.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">5:45 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌅 Radhanagar Beach — First Sunset ⭐ 4.8 <span class="tag t-sun">Asia's Best Beach</span> <span class="free">FREE</span></div>
+    <div class="edesc">Sunset at <strong>6:20 PM.</strong> White sand, forest backdrop, zero development. Safe flagged swim zone — walk out 50m in warm water. <strong>Walk 400m north of the main crowd</strong> — completely empty stretch, same beach. <strong>📸 Sunset photos:</strong> Group silhouette against the last light. "Walk toward camera" slow-motion reel. Mirror reflection on wet sand after a wave. Radio on softly. Stay until stars appear. Return by 8 PM.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">8:30 PM</span></div><div class="dc"><div class="dot"></div></div>
+    <div class="ec"><div class="etit">🍽️ Dinner · Early Sleep <span class="tag t-food">Veg ✅</span></div>
+    <div class="edesc">Resort dinner or Anju Coco Grove (veg options ₹150–250). Sleep by 10 PM — you've been up since 4:30 AM. Tomorrow is the biggest activity day: Kalapathar sunrise + Scuba.</div></div></div>
+
+  </div>
+</div>
+
+<!-- DAY 4 -->
+<div class="day">
+  <div class="day-head">
+    <div class="dpill"><div class="dp-d">DAY</div><div class="dp-n">4</div><div class="dp-dt">APR 30 WED</div></div>
+    <div class="day-title"><h3>Kalapathar Sunrise · Scuba Diving · Sea Walk · Radhanagar</h3><div class="ds">"All three layers — sky at dawn, surface at sunset, 12 metres deep."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb">5:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌅 Kala Pathar Beach — Sunrise ⭐ 4.7 <span class="tag t-sun">Sunrise 1</span> <span class="free">FREE</span></div>
+    <div class="edesc">6 km east, 15-min scooty ride in the dark. Arrive before 5:25 AM sunrise. Black volcanic rocks, white sand — completely alone. The Bay of Bengal cracks open in orange. Bring thermos chai + personal snacks (biscuit, dry fruit). Stay until 6:30 AM. <strong>📸 Rock throne:</strong> Sit on the highest black rock, arms spread, facing the sunrise. "Jump shot series" with orange sky behind. The most Instagram-worthy unposed sunrise you'll ever have.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">7:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍳 Light Breakfast · Dive Prep <span class="tag t-food">Veg ✅ · Eat VERY light</span></div>
+    <div class="edesc">Banana, toast, eggs only — no heavy food before diving (nausea at depth). Head to Barefoot Scuba Beach 3 by 8 AM for paperwork. <strong>Pre-call them last night: +91 9531864680.</strong></div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">8:30 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🤿 SCUBA DIVING — Fun Dive <span class="tag t-water">12 Metres Deep</span> <span class="ctag">₹3,200–4,000/person</span></div>
+    <div class="edesc">20-min briefing + full gear + PADI guide + 40-45 min underwater at 9–12m. You'll see: coral gardens, moray eels, giant clams, lionfish, possibly nurse sharks (harmless). Complete silence. Weightlessness. The coral world from inside it. GoPro rental ₹500–800 — worth it. <strong>Book scuba + sea walk together = 15–20% combo discount.</strong> Mention any ear/sinus issues. ✅ Scuba Apr 30 → Flight May 6 = 6-day gap. Completely safe.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">11:30 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍛 Lunch — Eat Well <span class="tag t-food">Veg ✅</span> <span class="ctag">₹200–350</span></div>
+    <div class="edesc">Post-dive you need real food + aggressive hydration. No alcohol today. Full Moon Café (paneer, dal, veg thali) is excellent. Personal snacks as a top-up.</div></div></div>
+
+    <div class="ev work-ev"><div class="tc"><span class="tb" style="background:var(--work)">1:00 PM</span></div><div class="dc"><div class="dot" style="background:var(--work)"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">💼 WORK BLOCK + Post-Dive Rest (2 hrs) <span class="tag t-work">Workation</span></div>
+    <div class="edesc">Post-dive rest is mandatory AND it's 33°C outside. Work in the AC room 1–3 PM. Perfect natural alignment — your body needs the downtime anyway. Drink water continuously.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">3:30 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🚶 Underwater Sea Walk — Helmet Dive <span class="tag t-water">Walk on the Sea Floor</span> <span class="ctag">₹2,500–3,500/person</span></div>
+    <div class="edesc">Walk on the actual sea floor at 5–7m with a pressurized helmet — normal breathing, no swimming needed. 25–30 min. You walk between fish and coral. Different from scuba — you're strolling rather than swimming. <strong>Book with same operator as scuba for combo discount.</strong></div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">5:30 PM</span></div><div class="dc"><div class="dot"></div></div>
+    <div class="ec"><div class="etit">🌅 Radhanagar — Second Sunset <span class="tag t-sun">Sunset 3</span> <span class="free">FREE</span></div>
+    <div class="edesc">The ocean looks different now that you've been inside it. The second Radhanagar visit tends to be more contemplative. <strong>📸 Underwater theme tonight:</strong> "Newspaper deep" (someone reading chest-deep), underwater phone-pouch shots. Dinner at resort after. Cards in the evening. Sleep by 10 PM.</div></div></div>
+
+  </div>
+</div>
+
+<!-- DAY 5 -->
+<div class="day">
+  <div class="day-head">
+    <div class="dpill"><div class="dp-d">DAY</div><div class="dp-n">5</div><div class="dp-dt">MAY 1 THU</div></div>
+    <div class="day-title"><h3>Work Morning · Beach Fun Afternoon · Night Kayaking</h3><div class="ds">"Your rest day. The big night."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb">7:30 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">😴 Sleep In · Resort Beach Morning Swim <span class="tag t-water">Gentle Start</span></div>
+    <div class="edesc">No early alarm. Wake naturally. Morning swim at the resort's beach or nearby Beach 5 — faces east, calm morning water. Floating face-up in Andaman water with blue sky = one of life's best moments. Leisurely breakfast at resort.</div></div></div>
+
+    <div class="ev work-ev"><div class="tc"><span class="tb" style="background:var(--work)">9:30 AM</span></div><div class="dc"><div class="dot" style="background:var(--work)"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">💼 WORK BLOCK — Best Work Day (3 hours) <span class="tag t-work">Workation</span></div>
+    <div class="edesc">This is the main workation day. Resort WiFi, AC room, morning is crisp and focused. 9:30 AM–12:30 PM is your most productive window. Others can beach, swim, explore the resort. <strong>Chai + personal snacks</strong> (nuts, dry fruit) at the desk. By 12:30 PM, work is done for the day.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">1:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍛 Lunch + Cards at the Table <span class="tag t-food">Veg ✅</span> <span class="tag t-fun">Cards</span></div>
+    <div class="edesc">Long lunch. Deal a round of cards while waiting for food. This is the Havelock lunch card game session — UNO or Bluff, radio playing. No rush. <strong>Veg:</strong> Full Moon Café or resort. Personal snacks after for dessert.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">2:30 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🏖️ BEACH FUN SESSION — Sand + Games <span class="tag t-fun">Main Event</span></div>
+    <div class="edesc"><strong>🏰 Sand Castle Build-Off</strong> (teams, 30 min, passerby judges) · <strong>🧟 Sphinx/Mermaid Burial</strong> (overhead photo from a nearby rock) · <strong>🌊 Wave Dodge</strong> (line up at shore, last to jump a wave loses) · <strong>🐚 Shell Hunt</strong> (most unusual shape wins) · <strong>🎵 Beach Radio</strong> (speaker out, impromptu dancing) · <strong>🏃 Running Entrance Reel</strong> (all five running toward camera on empty beach, arms spread, low angle, burst mode) · <strong>Talk to strangers:</strong> at Radhanagar especially — ask "which sunrise did you catch?" Everyone has an Andaman story.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">5:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌅 Radhanagar — Third Sunset <span class="tag t-sun">Sunset 4</span> <span class="free">FREE</span></div>
+    <div class="edesc">Third and most emotional visit. By now this beach is yours. If you've made friends at the resort, bring them. Radio on. Sunset 6:20 PM. Stay until dark. Return by 7:15 PM — night kayaking is at 7:30 PM.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">7:30 PM</span></div><div class="dc"><div class="dot"></div></div>
+    <div class="ec"><div class="etit">🌊 NIGHT KAYAKING — Bioluminescent Waters <span class="tag t-water">Unmissable</span> <span class="ctag">₹1,200–1,500/person</span></div>
+    <div class="edesc">Booked through World Orchid resort desk (done Day 3 morning). Barefoot India / India Kayaks. Paddle in the dark through water that erupts electric blue — bioluminescent plankton activated by movement. Every stroke leaves a glowing trail. Splash the water: it ignites. <strong>New moon window: ~May 1 = maximum glow ✅</strong>. No phones. No talking once on water. Just paddle. This is the most extraordinary thing on the trip. Returns ~9:30 PM. Sleep immediately.</div></div></div>
+
+  </div>
+</div>
+
+<!-- DAY 6 -->
+<div class="day">
+  <div class="day-head">
+    <div class="dpill"><div class="dp-d">DAY</div><div class="dp-n">6</div><div class="dp-dt">MAY 2 FRI</div></div>
+    <div class="day-title"><h3>Work Morning · Scooty Loop · Final Radhanagar · Book Neil Ferry</h3><div class="ds">"Last full day on Havelock. The island asks you to stay."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb">7:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌊 Morning Swim at Resort Beach <span class="tag t-water">Sunrise Swim</span></div>
+    <div class="edesc">Beach 5 faces east. 6–7 AM swim in completely calm water before anyone else arrives. Walk out chest-deep, watch the sun complete its rise. This is the quiet that balances the big nights.</div></div></div>
+
+    <div class="ev work-ev"><div class="tc"><span class="tb" style="background:var(--work)">8:30 AM</span></div><div class="dc"><div class="dot" style="background:var(--work)"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">💼 WORK BLOCK — Friday Work (3 hours) <span class="tag t-work">Workation</span></div>
+    <div class="edesc">8:30 AM–11:30 AM. Resort WiFi. This clears your Friday obligations and gives you free afternoons worry-free. Personal snacks at the desk. Chai ordered from resort.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">12:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍛 Lunch <span class="tag t-food">Veg ✅</span></div>
+    <div class="edesc">Resort or local dhaba. After lunch: book Havelock→Neil ferry. Ask resort desk or walk to Havelock Jetty (10 min scooty) — book for May 3 morning 9–10 AM slot. Makruzz ₹700–900.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">2:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🛵 Village Scooty Loop + Hidden Coves <span class="tag t-fun">Island Life</span></div>
+    <div class="edesc">Interior roads through coconut groves, paddy farms, fishing villages. Ask locals about unmarked beach tracks — there are 2–3 private coves accessible only by scooty + short walk. Stop for tender coconut (₹40–50). The <strong>Radhanagar forest tunnel</strong> — a canopy of trees 1 km before the beach, look for it on the approach road. Stop and photograph it.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">4:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">📦 Return Scooties · Pack for Neil</div>
+    <div class="edesc">Return all 3 scooties to rental shop. Collect deposits. Pack all bags for Neil — checkout is tomorrow morning.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">5:15 PM</span></div><div class="dc"><div class="dot"></div></div>
+    <div class="ec"><div class="etit">🌅 Radhanagar — Final Havelock Sunset <span class="tag t-sun">Sunset 5</span> <span class="free">Take a cab/resort shuttle ₹100/person</span></div>
+    <div class="edesc">Last Radhanagar visit. By now this beach has become part of your identity. Sit together in silence for 10 min before getting up to leave. <strong>📸 The one to print:</strong> All five, backs to camera, looking at the sunset. No posing. Just being here. That photograph will outlast all others from this trip.</div></div></div>
+
+  </div>
+</div>
+
+<div class="work-box box">
+  <h5>💼 Workation Schedule — Havelock (Recap)</h5>
+  <ul>
+    <li><strong>Day 3 (Apr 29 Tue):</strong> 3–5 PM · Post-Elephant Beach, siesta heat · 2 hrs</li>
+    <li><strong>Day 4 (Apr 30 Wed):</strong> 1–3 PM · Post-dive mandatory rest = work · 2 hrs</li>
+    <li><strong>Day 5 (May 1 Thu):</strong> 9:30 AM–12:30 PM · Main work day, resort WiFi · 3 hrs</li>
+    <li><strong>Day 6 (May 2 Fri):</strong> 8:30–11:30 AM · Friday sessions done · 3 hrs</li>
+    <li>Work happens in AC room during peak heat (12–3 PM) or mornings. Zero activities missed.</li>
+  </ul>
+</div>
+
+<div class="fun-box box">
+  <h5>🎉 Havelock Fun Activity & Reel Guide</h5>
+  <ul>
+    <li><strong>Sand Castle Build-Off</strong> · Teams of 2 · 30 min · Random stranger judges · Loser buys coconut water next round</li>
+    <li><strong>Sphinx / Mermaid Burial</strong> · Overhead photo from a rock · Try "pharaoh" and "zombie" variations</li>
+    <li><strong>Wave Dodge</strong> · Line up at shore · Last to jump a wave loses · Add increasingly humiliating forfeits</li>
+    <li><strong>Bioluminescence Splash Reel</strong> · Night kayaking · Hands in water, pull out, film the glowing drops · This goes viral</li>
+    <li><strong>"Types of Friends at the Beach" Skit Reel</strong> · The one still sunscreening, the one already swimming, the one asleep, the one taking photos of everyone</li>
+    <li><strong>Underwater Look-Up Shot</strong> · Person floating, camera in waterproof pouch looking up from below · Ethereal</li>
+    <li><strong>Cards on Ferry</strong> · Makruzz 90-min crossing = perfect UNO session</li>
+    <li><strong>Antakshari with Radio</strong> · Radio plays a song, next person sings with that last letter · Nostalgic, hilarious, very competitive</li>
+    <li><strong>Talk to Strangers</strong> · At Radhanagar sunset, Full Moon Café, resort breakfast · Open with: "Which sunrise did you catch?" Works every time.</li>
+  </ul>
+</div>
+
+<div class="food-box box">
+  <h5>🥗 Veg Food — Havelock</h5>
+  <ul>
+    <li><strong>Full Moon Café (Beach 3)</strong> — Best veg café. Dal makhani, paneer, veg thali. ₹180–300.</li>
+    <li><strong>New Heaven Restaurant (Beach 5 market)</strong> — Budget veg thali ₹100–150. Simple and clean.</li>
+    <li><strong>Anju Coco Grove</strong> — Coconut grove setting. Veg options. ₹150–250.</li>
+    <li><strong>World Orchid restaurant</strong> — Ask specifically for paneer / vegetable curries / dal. ₹250–400.</li>
+    <li><strong>Market area dhabas</strong> — Puri-sabzi, rice-dal ₹80–120. Cheapest, freshest, most local.</li>
+    <li><strong>Snacks:</strong> Tender coconut (₹40–50, everywhere), Maggi at beach shacks (₹40–60), fresh pineapple ₹20–30, chai ₹10–15.</li>
+  </ul>
+</div>
+
+<div class="hack box">
+  <h5>💚 Havelock Hacks</h5>
+  <ul>
+    <li>Trek Elephant Beach (free) vs boat (₹900/person). The forest trail is more magical. Save ₹4,500 for the group.</li>
+    <li>Night kayaking: new moon ~May 1 = maximum bioluminescence. Book Day 3 morning — don't leave it to Day 5.</li>
+    <li>Scuba + sea walk same operator = 15–20% combo. Save ₹500–800/person. Book together.</li>
+    <li>Radhanagar: 400m walk north of the crowd = empty private stretch. Same beach, no people.</li>
+    <li>One petrol pump, near Beach 5 market. Fill every time you pass it. No exceptions.</li>
+  </ul>
+</div>
+</div>
+
+<!-- FERRY 2 -->
+<div class="ferry">
+  <h3>⛴️ Ferry to Book: Havelock → Neil · May 3 Morning</h3>
+  <table class="ft">
+    <tr><td>Book when</td><td>May 2 afternoon — World Orchid resort desk or walk to Havelock Jetty</td></tr>
+    <tr><td>Take</td><td>9:00 AM or 10:00 AM departure (gives time for breakfast + checkout)</td></tr>
+    <tr><td>Duration</td><td>~45 min Makruzz / 1.5 hrs Govt ferry</td></tr>
+  </table>
+  <div class="fops">
+    <div class="fop"><div class="fo-n">Makruzz (Preferred)</div><div class="fo-p">₹700–900</div><div class="fo-d">45 min. AC. Walk-up at jetty or book online.</div><a class="fo-l" href="https://www.makruzz.com" target="_blank">makruzz.com →</a></div>
+    <div class="fop"><div class="fo-n">Govt Ferry</div><div class="fo-p">₹150–200</div><div class="fo-d">1.5 hrs. Buy at jetty counter day before.</div><a class="fo-l" href="https://dss.and.nic.in" target="_blank">dss.and.nic.in →</a></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════
+     NEIL ISLAND  Days 7–9
+═══════════════════════ -->
+<div class="nl-t">
+<div class="phase">
+  <div class="ph-icon">🌺</div>
+  <div class="ph-text">
+    <h2 style="color:var(--nl)">Neil Island — Shaheed Dweep</h2>
+    <div class="ph-sub">Days 7–9 · May 3–5 · SeaShells Samsara (1N) + TSG Aura (1N) · Sitapur Sunrise</div>
+  </div>
+</div>
+
+<div class="conf-card" style="background:linear-gradient(135deg,#3D1A0D,#6B3018)">
+  <div class="cc-l">🏨 Confirmed · Two Properties on Neil Island</div>
+  <div class="cc-n">SeaShells Samsara (May 3–4) → TSG Aura, Sitapur Beach (May 4–5)</div>
+  <div class="cc-row">
+    <span class="cc-i">Samsara checkin <strong>May 3</strong> → checkout <strong>May 4</strong></span>
+    <span class="cc-i">TSG Aura checkin <strong>May 4</strong> (~2 PM) → checkout <strong>May 5</strong></span>
+    <span class="cc-i">TSG Aura is <strong>on Sitapur Beach</strong> — May 5 sunrise is 50 steps from your door</span>
+  </div>
+</div>
+
+<div class="resort-card">
+  <div class="rc-title">TSG Aura Resort — Your Neil Highlight</div>
+  <div class="rc-sub">Confirmed · May 4–5 · The highest-rated hotel on Neil Island</div>
+  <div class="rc-opt">
+    <div>
+      <div class="rc-name">TSG Aura Resort, Neil Island</div>
+      <div class="rc-stars">⭐ 4.7 · 4,755 reviews</div>
+      <div class="rc-why">📍 AT Sitapur Beach — May 5 sunrise is from your own private beach</div>
+      <div class="rc-note">Sea-facing rooms. Private beach. Breakfast included. Staff consistently praised — "best stay in all of Andaman" in many reviews. Small resort = never crowded.</div>
+    </div>
+    <div>
+      <div class="rc-price">✅ Confirmed</div>
+      <a class="rc-link" href="https://www.tsgresorts.in" target="_blank">tsgresorts.in →</a>
+      <div style="font-size:.62rem;color:rgba(255,255,255,.3);margin-top:2px">📞 +91 3192 246 488</div>
+    </div>
+  </div>
+</div>
+
+<div class="stay">
+  <h4>🛵 Neil Island Transport</h4>
+  <div class="so">
+    <div class="sd"><strong>Rent 2–3 scooties at jetty exit</strong> · ₹600/day · Need original DL · <strong>CRITICAL: No petrol pumps on Neil. Government shops sell petrol — they close at 5 PM SHARP. Fill up immediately on arrival, before checking into hotel.</strong> Download offline Neil map before leaving Havelock. No ATM on Neil — carry all cash from Havelock.</div>
+  </div>
+</div>
+
+<!-- DAY 7 -->
+<div class="day">
+  <div class="day-head">
+    <div class="dpill"><div class="dp-d">DAY</div><div class="dp-n">7</div><div class="dp-dt">MAY 3 SAT</div></div>
+    <div class="day-title"><h3>Arrive Neil · Bharatpur Snorkel · Natural Bridge · Stargazing</h3><div class="ds">"Neil slows you down immediately."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb">10:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🛥️ Arrive Neil Kendra Jetty → Scooties → PETROL FIRST <span class="wtag">⚠️ Petrol closes 5 PM</span></div>
+    <div class="edesc">Rent scooties at exit. <strong>Before hotel: ride to petrol shop (near jetty, ask anyone) and fill up.</strong> Then check into SeaShells Samsara. Neil's pace is different — gentler, quieter. Exhale.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">11:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🐠 Bharatpur Beach — Snorkeling + Glass Boat ⭐ 4.6 <span class="tag t-water">Marine Life</span> <span class="ctag">₹400–800</span></div>
+    <div class="edesc">2-min ride from jetty. Shallow crystal water — live coral visible standing. Glass-bottom boat ₹800. Snorkeling ₹400. Starfish, brain coral, blue-ringed fish in waist-deep water. The gentlest, most meditative water experience of the trip. 2 hrs. <strong>Fun here:</strong> Sand name art — write the group's name in massive letters in the sand and photograph from a nearby rock.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">1:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🛍️ Neil Kendra Market — Lunch + Best Souvenir Prices <span class="tag t-food">Veg ✅</span> <span class="ctag">Thali ₹150–180</span></div>
+    <div class="edesc">Local dhaba — dal-chawal-sabzi ₹100 or fish thali with veg option ₹150. <strong>Neil market = best souvenir prices in Andaman</strong> — shell jewelry, spices, coconut crafts. 30–50% cheaper than Aberdeen. Buy everything here. Rest at Samsara 2:30–4:30 PM.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">4:30 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">⚠️ CHECK TIDES NOW — Laxmanpur + Natural Rock Bridge <span class="tag t-water">Tide-Dependent</span></div>
+    <div class="edesc"><strong>"Tides Near Me" app or ask Samsara staff.</strong> Natural Bridge only visible at low tide. If low tide window is 4–7 PM today: go now. At low tide: exposed coral flats — brain coral, starfish, sea snakes, crabs in tidal pools. The Rock Bridge is a massive natural arch carved by ocean over millennia. Walk under it. Photograph through it toward the sea. Stay for Laxmanpur sunset — sky turns violet before dark.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">9:00 PM</span></div><div class="dc"><div class="dot"></div></div>
+    <div class="ec"><div class="etit">🌌 Stargazing — Zero Light Pollution <span class="tag t-spi">Milky Way</span> <span class="free">FREE</span></div>
+    <div class="edesc">After dinner (local dhaba ₹150–200), walk to Bharatpur Beach. The Milky Way is fully visible — you can see the galactic core and nebulae with the naked eye. Lie flat on the sand. Eyes closed 3 min to dark-adapt, then open — you'll see 3× more stars. <strong>Cards on the beach:</strong> Name as many constellations as you can. Loser buys chai tomorrow.</div></div></div>
+
+  </div>
+</div>
+
+<!-- DAY 8 -->
+<div class="day">
+  <div class="day-head">
+    <div class="dpill"><div class="dp-d">DAY</div><div class="dp-n">8</div><div class="dp-dt">MAY 4 SUN</div></div>
+    <div class="day-title"><h3>Sitapur Sunrise · Checkout Samsara → TSG Aura · Island Loop</h3><div class="ds">"Sunday. No work. Just Neil."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb">5:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌅 Sitapur Beach Sunrise <span class="tag t-sun">Sunrise 2</span> <span class="free">Scooty 5.5 km · 15 min in dark</span></div>
+    <div class="edesc">Sunrise 5:25 AM. Arrive before 5:20 AM. Full unobstructed ocean horizon. <strong>A small chai stall opens at dawn</strong> near the beach — warm chai + Maggi (₹40–60). Sea caves to explore at low tide nearby. The walk back along the shore in pure golden light is the most meditative 20 min of the trip. <strong>📸 Sitapur photos:</strong> Wide shot with full horizon. Arms open to the sun. Time-lapse if phone supports it. Long exposure waves (rest phone on a rock).</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">7:30 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍳 Breakfast at Samsara · Checkout <span class="tag t-food">Veg ✅</span></div>
+    <div class="edesc">Eat. Checkout from SeaShells Samsara. Keep bags stored at reception. TSG Aura check-in at ~2 PM — you have the whole morning free.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">9:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🏝️ Full Island Scooty Loop <span class="tag t-fun">Freedom</span> <span class="free">Just petrol</span></div>
+    <div class="edesc">Circle all of Neil in 90 min leisurely. Coconut plantations, paddy fields, fishing villages, roads where sea appears on both sides simultaneously. Stop wherever calls to you. <strong>Find the local temple near Neil Kendra</strong> — small, old, active, the kind of temple that has been there quietly for decades. Duck in for 5 min. The atmosphere is completely different from tourist spaces.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">11:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌊 Natural Bridge / Laxmanpur (if tide missed yesterday) <span class="tag t-water">Tidal Walk</span></div>
+    <div class="edesc">Check tides for 10 AM–noon window. If low tide: walk the coral flats barefoot. This is the one experience that doesn't look like a photo — it looks better in person. Giant coral formations at your feet, small sea creatures everywhere.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">12:30 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍛 Last Market Lunch + Final Souvenir Buy <span class="tag t-food">Veg ✅</span></div>
+    <div class="edesc">Dhaba lunch (₹150–180). Final souvenir run — shell jewelry, local spices, coconut crafts. Cash only. Best prices you'll find anywhere.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">2:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🏨 Check Into TSG Aura · Resort Afternoon <span class="tag t-resort">Resort Stay</span> <span class="conf">CONFIRMED</span></div>
+    <div class="edesc">TSG Aura is <strong>on Sitapur Beach</strong> — the sunrise beach you visited this morning. You're now staying on it. Check in. Sea-facing room. Private beach. Resort afternoon: hammocks, beach chairs, the sound of waves. Cards on the beach. Radio. This is the resort experience — no rushing, nowhere to be. <strong>Tonight: ask TSG Aura front desk to book Neil → Port Blair ferry for tomorrow May 5 morning.</strong></div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">5:30 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌅 TSG Aura Private Beach Sunset</div>
+    <div class="edesc">Sitapur faces east for sunrise, but evening light from the side is still beautiful. Watch the sky change from the resort's own beach. Dinner at TSG Aura restaurant — ask specifically for veg options (they have paneer, dal, vegetable curries). Resort dinner is consistently good.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">9:00 PM</span></div><div class="dc"><div class="dot"></div></div>
+    <div class="ec"><div class="etit">🌌 Second Night of Stargazing — TSG Aura Beach <span class="tag t-spi">Milky Way Again</span></div>
+    <div class="edesc">TSG Aura's east-facing beach has minimal light behind it. After dinner, walk out. Same Milky Way. Different feeling — you leave tomorrow. This is the night for quiet reflection. Set alarm for 5:00 AM. Tomorrow is the farewell sunrise.</div></div></div>
+
+  </div>
+</div>
+
+<!-- DAY 9 -->
+<div class="day">
+  <div class="day-head">
+    <div class="dpill"><div class="dp-d">DAY</div><div class="dp-n">9</div><div class="dp-dt">MAY 5 MON</div></div>
+    <div class="day-title"><h3>Sitapur Sunrise from TSG Aura · Ferry to PB · Work Block · Last Night</h3><div class="ds">"50 steps from your door. The best sunrise in Andaman."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb">5:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌅 Sitapur Sunrise from TSG Aura Private Beach <span class="tag t-sun">Sunrise 3 — The One</span> <span class="free">50 steps from your bed</span></div>
+    <div class="edesc">Walk out of your room at 5:10 AM. The TSG Aura private beach IS Sitapur Beach. The sun rises directly from the ocean — full, unobstructed, exactly from the water's edge. <strong>Purple → tangerine → gold → brilliant white.</strong> Chai stall nearby opens at dawn. Sit on the sand. The last morning. <strong>No poses. No reels. Just be here together.</strong> This is the spiritual closing of the journey. Stay until 6:30 AM.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">7:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🍳 Resort Breakfast · Checkout TSG Aura <span class="tag t-food">Veg ✅</span></div>
+    <div class="edesc">Last resort meal. Return scooties by 8:30 AM. Checkout. Pack Neil souvenirs carefully. Say a genuine thank you to the staff.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">9:00 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">⛴️ Ferry Neil → Port Blair <span class="ctag">₹800–1,000 Makruzz</span></div>
+    <div class="edesc">Booked last night through TSG Aura. 90-min crossing. Final card game tournament on the ferry — settle all scores from the trip. Watch Neil disappear behind you into the sea. Arrive Port Blair ~11 AM.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">11:30 AM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🏨 Check Into Zostel Port Blair · Lunch <span class="ctag">₹700–900 dorm</span></div>
+    <div class="edesc">Zostel Phoenix Bay (same area as Hotel Oceanview — familiar ground). Drop bags. Lunch at Annapurna — pure veg thali ₹120–150. Personal snacks. Walk Aberdeen Bazaar one last time if anything was missed.</div></div></div>
+
+    <div class="ev work-ev"><div class="tc"><span class="tb" style="background:var(--work)">2:00 PM</span></div><div class="dc"><div class="dot" style="background:var(--work)"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">💼 WORK BLOCK — Monday Afternoon (3 hours) <span class="tag t-work">Workation</span></div>
+    <div class="edesc">2–5 PM. Monday full work session at Zostel (good WiFi, rooftop café). Clears your Monday work, everything tidy before returning home. <strong>Cellular Jail is closed Mondays</strong> — no conflict at all. Personal snacks at the desk.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">6:00 PM</span></div><div class="dc"><div class="dot"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🌅 Chidiya Tapu — Optional Farewell Sunset <span class="tag t-sun">Optional</span> <span class="ctag">Cab ₹1,500–2,000 return</span></div>
+    <div class="edesc">45 km south — "Bird Island," dense jungle, Andaman's most atmospheric sunset (forest + sea from all sides). Only if energy allows. Otherwise: sunset from Flag Point again or just rest at Zostel rooftop café with the harbour view. 9 AM flight tomorrow — you need to be at airport by 7 AM.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb">8:00 PM</span></div><div class="dc"><div class="dot"></div></div>
+    <div class="ec"><div class="etit">🍛 Final Dinner · Pack Everything · Sleep <span class="tag t-food">Veg ✅</span></div>
+    <div class="edesc">Annapurna one last time or anywhere you haven't tried yet. Pack everything — nothing left in the room. Set alarm for <strong>5:30 AM</strong>. Sleep by 9:30 PM. Tomorrow is just the airport.</div></div></div>
+
+  </div>
+</div>
+
+<div class="spi-box box" style="background:#EDE9FE;border-color:#4C1D95">
+  <h5 style="color:#4C1D95">🌌 Stargazing Guide — Neil Island</h5>
+  <ul style="color:#3B2060">
+    <li><strong>Best spots:</strong> Bharatpur Beach (Day 7) or TSG Aura private beach (Day 8) — minimal light, max sky</li>
+    <li><strong>Best window:</strong> 9:30 PM – midnight · Milky Way core highest overhead in late April–May</li>
+    <li><strong>Moon phase:</strong> New moon ~May 1 = very dark sky by May 3–5 ✅</li>
+    <li><strong>What to find:</strong> Milky Way core (dense stellar cloud), Scorpius constellation (bright in May southern sky), Jupiter/Saturn if visible, Orion setting west</li>
+    <li><strong>Phone photography:</strong> Night Mode, 3–5 sec exposure, rest phone flat on backpack. Turn all phone screens away.</li>
+    <li>Close eyes for 3 min first (dark adapt) — you'll see exponentially more stars when you open them</li>
+  </ul>
+</div>
+
+<div class="food-box box">
+  <h5>🥗 Veg Food — Neil Island</h5>
+  <ul>
+    <li><strong>Local dhabas near Neil Kendra Jetty</strong> — Dal-chawal-sabzi ₹100, fish thali with veg option ₹150. Best prices on the island. Eat here daily.</li>
+    <li><strong>SeaShells Samsara restaurant</strong> — Ask for veg dishes specifically. Good quality.</li>
+    <li><strong>TSG Aura Resort restaurant</strong> — Paneer, dal, vegetable curries. Resort quality, worth eating in for at least one dinner.</li>
+    <li><strong>South Indian stall near Neil Kendra</strong> — Idli-sambar mornings. ₹40–70.</li>
+    <li><strong>Sitapur sunrise chai stall</strong> — Opens at dawn. Warm chai + Maggi (₹40–60). The best ₹60 of the trip.</li>
+    <li><strong>Snacks throughout:</strong> Tender coconut ₹40–50, fresh fruit stalls at market. Your personal snacks: keep energy bars and dry fruits for early morning scooty rides.</li>
+  </ul>
+</div>
+</div>
+
+<!-- FERRY 3 -->
+<div class="ferry">
+  <h3>⛴️ Ferry to Book: Neil → Port Blair · May 5 Morning</h3>
+  <table class="ft">
+    <tr><td>Book when</td><td>May 4 evening — TSG Aura front desk will help</td></tr>
+    <tr><td>Take</td><td>9:00 AM departure → arrive PB ~10:30 AM</td></tr>
+    <tr><td>May 6 flight</td><td>9:00 AM flight = airport by 7:00 AM = no time for any activity on May 6. May 5 return to PB is correct.</td></tr>
+  </table>
+  <div class="fops">
+    <div class="fop"><div class="fo-n">Makruzz (Preferred)</div><div class="fo-p">₹800–1,000</div><div class="fo-d">90 min. AC. Ask TSG Aura to book.</div><a class="fo-l" href="https://www.makruzz.com" target="_blank">makruzz.com →</a></div>
+    <div class="fop"><div class="fo-n">Govt Ferry</div><div class="fo-p">₹200–300</div><div class="fo-d">2 hrs. Buy at Neil Kendra Jetty counter.</div><a class="fo-l" href="https://dss.and.nic.in" target="_blank">dss.and.nic.in →</a></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════
+     RETURN + FLY  Day 10
+═══════════════════════ -->
+<div class="return-t">
+<div class="phase">
+  <div class="ph-icon" style="background:#EDE8F7">🛬</div>
+  <div class="ph-text">
+    <h2 style="color:#5C3F8F">Day 10 — Fly Home</h2>
+    <div class="ph-sub">May 6 (Tue) · 9:00 AM flight · At airport by 7:00 AM · No activities today</div>
+  </div>
+</div>
+
+<div class="day">
+  <div class="day-head">
+    <div class="dpill" style="background:#5C3F8F"><div class="dp-d">DAY</div><div class="dp-n">10</div><div class="dp-dt">MAY 6 TUE</div></div>
+    <div class="day-title"><h3>Wake · Taxi · Airport · Fly Home</h3><div class="ds">"The islands let you go. You never really leave."</div></div>
+  </div>
+  <div class="tl">
+
+    <div class="ev"><div class="tc"><span class="tb" style="background:#5C3F8F">5:30 AM</span></div><div class="dc"><div class="dot" style="background:#5C3F8F"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">⏰ Wake · Pack Final Bag · Check Out Zostel</div>
+    <div class="edesc">Everything packed last night. Quick checkout. One last look at Phoenix Bay from the road.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb" style="background:#5C3F8F">6:15 AM</span></div><div class="dc"><div class="dot" style="background:#5C3F8F"></div><div class="vl"></div></div>
+    <div class="ec"><div class="etit">🚗 Taxi to Veer Savarkar Airport (IXZ) <span class="ctag">₹300–400</span></div>
+    <div class="edesc">Prepaid taxi from hotel or call in advance. 20–30 min drive. Arrive airport by 7:00 AM (2 hrs before 9 AM flight). Small airport but check-in queues form quickly.</div></div></div>
+
+    <div class="ev"><div class="tc"><span class="tb" style="background:#5C3F8F">9:00 AM</span></div><div class="dc"><div class="dot" style="background:#5C3F8F"></div></div>
+    <div class="ec"><div class="etit">✈️ Departs Port Blair → Bangalore</div>
+    <div class="edesc">On the flight: look out the window as Port Blair disappears. The Andaman Sea below — the same sea you swam in, dived through, kayaked at midnight while it glowed. Deal one final card game at 30,000 feet. The flight home will feel wrong. That is the sign of a trip that worked. <strong>Scuba safety: Last dive Apr 30 → Flight May 6 = 6-day gap. Completely safe ✅</strong></div></div></div>
+
+  </div>
+</div>
+</div>
+
+<!-- BUDGET -->
+<div class="budget">
+  <h3>💰 Estimated Budget Per Person — 5 People</h3>
+  <div class="brow"><span class="bk">🏨 Hotel Oceanview PB (2N) — split</span><span class="bv">₹800–1,600</span></div>
+  <div class="brow"><span class="bk">🌿 World Orchid Havelock (4N) — 2 rooms ÷ 5</span><span class="bv">₹5,600–9,600</span></div>
+  <div class="brow"><span class="bk">🏠 SeaShells Samsara Neil (1N) — split</span><span class="bv">₹600–1,200</span></div>
+  <div class="brow"><span class="bk">🏨 TSG Aura Neil (1N) — 2 rooms ÷ 5</span><span class="bv">₹2,000–3,000</span></div>
+  <div class="brow"><span class="bk">🏠 Zostel PB return (1N) — split</span><span class="bv">₹400–700</span></div>
+  <div class="brow"><span class="bk">⛴️ Makruzz PB→HV (confirmed) + HV→Neil + Neil→PB</span><span class="bv">₹2,400–3,700</span></div>
+  <div class="brow"><span class="bk">🛵 Scooties across all islands (~5 days, your 1/3 share) + fuel</span><span class="bv">₹1,200–1,800</span></div>
+  <div class="brow"><span class="bk">🐠 Jolly Buoy (permit + boat, confirmed)</span><span class="bv">₹1,200–1,800</span></div>
+  <div class="brow"><span class="bk">🤿 Scuba diving (1 dive, Havelock)</span><span class="bv">₹3,200–4,000</span></div>
+  <div class="brow"><span class="bk">🚶 Underwater Sea Walk (Havelock)</span><span class="bv">₹2,500–3,500</span></div>
+  <div class="brow"><span class="bk">🌊 Night Kayaking — bioluminescence</span><span class="bv">₹1,200–1,500</span></div>
+  <div class="brow"><span class="bk">🐠 Elephant Beach + Bharatpur activities + glass boats</span><span class="bv">₹1,200–2,200</span></div>
+  <div class="brow"><span class="bk">🍛 Food — 10 days (₹300–500/day, mostly local + some resort)</span><span class="bv">₹3,000–5,000</span></div>
+  <div class="brow"><span class="bk">🚗 Cabs (Wandoor, Chidiya Tapu optional, airports)</span><span class="bv">₹500–900</span></div>
+  <div class="brow"><span class="bk">🔦 L&S Show + museums + park entries + permits</span><span class="bv">₹300–500</span></div>
+  <div class="brow"><span class="bk">🛍️ Souvenirs + coconut water + chai + BSNL SIM + misc</span><span class="bv">₹1,000–2,000</span></div>
+  <div class="btot">
+    <div><div class="btl">Total Per Person (Excluding Flights)</div><div style="font-size:.68rem;color:rgba(255,255,255,.3);margin-top:2px">Save ₹2,500 skipping sea walk · Save ₹3,200 skipping scuba</div></div>
+    <div class="bta">₹26,200 – 43,000</div>
+  </div>
+</div>
+
+<!-- BOOKING LINKS -->
+<div class="links">
+  <h3>📌 All Bookings &amp; Numbers</h3>
+  <div class="lr"><div class="lic">⛴️</div><div><div class="ln"><a href="https://www.makruzz.com" target="_blank">makruzz.com</a></div><div class="ls">HV→Neil (book May 2) + Neil→PB (book May 4 via TSG Aura)</div></div></div>
+  <div class="lr"><div class="lic">⛴️</div><div><div class="ln"><a href="https://go2andaman.com/book-ferry/" target="_blank">go2andaman.com/book-ferry</a></div><div class="ls">Green Ocean backup if Makruzz full — from ₹900</div></div></div>
+  <div class="lr"><div class="lic">🤿</div><div><div class="ln">Barefoot Scuba, Havelock (Beach 3)</div><div class="ls">Book Day 3 morning for Day 4 dive. Combo scuba + sea walk = discount.</div><div class="lp">📞 +91 9531864680</div></div></div>
+  <div class="lr"><div class="lic">🌊</div><div><div class="ln">Night Kayaking — Havelock</div><div class="ls">Book Day 3 morning through World Orchid resort desk or Barefoot India. Day 5 May 1 evening slot.</div></div></div>
+  <div class="lr"><div class="lic">🎫</div><div><div class="ln"><a href="https://www.andamantourism.gov.in" target="_blank">andamantourism.gov.in</a></div><div class="ls">Cellular Jail L&S Show — book Day 1 evening on hotel WiFi. English 8:45 PM, Sunday slot.</div></div></div>
+  <div class="lr"><div class="lic">🏨</div><div><div class="ln"><a href="https://www.tsgresorts.in" target="_blank">TSG Aura Resort, Neil</a></div><div class="ls">Confirmed May 4–5. Ask them May 4 evening to book Neil→PB ferry May 5.</div><div class="lp">📞 +91 3192 246 488</div></div></div>
+  <div class="lr"><div class="lic">🏨</div><div><div class="ln">SeaShells Samsara, Neil</div><div class="ls">Confirmed May 3–4. Store bags after checkout on May 4 if needed.</div><div class="lp">📞 +91 95319 07002</div></div></div>
+  <div class="lr"><div class="lic">🏠</div><div><div class="ln"><a href="https://www.zostel.com/zostel/port-blair/" target="_blank">Zostel Port Blair</a></div><div class="ls">May 5 return night. Same Phoenix Bay area, near the jetty.</div><div class="lp">📞 +91 44 4011 4644</div></div></div>
+</div>
+
+<footer>
+  <em>🌊 Andaman &amp; Nicobar Islands · April 27 – May 6, 2026</em>
+  <p>BLR 11:30 AM → PB ~2:30 PM Apr 27 · Hotel Oceanview Apr 27–29 · Makruzz 06:00 Apr 29 · World Orchid Apr 29–May 3 · Samsara May 3–4 · TSG Aura May 4–5 · Zostel May 5 · PB 9:00 AM May 6</p>
+  <p>Scuba Apr 30 → Flight May 6 = 6-day gap ✅ · Kayaking May 1 new moon = max bioluminescence ✅ · Jail L&S Show Apr 27 Sunday ✅</p>
+  <p style="margin-top:10px;opacity:.3;font-size:.68rem">Prices are 2025–26 estimates. Verify ferry schedules at makruzz.com. Carry original ID on all ferry journeys. Have the best trip of your lives.</p>
+</footer>
+</body>
+</html>
