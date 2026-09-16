@@ -1,0 +1,1591 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Serpent Codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ebe2cd;--bg-deep:#e2d6bb;--page:#f5eddc;--ink:#2a221b;--soft:#5e4f3f;--gold:#7a5c26;--jade:#2d6a52;--cool:#36688a;--blood:#8a2226;--rule:#cbb994;--zebra:rgba(122,92,38,.055);--glow:rgba(45,106,82,.25);--fog:rgba(90,80,70,.09);--shadow:rgba(60,40,20,.22)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121118;--bg-deep:#0d0c12;--page:#1b1a23;--ink:#e8dfcf;--soft:#aaa295;--gold:#d0ab62;--jade:#66b896;--cool:#7fb0cf;--blood:#e0575c;--rule:#38343f;--zebra:rgba(255,255,255,.028);--glow:rgba(102,184,150,.32);--fog:rgba(170,165,185,.06);--shadow:rgba(0,0,0,.6)}}
+:root[data-theme="dark"]{--bg:#121118;--bg-deep:#0d0c12;--page:#1b1a23;--ink:#e8dfcf;--soft:#aaa295;--gold:#d0ab62;--jade:#66b896;--cool:#7fb0cf;--blood:#e0575c;--rule:#38343f;--zebra:rgba(255,255,255,.028);--glow:rgba(102,184,150,.32);--fog:rgba(170,165,185,.06);--shadow:rgba(0,0,0,.6)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"EB Garamond",Garamond,Georgia,"Times New Roman",serif;font-size:1.15rem;line-height:1.68;overflow-x:hidden;text-rendering:optimizeLegibility}
+body::before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:0;background:radial-gradient(40% 30% at 15% 30%,var(--fog),transparent 70%),radial-gradient(35% 25% at 85% 75%,var(--fog),transparent 70%);animation:drift 80s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(4%,-3%,0)}}
+nav,main,footer,.part{position:relative;z-index:1}
+[id]{scroll-margin-top:4rem}
+h1,h2,h3,h4{font-family:Cinzel,"Trajan Pro",Georgia,serif;font-weight:700;line-height:1.22;margin:0}
+p{margin:.45rem 0}
+a{color:var(--jade);text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:var(--gold)}
+b,strong{font-weight:600}
+i{font-style:italic}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.nav{position:sticky;top:0;z-index:20;background:var(--bg-deep);border-bottom:1px solid var(--rule)}
+.nav ul{display:flex;gap:1.15rem;list-style:none;margin:0 auto;padding:.7rem 1.25rem;max-width:1180px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.nav ul::-webkit-scrollbar{display:none}
+.nav a{font-family:Cinzel,serif;font-size:.78rem;letter-spacing:.05em;color:var(--soft);text-decoration:none}
+.nav a:hover,.nav a.on{color:var(--jade)}
+.readbar{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:linear-gradient(90deg,var(--jade),var(--gold))}
+
+.hero{max-width:1180px;margin:0 auto;padding:3rem 1.5rem 1rem;display:grid;grid-template-columns:1.3fr .7fr;gap:2.5rem;align-items:center;min-height:84vh}
+.hero h1{font-size:clamp(2.7rem,8vw,6rem);font-weight:900;line-height:1;letter-spacing:.01em}
+.tag{font-style:italic;font-size:clamp(1.2rem,2.3vw,1.55rem);color:var(--soft);margin:1.2rem 0 1.6rem;max-width:42ch;line-height:1.5}
+.begin{list-style:none;padding:0;margin:0 0 2rem;counter-reset:b}
+.begin li{counter-increment:b;padding-left:2.6rem;position:relative;margin:.5rem 0;max-width:56ch}
+.begin li::before{content:counter(b,upper-roman);position:absolute;left:0;top:.05rem;font-family:Cinzel,serif;color:var(--gold)}
+.spine{width:100%;max-height:76vh}
+.spine .axis{stroke:var(--rule);stroke-width:1}
+.spine .strand{fill:none;stroke-width:2.2;stroke-dasharray:900;stroke-dashoffset:900;animation:draw 3.2s ease-out forwards}
+.spine .sun{stroke:var(--gold)}
+.spine .moonc{stroke:var(--jade);animation-delay:.2s}
+.spine .coil{fill:none;stroke:var(--jade);stroke-width:1.6;opacity:.9}
+.spine .node{opacity:.25;animation:wake .8s ease-out forwards}
+.spine .ray{stroke:var(--gold);stroke-width:1.2;opacity:0;animation:wake 1s ease-out 3.2s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes wake{to{opacity:1}}
+
+.btn{display:inline-block;font-family:Cinzel,serif;font-size:.88rem;letter-spacing:.04em;padding:.7rem 1.15rem;border:1px solid var(--gold);color:var(--ink);text-decoration:none;background:transparent;cursor:pointer;margin:0 .5rem .6rem 0;line-height:1.3}
+.btn:hover{border-color:var(--jade);color:var(--jade)}
+.btn.primary{background:var(--jade);border-color:var(--jade);color:#f5eddc}
+.btn.primary:hover{filter:brightness(1.1);color:#fff}
+.btn.small{font-size:.78rem;padding:.4rem .75rem}
+.btn[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:#f5eddc}
+
+.toc{max-width:1180px;margin:0 auto;padding:1rem 1.5rem 2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1rem}
+.toc .page h3{font-size:1rem;margin-bottom:.35rem}
+.toc .pn{font-family:Cinzel,serif;font-size:.75rem;color:var(--gold);letter-spacing:.06em}
+.toc ol{list-style:none;padding:0;margin:.2rem 0 0}
+.toc li{padding:.12rem 0;font-size:1.02rem}
+.toc li a{color:var(--ink);text-decoration:none}
+.toc li a:hover{color:var(--jade)}
+.toc li span{display:inline-block;min-width:2.1rem;font-family:Cinzel,serif;font-size:.78rem;color:var(--jade)}
+
+.part{margin-top:4.5rem;background:var(--bg-deep);border-block:1px solid var(--rule);overflow:hidden}
+.part-in{max-width:1180px;margin:0 auto;padding:2.8rem 1.5rem;display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:center}
+.part .pn{font-family:Cinzel,serif;font-size:.85rem;color:var(--gold);letter-spacing:.08em}
+.part h2{font-size:clamp(2rem,5vw,3.1rem);font-weight:900;margin:.2rem 0 .4rem}
+.part p{font-style:italic;color:var(--soft);max-width:60ch;margin:0}
+.part svg{width:220px;height:70px}
+.part svg path{fill:none;stroke:var(--jade);stroke-width:1.6;opacity:.8}
+
+section{max-width:1180px;margin:0 auto;padding:4rem 1.5rem 1rem}
+.sec-h{display:grid;grid-template-columns:auto 1fr;column-gap:1.2rem;align-items:baseline;padding-bottom:1.1rem;margin-bottom:2rem;background:linear-gradient(90deg,var(--jade),var(--rule) 35%,transparent) bottom/100% 1px no-repeat}
+.sec-h .num{font-family:Cinzel,serif;font-size:clamp(2.2rem,5vw,3.3rem);color:var(--jade);line-height:1;min-width:2.2ch}
+.sec-h h2{font-size:clamp(1.55rem,3.5vw,2.3rem)}
+.sec-h p{grid-column:2;margin:.45rem 0 0;color:var(--soft);font-style:italic;max-width:66ch}
+.prose{max-width:70ch}
+h3.sub{font-size:1.2rem;margin:2.8rem 0 1rem;display:flex;align-items:center;gap:.8rem}
+h3.sub::after{content:"";flex:1;height:1px;background:var(--rule)}
+
+.page{background:var(--page);border:1px solid var(--rule);padding:1.45rem 1.55rem;position:relative;box-shadow:0 14px 32px -22px var(--shadow)}
+.page::before{content:"";position:absolute;inset:5px;border:1px solid var(--rule);opacity:.45;pointer-events:none}
+.page h3{font-size:1.1rem;margin-bottom:.45rem}
+.page>:last-child{margin-bottom:0}
+.lead{border-left:4px solid var(--jade)}
+.seal{border-color:var(--blood)}
+.seal::before{border-color:var(--blood);opacity:.3}
+.seal h3{color:var(--blood)}
+.gap{margin-top:1.1rem}
+
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:1.1rem;align-items:start}
+.grid3{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:1rem;align-items:start}
+.grid2>*,.grid3>*,.toc>*{min-width:0}
+
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:1.04rem;line-height:1.5}
+th{font-family:Cinzel,serif;font-size:.78rem;letter-spacing:.03em;text-align:left;color:var(--gold);border-bottom:1px solid var(--gold);padding:.65rem .75rem;vertical-align:bottom;font-weight:700}
+td{border-bottom:1px solid var(--rule);padding:.7rem .75rem;vertical-align:top}
+tbody tr:nth-child(even) td{background:var(--zebra)}
+td:first-child{font-weight:600}
+table.narrow{min-width:460px}
+.dot{display:inline-block;width:.7rem;height:.7rem;border-radius:50%;margin-right:.45rem;vertical-align:.05rem;box-shadow:0 0 8px currentColor}
+
+.steps{list-style:none;padding:0;margin:.4rem 0;counter-reset:s}
+.steps li{counter-increment:s;position:relative;padding:.55rem 0 .55rem 2.5rem;border-top:1px dashed var(--rule)}
+.steps li:first-child{border-top:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:.62rem;width:1.65rem;height:1.65rem;border:1px solid var(--jade);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Cinzel,serif;font-size:.78rem;line-height:1;color:var(--jade)}
+.steps.tight li{padding-top:.35rem;padding-bottom:.35rem}
+.steps.tight li::before{top:.42rem}
+.plain{margin:.3rem 0;padding-left:1.2rem}
+.plain li{margin:.3rem 0}
+.plain li::marker{color:var(--jade)}
+
+.thought{position:relative;border-left:2px solid var(--gold);padding:.35rem 0 .35rem 1rem;font-style:italic;margin:.9rem 0 .2rem;color:var(--ink)}
+.caution{border:1px solid var(--blood);border-left-width:3px;padding:.5rem .8rem;color:var(--ink);font-size:.98rem;margin:.8rem 0 0;background:linear-gradient(90deg,rgba(200,60,60,.07),transparent)}
+.caution::before{content:"Caution. ";font-weight:600;color:var(--blood)}
+.note{border-left:3px solid var(--jade);padding:.35rem 0 .35rem .9rem;margin:.8rem 0;color:var(--soft);font-size:1.02rem}
+.meta{color:var(--soft);font-size:1rem;margin:.15rem 0 .55rem;font-style:italic}
+.kind{font-family:Cinzel,serif;font-size:.72rem;letter-spacing:.04em;color:var(--gold)}
+
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.35rem;flex-wrap:wrap}
+.chip{display:inline-block;font-family:Cinzel,serif;font-size:.68rem;letter-spacing:.04em;padding:.12rem .55rem;border:1px solid currentColor;border-radius:999px;line-height:1.5}
+.chip.warm{color:var(--gold)}.chip.cool{color:var(--cool)}.chip.bal{color:var(--jade)}.chip.hand{color:var(--jade)}.chip.eye{color:var(--cool)}.chip.lock{color:var(--blood)}.chip.body{color:var(--gold)}
+.meter{display:inline-flex;gap:3px;align-items:center}
+.meter i{width:7px;height:7px;border-radius:50%;border:1px solid var(--gold)}
+.meter i.f{background:var(--gold)}
+.meter small{font-size:.78rem;color:var(--soft);margin-right:.35rem;font-style:italic}
+.filters{display:flex;flex-wrap:wrap;gap:.2rem;margin:0 0 1.2rem}
+
+.phase{margin-bottom:1rem;padding:0}
+.phase summary{cursor:pointer;font-family:Cinzel,serif;font-size:1.02rem;padding:1rem 1.4rem;list-style:none;display:flex;align-items:center;gap:.8rem}
+.phase summary::-webkit-details-marker{display:none}
+.phase summary::before{content:"+";display:inline-flex;align-items:center;justify-content:center;width:1.5rem;height:1.5rem;border:1px solid var(--jade);border-radius:50%;color:var(--jade);font-size:1rem;flex:none}
+.phase[open] summary::before{content:"\2212"}
+.phase summary small{font-family:"EB Garamond",serif;font-style:italic;color:var(--soft);font-size:1rem;margin-left:auto}
+.phase .inner{padding:0 1.4rem 1.2rem}
+
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.65rem;margin-top:1rem}
+.day{display:grid;grid-template-columns:auto 1fr;gap:.1rem .7rem;border:1px solid var(--rule);background:var(--page);padding:.7rem .85rem;cursor:pointer}
+.day input{width:1.1rem;height:1.1rem;accent-color:var(--jade);margin-top:.3rem;cursor:pointer}
+.dn{font-family:Cinzel,serif;font-size:.82rem;color:var(--gold)}
+.df{font-size:.97rem;line-height:1.4}
+.day.done{border-color:var(--jade);background:linear-gradient(135deg,var(--glow),transparent 60%),var(--page)}
+.day.done .df{color:var(--soft)}
+.progress{height:6px;background:var(--rule);margin:.4rem 0 .5rem}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--jade),var(--gold));width:0;transition:width .4s}
+.ptext{color:var(--soft);font-style:italic}
+
+input[type=number],input[type=text],input[type=date],select,textarea{font:inherit;font-size:1rem;padding:.4rem .55rem;background:var(--bg);color:var(--ink);border:1px solid var(--rule);width:100%}
+textarea{min-height:4.5rem;resize:vertical}
+input[type=number]{max-width:8rem}
+.calc{display:flex;flex-wrap:wrap;gap:1rem;align-items:end}
+.calc label,.form label{display:grid;gap:.2rem;font-size:.95rem;color:var(--soft)}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:.8rem 1rem}
+.form .wide{grid-column:1/-1}
+.verdict{font-size:1.12rem;margin-top:1rem}
+.entries{margin-top:1.2rem;display:grid;gap:.6rem}
+.entry{border-top:1px dashed var(--rule);padding-top:.6rem;font-size:1rem}
+.entry b{font-family:Cinzel,serif;font-size:.85rem;color:var(--gold)}
+
+.pacer{text-align:center}
+.orb-wrap{height:250px;display:grid;place-items:center}
+.orb{width:115px;height:115px;border-radius:50%;background:radial-gradient(circle at 40% 35%,var(--jade),transparent 75%);box-shadow:0 0 60px 10px var(--glow);transition:transform .12s linear;border:1px solid var(--jade)}
+.phase-name{font-family:Cinzel,serif;font-size:1.45rem;color:var(--jade);min-height:2rem}
+.count{font-size:1.05rem;color:var(--soft)}
+.clock{font-family:Cinzel,serif;font-size:clamp(3rem,10vw,4.6rem);color:var(--jade);line-height:1.1;margin:.6rem 0}
+
+.pillars{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-top:1rem}
+.pillars div{border:1px solid var(--rule);padding:.8rem;text-align:center;background:var(--page)}
+.pillars b{display:block;font-family:Cinzel,serif;font-size:.9rem;color:var(--jade)}
+.pillars span{font-size:.95rem;color:var(--soft)}
+.loop{font-family:Cinzel,serif;font-size:clamp(.85rem,1.8vw,1.05rem);letter-spacing:.03em;text-align:center;color:var(--gold);margin:1.4rem 0;line-height:2}
+.totop{position:fixed;right:1rem;bottom:1rem;z-index:30;width:2.6rem;height:2.6rem;border-radius:50%;border:1px solid var(--gold);background:var(--bg-deep);color:var(--gold);font-family:Cinzel,serif;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s}
+.totop.show{opacity:1;pointer-events:auto}
+footer{max-width:1180px;margin:3rem auto 0;padding:2rem 1.5rem 4rem;border-top:1px solid var(--rule);color:var(--soft);font-style:italic}
+@media (max-width:780px){.hero{grid-template-columns:1fr;min-height:auto}.spine{max-height:340px;order:-1}.sec-h p{grid-column:1/-1}.part-in{grid-template-columns:1fr}.part svg{display:none}.grid2{grid-template-columns:minmax(0,1fr)}.grid3{grid-template-columns:minmax(0,1fr)}.toc{grid-template-columns:minmax(0,1fr)}body{font-size:1.1rem}.page{padding:1.2rem 1.15rem}}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}html{scroll-behavior:auto}.spine .strand{stroke-dashoffset:0}.spine .node,.spine .ray{opacity:1}}
+</style>
+</head>
+<body>
+<nav class="nav" aria-label="Sections">
+<ul>
+<li><a href="#seals">Seals</a></li>
+<li><a href="#method">Method</a></li>
+<li><a href="#sadhana">40 Days</a></li>
+<li><a href="#temples">Temples</a></li>
+<li><a href="#serpent">Serpent</a></li>
+<li><a href="#breath">Breath</a></li>
+<li><a href="#mudras">Mudras</a></li>
+<li><a href="#tratak">Tratak</a></li>
+<li><a href="#meditation">Meditation</a></li>
+<li><a href="#siddhis">Siddhis</a></li>
+<li><a href="#emotion">Emotion</a></li>
+<li><a href="#mind">Mind</a></li>
+<li><a href="#food">Food</a></li>
+<li><a href="#chamber">Chamber</a></li>
+<li><a href="#journal">Journal</a></li>
+</ul>
+<div class="readbar" id="readbar"></div>
+</nav>
+
+<main>
+<header class="hero">
+<div>
+<h1>The Serpent Codex</h1>
+<p class="tag">Volume II of the Grimoire. Breath, gaze, seal and fire from the Hindu, Taoist, Tibetan, Egyptian, Hermetic and Buddhist traditions, built as a 40-day practice book and a personal laboratory.</p>
+<ol class="begin">
+<li>Read the Seven Seals. They are the price of entry.</li>
+<li>Take your Day 1 measurements in the Siddhi Log.</li>
+<li>Follow the 40-day sadhana. Everything else here is its reference, and the Journal is where you record it.</li>
+</ol>
+<a class="btn primary" href="#seals">Read the seals</a>
+<a class="btn" href="#sadhana">Open the 40 days</a>
+</div>
+<svg class="spine" viewBox="0 0 200 620" role="img" aria-label="A serpent coiled at the base of a spine, rising through seven centers">
+<line class="axis" x1="100" y1="92" x2="100" y2="560"/>
+<ellipse class="coil" cx="100" cy="566" rx="40" ry="11"/>
+<ellipse class="coil" cx="100" cy="566" rx="30" ry="8"/>
+<ellipse class="coil" cx="100" cy="566" rx="20" ry="5.5"/>
+<path class="coil" d="M88 566 A12 3.5 0 0 1 112 566"/>
+<path class="strand sun" d="M100 555 C145 520 145 505 100 470 C55 435 55 420 100 390 C145 360 145 345 100 315 C55 285 55 270 100 240 C145 210 145 195 100 165 C70 140 90 110 100 92"/>
+<path class="strand moonc" d="M100 555 C55 520 55 505 100 470 C145 435 145 420 100 390 C55 360 55 345 100 315 C145 285 145 270 100 240 C55 210 55 195 100 165 C130 140 110 110 100 92"/>
+<circle class="node" cx="100" cy="545" r="9" fill="#b03a33" style="animation-delay:.4s"/>
+<circle class="node" cx="100" cy="470" r="9" fill="#cc7330" style="animation-delay:.8s"/>
+<circle class="node" cx="100" cy="390" r="9" fill="#d0a93c" style="animation-delay:1.2s"/>
+<circle class="node" cx="100" cy="315" r="9" fill="#52a070" style="animation-delay:1.6s"/>
+<circle class="node" cx="100" cy="240" r="9" fill="#4287b0" style="animation-delay:2s"/>
+<circle class="node" cx="100" cy="165" r="9" fill="#5e56a8" style="animation-delay:2.4s"/>
+<circle class="node" cx="100" cy="80" r="11" fill="#a077c0" style="animation-delay:2.8s"/>
+<g id="rays"></g>
+</svg>
+</header>
+
+<div class="toc" aria-label="Contents">
+<div class="page"><span class="pn">Part one</span><h3>Foundations</h3><ol><li><a href="#seals"><span>I</span>The Seven Seals</a></li><li><a href="#method"><span>II</span>The Method of Three Layers</a></li><li><a href="#sadhana"><span>III</span>The 40-Day Sadhana</a></li></ol></div>
+<div class="page"><span class="pn">Part two</span><h3>The Subtle Body</h3><ol><li><a href="#temples"><span>IV</span>The Map of Temples</a></li><li><a href="#serpent"><span>V</span>The Serpent</a></li></ol></div>
+<div class="page"><span class="pn">Part three</span><h3>The Practices</h3><ol><li><a href="#breath"><span>VI</span>Breath</a></li><li><a href="#mudras"><span>VII</span>Mudras and Bandhas</a></li><li><a href="#tratak"><span>VIII</span>Tratak</a></li><li><a href="#meditation"><span>IX</span>Meditation, Mantra, Nada</a></li></ol></div>
+<div class="page"><span class="pn">Part four</span><h3>Powers</h3><ol><li><a href="#siddhis"><span>X</span>Siddhis and Proof</a></li></ol></div>
+<div class="page"><span class="pn">Part five</span><h3>Heart, Mind, Body</h3><ol><li><a href="#emotion"><span>XI</span>Emotion Keys</a></li><li><a href="#mind"><span>XII</span>The Mind</a></li><li><a href="#food"><span>XIII</span>Food</a></li></ol></div>
+<div class="page"><span class="pn">Part six</span><h3>The Laboratory</h3><ol><li><a href="#chamber"><span>XIV</span>The Chamber</a></li><li><a href="#journal"><span>XV</span>Journal and Study</a></li></ol></div>
+</div>
+
+<div class="part"><div class="part-in"><div><span class="pn">Part one</span><h2>Foundations</h2><p>Safety, method and the daily path. Read this part fully before touching the fire.</p></div><svg viewBox="0 0 220 70" aria-hidden="true"><path d="M5 35 C30 5 50 5 75 35 S120 65 145 35 S190 5 215 35"/></svg></div></div>
+
+<section id="seals">
+<div class="sec-h"><span class="num">I</span><h2>The Seven Seals</h2><p>Non-negotiable. The traditions kept these practices behind teachers for a reason.</p></div>
+<div class="grid2">
+<div class="page seal"><h3>1. Fire breaths never near water</h3><p>Wim Hof, bhastrika, kapalabhati and long holds can cause sudden blackout without warning. Never in a bath, pool, sea, car, or while standing. Sit or lie on the floor.</p></div>
+<div class="page seal"><h3>2. Never gaze at the sun disc</h3><p>Not at sunrise, not at sunset, not through clouds. Retinal burns from sun gazing are permanent and painless while they happen. The solar method here uses closed eyes.</p></div>
+<div class="page seal"><h3>3. Skip intense methods if</h3><p>Pregnant, epileptic, heart disease, high blood pressure, glaucoma, recent surgery, hernia, or a history of stroke. Keep to nadi shodhana, bhramari and coherent breathing, and ask a doctor.</p></div>
+<div class="page seal"><h3>4. Protect the mind</h3><p>With any history of psychosis, bipolar disorder, dissociation or severe panic, avoid kundalini work, long retention and mirror gazing. Calm practices only.</p></div>
+<div class="page seal"><h3>5. What rises must return</h3><p>End every session by bringing awareness down to the navel, then eat, walk, or touch the earth. Raised energy that is never grounded is the root of most trouble.</p></div>
+<div class="page seal"><h3>6. Know the stop signs</h3><p>Chest pain, fainting, several nights of insomnia, racing heart, uncontrollable heat or shaking, feeling unreal, visions or voices that continue outside practice, wild mood swings. Stop all fire breaths, retention and kundalini work at once. If it lasts more than a few days, see a doctor.</p></div>
+<div class="page seal"><h3>7. Sober, rested, empty stomach</h3><p>No alcohol or drugs within a day of practice. No intense breathwork after a meal or when exhausted. No long fasting combined with breathwork, cold, or sleep loss.</p></div>
+<div class="page"><h3>How to read this book</h3><p>Traditional claims are given as the traditions state them. Where research has measured something, it is marked. Where it has not, you get a way to test it. Advanced bandha and kumbhaka work is best refined with a qualified teacher. This is not medical advice.</p></div>
+</div>
+
+<div class="grid2 gap">
+<div class="page lead">
+<h3>The grounding sequence</h3>
+<p class="meta">Use after any intense session, or at the first stop sign.</p>
+<ol class="steps tight">
+<li>Open the eyes. Look around and name five ordinary objects out loud.</li>
+<li>Feel both feet pressing into the floor.</li>
+<li>Breathe normally. Make each exhale a little longer than the inhale.</li>
+<li>Drink water. Eat something warm and heavy if energy feels too high.</li>
+<li>Walk slowly for five minutes, barefoot on earth if possible.</li>
+<li>Resume ordinary activity before any further practice today.</li>
+</ol>
+</div>
+<div class="page lead">
+<h3>The integration test</h3>
+<p class="meta">After any strong experience, answer honestly. Any "no" means slow down.</p>
+<ul class="plain">
+<li>Can I sleep, work and talk to people normally?</li>
+<li>Can I tolerate disagreement without feeling threatened?</li>
+<li>Can I tell the experience apart from my interpretation of it?</li>
+<li>Can I skip a day of practice without anxiety?</li>
+<li>Am I becoming kinder and steadier, not stranger and more isolated?</li>
+</ul>
+</div>
+</div>
+</section>
+
+<section id="method">
+<div class="sec-h"><span class="num">II</span><h2>The Method of Three Layers</h2><p>The single discipline that keeps practice deep and the mind clear: never confuse an experience with its explanation.</p></div>
+<div class="scroll page">
+<table>
+<thead><tr><th>Layer</th><th>Question</th><th>Example</th></tr></thead>
+<tbody>
+<tr><td>Experience</td><td>What actually happened?</td><td>"Warmth moved up my back for about a minute during bhastrika."</td></tr>
+<tr><td>Interpretation</td><td>What does my tradition call it?</td><td>"Hatha yoga would call this prana entering Sushumna."</td></tr>
+<tr><td>Explanation</td><td>What could physiology or psychology say?</td><td>"Fast breathing lowers carbon dioxide and changes circulation and sensation."</td></tr>
+<tr><td>Verification</td><td>What can be measured or reproduced?</td><td>"Does a fingertip thermometer show a change? Does it repeat?"</td></tr>
+</tbody>
+</table>
+</div>
+<div class="grid2 gap">
+<div class="page">
+<h3>When anything unusual happens, write four sentences</h3>
+<ol class="steps tight">
+<li>I experienced...</li>
+<li>My tradition would interpret this as...</li>
+<li>An ordinary explanation might be...</li>
+<li>I currently have evidence for...</li>
+</ol>
+<p class="note">This lets you take profound experiences seriously without having to believe every interpretation.</p>
+</div>
+<div class="page">
+<h3>The six capacities every tradition builds first</h3>
+<ul class="plain">
+<li><b>Attention.</b> Placing and holding the mind where you choose.</li>
+<li><b>Interoception.</b> Feeling heartbeat, breath, heat, pressure and tension from inside.</li>
+<li><b>Regulation.</b> Feeling an emotion fully without obeying or feeding it.</li>
+<li><b>Metacognition.</b> Seeing a thought as an event, not a command or a prophecy.</li>
+<li><b>Ethics.</b> Power without restraint only amplifies old habits.</li>
+<li><b>Consistency.</b> A modest daily practice beats rare heroic sessions.</li>
+</ul>
+</div>
+</div>
+<div class="page gap">
+<h3>The 7-minute attention test</h3>
+<p>Take it on Day 1, 20 and 40. Choose one object, such as the breath at the nostrils. Set a 7-minute timer in the <a href="#chamber">Chamber</a>. Every time you notice the mind has wandered, make a tally mark and return without judgment. Record the tally count and a 1 to 10 clarity score in the <a href="#journal">Journal</a>.</p>
+<p class="loop">Prepare, practice, observe, record, question, test, integrate, repeat.</p>
+</div>
+</section>
+
+<section id="sadhana">
+<div class="sec-h"><span class="num">III</span><h2>The 40-Day Sadhana</h2><p>Four phases of ten days. Morning practice on an empty stomach, a short evening close. Tick each day when both are done.</p></div>
+
+<details class="phase page" open>
+<summary>Phase I: Purify <small>Days 1 to 10, 30 minutes</small></summary>
+<div class="inner scroll"><table><thead><tr><th>Min</th><th>Practice</th><th>Detail</th></tr></thead><tbody>
+<tr><td>1</td><td>Settle</td><td>Spine tall, <a href="#m-adi">Adi mudra</a>, three long exhales.</td></tr>
+<tr><td>3</td><td><a href="#b-found">Foundation breath</a></td><td>Hand on belly. Just observe the breath.</td></tr>
+<tr><td>6</td><td><a href="#b-nadi">Nadi shodhana</a></td><td>Ratio 1:1, count of 4. Ten rounds or more.</td></tr>
+<tr><td>3</td><td><a href="#b-kapal">Kapalabhati</a></td><td>2 rounds of 30. From Day 6: 3 rounds of 50.</td></tr>
+<tr><td>2</td><td><a href="#b-bhramari">Bhramari</a></td><td>7 hums, then listen to the silence.</td></tr>
+<tr><td>5</td><td><a href="#t-candle">Candle tratak</a></td><td>2 minutes gaze, 3 minutes afterimage.</td></tr>
+<tr><td>8</td><td><a href="#med-one">One-point attention</a></td><td><a href="#m-gyan">Gyan mudra</a>. Wander, notice, return.</td></tr>
+<tr><td>2</td><td>Close</td><td>Palms on navel, 9 breaths. Anjali mudra, one line of gratitude.</td></tr>
+<tr><td>Eve</td><td><a href="#review">Nightly review</a></td><td>5 minutes in bed.</td></tr>
+</tbody></table></div>
+</details>
+
+<details class="phase page">
+<summary>Phase II: Steady <small>Days 11 to 20, 35 minutes</small></summary>
+<div class="inner scroll"><table><thead><tr><th>Min</th><th>Practice</th><th>Detail</th></tr></thead><tbody>
+<tr><td>5</td><td><a href="#p-zhan">Zhan zhuang</a></td><td>Standing like a tree. Build the root.</td></tr>
+<tr><td>6</td><td><a href="#b-nadi">Nadi shodhana</a></td><td>Ratio 1:2, inhale 4, exhale 8.</td></tr>
+<tr><td>2</td><td><a href="#m-mula">Mula bandha</a></td><td>10 holds of 5 seconds, breathing normally.</td></tr>
+<tr><td>8</td><td><a href="#b-wim">Wim Hof</a> or <a href="#b-ujjayi">Ujjayi</a></td><td>Odd days: Wim Hof, 3 rounds, lying down. Even days: Ujjayi, 8 minutes.</td></tr>
+<tr><td>6</td><td><a href="#t-bindu">Bindu tratak</a></td><td>3 minutes gaze, 3 minutes afterimage.</td></tr>
+<tr><td>4</td><td><a href="#emotion">Emotion keys</a></td><td>The five-state cycle, or one key per day.</td></tr>
+<tr><td>4</td><td><a href="#m-shambhavi">Shambhavi</a> sitting</td><td>Then palms on navel.</td></tr>
+<tr><td>Eve</td><td><a href="#sounds">Six healing sounds</a> + review</td><td>10 minutes.</td></tr>
+</tbody></table></div>
+</details>
+
+<details class="phase page">
+<summary>Phase III: Awaken <small>Days 21 to 30, 40 minutes</small></summary>
+<div class="inner scroll"><table><thead><tr><th>Min</th><th>Practice</th><th>Detail</th></tr></thead><tbody>
+<tr><td>5</td><td><a href="#p-zhan">Zhan zhuang</a></td><td>Add slow belly breath.</td></tr>
+<tr><td>5</td><td><a href="#b-nadi">Nadi shodhana</a></td><td>Ratio 1:4:2 with a hold, only if 1:2 is easy.</td></tr>
+<tr><td>6</td><td><a href="#b-bhastrika">Bhastrika</a></td><td>3 rounds with bandhas.</td></tr>
+<tr><td>3</td><td><a href="#b-fire">Breath of fire</a></td><td>1 minute, building to 3 by Day 30.</td></tr>
+<tr><td>5</td><td><a href="#p-bija">Bija ascent</a></td><td>Chant the seed sounds up the spine.</td></tr>
+<tr><td>12</td><td><a href="#p-orbit">Microcosmic orbit</a></td><td>From Day 25, open with 5 rounds of <a href="#b-tummo">tummo</a>.</td></tr>
+<tr><td>4</td><td>Descent and seal</td><td>Awareness down the front to the navel. <a href="#m-apana">Apana mudra</a>. Water.</td></tr>
+<tr><td>Eve</td><td><a href="#t-moon">Moon</a> or <a href="#t-star">star</a> tratak</td><td>Clear nights. Otherwise candle. Then review.</td></tr>
+</tbody></table>
+<p class="meta">Cold: end each shower with cold water, 30 seconds on Day 21, rising to 2 minutes by Day 30.</p></div>
+</details>
+
+<details class="phase page">
+<summary>Phase IV: Integrate <small>Days 31 to 40, 45 minutes</small></summary>
+<div class="inner scroll"><table><thead><tr><th>Min</th><th>Practice</th><th>Detail</th></tr></thead><tbody>
+<tr><td>25</td><td><a href="#p-ascent">The Serpent Ascent</a></td><td>The full ten-step sequence.</td></tr>
+<tr><td>12</td><td><a href="#p-samyama">Samyama</a></td><td>Days 31 to 35 on the heart. Days 36 to 40 on the breath. Write what arises.</td></tr>
+<tr><td>5</td><td><a href="#log">Siddhi log</a></td><td>Measure one ability per day.</td></tr>
+<tr><td>3</td><td>Ground</td><td>Barefoot walk, or a warm meal.</td></tr>
+<tr><td>Eve</td><td>Tratak of choice + review</td><td>10 minutes.</td></tr>
+</tbody></table></div>
+</details>
+
+<div class="grid2 gap">
+<div class="page">
+<h3>Advance to the next phase only when</h3>
+<ul class="plain">
+<li>Sleep and daily functioning are stable.</li>
+<li>No lingering dizziness from breathwork.</li>
+<li>You can stop a practice easily and return to ordinary awareness.</li>
+<li>You feel no compulsion to repeat unusual experiences.</li>
+<li>Emotional reactivity is falling, not rising.</li>
+</ul>
+<p class="note">If not, repeat the phase. Repeating is progress too.</p>
+</div>
+<div class="page">
+<h3>Weekly and monthly rhythms</h3>
+<ul class="plain">
+<li><b>Weekly:</b> half a day of silence, a screen-free evening, one long sitting of 60 to 90 minutes, and the weekly review questions in the <a href="#journal">Journal</a>.</li>
+<li><b>Ekadashi:</b> the eleventh lunar day, traditionally a light day of fruit and milk. Only if healthy, and never with fire breaths.</li>
+<li><b>New moon:</b> set one intention for the coming month.</li>
+<li><b>Full moon:</b> moon tratak and a release of what is finished.</li>
+</ul>
+</div>
+</div>
+
+<div class="progress" aria-hidden="true" style="margin-top:2.2rem"><i id="bar"></i></div>
+<p class="ptext" id="ptext">0 of 40 days complete</p>
+<div class="days" id="days"></div>
+</section>
+<div class="part"><div class="part-in"><div><span class="pn">Part two</span><h2>The Subtle Body</h2><p>The maps each tradition drew of breath, energy and consciousness, and the serpent that sleeps at the root.</p></div><svg viewBox="0 0 220 70" aria-hidden="true"><path d="M5 35 C30 5 50 5 75 35 S120 65 145 35 S190 5 215 35"/></svg></div></div>
+
+<section id="temples">
+<div class="sec-h"><span class="num">IV</span><h2>The Map of Temples</h2><p>Six traditions, one pattern: breath moves energy, energy moves mind. Learn each map on its own terms before comparing them.</p></div>
+<div class="scroll page">
+<table>
+<thead><tr><th>Tradition</th><th>Energy and subtle body</th><th>Aim</th><th>Signature practice</th></tr></thead>
+<tbody>
+<tr><td>Hindu Tantra and Hatha</td><td>Prana in five winds, 72,000 channels, seven centers, Kundalini Shakti asleep at the base.</td><td>Union of Shakti and Shiva at the crown.</td><td>Pranayama, bandhas, mudras, mantra, kundalini kriya.</td></tr>
+<tr><td>Taoist inner alchemy</td><td>Jing refines into Qi, Qi into Shen. Three dantians. Governing and conception vessels.</td><td>Return to the Tao, longevity.</td><td>Microcosmic orbit, standing practice, six healing sounds.</td></tr>
+<tr><td>Tibetan Vajrayana</td><td>Channels (tsa), winds (lung), drops (tigle). Central channel with navel fire.</td><td>Clear light awareness.</td><td>Tummo, vase breath, dream yoga.</td></tr>
+<tr><td>Ancient Egyptian</td><td>Ka, Ba, Akh, Ib, Ren, Sheut, Sekhem.</td><td>A heart as light as the feather of Ma'at.</td><td>Truthful living, heart judgment, temple ritual.</td></tr>
+<tr><td>Hermetic</td><td>Nous, the divine mind. As above, so below.</td><td>Gnosis, rebirth of the mind.</td><td>Contemplation, mental transmutation, elemental training.</td></tr>
+<tr><td>Buddhist</td><td>Mind and breath. Iddhi (powers) as side effects of deep absorption.</td><td>Liberation from suffering.</td><td>Mindfulness of breath, samatha, vipassana, metta.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 class="sub">Where they meet</h3>
+<div class="grid3">
+<div class="page"><h3>Breath is spirit</h3><p>Prana, qi, pneuma, ruach, spiritus: in Sanskrit, Chinese, Greek, Hebrew and Latin, the word for breath also means life or spirit.</p></div>
+<div class="page"><h3>The spine is the axis</h3><p>Sushumna in India, the governing vessel in China, the djed pillar in Egypt, read as the backbone of Osiris.</p></div>
+<div class="page"><h3>Energy is refined, not spent</h3><p>Brahmacharya, conserving jing, Hermetic transmutation. Less leakage through lust, rage, gossip and noise.</p></div>
+<div class="page"><h3>The heart is the judge</h3><p>The Egyptian heart weighed against a feather. Anahata. The Taoist heart that houses the spirit.</p></div>
+<div class="page"><h3>Powers are a byproduct</h3><p>Patanjali calls siddhis obstacles to liberation. The Buddha refused to perform wonders for crowds.</p></div>
+<div class="page"><h3>But do not force equivalence</h3><p>When two systems both have a serpent, a fire or a center, ask: shared history, independent invention, similar function, modern reinterpretation, or surface resemblance? Prana is not automatically qi.</p></div>
+</div>
+
+<h3 class="sub">The Indian maps</h3>
+<div class="grid2">
+<div class="page">
+<h3>The three bodies</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Body</th><th>Sanskrit</th><th>Made of</th><th>Role</th></tr></thead><tbody>
+<tr><td>Physical</td><td>Sthula sharira</td><td>The five elements</td><td>Vehicle of action</td></tr>
+<tr><td>Subtle</td><td>Sukshma sharira</td><td>Prana, nadis, chakras, mind</td><td>Vehicle of experience</td></tr>
+<tr><td>Causal</td><td>Karana sharira</td><td>Latent impressions (samskaras)</td><td>Seed of future tendencies</td></tr>
+</tbody></table></div>
+</div>
+<div class="page">
+<h3>The five elements and senses</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Element</th><th>Quality</th><th>Sense</th><th>Center</th></tr></thead><tbody>
+<tr><td>Earth, prithvi</td><td>Solidity</td><td>Smell</td><td>Muladhara</td></tr>
+<tr><td>Water, apas</td><td>Cohesion, flow</td><td>Taste</td><td>Svadhisthana</td></tr>
+<tr><td>Fire, agni</td><td>Transformation</td><td>Sight</td><td>Manipura</td></tr>
+<tr><td>Air, vayu</td><td>Movement</td><td>Touch</td><td>Anahata</td></tr>
+<tr><td>Space, akasha</td><td>Container</td><td>Hearing</td><td>Vishuddha</td></tr>
+</tbody></table></div>
+</div>
+<div class="page">
+<h3>The five winds, pancha vayu</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Vayu</th><th>Seat and direction</th><th>Governs</th></tr></thead><tbody>
+<tr><td>Prana</td><td>Chest, inward</td><td>Breathing in, receiving, alertness</td></tr>
+<tr><td>Apana</td><td>Pelvis, downward</td><td>Elimination, grounding, stability</td></tr>
+<tr><td>Samana</td><td>Navel, centering</td><td>Digestion, assimilation, balance</td></tr>
+<tr><td>Udana</td><td>Throat, upward</td><td>Speech, effort, rising awareness</td></tr>
+<tr><td>Vyana</td><td>Whole body, outward</td><td>Circulation, coordination</td></tr>
+</tbody></table></div>
+</div>
+<div class="page">
+<h3>The three channels</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Channel</th><th>Side</th><th>Quality</th><th>Linked practice</th></tr></thead><tbody>
+<tr><td>Ida, Chandra</td><td>Left nostril</td><td>Lunar, cooling, receptive</td><td>Chandra bhedana</td></tr>
+<tr><td>Pingala, Surya</td><td>Right nostril</td><td>Solar, heating, active</td><td>Surya bhedana</td></tr>
+<tr><td>Sushumna</td><td>Center of spine</td><td>Integration, ascent</td><td>Nadi shodhana balances the two</td></tr>
+</tbody></table></div>
+<p class="meta">These belong to the subtle-body model, not to anatomy. They are not nerves or vessels.</p>
+</div>
+</div>
+
+<h3 class="sub">The Taoist, Egyptian and Hermetic maps</h3>
+<div class="grid2">
+<div class="page">
+<h3>The three treasures</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Treasure</th><th>Nature</th><th>Home</th></tr></thead><tbody>
+<tr><td>Jing 精</td><td>Essence, constitution, sexual vitality</td><td>Lower dantian, below the navel</td></tr>
+<tr><td>Qi 氣</td><td>Vital breath, functional energy</td><td>Middle dantian, heart</td></tr>
+<tr><td>Shen 神</td><td>Spirit, awareness</td><td>Upper dantian, brow</td></tr>
+</tbody></table></div>
+<p class="thought">The alchemical sequence: refine jing into qi, qi into shen, shen back into emptiness, and emptiness into the Tao.</p>
+</div>
+<div class="page">
+<h3>The Egyptian parts of a person</h3>
+<ul class="plain">
+<li><b>Ka.</b> Vital double, life force that needs sustenance.</li>
+<li><b>Ba.</b> Personality, shown as a human-headed bird that travels.</li>
+<li><b>Akh.</b> The luminous, transfigured spirit after judgment.</li>
+<li><b>Ib.</b> The heart, seat of thought and conscience.</li>
+<li><b>Ren.</b> The name. <b>Sheut.</b> The shadow. <b>Sekhem.</b> Power.</li>
+</ul>
+</div>
+</div>
+
+<div class="page gap">
+<h3>The seven Hermetic principles, and how to practice each</h3>
+<div class="scroll"><table><thead><tr><th>Principle</th><th>Teaching</th><th>Practice</th></tr></thead><tbody>
+<tr><td>Mentalism</td><td>The All is mind.</td><td>Notice how your interpretation shapes each experience before reacting to it.</td></tr>
+<tr><td>Correspondence</td><td>As above, so below.</td><td>Look for the same pattern in your body, your habits and your outer life.</td></tr>
+<tr><td>Vibration</td><td>Nothing rests. Everything moves.</td><td>Chant OM and feel vibration spread from navel to crown.</td></tr>
+<tr><td>Polarity</td><td>Opposites are two ends of one scale.</td><td>Transmute a state by moving along its own scale. See <a href="#transmute">transmutation</a>.</td></tr>
+<tr><td>Rhythm</td><td>Everything has its tides.</td><td>Track your energy for 30 days. Schedule hard practice on high tides.</td></tr>
+<tr><td>Cause and effect</td><td>Nothing happens by chance.</td><td>Before acting, ask what effect this will cause.</td></tr>
+<tr><td>Gender</td><td>Active and receptive in all things.</td><td>Ask which you lack today, effort or receptivity, and cultivate it.</td></tr>
+</tbody></table></div>
+<p class="note">These seven principles come from The Kybalion (1908). The ancient Hermetic writings are the Corpus Hermeticum and the Emerald Tablet. Much modern Kemetic yoga is likewise a 20th-century reconstruction.</p>
+</div>
+
+<h3 class="sub">Practices from the other temples</h3>
+<div class="grid3">
+<div class="page" id="p-zhan"><span class="kind">Taoist</span><h3>Zhan zhuang, standing like a tree</h3><ol class="steps tight"><li>Feet shoulder-width apart, knees soft, tailbone gently dropped.</li><li>Arms raised in a circle at chest height, as if hugging a large tree.</li><li>Crown lifted as if hung by a thread. Tongue on the palate.</li><li>Breathe into the lower belly. Stay 5 minutes, building to 20.</li></ol><p class="thought">Rooted below, suspended above, empty in the middle.</p></div>
+<div class="page"><span class="kind">Hermetic</span><h3>Thought observation</h3><ol class="steps tight"><li>Sit still with a timer set to 5 minutes.</li><li>Watch thoughts like a cat watching a mouse hole, without joining them.</li><li>Each time you get carried away, make one tally mark.</li><li>Record the tally. Watch it fall over weeks.</li></ol><p class="thought">The thought is an object. I am the one watching it.</p></div>
+<div class="page"><span class="kind">Hermetic</span><h3>Elemental breathing</h3><ol class="steps tight"><li>Choose an element: fire for drive, water for calm, air for lightness, earth for stability.</li><li>Inhale and imagine its quality filling the body through every pore.</li><li>Exhale and let the quality remain.</li><li>21 breaths, then 3 breaths of ordinary air to neutralize.</li></ol></div>
+<div class="page"><span class="kind">Egyptian, adapted</span><h3>Uraeus gaze</h3><ol class="steps tight"><li>Eyes closed, awareness at the brow.</li><li>Picture a cobra rising from the base of the spine and settling at the brow, hood open, perfectly still.</li><li>Hold it as one-pointed, watchful attention for 5 minutes.</li></ol><p class="meta">A modern adaptation of the uraeus symbol.</p></div>
+<div class="page"><span class="kind">Egyptian, adapted</span><h3>Ankh breath</h3><ol class="steps tight"><li>Picture an ankh at the heart: a vertical line with a loop on top.</li><li>Inhale up the vertical line along the spine to the crown.</li><li>Pause at the top of the loop.</li><li>Exhale down around the loop and back into the body.</li><li>7, 14 or 21 cycles.</li></ol><p class="meta">A modern visualization using an ancient symbol of life.</p></div>
+<div class="page"><span class="kind">Egyptian</span><h3>Weighing of the heart</h3><ol class="steps tight"><li>Sit in stillness. Picture a hall with a balance: your heart on one pan, a single feather on the other.</li><li>Let anything heavy appear: a lie, a harm, a secret, a grudge.</li><li>Name each one honestly to yourself.</li><li>Release it with a long exhale and decide on one amend.</li><li>Stay until the pans feel level.</li></ol></div>
+</div>
+</section>
+
+<section id="serpent">
+<div class="sec-h"><span class="num">V</span><h2>The Serpent: Naga Shakti and Kundalini</h2><p>The coiled power at the root, the dragon of the orbit, and how the traditions say to raise it safely.</p></div>
+
+<div class="grid2">
+<div class="page lead">
+<h3>What the tradition says</h3>
+<p>Kundalini, the coiled one, is Shakti, the creative power of the cosmos, lying asleep in the body as a serpent wrapped three and a half times around the self-born linga at the base of the spine. Her mouth covers the entrance to the central channel, Sushumna. Energy flows through the lunar and solar channels, and awareness faces outward.</p>
+<p>Awakening means the serpent uncoils and rises through Sushumna, pierces three knots and seven centers, and unites with Shiva, pure consciousness, at the crown.</p>
+<p><b>The three and a half coils</b> are read in several ways: the three gunas, or the three states of waking, dream and deep sleep, with the half coil as turiya, the fourth state beyond them.</p>
+</div>
+<div class="page lead">
+<h3>Naga Shakti</h3>
+<p>Naga means serpent, and Naga Shakti is serpent power. In Indian lore, nagas guard waters, treasures and hidden knowledge. Shiva wears Vasuki at his throat. Vishnu rests on Shesha, the endless serpent. Naga Panchami honours them each monsoon.</p>
+<p>The inner naga is Kundalini. The outer nagas are her images: latent power, cycles of time, and knowledge that bites the unprepared.</p>
+<h3 style="margin-top:1rem">The Hatha key</h3>
+<p>The downward wind, apana, is drawn up by mula bandha. The upward wind, prana, is pressed down by jalandhara bandha. They meet in the navel fire, sealed by uddiyana. Their union there is said to wake the serpent and drive her into the central channel.</p>
+</div>
+</div>
+
+<h3 class="sub">Five ways to read the serpent</h3>
+<div class="scroll page">
+<table>
+<thead><tr><th>Level</th><th>Reading</th></tr></thead>
+<tbody>
+<tr><td>Traditional</td><td>A dormant divine power capable of spiritual awakening.</td></tr>
+<tr><td>Symbolic</td><td>Compressed potential, progressively expressed.</td></tr>
+<tr><td>Experiential</td><td>A framework for organizing unusual bodily, emotional and perceptual experiences.</td></tr>
+<tr><td>Psychological</td><td>A metaphor for the transformation of attention, identity and motivation.</td></tr>
+<tr><td>Physiological</td><td>Sensations arising from breathing, posture, pelvic and spinal muscles, arousal and interoception.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 class="sub">The serpent and dragon across the world</h3>
+<div class="scroll page">
+<table>
+<thead><tr><th>Tradition</th><th>Symbol</th><th>Meaning</th></tr></thead>
+<tbody>
+<tr><td>Egypt</td><td>Uraeus, the rearing cobra on the pharaoh's brow. Ouroboros, the serpent eating its tail.</td><td>Sovereignty, protection, awakened sight. The eternal cycle.</td></tr>
+<tr><td>Greek and Hermetic</td><td>Caduceus: two serpents coiled around a winged staff.</td><td>Opposites balanced and rising. Often compared to the two side channels, a modern comparison.</td></tr>
+<tr><td>Taoist China</td><td>The dragon, and the dragon and tiger of inner alchemy.</td><td>Water, heaven, rising yang power, transformation, sovereignty.</td></tr>
+<tr><td>Buddhist</td><td>Mucalinda, the naga king who coiled around the meditating Buddha to shelter him from a storm.</td><td>Serpent power guarding deep meditation.</td></tr>
+<tr><td>Mesoamerica</td><td>Quetzalcoatl, the feathered serpent.</td><td>Earth joined with sky, matter with spirit.</td></tr>
+</tbody>
+</table>
+</div>
+<p class="meta">The parallels are striking. Whether they share a single source is debated by historians.</p>
+
+<h3 class="sub">The seven centers and three knots</h3>
+<div class="scroll page">
+<table style="min-width:860px">
+<thead><tr><th>Center</th><th>Place</th><th>Element</th><th>Seed</th><th>Petals</th><th>Quality</th><th>Question to sit with</th></tr></thead>
+<tbody>
+<tr><td><span class="dot" style="background:#b03a33;color:#b03a33"></span>Muladhara</td><td>Perineum</td><td>Earth</td><td>LAM</td><td>4</td><td>Stability, survival. <i>Brahma knot: attachment to body and comfort.</i></td><td>Can I stay present without fear?</td></tr>
+<tr><td><span class="dot" style="background:#cc7330;color:#cc7330"></span>Svadhisthana</td><td>Sacrum</td><td>Water</td><td>VAM</td><td>6</td><td>Desire, creativity, flow</td><td>Can I feel desire without being ruled by it?</td></tr>
+<tr><td><span class="dot" style="background:#d0a93c;color:#d0a93c"></span>Manipura</td><td>Navel</td><td>Fire</td><td>RAM</td><td>10</td><td>Will, transformation</td><td>Can determination exist without aggression?</td></tr>
+<tr><td><span class="dot" style="background:#52a070;color:#52a070"></span>Anahata</td><td>Heart</td><td>Air</td><td>YAM</td><td>12</td><td>Love, compassion. <i>Vishnu knot: emotional attachment, need for approval.</i></td><td>Can strength and tenderness coexist?</td></tr>
+<tr><td><span class="dot" style="background:#4287b0;color:#4287b0"></span>Vishuddha</td><td>Throat</td><td>Space</td><td>HAM</td><td>16</td><td>Truth, expression, purification</td><td>Can my speech become more precise and honest?</td></tr>
+<tr><td><span class="dot" style="background:#5e56a8;color:#5e56a8"></span>Ajna</td><td>Brow</td><td>Mind</td><td>OM</td><td>2</td><td>Insight, vision. <i>Rudra knot: attachment to identity, intellect and powers.</i></td><td>Can I tell observation from interpretation?</td></tr>
+<tr><td><span class="dot" style="background:#a077c0;color:#a077c0"></span>Sahasrara</td><td>Crown</td><td>Beyond</td><td>Silence</td><td>1000</td><td>Union, transcendence</td><td>What remains when I stop grasping for experience?</td></tr>
+</tbody>
+</table>
+</div>
+<p class="meta">The popular chakra-to-gland pairing is a modern overlay, not what the classical texts describe.</p>
+
+<h3 class="sub">The safe ascent: five stages</h3>
+<div class="grid3">
+<div class="page"><span class="kind">Stage 1</span><h3>Base</h3><p>Sleep, ethics, nadi shodhana, bhramari, zhan zhuang, clean food. At least two weeks.</p><p class="note">Advance when calm, sleeping well, and 1:2 breathing is easy.</p></div>
+<div class="page"><span class="kind">Stage 2</span><h3>Seals</h3><p>Mula, uddiyana and jalandhara bandha learned separately. Ashwini mudra.</p><p class="note">Advance when every lock holds without strain.</p></div>
+<div class="page"><span class="kind">Stage 3</span><h3>Channel</h3><p>Spinal breath, bija ascent, microcosmic orbit.</p><p class="note">Advance when awareness holds along the spine for 10 minutes.</p></div>
+<div class="page"><span class="kind">Stage 4</span><h3>Fire</h3><p>Bhastrika with maha bandha, breath of fire, tummo.</p><p class="note">Advance after 10 days with no stop signs.</p></div>
+<div class="page"><span class="kind">Stage 5</span><h3>Ascent</h3><p>The full Serpent Ascent and samyama.</p><p class="note">Stay here. Depth, not novelty.</p></div>
+<div class="page seal"><h3>Signs are not goals</h3><p>Traditions describe heat along the spine, inner sound, inner light, spontaneous movement, spontaneous breath suspension and waves of bliss. Record them as experiences first. Chasing them tightens the Rudra knot.</p></div>
+</div>
+
+<h3 class="sub">Core serpent practices</h3>
+<div class="grid2">
+<div class="page" id="p-bija">
+<span class="kind">Stage 3</span><h3>Bija ascent</h3>
+<ol class="steps">
+<li>Sit tall, jaw relaxed, eyes closed.</li>
+<li>Awareness at the base. Chant <b>LAM</b> three times, deep and slow, feeling vibration there.</li>
+<li>Move up: <b>VAM</b> at the sacrum, <b>RAM</b> at the navel, <b>YAM</b> at the heart, <b>HAM</b> at the throat, <b>OM</b> at the brow. Three times each, pitch rising slightly.</li>
+<li>At the crown, no sound. Sit in the silence for one minute.</li>
+<li>Descend silently back to the navel.</li>
+</ol>
+<p class="thought">Each sound is a key turning in its lock, one by one.</p>
+</div>
+<div class="page" id="p-orbit">
+<span class="kind">Stage 3</span><h3>Microcosmic orbit</h3>
+<ol class="steps">
+<li>Tongue tip on the palate behind the teeth. This bridges the two vessels.</li>
+<li>Rest attention at the lower dantian, three finger-widths below the navel, inside.</li>
+<li><b>Inhale</b> up the back: perineum, tailbone, the point opposite the navel, between the shoulder blades, base of skull, crown.</li>
+<li><b>Exhale</b> down the front: brow, palate, throat, heart, solar plexus, navel, back to the dantian.</li>
+<li>9 circuits, building to 36. If breath and attention will not sync, move attention alone.</li>
+<li>Close by circling the palms over the navel, 9 times each direction, storing the warmth there.</li>
+</ol>
+<p class="thought">The dragon rises up the back and returns down the front. Nothing is left in the head.</p>
+</div>
+</div>
+
+<div class="page lead gap" id="p-ascent">
+<span class="kind">Stage 5 only. Empty stomach. Seated on the floor.</span>
+<h3 style="font-size:1.35rem;margin:.2rem 0 .6rem">The Serpent Ascent, full sequence, 25 minutes</h3>
+<div class="grid2" style="gap:0 2rem">
+<ol class="steps">
+<li><b>Seat.</b> Cross-legged, spine erect, 1 minute of stillness. Hands in Prithvi mudra, 11 breaths feeling the weight of the base.</li>
+<li><b>Balance.</b> Nadi shodhana, 3 minutes, ratio 1:2.</li>
+<li><b>Wake the base.</b> Ashwini mudra: 50 rhythmic contractions of the anal sphincter, breathing freely.</li>
+<li><b>Spinal breath.</b> Tongue to palate. Slow ujjayi inhale while awareness travels up a thin silver thread inside the spine from base to brow. Pause at the brow. Exhale, awareness travels back down. 21 rounds.</li>
+<li><b>Stoke.</b> Bhastrika, 20 breaths. Exhale fully. Hold out with maha bandha: chin down, abdomen drawn up, pelvic floor lifted. Hold only while easy. Release root, belly, chin, then inhale. 3 rounds.</li>
+</ol>
+<ol class="steps" start="6" style="counter-reset:s 5">
+<li><b>Seeds.</b> The bija ascent, LAM to OM.</li>
+<li><b>Seal the gaze.</b> Shambhavi mudra with the tongue curled back along the palate (khechari, non-surgical), 3 minutes, awareness at the brow.</li>
+<li><b>Witness.</b> Drop all technique. Sit 5 minutes as pure awareness. Note any phenomena and return to stillness.</li>
+<li><b>Descend.</b> Exhale awareness down the front to the navel, 9 breaths. Palms on the navel.</li>
+<li><b>Ground.</b> Apana mudra for 1 minute. Drink water. Walk barefoot or eat within the hour.</li>
+</ol>
+</div>
+<p class="thought">I am not raising a force. I am removing what blocks it, and letting it find its own way.</p>
+</div>
+
+<div class="grid2 gap">
+<div class="page" id="p-gentle">
+<span class="kind">Any stage, and on rest days</span><h3>Gentle root-to-crown contemplation</h3>
+<ol class="steps tight">
+<li>Sit upright and watch ordinary breathing for a few minutes.</li>
+<li>Bring attention to the base of the spine without contracting anything.</li>
+<li>Picture a small point of warm light there.</li>
+<li>With each easy inhale, let awareness widen upward along the central axis.</li>
+<li>With each exhale, release unnecessary tension.</li>
+<li>End by returning attention to the feet and the floor.</li>
+</ol>
+</div>
+<div class="page" id="p-samyama">
+<span class="kind">Phase IV</span><h3>Samyama, Patanjali's key</h3>
+<ol class="steps tight">
+<li><b>Dharana, holding.</b> Fix attention on one object, such as the heart center. Return each time it slips.</li>
+<li><b>Dhyana, flowing.</b> The returns stop. Attention flows to the object unbroken, like oil poured from a jar.</li>
+<li><b>Samadhi, absorption.</b> The sense of a meditator fades. Only the object shines.</li>
+<li><b>Inquiry.</b> From stillness, ask the object one silent question. Do not seek an answer. Afterwards, write whatever arose.</li>
+</ol>
+</div>
+</div>
+</section>
+<div class="part"><div class="part-in"><div><span class="pn">Part three</span><h2>The Practices</h2><p>Breath, seal, gaze and attention. Every method with its steps, the thought to hold, and its limits.</p></div><svg viewBox="0 0 220 70" aria-hidden="true"><path d="M5 35 C30 5 50 5 75 35 S120 65 145 35 S190 5 215 35"/></svg></div></div>
+
+<section id="breath">
+<div class="sec-h"><span class="num">VI</span><h2>Breath: The Pranayama Book</h2><p>Breath is the only automatic function you can also steer, which makes it the bridge between body and mind. Start with the least intense method that serves your aim.</p></div>
+<div class="grid2">
+<div class="page">
+<h3>The four parts of pranayama</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Part</th><th>Sanskrit</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>Inhale</td><td>Puraka</td><td>Filling</td></tr>
+<tr><td>Exhale</td><td>Rechaka</td><td>Emptying</td></tr>
+<tr><td>Hold in</td><td>Antar kumbhaka</td><td>Retention with full lungs</td></tr>
+<tr><td>Hold out</td><td>Bahya kumbhaka</td><td>Suspension with empty lungs</td></tr>
+</tbody></table></div>
+<p class="note"><b>Kevala kumbhaka</b>, the goal of the classical path, is the breath stopping on its own in deep stillness. It cannot be forced, only allowed.</p>
+</div>
+<div class="page">
+<h3>Which breath do I need?</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>If you want</th><th>Use</th></tr></thead><tbody>
+<tr><td>Calm, now</td><td><a href="#b-sigh">Physiological sigh</a>, <a href="#b-bhramari">bhramari</a></td></tr>
+<tr><td>Balance and focus</td><td><a href="#b-nadi">Nadi shodhana</a>, <a href="#b-coh">coherent</a></td></tr>
+<tr><td>Steady concentration</td><td><a href="#b-ujjayi">Ujjayi</a></td></tr>
+<tr><td>Sleep</td><td><a href="#b-478">4-7-8</a>, <a href="#b-surya">Chandra bhedana</a></td></tr>
+<tr><td>Cooling</td><td><a href="#b-sheetali">Sheetali</a></td></tr>
+<tr><td>Energy and clarity</td><td><a href="#b-kapal">Kapalabhati</a>, <a href="#b-fire">breath of fire</a></td></tr>
+<tr><td>Heat and the ascent</td><td><a href="#b-bhastrika">Bhastrika</a>, <a href="#b-tummo">tummo</a></td></tr>
+<tr><td>Stress training</td><td><a href="#b-wim">Wim Hof</a>, lying down only</td></tr>
+</tbody></table></div>
+</div>
+</div>
+
+<div class="page gap">
+<h3>The retention ladder</h3>
+<p class="meta">Kumbhaka is central to Hatha yoga. Climb one rung at a time, and never treat a hold as a contest of will.</p>
+<div class="scroll"><table><thead><tr><th>Rung</th><th>Practice</th><th>What to observe</th></tr></thead><tbody>
+<tr><td>1</td><td>Natural breathing</td><td>Comfort and smoothness</td></tr>
+<tr><td>2</td><td>Lengthened exhale, 1:2</td><td>Relaxation</td></tr>
+<tr><td>3</td><td>Brief, easy pauses after the inhale and exhale</td><td>The first urge to breathe</td></tr>
+<tr><td>4</td><td>Ratio 1:4:2 with chin and root lock</td><td>Steady attention during the hold</td></tr>
+<tr><td>5</td><td>Ratio 1:4:2:2, adding a hold out, with maha bandha</td><td>Traditional advanced work, best refined with a teacher</td></tr>
+</tbody></table></div>
+</div>
+
+<h3 class="sub">The methods</h3>
+<div class="grid2" id="breathList"></div>
+</section>
+
+<section id="mudras">
+<div class="sec-h"><span class="num">VII</span><h2>Mudras and Bandhas</h2><p>Mudra means seal. Hand seals anchor attention. Eye, tongue and body seals and the bandha locks redirect breath and energy. Effects listed are the traditional claims.</p></div>
+<div class="filters" role="group" aria-label="Filter mudras">
+<button class="btn small" data-f="all" aria-pressed="true" type="button">All</button>
+<button class="btn small" data-f="Hand" aria-pressed="false" type="button">Hand</button>
+<button class="btn small" data-f="Eye" aria-pressed="false" type="button">Eye and tongue</button>
+<button class="btn small" data-f="Lock" aria-pressed="false" type="button">Locks</button>
+<button class="btn small" data-f="Body" aria-pressed="false" type="button">Body</button>
+</div>
+<div class="grid3" id="mudraList"></div>
+<div class="page gap">
+<h3>A daily mudra sequence</h3>
+<ol class="steps tight">
+<li>Anjali mudra, 1 minute, to open.</li>
+<li>Adi mudra before pranayama, 1 minute.</li>
+<li>Gyan or Chin mudra for meditation, 10 to 20 minutes.</li>
+<li>One purpose mudra as needed, such as Prana for fatigue or Prithvi for grounding, 10 minutes.</li>
+<li>Apana mudra after intense practice, 5 minutes, to close.</li>
+</ol>
+</div>
+</section>
+
+<section id="tratak">
+<div class="sec-h"><span class="num">VIII</span><h2>Tratak: The Steady Gaze</h2><p>One of the six Hatha purifications. Gaze at a point until the eyes water, then hold the image inside. The eye stills, and the mind follows.</p></div>
+<div class="grid2">
+<div class="page lead">
+<h3>Rules for every method</h3>
+<ol class="steps tight">
+<li>Remove contact lenses. Face soft, jaw loose, spine tall, object at eye level.</li>
+<li>Start with 1 minute of gaze. Add 1 minute per week. Beginners may blink gently. Never strain.</li>
+<li>After gazing, close the eyes and hold the afterimage at the brow center. When it fades, rest in the space where it was.</li>
+<li>Repeat the gaze and afterimage cycle up to 3 times.</li>
+<li>Finish by rubbing the palms warm and cupping them over the eyes for 30 seconds. Splash cool water.</li>
+<li>Stop with eye pain. Avoid flickering light with epilepsy. Never the sun disc.</li>
+</ol>
+</div>
+<div class="page">
+<h3>The progression</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Step</th><th>Object</th><th>Skill trained</th></tr></thead><tbody>
+<tr><td>1</td><td><a href="#t-bindu">Black dot</a></td><td>Pure visual stability</td></tr>
+<tr><td>2</td><td><a href="#t-candle">Candle flame</a></td><td>Attention plus afterimage</td></tr>
+<tr><td>3</td><td><a href="#t-yantra">Yantra or OM</a></td><td>Holding complex form</td></tr>
+<tr><td>4</td><td>Closed-eye inner image</td><td>Visualization</td></tr>
+<tr><td>5</td><td><a href="#t-moon">Moon</a> and <a href="#t-star">stars</a></td><td>Vastness and calm</td></tr>
+<tr><td>6</td><td><a href="#t-dark">Darkness</a></td><td>Gazing into no object</td></tr>
+</tbody></table></div>
+</div>
+</div>
+<h3 class="sub">The methods</h3>
+<div class="grid2" id="tratakList"></div>
+</section>
+
+<section id="meditation">
+<div class="sec-h"><span class="num">IX</span><h2>Meditation, Mantra and Nada</h2><p>The attention engine that every other practice runs on.</p></div>
+
+<div class="grid2">
+<div class="page lead" id="med-one">
+<span class="kind">Stage 1, 10 to 20 minutes</span><h3>One-point attention</h3>
+<ol class="steps tight">
+<li><b>Posture.</b> Sit with the spine naturally upright, not rigid.</li>
+<li><b>Object.</b> Choose one: breath at the nostrils, a small visual point, a mantra, or a neutral sensation.</li>
+<li><b>Place.</b> Rest attention directly on it.</li>
+<li><b>Detect.</b> The moment you notice you have wandered, count it as a success. Noticing is the skill.</li>
+<li><b>Return.</b> Come back without anger or commentary.</li>
+<li><b>Repeat.</b> Wander, notice, return, thousands of times over weeks.</li>
+</ol>
+</div>
+<div class="page">
+<span class="kind">Stages 2 to 4</span><h3>Beyond one point</h3>
+<ul class="plain">
+<li><b>Open monitoring.</b> Let sounds, sensations, emotions and thoughts appear. Do not chase, do not suppress. Notice that each one changes. Rest as the awareness they appear in.</li>
+<li><b>Self-inquiry.</b> When a thought arises, ask: What exactly is being experienced? Where? What labels have I added? Can the observer itself be observed?</li>
+<li><b>Absorption.</b> Deepen one-point attention into <a href="#p-samyama">samyama</a>. Train stability first. Absorption arrives, it is not seized.</li>
+</ul>
+<p class="note">Measure progress by calm, honesty, kindness and less reactivity, not by unusual experiences.</p>
+</div>
+</div>
+
+<div class="page gap">
+<h3>The witness attitude: four ways to hold one emotion</h3>
+<div class="scroll"><table><thead><tr><th>Stance</th><th>Inner sentence</th><th>Effect</th></tr></thead><tbody>
+<tr><td>Identification</td><td>"I am angry."</td><td>The emotion is you. It drives.</td></tr>
+<tr><td>Object</td><td>"There is anger."</td><td>A little distance appears.</td></tr>
+<tr><td>Observation</td><td>"Anger is occurring in awareness."</td><td>You are the space it moves through.</td></tr>
+<tr><td>Investigation</td><td>"What sensations, thoughts and impulses make up this anger?"</td><td>It dissolves into parts you can work with.</td></tr>
+</tbody></table></div>
+</div>
+
+<h3 class="sub">Mantra</h3>
+<div class="grid2">
+<div class="page">
+<h3>The four modes of japa</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Mode</th><th>How</th><th>Effect</th></tr></thead><tbody>
+<tr><td>Vachika</td><td>Aloud</td><td>Grounds a restless mind</td></tr>
+<tr><td>Upamshu</td><td>Whispered, lips moving</td><td>Draws inward</td></tr>
+<tr><td>Manasika</td><td>Silent, in the mind</td><td>Deepest concentration</td></tr>
+<tr><td>Ajapa</td><td>Continuous, happening by itself</td><td>The mantra repeats you</td></tr>
+</tbody></table></div>
+<ol class="steps tight" style="margin-top:.8rem">
+<li>Choose one mantra and keep it for the full 40 days.</li>
+<li>Choose the mode. Begin aloud, move to whisper, then silent.</li>
+<li>With a 108-bead mala, move one bead per repetition, turning back at the large bead rather than crossing it.</li>
+<li>When distracted, return to the sound.</li>
+<li>After the round, stop and sit in the silence it leaves.</li>
+</ol>
+</div>
+<div class="page">
+<h3>Mantras for this practice</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Mantra</th><th>Tradition</th><th>Use</th></tr></thead><tbody>
+<tr><td>OM</td><td>Vedic, universal</td><td>Resonance from navel to crown</td></tr>
+<tr><td>So-Ham</td><td>Hatha, breath-linked</td><td>"So" on inhale, "Ham" on exhale. Walking, waiting.</td></tr>
+<tr><td>Om Namah Shivaya</td><td>Shaiva</td><td>Dissolving ego, kundalini work</td></tr>
+<tr><td>Om Mani Padme Hum</td><td>Tibetan Buddhist</td><td>Compassion</td></tr>
+<tr><td>Om bhur bhuvah svah, tat savitur varenyam, bhargo devasya dhimahi, dhiyo yo nah prachodayat</td><td>Vedic, the Gayatri</td><td>Solar clarity. Traditionally at sunrise.</td></tr>
+</tbody></table></div>
+</div>
+</div>
+
+<div class="grid2 gap">
+<div class="page" id="nada">
+<span class="kind">Nada yoga</span><h3>Listening to inner sound</h3>
+<ol class="steps tight">
+<li>Sit for 5 to 10 minutes, ideally right after bhramari with shanmukhi mudra.</li>
+<li>Listen first to the farthest external sounds.</li>
+<li>Move to nearer sounds, then breath and body sounds.</li>
+<li>Rest attention on any faint inner ringing or humming. Do not strain to hear something special.</li>
+</ol>
+<p class="meta">Hatha texts describe inner sounds shifting from loud, like ocean and drums, to subtle, like bells, flute and a humming bee. Record them as experiences before interpreting them.</p>
+</div>
+<div class="page" id="elements">
+<span class="kind">Five minutes</span><h3>Five-element meditation</h3>
+<ol class="steps tight">
+<li><b>Earth.</b> One minute sensing weight and contact with the ground.</li>
+<li><b>Water.</b> One minute sensing saliva, pulse and fluid movement.</li>
+<li><b>Fire.</b> One minute sensing warmth and digestion.</li>
+<li><b>Air.</b> One minute sensing breath and every small movement.</li>
+<li><b>Space.</b> One minute sensing the open space in which all of it appears.</li>
+</ol>
+</div>
+</div>
+</section>
+<div class="part"><div class="part-in"><div><span class="pn">Part four</span><h2>Powers</h2><p>What the traditions promise, what has been measured, and how to test a claim so it can actually fail.</p></div><svg viewBox="0 0 220 70" aria-hidden="true"><path d="M5 35 C30 5 50 5 75 35 S120 65 145 35 S190 5 215 35"/></svg></div></div>
+
+<section id="siddhis">
+<div class="sec-h"><span class="num">X</span><h2>Siddhis: Powers and Proof</h2><p>Siddhis are presented here as traditional claims and practice frameworks. You can study the method seriously without assuming the result is already proven.</p></div>
+
+<div class="page">
+<h3>The eight great siddhis</h3>
+<div class="scroll"><table style="min-width:760px"><thead><tr><th>Siddhi</th><th>Traditional claim</th><th>Inner reading</th><th>How it could be tested</th></tr></thead><tbody>
+<tr><td>Anima</td><td>Become as small as an atom</td><td>Perceiving the subtle</td><td>Physical measurement by independent observers</td></tr>
+<tr><td>Mahima</td><td>Become infinitely large</td><td>Vast awareness</td><td>Physical measurement by independent observers</td></tr>
+<tr><td>Garima</td><td>Become immovably heavy</td><td>Unshakable steadiness</td><td>Calibrated scale or force plate, recorded continuously</td></tr>
+<tr><td>Laghima</td><td>Become weightless, levitate</td><td>Freedom from burden</td><td>Seated on a calibrated scale, recorded continuously</td></tr>
+<tr><td>Prapti</td><td>Reach anything, anywhere</td><td>Access to what is needed</td><td>Blind, randomized target identification</td></tr>
+<tr><td>Prakamya</td><td>Fulfil any desire</td><td>Will made real</td><td>Pre-registered, specific predictions scored against chance</td></tr>
+<tr><td>Ishitva</td><td>Lordship over creation</td><td>Mastery of self</td><td>Only a precisely defined effect can be tested</td></tr>
+<tr><td>Vashitva</td><td>Control over beings and elements</td><td>Command of the senses</td><td>Define the target behavior beforehand, use controls</td></tr>
+</tbody></table></div>
+<p class="meta">The inner readings are a modern contemplative interpretation, not the classical meaning.</p>
+</div>
+
+<div class="grid2 gap">
+<div class="page">
+<h3>The five sources of siddhi</h3>
+<p>The opening sutra of the fourth chapter of the Yoga Sutras says powers arise from:</p>
+<ol class="steps tight">
+<li><b>Janma.</b> Birth, the fruit of past practice.</li>
+<li><b>Aushadhi.</b> Herbs and substances.</li>
+<li><b>Mantra.</b> Sacred sound.</li>
+<li><b>Tapas.</b> Austerity and disciplined heat.</li>
+<li><b>Samadhi.</b> Absorption, the path this book follows.</li>
+</ol>
+</div>
+<div class="page seal">
+<h3>The warnings inside the tradition</h3>
+<p>Patanjali states that these powers are obstacles to samadhi, though they look like achievements to the worldly mind.</p>
+<p>In the Kevaddha Sutta, the Buddha refuses to display powers, saying the only wonder worth showing is instruction that frees the mind.</p>
+<p>Never try to prove a siddhi through danger: no levitation stunts, fasting, sleep loss, breath deprivation, cold exposure or self-injury. Loss of consciousness is not attainment.</p>
+</div>
+</div>
+
+<h3 class="sub">Patanjali's samyama objects and their claimed fruits</h3>
+<div class="scroll page">
+<table style="min-width:760px">
+<thead><tr><th>Samyama on</th><th>Claimed result</th><th>Safe testable analogue</th></tr></thead>
+<tbody>
+<tr><td>The three transformations of things</td><td>Knowledge of past and future</td><td>Prospective predictions, scored for accuracy</td></tr>
+<tr><td>Word, meaning and idea as separate</td><td>Understanding the sounds of all beings</td><td>Blind identification of unfamiliar languages</td></tr>
+<tr><td>Stored impressions, samskaras</td><td>Knowledge of past lives</td><td>Specific, checkable details verified independently</td></tr>
+<tr><td>The mind of another</td><td>Knowledge of that mind</td><td>Blind target-thought trials</td></tr>
+<tr><td>The form of the body</td><td>Invisibility</td><td>Camera and observer detection</td></tr>
+<tr><td>Karma, fast and slow</td><td>Foreknowledge of death</td><td>Not appropriate to test</td></tr>
+<tr><td>Friendliness, compassion, joy</td><td>Those very strengths</td><td>Validated compassion and wellbeing scales over time</td></tr>
+<tr><td>The strength of an elephant</td><td>That strength</td><td>Blinded grip dynamometer</td></tr>
+<tr><td>The inner light of perception</td><td>Knowledge of subtle, hidden and distant things</td><td>Randomized remote-target trials</td></tr>
+<tr><td>The sun, the moon, the pole star</td><td>Knowledge of the worlds, star arrangement, star motion</td><td>Predict unseen sky facts, then check</td></tr>
+<tr><td>The navel center</td><td>Knowledge of the body's order</td><td>Blind anatomy questions</td></tr>
+<tr><td>The pit of the throat</td><td>Freedom from hunger and thirst</td><td>Not safe to test by fasting</td></tr>
+<tr><td>The tortoise channel below the throat</td><td>Steadiness</td><td>Balance-board sway measurement</td></tr>
+<tr><td>The light in the crown</td><td>Vision of perfected beings</td><td>Record as experience only</td></tr>
+<tr><td>The heart</td><td>Knowledge of the mind itself</td><td>Journal clarity and reactivity over time</td></tr>
+<tr><td>Udana, the upward wind</td><td>Passing over water, mud and thorns</td><td>Not appropriate to test</td></tr>
+</tbody>
+</table>
+</div>
+<p class="meta">Sutra numbering varies by edition, so objects are listed without numbers.</p>
+
+<h3 class="sub">The honest ledger</h3>
+<div class="grid2">
+<div class="page lead">
+<h3>Measured under controlled conditions</h3>
+<ul class="plain">
+<li><b>Inner heat.</b> Tummo practitioners raised finger and toe temperature sharply (Benson, 1982). Vase breathing raised core temperature in Tibetan nuns (Kozhevnikov, 2013).</li>
+<li><b>Stress and immune response.</b> Wim Hof trainees released more adrenaline and had milder symptoms after an injected bacterial toxin (Kox, 2014).</li>
+<li><b>Heart control.</b> Slow breathing near 6 breaths a minute raises heart rate variability.</li>
+<li><b>Breath.</b> Trained freedivers hold their breath at rest for over 11 minutes.</li>
+<li><b>Attention and pain.</b> Long-term meditators show steadier attention and less distress from pain.</li>
+</ul>
+</div>
+<div class="page">
+<h3>Not demonstrated</h3>
+<p>Levitation, invisibility, telepathy, remote viewing and precognition have not been shown in controlled, repeatable tests. Parapsychology results remain disputed, and a one-million-dollar prize for any paranormal ability under agreed conditions went unclaimed for decades.</p>
+<p>That does not forbid testing. It means the test must be fair, or it will only show you what you hope to see. A failed personal test also does not refute a whole tradition. Match the conclusion to the experiment you actually ran.</p>
+</div>
+</div>
+
+<div class="page gap">
+<h3>The evidence ladder</h3>
+<div class="scroll"><table><thead><tr><th>Level</th><th>What you have</th><th>What it establishes</th></tr></thead><tbody>
+<tr><td>1</td><td>One striking coincidence</td><td>An interesting anecdote</td></tr>
+<tr><td>2</td><td>Repeated success without controls</td><td>Interesting, but wide open to bias</td></tr>
+<tr><td>3</td><td>Above-chance result under blinding and randomization</td><td>Evidence worth investigating further</td></tr>
+<tr><td>4</td><td>Replication by you on fresh trials</td><td>Stronger evidence</td></tr>
+<tr><td>5</td><td>Independent replication under skeptical controls</td><td>A strong empirical case</td></tr>
+</tbody></table></div>
+</div>
+
+<h3 class="sub">How to prove a siddhi</h3>
+<div class="grid2">
+<div class="page">
+<ol class="steps">
+<li><b>Write a claim that can fail.</b> "I can sense which of 5 symbols is in a sealed envelope better than chance."</li>
+<li><b>Set chance.</b> 5 options means 20 percent by pure guessing.</li>
+<li><b>Pre-register.</b> Before starting, write the trial count, what counts as a hit, and the pass mark. Date it and send it to someone.</li>
+<li><b>Randomize and blind.</b> Another person picks targets with a random number generator, seals them, and leaves the room.</li>
+<li><b>Close leaks.</b> No sounds, reflections, handwriting marks or body language that could give the answer.</li>
+<li><b>Record every trial.</b> No dropping bad days, no stopping when ahead.</li>
+<li><b>Calculate.</b> 100 trials at 20 percent: 28 hits passes at p under 0.05, 31 hits at p under 0.01.</li>
+<li><b>Replicate.</b> Pass again with fresh trials, ideally run by someone else.</li>
+</ol>
+<p class="caution">Remembering hits and forgetting misses, reading meaning into vague results, subtle cues from a helper, and changing the rules afterwards will fake any power.</p>
+</div>
+<div>
+<div class="page lead">
+<h3>Chance calculator</h3>
+<div class="calc">
+<label>Trials <input type="number" id="cN" value="100" min="1" max="5000"></label>
+<label>Options per trial <input type="number" id="cK" value="5" min="2" max="100"></label>
+<label>Hits <input type="number" id="cH" value="28" min="0"></label>
+</div>
+<p class="verdict" id="cOut"></p>
+<p class="meta">Probability of scoring this many hits or more by pure guessing.</p>
+</div>
+<div class="page gap">
+<h3>The claim sheet</h3>
+<ul class="plain">
+<li>Claim and its traditional source</li>
+<li>Exact prediction, and what counts as success and failure</li>
+<li>Possible sensory cues, psychological explanations and coincidences</li>
+<li>Control condition and number of trials</li>
+<li>Result, and who replicated it</li>
+<li>What result would change my mind?</li>
+</ul>
+</div>
+</div>
+</div>
+
+<h3 class="sub" id="log">The siddhi log: abilities you can measure</h3>
+<p class="prose">These are the powers you can genuinely grow and prove. Measure on Day 1 and Day 40. Values save in this browser.</p>
+<div class="scroll page">
+<table style="min-width:720px">
+<thead><tr><th>Ability</th><th>How to measure</th><th style="width:8.5rem">Day 1</th><th style="width:8.5rem">Day 40</th></tr></thead>
+<tbody id="logBody"></tbody>
+</table>
+</div>
+
+<div class="grid2 gap">
+<div class="page">
+<h3>The attainment ladder</h3>
+<div class="scroll"><table class="narrow"><thead><tr><th>Level</th><th>Requirement</th></tr></thead><tbody>
+<tr><td>0</td><td>Interest and reading</td></tr>
+<tr><td>1</td><td>Daily consistency</td></tr>
+<tr><td>2</td><td>Stable concentration</td></tr>
+<tr><td>3</td><td>Reliable recognition of inner states</td></tr>
+<tr><td>4</td><td>Competence in a lineage method</td></tr>
+<tr><td>5</td><td>A specific, measurable claim</td></tr>
+<tr><td>6</td><td>Above-chance result under controls</td></tr>
+<tr><td>7</td><td>Independent replication</td></tr>
+</tbody></table></div>
+</div>
+<div class="page">
+<h3>Run one-variable experiments</h3>
+<p><b>Change one thing:</b> sleep, meal timing, caffeine, method, duration of tratak, mantra or breathwork.</p>
+<p><b>Measure one outcome:</b> calm, attention tally, mood, sleep quality, reactivity, dream recall, or a siddhi log number.</p>
+<ol class="steps tight">
+<li>Record a baseline for 5 days.</li>
+<li>Introduce the single change for 10 days.</li>
+<li>Keep recording, good days and bad.</li>
+<li>Compare against baseline, then repeat later before trusting it.</li>
+</ol>
+</div>
+</div>
+</section>
+
+<div class="part"><div class="part-in"><div><span class="pn">Part five</span><h2>Heart, Mind, Body</h2><p>Emotion as a key, thought as a discipline, and food as the ground the practice stands on.</p></div><svg viewBox="0 0 220 70" aria-hidden="true"><path d="M5 35 C30 5 50 5 75 35 S120 65 145 35 S190 5 215 35"/></svg></div></div>
+
+<section id="emotion">
+<div class="sec-h"><span class="num">XI</span><h2>Emotion Keys</h2><p>The Natya Shastra names nine rasas, and devotional yoga cultivates bhavas. Evoking one briefly shifts breath, posture and energy. Use them as keys, not as homes.</p></div>
+<div class="scroll page">
+<table style="min-width:820px">
+<thead><tr><th>Energy you want</th><th>Emotion to evoke</th><th>Tradition</th><th>How to call it, 90 seconds</th></tr></thead>
+<tbody>
+<tr><td>Grounding, stability</td><td>Unshakable trust</td><td>Earth, Muladhara</td><td>Recall a moment of total safety. Feel weight sink through the seat. Prithvi mudra. Exhale longer than inhale.</td></tr>
+<tr><td>Creative flow</td><td>Playful delight, beauty</td><td>Hasya and Shringara rasa, Svadhisthana</td><td>Recall laughing freely or being moved by beauty. Soften the face and hips. Let the breath wave.</td></tr>
+<tr><td>Will, drive, heat</td><td>Heroic resolve</td><td>Veera rasa, yang fire, Manipura</td><td>Recall a win against the odds. Chin level, navel firm. 30 kapalabhati strokes, then silently: I can and I will.</td></tr>
+<tr><td>Healing, connection</td><td>Compassion, gratitude</td><td>Karuna rasa, bhakti, Anahata</td><td>Picture someone who loved you without conditions. Hand on the heart, breathe into the hand.</td></tr>
+<tr><td>Authority of speech</td><td>Calm truthfulness</td><td>Satya, Ma'at, Vishuddha</td><td>Recall speaking the truth without fear. Ujjayi breath. Lengthen the neck. Hum once before speaking.</td></tr>
+<tr><td>Insight, clear decisions</td><td>Wonder, then neutral clarity</td><td>Adbhuta rasa, Ajna</td><td>Imagine the depth of the night sky. Then equal breathing, Shambhavi gaze, witness stance.</td></tr>
+<tr><td>Letting go, flow</td><td>Surrender</td><td>Water element</td><td>Picture a river carrying everything downstream. Silently: I allow. Soft, circular breath.</td></tr>
+<tr><td>Stillness</td><td>Peace</td><td>Shanta rasa, Sahasrara</td><td>Recall the silence at the end of a long exhale. Let every effort go.</td></tr>
+<tr><td>Protective force</td><td>Clean, fierce protectiveness, never hatred</td><td>Tamed Raudra rasa. Kali, Bhairava, Sekhmet</td><td>Picture standing between danger and someone you protect. Stand tall. One strong exhale on HA. 30 seconds only, then peace.</td></tr>
+<tr><td>Clarity after loss</td><td>Tender acceptance</td><td>Taoist metal element, lungs</td><td>Recall a loss and the love beneath it. Long exhales on a soft SSS.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="grid2 gap">
+<div class="page lead">
+<h3>The five-state cycle</h3>
+<p class="meta">A daily drill in steering state. Rate each from 1 to 10 before and after.</p>
+<div class="scroll"><table class="narrow"><thead><tr><th>State</th><th>Time</th><th>Inner phrase</th></tr></thead><tbody>
+<tr><td>Neutral</td><td>60 s</td><td>I am simply here.</td></tr>
+<tr><td>Courage</td><td>60 s</td><td>Fear can be present without commanding me.</td></tr>
+<tr><td>Compassion</td><td>60 s</td><td>May suffering decrease.</td></tr>
+<tr><td>Devotion</td><td>60 s</td><td>Let this action be an offering.</td></tr>
+<tr><td>Equanimity</td><td>2 min</td><td>Let it arise and pass.</td></tr>
+</tbody></table></div>
+<h3 style="margin-top:1rem">The 90-second induction</h3>
+<ol class="steps tight">
+<li>Choose one state.</li>
+<li>Take its posture.</li>
+<li>Say its one sentence internally.</li>
+<li>Picture a scene that carries it.</li>
+<li>Let it rise rather than forcing it. Notice what changes in the body.</li>
+<li>Release the image and return to neutral.</li>
+</ol>
+</div>
+<div>
+<div class="page seal">
+<h3>Laws of the keys</h3>
+<ol class="steps tight">
+<li>Evoke, do not become. 90 seconds, then three slow breaths back to neutral.</li>
+<li>Never evoke rage, terror or hatred to gain power. What you rehearse, the nervous system learns.</li>
+<li>Fierce energy is used only in its protective form, and briefly.</li>
+</ol>
+</div>
+<div class="page gap">
+<h3>The emotional ladder</h3>
+<p class="meta">A modern tool from the Abraham-Hicks teachings. From a low state, do not leap to joy. Climb one believable rung.</p>
+<p style="font-size:1.02rem;line-height:1.9">Despair <span class="kind">then</span> anger <span class="kind">then</span> frustration <span class="kind">then</span> doubt <span class="kind">then</span> boredom <span class="kind">then</span> contentment <span class="kind">then</span> hope <span class="kind">then</span> optimism <span class="kind">then</span> enthusiasm <span class="kind">then</span> joy</p>
+</div>
+</div>
+</div>
+
+<h3 class="sub" id="sounds">Taoist six healing sounds</h3>
+<div class="grid2">
+<div class="scroll page">
+<table class="narrow"><thead><tr><th>Organ</th><th>Element</th><th>Release</th><th>Grow</th><th>Sound</th></tr></thead><tbody>
+<tr><td>Lungs</td><td>Metal</td><td>Grief, sadness</td><td>Courage</td><td>Si, "ssss"</td></tr>
+<tr><td>Kidneys</td><td>Water</td><td>Fear</td><td>Gentleness</td><td>Chui, "chway"</td></tr>
+<tr><td>Liver</td><td>Wood</td><td>Anger</td><td>Kindness</td><td>Xu, "shhh"</td></tr>
+<tr><td>Heart</td><td>Fire</td><td>Hatred, impatience</td><td>Joy, love</td><td>He, "haaa"</td></tr>
+<tr><td>Spleen</td><td>Earth</td><td>Worry</td><td>Openness</td><td>Hu, "whooo"</td></tr>
+<tr><td>Triple warmer</td><td>All</td><td>Stress</td><td>Balance</td><td>Xi, "sheee"</td></tr>
+</tbody></table>
+</div>
+<div class="page">
+<h3>How to practice</h3>
+<ol class="steps tight">
+<li>Sit or stand relaxed. Work through the organs in the order shown.</li>
+<li>Rest the hands over the organ.</li>
+<li>Inhale slowly into the belly.</li>
+<li>Exhale on the sound, nearly silent, feeling the organ vibrate and release its emotion like grey smoke.</li>
+<li>Inhale, smile into the organ, and picture its virtue entering as light.</li>
+<li>3 to 6 times per organ. Finish with 3 breaths, storing warmth at the navel.</li>
+</ol>
+</div>
+</div>
+</section>
+<section id="mind">
+<div class="sec-h"><span class="num">XII</span><h2>The Mind: Thought Process</h2><p>What to hold in mind during practice, in free time, and when emotion runs hot.</p></div>
+<div class="grid3">
+<div class="page lead">
+<h3>During practice</h3>
+<ul class="plain">
+<li><b>Sakshi.</b> Be the witness. Sensations, lights and thoughts are objects passing through.</li>
+<li><b>Seventy percent.</b> The Taoists never use full effort. Strain blocks flow.</li>
+<li><b>Abhyasa and vairagya.</b> Steady practice with no clinging to results.</li>
+<li><b>Noting.</b> If phenomena come, note "seeing" or "feeling" and return to the breath.</li>
+<li><b>Close with care.</b> End as carefully as you began.</li>
+</ul>
+<p class="thought">I am the container, not the contents. This is passing through me.</p>
+</div>
+<div class="page lead">
+<h3>In free time</h3>
+<ul class="plain">
+<li><b>So-Ham.</b> Hear "so" on the inhale and "ham" on the exhale while walking or waiting.</li>
+<li><b>Hourly check.</b> Am I breathing low? Where am I holding tension? What am I rehearsing in my head?</li>
+<li><b>One-minute sits.</b> Several a day, eyes open, just presence.</li>
+<li><b>Conserve.</b> Fewer words, less scrolling, less arguing, less gossip. Leaks drain the vessel.</li>
+<li><b>Ma'at.</b> Speak only what is true.</li>
+</ul>
+</div>
+<div class="page lead">
+<h3>When emotion runs hot</h3>
+<ol class="steps tight">
+<li><b>Stop.</b> Stop speaking and typing. Feet on the ground.</li>
+<li><b>Sigh.</b> Two <a href="#b-sigh">physiological sighs</a>.</li>
+<li><b>Name and locate.</b> "Anger. Heat in the face and chest. Fast breath."</li>
+<li><b>Allow.</b> "I don't need to suppress it or obey it." Do not feed the story for 90 seconds. Let the wave crest.</li>
+<li><b>Ask.</b> "What does this energy want to become?"</li>
+<li><b>Transmute.</b> Move to the other pole on the same scale, below. Then choose the action.</li>
+</ol>
+</div>
+</div>
+
+<h3 class="sub" id="transmute">Hermetic transmutation: same scale, other pole</h3>
+<div class="scroll page">
+<table style="min-width:560px">
+<thead><tr><th>From</th><th>To</th><th>Bridge thought</th></tr></thead>
+<tbody>
+<tr><td>Fear</td><td>Courage</td><td>This matters to me. Fear is energy waiting for direction.</td></tr>
+<tr><td>Anxiety</td><td>Excitement</td><td>My body is getting ready. I am ready.</td></tr>
+<tr><td>Anger</td><td>Resolve</td><td>A boundary was crossed. I will act on it calmly.</td></tr>
+<tr><td>Envy</td><td>Inspiration</td><td>This shows me what is possible for me.</td></tr>
+<tr><td>Grief</td><td>Love</td><td>It hurts this much because it mattered this much.</td></tr>
+<tr><td>Doubt</td><td>Curiosity</td><td>I don't know yet. Let me find out.</td></tr>
+<tr><td>Lust</td><td>Creative fire</td><td>This heat can build something.</td></tr>
+</tbody>
+</table>
+</div>
+
+<h3 class="sub">States you may meet in practice</h3>
+<div class="scroll page">
+<table>
+<thead><tr><th>State</th><th>What it feels like</th><th>What to do</th></tr></thead>
+<tbody>
+<tr><td>Relaxed alertness</td><td>Low tension, clear attention</td><td>Continue</td></tr>
+<tr><td>Absorption</td><td>Surroundings fade, time shrinks</td><td>Observe without forcing it deeper</td></tr>
+<tr><td>Energetic activation</td><td>Heat, tingling, vibration, arousal</td><td>Lower the intensity if uncomfortable. Ground.</td></tr>
+<tr><td>Emotional release</td><td>Tears, laughter, grief, joy</td><td>Allow it safely, then ground</td></tr>
+<tr><td>Visual phenomena</td><td>Afterimages, patterns, lights</td><td>Record before interpreting</td></tr>
+<tr><td>Dreamlike imagery</td><td>Symbolic scenes arising by themselves</td><td>Stay oriented. Open the eyes if needed.</td></tr>
+<tr><td>Nondual moments</td><td>Observer and object seem to merge</td><td>Observe. Hold off on metaphysical certainty.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="grid2 gap">
+<div class="page" id="dream">
+<span class="kind">Dream practice</span><h3>Recall and lucidity</h3>
+<ol class="steps tight">
+<li>Keep a notebook by the bed. On waking, stay still for a few seconds.</li>
+<li>Recall the emotion first, then scenes, people, words. Write immediately.</li>
+<li>Mark recurring dream signs: places, people, impossible events.</li>
+<li>During the day, ask "Am I dreaming?" and check: read a line of text twice, look at your hands.</li>
+<li>As you fall asleep, repeat: "Next time I'm dreaming, I will know I'm dreaming," while imagining becoming lucid in a recent dream.</li>
+</ol>
+<p class="note">Tibetan dream yoga rests attention at the throat as sleep comes. Never trade away healthy sleep for dream work.</p>
+</div>
+<div class="page lead" id="review">
+<span class="kind">5 minutes, lying in bed</span><h3>The nightly review</h3>
+<p class="meta">Joins the Pythagorean evening examination with the Egyptian weighing of the heart.</p>
+<ol class="steps tight">
+<li>Replay the day backwards, from now to waking, like a film in reverse.</li>
+<li>Ask: What did I do well? Where did I go wrong? What did I leave undone?</li>
+<li>Weigh the heart: Was I truthful? Did I cause needless harm? Where did ego distort what I saw? Did I waste my life force in anger or excess?</li>
+<li>Choose one action for tomorrow that restores balance. Say it once. Sleep.</li>
+</ol>
+<p class="thought">Let my heart be light as the feather.</p>
+</div>
+</div>
+</section>
+
+<section id="food">
+<div class="sec-h"><span class="num">XIII</span><h2>Food for the Practice</h2><p>Ayurveda sorts food by its effect on the mind: sattvic clarifies, rajasic agitates, tamasic dulls. Your own journal is the final judge.</p></div>
+<div class="grid3">
+<div class="page lead"><span class="kind">Take</span><h3>Sattvic</h3><p>Fresh seasonal fruit, cooked vegetables and leafy greens, rice, millets, oats, mung dal and khichdi, sprouts, milk, ghee, fresh curd at midday, paneer, soaked almonds and walnuts, sesame and pumpkin seeds, dates, raisins, jaggery, raw honey, tulsi, fennel, cardamom, turmeric, ginger, cumin, coriander, coconut water, warm water.</p></div>
+<div class="page"><span class="kind">Limit</span><h3>Rajasic</h3><p>Chilli-heavy food, excess coffee and tea, chocolate in excess, very salty or sour food, eating in a rush, heavily processed snacks. Many yogic lineages also avoid onion and garlic during intense sadhana.</p></div>
+<div class="page seal"><span class="kind">Avoid</span><h3>Tamasic</h3><p>Stale and repeatedly reheated food, deep-fried food, alcohol, tobacco, recreational drugs, overeating, heavy meals late at night.</p></div>
+</div>
+
+<div class="grid2 gap">
+<div class="scroll page">
+<h3>Foods by purpose</h3>
+<table class="narrow"><thead><tr><th>Purpose</th><th>Foods</th><th>When</th></tr></thead><tbody>
+<tr><td>Kundalini work</td><td>Ghee, dates, soaked almonds, saffron milk</td><td>Phase III and IV</td></tr>
+<tr><td>Pranayama</td><td>Warm water with honey, cardamom, a light stomach</td><td>Before and after</td></tr>
+<tr><td>Tratak and eyes</td><td>Carrots, amla, ghee, leafy greens</td><td>Daily</td></tr>
+<tr><td>Deep meditation</td><td>Light fruit, herbal tea</td><td>Hours before long sits</td></tr>
+<tr><td>Steady energy</td><td>Soaked almonds, dates, banana</td><td>After morning practice</td></tr>
+<tr><td>Calm and sleep</td><td>Warm milk with nutmeg or turmeric</td><td>Before bed</td></tr>
+<tr><td>Digestive fire</td><td>Fresh ginger with lemon and rock salt, cumin, fennel</td><td>Around meals</td></tr>
+<tr><td>Cooling</td><td>Coconut water, soaked sabja seeds, cucumber, buttermilk</td><td>After fire breaths, hot days</td></tr>
+<tr><td>Grounding when energy runs too high</td><td>Rice or khichdi with ghee, sweet potato, beetroot, warm soups, regular full meals</td><td>At any stop sign</td></tr>
+</tbody></table>
+</div>
+<div class="page lead">
+<h3>Mitahara, the yogic way of eating</h3>
+<ol class="steps tight">
+<li>Fill the stomach half with food, a quarter with water, and leave a quarter empty, as the Hatha Yoga Pradipika advises.</li>
+<li>Eat when truly hungry, in calm surroundings, chewing slowly. Pause in gratitude before eating.</li>
+<li>Make lunch the largest meal, when digestive fire is strongest.</li>
+<li>Practice first thing in the morning, or 2 to 3 hours after a meal.</li>
+<li>Wait 30 minutes after intense pranayama before eating.</li>
+<li>Last meal at least 3 hours before sleep. Sip water between meals rather than with them.</li>
+<li>Get enough protein from dal, paneer, curd and nuts. Light days only if healthy, and never with fire breaths or cold.</li>
+</ol>
+</div>
+</div>
+</section>
+
+<div class="part"><div class="part-in"><div><span class="pn">Part six</span><h2>The Laboratory</h2><p>Timers, pacer and journal. The journal is the central instrument of this book.</p></div><svg viewBox="0 0 220 70" aria-hidden="true"><path d="M5 35 C30 5 50 5 75 35 S120 65 145 35 S190 5 215 35"/></svg></div></div>
+
+<section id="chamber">
+<div class="sec-h"><span class="num">XIV</span><h2>The Chamber</h2><p>A pacer for the slow breaths, and a quiet timer for sitting, tratak and the attention test.</p></div>
+<div class="grid2">
+<div class="page pacer lead">
+<h3>Breath pacer</h3>
+<p class="meta">Follow the orb: it grows as you inhale and shrinks as you exhale.</p>
+<select id="mode" aria-label="Breathing pattern">
+<option value="coherent">Coherent: 5.5 in, 5.5 out</option>
+<option value="box">Box: 4 in, 4 hold, 4 out, 4 hold</option>
+<option value="n12">Nadi shodhana 1:2: 4 in, 8 out</option>
+<option value="n142">Nadi shodhana 1:4:2: 4 in, 16 hold, 8 out</option>
+<option value="478">Sleep: 4 in, 7 hold, 8 out</option>
+</select>
+<div class="orb-wrap"><div class="orb" id="orb"></div></div>
+<div class="phase-name" id="pname">Ready</div>
+<div class="count" id="pcount">Choose a pattern and begin</div>
+<div style="margin-top:1.1rem">
+<button class="btn primary" id="pstart" type="button">Begin</button>
+<button class="btn" id="pstop" type="button">Stop</button>
+</div>
+</div>
+<div class="page pacer">
+<h3>Practice timer</h3>
+<p class="meta">A soft tone sounds at the end.</p>
+<div class="filters" style="justify-content:center" role="group" aria-label="Timer presets">
+<button class="btn small" data-min="3" type="button">3 min</button>
+<button class="btn small" data-min="7" type="button">7 min</button>
+<button class="btn small" data-min="10" type="button">10 min</button>
+<button class="btn small" data-min="20" type="button">20 min</button>
+<button class="btn small" data-min="40" type="button">40 min</button>
+</div>
+<div class="clock" id="tclock" aria-live="polite">10:00</div>
+<div style="margin-top:1rem">
+<button class="btn primary" id="tstart" type="button">Start</button>
+<button class="btn" id="tpause" type="button">Pause</button>
+<button class="btn" id="treset" type="button">Reset</button>
+</div>
+</div>
+</div>
+</section>
+
+<section id="journal">
+<div class="sec-h"><span class="num">XV</span><h2>Journal and Study</h2><p>Record the experience before you explain it. Entries stay in this browser. Export them regularly as a backup.</p></div>
+<div class="page lead">
+<div class="form">
+<label>Date <input type="date" id="jDate"></label>
+<label>Practice <input type="text" id="jPractice" placeholder="Phase II morning"></label>
+<label>Minutes <input type="number" id="jMin" min="0" style="max-width:none"></label>
+<label>Sleep hours <input type="number" id="jSleep" min="0" step="0.5" style="max-width:none"></label>
+<label>Calm before, 1 to 10 <input type="number" id="jBefore" min="1" max="10" style="max-width:none"></label>
+<label>Calm after, 1 to 10 <input type="number" id="jAfter" min="1" max="10" style="max-width:none"></label>
+<label class="wide">I experienced <textarea id="jExp" placeholder="Sensations, emotions, images, thoughts, exactly as they were"></textarea></label>
+<label>My tradition would call it <textarea id="jTrad"></textarea></label>
+<label>An ordinary explanation might be <textarea id="jOrd"></textarea></label>
+<label class="wide">What changed in how I acted today? <input type="text" id="jAct"></label>
+</div>
+<div style="margin-top:1rem">
+<button class="btn primary" id="jSave" type="button">Save entry</button>
+<button class="btn" id="jExport" type="button">Download journal</button>
+<button class="btn" id="jCopy" type="button">Copy journal</button>
+<button class="btn" id="jClear" type="button">Clear all entries</button>
+</div>
+<p class="meta" id="jMsg"></p>
+<div class="entries" id="entries"></div>
+</div>
+
+<div class="grid2 gap">
+<div class="page">
+<h3>Weekly review questions</h3>
+<ol class="steps tight">
+<li>What improved, and what became harder?</li>
+<li>Which practice produced the clearest effect?</li>
+<li>What did I expect that did not happen?</li>
+<li>Which belief grew stronger, and which weaker?</li>
+<li>What evidence supports my interpretation, and what contradicts it?</li>
+<li>Before the next big practice: Why am I doing it? What am I expecting? What is the safest version? Can I stop easily?</li>
+</ol>
+</div>
+<div class="scroll page">
+<h3>Primary texts to study</h3>
+<table class="narrow"><thead><tr><th>Text</th><th>Study for</th></tr></thead><tbody>
+<tr><td>Yoga Sutras of Patanjali</td><td>Eight limbs, samyama, siddhis</td></tr>
+<tr><td>Hatha Yoga Pradipika</td><td>Pranayama, mudra, bandha, kundalini</td></tr>
+<tr><td>Gheranda Samhita</td><td>Purifications, mudras, pranayama</td></tr>
+<tr><td>Shiva Samhita</td><td>Subtle body, prana, liberation</td></tr>
+<tr><td>Upanishads and Bhagavad Gita</td><td>Atman, prana, equanimity, action</td></tr>
+<tr><td>Daoist inner alchemy classics</td><td>Jing, qi, shen, the orbit</td></tr>
+<tr><td>Corpus Hermeticum</td><td>Nous, cosmos, rebirth of mind</td></tr>
+<tr><td>Egyptian Book of the Dead</td><td>Ma'at, the heart, transformation</td></tr>
+</tbody></table>
+<p class="meta">Read the oldest text first, then traditional commentary, then modern interpretation. Keep the three separate.</p>
+</div>
+</div>
+
+<div class="page lead gap">
+<h3>The seven pillars</h3>
+<div class="pillars">
+<div><b>Ethics</b><span>Truth, non-harm, responsibility</span></div>
+<div><b>Body</b><span>Posture, movement, health</span></div>
+<div><b>Breath</b><span>Regulation and restraint</span></div>
+<div><b>Attention</b><span>Concentration and open awareness</span></div>
+<div><b>Emotion</b><span>Courage, compassion, equanimity</span></div>
+<div><b>Insight</b><span>Inquiry and discernment</span></div>
+<div><b>Integration</b><span>Practice lived in ordinary life</span></div>
+</div>
+<p class="loop">Depth before intensity. Stability before extremity. Evidence before certainty. Integration before attainment.</p>
+</div>
+</section>
+</main>
+
+<footer>Practice deeply. Observe precisely. Interpret carefully. Test honestly. Rise slowly, and return fully.</footer>
+<button class="totop" id="totop" type="button" aria-label="Back to top">&#8593;</button>
+<script>
+const KEY="serpent-codex-v1";
+function load(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+const state=load();state.days=state.days||{};state.log=state.log||{};state.journal=state.journal||[];
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const rays=$("rays");
+for(let i=0;i<12;i++){const a=i*Math.PI/6;rays.insertAdjacentHTML("beforeend",`<line class="ray" x1="${(100+Math.cos(a)*16).toFixed(1)}" y1="${(80+Math.sin(a)*16).toFixed(1)}" x2="${(100+Math.cos(a)*27).toFixed(1)}" y2="${(80+Math.sin(a)*27).toFixed(1)}"/>`)}
+
+const PHASES=["Purify","Steady","Awaken","Integrate"];
+const EXTRA={1:"Day 1 measurements and attention test.",6:"Kapalabhati rises to 3 x 50.",10:"Review: sleep, mood, stop signs.",11:"Wim Hof begins, odd days.",15:"Try a new emotion key.",20:"Attention test. Is 1:2 breathing easy?",21:"Cold showers begin.",25:"Tummo joins the orbit.",30:"Review. Any stop signs in 10 days?",31:"Serpent Ascent begins.",36:"Samyama moves to the breath.",40:"Retest everything. Compare with Day 1."};
+(function renderDays(){
+  const box=$("days");
+  for(let n=1;n<=40;n++){
+    const d=document.createElement("label");d.className="day";
+    d.innerHTML=`<input type="checkbox" aria-label="Day ${n} complete"><div><div class="dn">Day ${n}</div><div class="df">${PHASES[Math.floor((n-1)/10)]}${EXTRA[n]?". "+EXTRA[n]:""}</div></div>`;
+    const cb=d.querySelector("input");cb.checked=!!state.days[n];d.classList.toggle("done",cb.checked);
+    cb.addEventListener("change",()=>{state.days[n]=cb.checked;d.classList.toggle("done",cb.checked);save();prog()});
+    box.appendChild(d);
+  }
+  prog();
+})();
+function prog(){const c=Object.values(state.days).filter(Boolean).length;$("bar").style.width=(c/40*100)+"%";$("ptext").textContent=`${c} of 40 days complete`}
+
+const ENERGY={warm:["warm","Warming"],cool:["cool","Cooling"],bal:["bal","Balancing"]};
+const BREATH=[
+["b-found","Foundation breath","Natural diaphragmatic breathing","bal",1,"The base of every other method. Day 1 onwards.",["Sit or lie comfortably. Rest one hand lightly on the belly.","Let the inhale widen the lower ribs and belly by itself. Do not push the belly out.","Let the exhale fall away without effort.","Notice the quality: smooth or jerky, shallow or deep, rushed or easy.","5 to 10 minutes. Change nothing, only observe."],"Smooth. Quiet. Nothing to force. Nothing to achieve.",""],
+["b-nadi","Nadi shodhana","Alternate nostril, Hatha yoga","bal",1,"The daily foundation of balance.",["Right hand in Vishnu mudra: fold the index and middle fingers. Thumb closes the right nostril, ring finger the left.","Close the right. Inhale through the left for 4.","Close the left. Exhale through the right for 4. Inhale through the right for 4.","Close the right. Exhale through the left for 4. That is one round.","10 rounds minimum. Progress only when easy: 1:1, then 1:2 (4 in, 8 out), then 1:4:2 with a hold (4, 16, 8), and much later 1:4:2:2 with a hold out."],"Moon breath in, sun breath out. Left and right dissolve into one breath in the center.",""],
+["b-ujjayi","Ujjayi","Ocean breath, Hatha yoga","warm",1,"Steady focus, during holds, spinal breath and asana.",["Mouth closed, jaw and face soft.","Gently narrow the back of the throat, as if fogging a mirror with the lips shut.","Breathe slowly through the nose with a soft ocean sound on both inhale and exhale.","Make the exhale longer than the inhale.","5 to 10 minutes. The sound should stay smooth, never scraping."],"The sound is a thread. I follow it inward.",""],
+["b-bhramari","Bhramari","Humming bee, Hatha yoga","cool",1,"Anxiety, before sleep, before tratak and nada listening.",["Sit tall. Close the ear flaps with the index fingers, or use shanmukhi mudra.","Inhale comfortably through the nose.","Exhale on a steady, moderate humming mmmm, lips closed, jaw soft. Feel face, skull and chest vibrate.","7 rounds.","Sit and listen to the silence inside."],"The hum fills the skull. When it ends, I listen to what remains.",""],
+["b-coh","Coherent and box breathing","Sama vritti and slow pranayama","bal",1,"Before hard conversations, decisions, or to raise heart rate variability.",["Coherent: inhale 5.5 seconds, exhale 5.5 seconds, through the nose, 10 minutes.","Box, sama vritti: inhale 4, hold 4, exhale 4, hold 4, for 5 minutes.","A gentler start: inhale 4, exhale 6.","Use the pacer in the Chamber."],"Wave in, wave out. Nothing to do but ride it.",""],
+["b-478","4-7-8 breath","Modern adaptation of kumbhaka","cool",2,"Falling asleep, winding down.",["Tongue tip behind the upper teeth.","Exhale fully through the mouth with a whoosh.","Inhale through the nose for 4, hold for 7, exhale through the mouth for 8.","4 rounds only at first."],"Each exhale lowers me one step deeper.",""],
+["b-sigh","Physiological sigh","Modern physiology","cool",1,"Any spike of anger, fear or panic.",["Inhale fully through the nose.","Take a second short inhale on top to fill the lungs completely.","Exhale slowly and completely through the mouth.","1 to 3 times."],"Letting go is a physical act. I do it now.",""],
+["b-surya","Surya and Chandra bhedana","Sun and moon piercing, Hatha yoga","bal",2,"Surya on sluggish mornings. Chandra when hot, angry or at night.",["Use the same hand position as nadi shodhana.","Surya: inhale only through the right nostril, exhale only through the left. 10 rounds.","Chandra: inhale only through the left nostril, exhale only through the right. 10 rounds."],"Surya: the sun rises in me. Chandra: moonlight cools the fire.","Skip Surya bhedana with high blood pressure, and in the evening."],
+["b-sheetali","Sheetali and sheetkari","Cooling breaths, Hatha yoga","cool",1,"Heat, irritability, after fire breaths in summer.",["Sheetali: roll the tongue into a tube and let it stick out slightly. If you cannot roll it, use sheetkari: teeth together, lips parted.","Inhale slowly through the tongue or teeth, feeling cool air.","Close the mouth. Exhale through the nose.","10 rounds."],"Cool water poured over a hot stone.","Avoid in cold weather, and with asthma or low blood pressure."],
+["b-kapal","Kapalabhati","Skull-shining breath, Hatha yoga","warm",3,"Morning, before meditation, mental dullness.",["Sit tall, hands on knees. Breathe normally for a minute.","Take a normal inhale.","Snap the lower belly in to push air out sharply through the nose. Let the inhale happen by itself as the belly releases.","About 1 stroke per second, rising to 2. Start with 30 strokes per round, building slowly over months toward 100.","After each round, breathe normally and notice the stillness at the brow.","2 to 3 rounds."],"Each exhale throws out dullness. The stillness afterwards is the real practice.","Empty stomach. Not with pregnancy, hernia, high blood pressure, heart disease, epilepsy or during menstruation. Stop well before dizziness."],
+["b-fire","Breath of fire","Kundalini yoga","warm",3,"Building heat and focus, Phase III.",["Sit tall, mouth closed.","Breathe rapidly and rhythmically through the nose, inhale and exhale equal, 2 to 3 per second.","Power comes from the navel: pull in on the exhale, release on the inhale. Chest and shoulders stay still.","Start with 30 seconds, build to 3 minutes.","End with a deep inhale, a brief hold, and a slow exhale."],"The navel is a drum. The fire keeps the beat.","Same cautions as kapalabhati. Unlike kapalabhati, both breaths are equally active."],
+["b-bhastrika","Bhastrika","Bellows breath, Hatha yoga","warm",4,"Stoking prana before the ascent.",["Sit tall, hands on knees in Gyan mudra. Take 3 slow preparatory breaths.","Inhale and exhale forcefully and equally through the nose, belly pumping like a blacksmith's bellows, about 1 per second. 20 breaths.","After the last exhale, inhale fully and slowly.","Hold the breath in with chin lock and root lock, only as long as it stays comfortable.","Release the root lock, lift the chin, exhale slowly.","A few normal breaths. 3 rounds. Build toward 30 breaths per round over weeks, not days."],"The bellows fan the navel fire. In the hold, the heat gathers and turns upward.","Not with high blood pressure, heart disease, epilepsy, hernia, pregnancy or glaucoma. Floor only. Stop if lightheaded. Reduce intensity first, never safety."],
+["b-tummo","Tummo vase breath","Tibetan inner fire, simplified","warm",4,"Phase III onwards, cold mornings.",["Sit cross-legged, spine tall, hands on knees.","Picture a small, hot flame four finger-widths below the navel.","Inhale deeply through the nose. Swallow gently and press the breath down into the lower belly while lightly lifting the pelvic floor, so the belly fills like a sealed vase.","Hold as long as comfortable while the flame grows hotter and brighter.","Exhale slowly. The flame stays.","5 to 7 rounds. Then sit in the warmth."],"The fire blazes up the central channel, melting all that is cold and stuck.","Traditionally learned from a teacher with fuller visualizations. Same cautions as bhastrika. Never test it with dangerous cold."],
+["b-wim","Wim Hof method","Modern, inspired by tummo","warm",5,"Odd days in Phase II. Always lying down.",["Lie on your back on a floor or bed. Never in water, never driving, never standing.","30 to 40 deep breaths: full inhale into belly then chest, relaxed exhale without forcing it out. Tingling and lightheadedness are common.","After the last breath, exhale to a relaxed empty and hold. Wait until you feel a strong urge to breathe.","Recovery breath: inhale fully and hold for 15 seconds, then release.","That is one round. Do 3 rounds.","Lie still for 2 minutes. Log retention times as notes, never as a competition."],"Breath fills and lets go. In the hold, I am still and safe. The urge to breathe is a signal, not an alarm.","Blackouts can happen without warning, and people have drowned doing this in water. Tingling is carbon dioxide dropping, not proof of energy rising. Not with epilepsy, heart disease, high blood pressure or pregnancy."]
+];
+(function(){
+  const box=$("breathList");
+  BREATH.forEach(([id,name,src,en,lvl,when,steps,thought,caution])=>{
+    const [cls,label]=ENERGY[en];
+    const meter=`<span class="meter" title="Intensity ${lvl} of 5"><small>intensity</small>${[1,2,3,4,5].map(i=>`<i class="${i<=lvl?"f":""}"></i>`).join("")}</span>`;
+    const el=document.createElement("article");el.className="page";el.id=id;
+    el.innerHTML=`<div class="card-top"><span class="chip ${cls}">${label}</span>${meter}</div><h3>${name}</h3><p class="meta">${src}. ${when}</p><ol class="steps tight">${steps.map(s=>`<li>${s}</li>`).join("")}</ol><p class="thought">${thought}</p>${caution?`<p class="caution">${caution}</p>`:""}`;
+    box.appendChild(el);
+  });
+})();
+
+const KIND={Hand:"hand",Eye:"eye",Lock:"lock",Body:"body"};
+const MUDRAS=[
+["m-gyan","Gyan and Chin mudra","Hand","Index fingertip touches the thumb tip, other fingers straight. Palms up for Gyan, palms down on the knees for Chin.","Knowledge and calm focus. Chin grounds, Gyan receives.","Meditation and witness sitting, any length."],
+["m-dhyana","Dhyana mudra","Hand","Right hand rests on the left in the lap, palms up, thumb tips touching to form an oval.","Deep concentration and stillness.","Long silent sitting."],
+["m-anjali","Anjali mudra","Hand","Palms pressed together at the heart, thumbs lightly on the breastbone.","Centering, gratitude, union of opposites.","Opening and closing every session."],
+["m-adi","Adi mudra","Hand","Thumb tucked into the palm, fingers close over it into a gentle fist.","Calms the nervous system, deepens breath.","Before pranayama, 1 minute."],
+["m-prana","Prana mudra","Hand","Ring and little fingertips touch the thumb tip. Other fingers straight.","Vitality, the life force.","Fatigue, 10 to 15 minutes."],
+["m-apana","Apana mudra","Hand","Middle and ring fingertips touch the thumb tip.","Downward energy, elimination, grounding.","After intense practice, 5 to 15 minutes."],
+["m-prithvi","Prithvi mudra","Hand","Ring fingertip touches the thumb tip.","Earth: stability and strength.","Grounding, and at any stop sign. No time limit."],
+["m-surya","Surya mudra","Hand","Fold the ring finger under the thumb base and press lightly with the thumb.","Fire: metabolism and heat.","Cold, sluggish mornings. Not when overheated."],
+["m-varuna","Varuna mudra","Hand","Little fingertip touches the thumb tip.","Water: fluid balance, softness, emotional flow.","Dryness and rigidity, 15 minutes."],
+["m-vayu","Vayu mudra","Hand","Fold the index finger under the thumb base, thumb presses lightly on it.","Air: settles restlessness.","Anxiety and scattered energy, 10 minutes."],
+["m-shunya","Shunya mudra","Hand","Fold the middle finger under the thumb base, thumb presses lightly on it.","Space: quiets mental noise.","Restless mind, before nada listening."],
+["m-rudra","Rudra mudra","Hand","Thumb, index and ring fingertips touch. Middle and little fingers relaxed.","Clarity and a focused, steady center.","During pranayama, 10 to 15 minutes."],
+["m-hakini","Hakini mudra","Hand","All five fingertips of both hands touch, hands apart as if holding a ball.","Concentration and memory.","Before study or problem solving."],
+["m-linga","Linga mudra","Hand","Interlock the fingers. Left thumb points up and is encircled by the right thumb and index finger.","Inner heat.","Cold weather. Short sessions only."],
+["m-ganesha","Ganesha mudra","Hand","At the heart, left palm out, right palm in, fingers hooked. Exhale and pull outward without letting go. Inhale and relax.","Courage and removing obstacles.","Before a hard day. 6 pulls."],
+["m-yonih","Yoni mudra, hand form","Hand","Interlace the lower fingers. Thumb tips touch pointing up, index fingertips touch pointing down, forming a triangle at the navel.","Inward withdrawal, the receptive source.","Seated meditation, 10 minutes. In Hatha texts the name Yoni mudra can also mean shanmukhi."],
+["m-shambhavi","Shambhavi mudra","Eye","Eyes open or half closed, gaze gently up toward the brow center without moving the head. Relax the forehead.","Stills thought, awakens Ajna.","Start at 30 seconds, build to 5 minutes. Release at any strain."],
+["m-agochari","Nasikagra drishti","Eye","Gaze gently at the tip of the nose. At first two images appear. Let them merge into one.","Grounding concentration, prepares for Shambhavi.","1 to 5 minutes. Stop if it causes a headache."],
+["m-khechari","Khechari mudra, non-surgical","Eye","Curl the tongue back along the palate, reaching toward the soft palate. Never cut, pull or stretch the tongue.","Draws awareness inward. Traditionally linked to the flow of amrita, nectar.","During spinal breath and silent sitting. Release if it strains."],
+["m-shanmukhi","Shanmukhi mudra","Eye","Thumbs close the ears, index fingers rest on closed eyes, middle fingers beside the nostrils, ring and little fingers above and below the lips.","Closes the six gates. Withdraws the senses, reveals inner sound.","With bhramari. Then listen."],
+["m-mula","Mula bandha","Lock","Contract and lift the center of the pelvic floor, the point between anus and genitals. Keep the buttocks and belly relaxed.","Root lock. Holds prana at the base, draws apana upward.","Learn light awareness first. 10 holds of 5 seconds, building gradually."],
+["m-uddiyana","Uddiyana bandha","Lock","Standing or seated, exhale fully. Hold the breath out and make a false inhale with the throat closed, so the abdomen draws up and in under the ribs.","Flying-up lock. Lifts energy through the navel.","Empty stomach only. 3 to 5 holds. Not with pregnancy, ulcers, hernia or heart disease."],
+["m-jalandhara","Jalandhara bandha","Lock","After inhaling, draw the chin down and back toward the chest while lifting the breastbone slightly.","Throat lock. Seals prana during holds.","During retention only. Release before breathing again. Never crush the neck."],
+["m-maha","Maha bandha","Lock","After a full exhale, apply chin lock, then abdominal lock, then root lock. Release in reverse: root, belly, chin, then inhale.","Great lock. Unites prana and apana at the navel.","Stage 4 onwards, 3 holds. Same cautions as uddiyana."],
+["m-ashwini","Ashwini mudra","Body","Rhythmically contract and release the anal sphincter while breathing normally.","Horse gesture. Awakens the base.","50 contractions, before spinal breath."],
+["m-mahamudra","Maha mudra","Body","Sit with the left heel pressing the perineum, right leg straight. Hold the right big toe. Inhale, hold with chin and root lock, gaze to the brow. Release, exhale. Change sides.","The great seal, a classical kundalini practice.","3 times each side. Not with high blood pressure, heart disease or pregnancy."],
+["m-viparita","Viparita karani","Body","Lie down with the legs raised up a wall, or hips supported by the hands in a half shoulder stand.","The inverted seal, said to reverse the flow of vital nectar.","3 to 5 minutes. Not with high blood pressure, glaucoma, neck injury or during menstruation."]
+];
+(function(){
+  const box=$("mudraList");
+  MUDRAS.forEach(([id,name,kind,how,effect,use])=>{
+    const el=document.createElement("article");el.className="page";el.id=id;el.dataset.kind=kind;
+    el.innerHTML=`<div class="card-top"><span class="chip ${KIND[kind]}">${kind==="Eye"?"Eye and tongue":kind}</span></div><h3>${name}</h3><p>${how}</p><p class="thought" style="margin:.6rem 0">${effect}</p><p class="meta" style="margin:0">${use}</p>`;
+    box.appendChild(el);
+  });
+  document.querySelectorAll("[data-f]").forEach(b=>b.addEventListener("click",()=>{
+    document.querySelectorAll("[data-f]").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));
+    box.querySelectorAll("article").forEach(a=>a.style.display=(b.dataset.f==="all"||a.dataset.kind===b.dataset.f)?"":"none");
+  }));
+})();
+
+const TRATAK=[
+["t-bindu","Bindu, the black dot","Daytime, even light","Pure one-pointedness without the pull of light. The best first object.",["Draw a black dot about 1 cm wide on white paper. Fix it at eye level, about 60 cm away.","Gaze at the dot. The edges of the paper may blur or the dot may seem to move. Stay with the dot.","When the eyes water, close them and see the dot in the inner space.","Later, replace the dot with a small yantra."],"A single point, and nothing else in the universe.",""],
+["t-candle","Candle, jyoti tratak","Before dawn or after dark","Develops concentration and the inner image. The classic method.",["Dark, draught-free room. Candle at arm's length, flame at eye level.","Three slow breaths. Gaze at the flame just above the wick, its steadiest part.","Hold the gaze softly. Let the eyes water. Keep the face relaxed.","Close the eyes. Hold the glowing afterimage at the brow center.","When it drifts, guide it back. When it fades, open the eyes and repeat. 3 cycles."],"The flame is still. The eye is still. The mind rests where the eye rests. When the image fades: who is watching?",""],
+["t-yantra","OM symbol or yantra","Any time","Combines gaze with sacred form. The Sri Yantra draws the eye to its central dot.",["Place a printed OM or yantra at eye level.","Gaze at its center.","Close the eyes and rebuild the shape in the inner space, line by line."],"The form is a doorway. I walk through it to its center.",""],
+["t-moon","Moon, chandra tratak","Full moon, and two nights either side","Cooling and calming. Tradition links it to intuition and the lunar channel.",["Sit outdoors or at a window with the moon in clear view.","Gaze softly at the moon's disc for 3 to 10 minutes. Gentle blinking is fine.","Breathe slowly, through the left nostril if you can.","Close the eyes and feel cool silver-white light pouring in through the brow and filling the body."],"Cool light fills the head and quiets every thought.",""],
+["t-star","Star and pole star, nakshatra tratak","Clear, dark night","Expands awareness. Patanjali links samyama on the pole star to knowing the motion of the stars.",["Pick one bright star, or the pole star if you can find it. Sit or lie back comfortably.","Gaze at the single point of light without moving the eyes.","Let the peripheral field widen until the whole sky is felt around it.","Close the eyes and rest in the vastness. 5 to 15 minutes."],"I am a point of awareness in endless space.",""],
+["t-shadow","Shadow, chhaya tratak","Sunny morning, sun behind you","A traditional practice ending in an afterimage against the sky.",["Stand with the sun directly behind you so your shadow falls ahead on the ground.","Gaze at the neck of your shadow for 1 to 3 minutes.","Look up at a clear patch of blue sky, far away from the sun.","Watch your pale afterimage appear against the sky."],"Form fades into the sky.","Keep the sun behind you the whole time."],
+["t-sun","Sun, surya dhyana, safe form","Sunrise","The solar warmth of Surya without harm to the eyes.",["Stand barefoot or sit facing the rising sun with the eyes gently closed.","Feel warm light on the eyelids. Watch the red-gold field behind them.","Breathe the warmth down to the navel on each inhale.","After 3 to 5 minutes, turn away from the sun, open the eyes toward the ground, and picture a sun glowing at the solar plexus."],"The sun rises at my navel and lights me from within.","Eyes stay closed while facing the sun. Never look at the sun's disc, at any hour, however red it looks."],
+["t-mirror","Mirror, darpan tratak","Dim, steady light","Confronts self-image. Produces strong perceptual effects.",["Sit an arm's length from a mirror in dim light.","Gaze into the space between your own eyes.","The face may distort or change. This is a known visual effect. Stay calm.","3 to 5 minutes, then close the eyes and rest."],"I see the face. I am not the face.","Skip it if you are prone to anxiety, dissociation or disturbing images."],
+["t-dark","Darkness, shunya tratak","Night, fully dark room","The last stage: gazing into nothing.",["Sit in total darkness with the eyes open.","Gaze at a point in the black as if it were a flame.","Notice any inner light without chasing it."],"The dark is not empty. It is full and awake.",""]
+];
+(function(){
+  const box=$("tratakList");
+  TRATAK.forEach(([id,name,time,purpose,steps,thought,caution])=>{
+    const el=document.createElement("article");el.className="page";el.id=id;
+    el.innerHTML=`<div class="card-top"><span class="kind">${time}</span></div><h3>${name}</h3><p class="meta">${purpose}</p><ol class="steps tight">${steps.map(s=>`<li>${s}</li>`).join("")}</ol><p class="thought">${thought}</p>${caution?`<p class="caution">${caution}</p>`:""}`;
+    box.appendChild(el);
+  });
+})();
+
+const LOG=[
+["attn","Ekagrata: attention","7-minute attention test. Number of wanderings noticed. Lower is better."],
+["gaze","Drishti: steady gaze","Candle tratak. Seconds of steady gaze before real discomfort."],
+["bolt","Prana: breath control","After a normal exhale, pinch the nose. Seconds until the first definite urge to breathe. Not a maximum hold."],
+["heat","Agni: inner heat","Fingertip thermometer. Temperature change in degrees after 10 minutes of tummo visualization, without the fire breaths."],
+["hrv","Hridaya: heart coherence","Morning HRV from a chest strap or watch, after 10 minutes of coherent breathing."],
+["count","Chitta: still mind","In 10 minutes, full sets of counting breaths 1 to 10 without losing count."],
+["lucid","Swapna: dream mastery","Dreams recalled, and lucid dreams, in the past week."],
+["brier","Pratibha: intuition","Brier score on last month's written predictions with confidence levels. 0.25 equals guessing, lower is better."]
+];
+(function(){
+  const body=$("logBody");
+  LOG.forEach(([k,name,how])=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`<td>${name}</td><td>${how}</td><td><input type="number" step="any" data-k="${k}1" aria-label="${name}, Day 1"></td><td><input type="number" step="any" data-k="${k}40" aria-label="${name}, Day 40"></td>`;
+    tr.querySelectorAll("input").forEach(inp=>{const key=inp.dataset.k;if(state.log[key]!==undefined)inp.value=state.log[key];inp.addEventListener("input",()=>{state.log[key]=inp.value;save()})});
+    body.appendChild(tr);
+  });
+})();
+
+const lnf=[0];for(let i=1;i<=5001;i++)lnf[i]=lnf[i-1]+Math.log(i);
+function tail(n,p,k){let s=0;for(let i=k;i<=n;i++)s+=Math.exp(lnf[n]-lnf[i]-lnf[n-i]+i*Math.log(p)+(n-i)*Math.log(1-p));return Math.min(1,s)}
+function calc(){
+  const n=Math.min(5000,Math.max(1,parseInt($("cN").value)||1)),k=Math.max(2,parseInt($("cK").value)||2),h=Math.max(0,Math.min(n,parseInt($("cH").value)||0));
+  const p=1/k,pv=tail(n,p,h);
+  const v=pv<0.01?"Strong result. Now replicate it with fresh, blinded trials.":pv<0.05?"Passes the usual bar. One run is not proof: replicate.":"Consistent with guessing.";
+  $("cOut").innerHTML=`Chance expects about <b>${(n*p).toFixed(1)}</b> hits. Probability of ${h} or more by guessing: <b>${pv<0.0001?"under 0.0001":pv.toFixed(4)}</b>. ${v}`;
+}
+["cN","cK","cH"].forEach(i=>$(i).addEventListener("input",calc));calc();
+
+const PATTERNS={coherent:[["Inhale",5.5],["Exhale",5.5]],box:[["Inhale",4],["Hold",4],["Exhale",4],["Hold",4]],n12:[["Inhale left",4],["Exhale right",8],["Inhale right",4],["Exhale left",8]],n142:[["Inhale left",4],["Hold",16],["Exhale right",8],["Inhale right",4],["Hold",16],["Exhale left",8]],"478":[["Inhale",4],["Hold",7],["Exhale",8]]};
+let pTimer=null;
+function startPacer(){
+  stopPacer();
+  const pat=PATTERNS[$("mode").value],cycle=pat.reduce((a,b)=>a+b[1],0),t0=performance.now();let sc=1;
+  pTimer=setInterval(()=>{
+    const el=(performance.now()-t0)/1000;let t=el%cycle,i=0;while(t>=pat[i][1]){t-=pat[i][1];i++}
+    const [name,dur]=pat[i],f=t/dur;
+    if(name.startsWith("Inhale"))sc=1+f*.9;else if(name.startsWith("Exhale"))sc=1.9-f*.9;
+    $("orb").style.transform=`scale(${sc.toFixed(3)})`;$("pname").textContent=name;
+    $("pcount").textContent=`${Math.ceil(dur-t)}  |  ${Math.floor(el/60)} min ${Math.floor(el%60)} s`;
+  },100);
+}
+function stopPacer(){clearInterval(pTimer);pTimer=null;$("orb").style.transform="scale(1)";$("pname").textContent="Ready";$("pcount").textContent="Choose a pattern and begin"}
+$("pstart").addEventListener("click",startPacer);$("pstop").addEventListener("click",stopPacer);
+$("mode").addEventListener("change",()=>{if(pTimer)startPacer()});
+
+let tSet=600,tLeft=600,tInt=null;
+function paintT(){$("tclock").textContent=Math.floor(tLeft/60)+":"+String(tLeft%60).padStart(2,"0")}
+function chime(){try{const C=window.AudioContext||window.webkitAudioContext,ctx=new C();[0,1.2].forEach(d=>{const o=ctx.createOscillator(),g=ctx.createGain();o.type="sine";o.frequency.value=432;g.gain.setValueAtTime(0,ctx.currentTime+d);g.gain.linearRampToValueAtTime(.25,ctx.currentTime+d+.05);g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+d+2.5);o.connect(g).connect(ctx.destination);o.start(ctx.currentTime+d);o.stop(ctx.currentTime+d+2.6)})}catch(e){}}
+document.querySelectorAll("[data-min]").forEach(b=>b.addEventListener("click",()=>{clearInterval(tInt);tInt=null;tSet=tLeft=+b.dataset.min*60;paintT()}));
+$("tstart").addEventListener("click",()=>{if(tInt)return;if(tLeft<=0)tLeft=tSet;tInt=setInterval(()=>{tLeft--;paintT();if(tLeft<=0){clearInterval(tInt);tInt=null;$("tclock").textContent="Complete";chime()}},1000)});
+$("tpause").addEventListener("click",()=>{clearInterval(tInt);tInt=null});
+$("treset").addEventListener("click",()=>{clearInterval(tInt);tInt=null;tLeft=tSet;paintT()});
+
+const JF=["jDate","jPractice","jMin","jSleep","jBefore","jAfter","jExp","jTrad","jOrd","jAct"];
+$("jDate").valueAsDate=new Date();
+function renderJ(){
+  const box=$("entries");
+  if(!state.journal.length){box.innerHTML=`<p class="meta">No entries yet. Your first entry appears here after you save it.</p>`;return}
+  box.innerHTML=state.journal.slice().reverse().map(e=>`<div class="entry"><b>${esc(e.jDate)}${e.jPractice?"  |  "+esc(e.jPractice):""}</b> <span class="meta">${e.jMin?esc(e.jMin)+" min":""}${e.jBefore||e.jAfter?"  |  calm "+esc(e.jBefore||"?")+" to "+esc(e.jAfter||"?"):""}${e.jSleep?"  |  slept "+esc(e.jSleep)+" h":""}</span>${e.jExp?`<p><i>Experienced:</i> ${esc(e.jExp)}</p>`:""}${e.jTrad?`<p><i>Tradition:</i> ${esc(e.jTrad)}</p>`:""}${e.jOrd?`<p><i>Ordinary:</i> ${esc(e.jOrd)}</p>`:""}${e.jAct?`<p><i>Acted differently:</i> ${esc(e.jAct)}</p>`:""}</div>`).join("");
+}
+function msg(t){$("jMsg").textContent=t;setTimeout(()=>{$("jMsg").textContent=""},3500)}
+$("jSave").addEventListener("click",()=>{
+  const e={};JF.forEach(f=>e[f]=$(f).value.trim());
+  if(!e.jExp&&!e.jPractice){msg("Add a practice name or an experience before saving.");return}
+  state.journal.push(e);save();renderJ();
+  JF.slice(1).forEach(f=>$(f).value="");msg("Entry saved.");
+});
+const jText=()=>JSON.stringify({exported:new Date().toISOString(),days:state.days,log:state.log,journal:state.journal},null,2);
+$("jExport").addEventListener("click",()=>{
+  try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([jText()],{type:"application/json"}));a.download="serpent-codex-journal.json";document.body.appendChild(a);a.click();a.remove();msg("Journal downloaded. If nothing happened, use Copy journal instead.")}catch(e){msg("Download is blocked here. Use Copy journal instead.")}
+});
+$("jCopy").addEventListener("click",async()=>{
+  try{await navigator.clipboard.writeText(jText());msg("Journal copied to the clipboard.")}
+  catch(e){const t=document.createElement("textarea");t.value=jText();document.body.appendChild(t);t.select();try{document.execCommand("copy");msg("Journal copied to the clipboard.")}catch(x){msg("Copy is blocked here.")}t.remove()}
+});
+$("jClear").addEventListener("click",()=>{if(confirm("Delete all journal entries from this browser? This cannot be undone.")){state.journal=[];save();renderJ();msg("All entries cleared.")}});
+renderJ();
+
+document.addEventListener("click",e=>{
+  const link=e.target.closest('a[href^="#"]');if(!link)return;
+  const target=document.getElementById(link.getAttribute("href").slice(1));e.preventDefault();
+  if(!target)return;
+  const d=target.closest("details");if(d)d.open=true;
+  if(target.style.display==="none"){document.querySelector('[data-f="all"]').click()}
+  target.scrollIntoView({behavior:"smooth",block:"start"});
+});
+$("totop").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));
+const navLinks=[...document.querySelectorAll(".nav a")];
+function onScroll(){
+  const h=document.documentElement,max=h.scrollHeight-h.clientHeight;
+  $("readbar").style.width=(max>0?h.scrollTop/max*100:0)+"%";
+  $("totop").classList.toggle("show",h.scrollTop>900);
+  let cur=null;navLinks.forEach(a=>{const s=document.getElementById(a.getAttribute("href").slice(1));if(s&&s.getBoundingClientRect().top<140)cur=a});
+  navLinks.forEach(a=>a.classList.toggle("on",a===cur));
+}
+window.addEventListener("scroll",onScroll,{passive:true});onScroll();
+</script>
+</body>
+</html>
