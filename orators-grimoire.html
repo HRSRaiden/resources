@@ -108,6 +108,7 @@ input[type=search]{font:inherit;padding:.6rem .8rem;background:var(--page);color
 .prompt{font-size:clamp(1.3rem,3vw,1.65rem);max-width:34ch;margin:1rem auto .4rem}
 .use{color:var(--ink-soft);font-style:italic;margin-bottom:1.4rem}
 h3.sub{font-size:1.2rem;margin:2.2rem 0 1rem}
+[id]{scroll-margin-top:3.5rem}
 footer{max-width:1120px;margin:3rem auto 0;padding:2rem 1.5rem 3rem;border-top:1px solid var(--rule);color:var(--ink-soft);font-style:italic}
 @media (max-width:640px){.rite{grid-template-columns:1fr}.rite .mark{text-align:left;border:0;padding:0;font-size:1.4rem}.row{grid-template-columns:1fr}.moon{opacity:.55;right:-12%;top:4%}.sec-h p{grid-column:1/-1}}
 @media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
@@ -684,6 +685,14 @@ document.getElementById("start").addEventListener("click",()=>{
   timer=setInterval(()=>{left--;paint();if(left<=0){clearInterval(timer);clock.textContent="Time";document.getElementById("use").textContent="Play back your recording. Count fillers. Note one fix."}},1000);
 });
 document.getElementById("reset").addEventListener("click",()=>{clearInterval(timer);left=60;paint()});
+
+document.addEventListener("click",e=>{
+  const link=e.target.closest('a[href^="#"]');
+  if(!link)return;
+  const target=document.getElementById(link.getAttribute("href").slice(1));
+  e.preventDefault();
+  if(target)target.scrollIntoView({behavior:"smooth",block:"start"});
+});
 
 renderPath();renderLex();renderScen();
 </script>
