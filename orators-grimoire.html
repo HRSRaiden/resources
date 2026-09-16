@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Orator's Grimoire</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ebe1ca;--bg-deep:#e2d5b8;--page:#f3ebda;--ink:#2b231c;--ink-soft:#5e4f3f;--brass:#7d6030;--blood:#8a2226;--rule:#c8b58f;--moon:rgba(138,34,38,.22);--fog:rgba(90,80,70,.10);--shadow:rgba(60,40,20,.2)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#15141c;--bg-deep:#100f16;--page:#1d1b25;--ink:#e4dccb;--ink-soft:#a79f92;--brass:#c2a063;--blood:#cf4349;--rule:#3a3544;--moon:rgba(170,30,40,.45);--fog:rgba(170,165,185,.07);--shadow:rgba(0,0,0,.55)}}
+:root[data-theme="dark"]{--bg:#15141c;--bg-deep:#100f16;--page:#1d1b25;--ink:#e4dccb;--ink-soft:#a79f92;--brass:#c2a063;--blood:#cf4349;--rule:#3a3544;--moon:rgba(170,30,40,.45);--fog:rgba(170,165,185,.07);--shadow:rgba(0,0,0,.55)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"EB Garamond",Garamond,Georgia,"Times New Roman",serif;font-size:1.1875rem;line-height:1.65;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-20%;pointer-events:none;z-index:0;background:radial-gradient(40% 30% at 20% 30%,var(--fog),transparent 70%),radial-gradient(35% 25% at 80% 70%,var(--fog),transparent 70%),radial-gradient(50% 30% at 50% 105%,var(--fog),transparent 70%);animation:drift 70s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate3d(5%,-4%,0)}}
+nav,main,footer{position:relative;z-index:1}
+h1,h2,h3,h4{font-family:Cinzel,"Trajan Pro",Georgia,serif;font-weight:700;line-height:1.2;margin:0}
+p{margin:.5rem 0}
+a{color:var(--blood)}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.nav{position:sticky;top:0;z-index:10;background:var(--bg-deep);border-bottom:1px solid var(--rule)}
+.nav ul{display:flex;gap:1.3rem;list-style:none;margin:0 auto;padding:.7rem 1.25rem;max-width:1120px;overflow-x:auto;white-space:nowrap;scrollbar-width:none}
+.nav a{font-family:Cinzel,serif;font-size:.8rem;letter-spacing:.05em;color:var(--ink-soft);text-decoration:none}
+.nav a:hover{color:var(--blood)}
+.hero{position:relative;min-height:86vh;display:grid;align-items:center;padding:4rem 1.5rem;max-width:1120px;margin:0 auto}
+.moon{position:absolute;right:3%;top:8%;width:min(46vmin,420px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 70% 30%,rgba(0,0,0,.18) 0 6%,transparent 7%),radial-gradient(circle at 40% 70%,rgba(0,0,0,.14) 0 9%,transparent 10%),radial-gradient(circle at 25% 40%,rgba(255,255,255,.08) 0 5%,transparent 6%),radial-gradient(circle at 38% 36%,#dd5a52 0%,#a3242b 48%,#5a1015 100%);box-shadow:0 0 110px 24px var(--moon),inset -34px -24px 70px rgba(0,0,0,.4);animation:moon 2.4s ease-out both}
+@keyframes moon{from{opacity:0;transform:scale(.92)}to{opacity:.92;transform:none}}
+.hero-inner{position:relative;max-width:680px}
+.hero-inner>*{animation:rise .9s ease-out both}
+.hero-inner>*:nth-child(2){animation-delay:.15s}.hero-inner>*:nth-child(3){animation-delay:.3s}.hero-inner>*:nth-child(4){animation-delay:.45s}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.hero h1{font-size:clamp(2.6rem,8.5vw,6.2rem);font-weight:900;letter-spacing:.015em;line-height:1.02;text-shadow:0 2px 30px var(--bg)}
+.tag{font-style:italic;font-size:clamp(1.25rem,2.4vw,1.6rem);color:var(--ink-soft);margin:1.2rem 0 1.8rem}
+.begin{list-style:none;padding:0;margin:0 0 2.2rem;counter-reset:b}
+.begin li{counter-increment:b;padding-left:2.4rem;position:relative;margin:.45rem 0}
+.begin li::before{content:counter(b,upper-roman);position:absolute;left:0;font-family:Cinzel,serif;color:var(--brass)}
+.btn{display:inline-block;font-family:Cinzel,serif;font-size:.92rem;letter-spacing:.04em;padding:.75rem 1.25rem;border:1px solid var(--brass);color:var(--ink);text-decoration:none;background:transparent;cursor:pointer;margin:0 .5rem .6rem 0}
+.btn:hover{border-color:var(--blood);color:var(--blood)}
+.btn.primary{background:var(--blood);border-color:var(--blood);color:#f6ecdc}
+.btn.primary:hover{filter:brightness(1.1);color:#fff}
+section{max-width:1120px;margin:0 auto;padding:4.5rem 1.5rem 1.5rem;scroll-margin-top:3rem}
+.sec-h{display:grid;grid-template-columns:auto 1fr;column-gap:1.2rem;align-items:baseline;border-bottom:1px solid var(--rule);padding-bottom:1rem;margin-bottom:2rem}
+.sec-h .num{font-family:Cinzel,serif;font-size:clamp(2.2rem,5vw,3.4rem);color:var(--blood);line-height:1}
+.sec-h h2{font-size:clamp(1.6rem,3.6vw,2.4rem)}
+.sec-h p{grid-column:2;margin:.4rem 0 0;color:var(--ink-soft);font-style:italic;max-width:64ch}
+.prose{max-width:68ch}
+.page{background:var(--page);border:1px solid var(--rule);padding:1.5rem 1.6rem;position:relative;box-shadow:0 12px 30px -20px var(--shadow)}
+.page::before{content:"";position:absolute;inset:5px;border:1px solid var(--rule);opacity:.55;pointer-events:none}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:600px}
+th{font-family:Cinzel,serif;font-size:.84rem;text-align:left;color:var(--brass);border-bottom:1px solid var(--brass);padding:.6rem .8rem}
+td{border-bottom:1px solid var(--rule);padding:.7rem .8rem;vertical-align:top}
+td:first-child{white-space:nowrap}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.1rem}
+.steps{list-style:none;padding:0;margin:0;counter-reset:s}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2.4rem 1fr;gap:.8rem;padding:.75rem 0;border-top:1px dashed var(--rule)}
+.steps li:first-child{border-top:0}
+.steps li::before{content:counter(s);font-family:Cinzel,serif;font-size:1.4rem;color:var(--blood);line-height:1.2}
+.steps b{font-weight:600}
+.dur{color:var(--brass);font-style:italic;white-space:nowrap}
+.warn{border-left:3px solid var(--blood);padding:.4rem 0 .4rem 1.1rem;margin:1.2rem 0}
+.warn ul{margin:.3rem 0;padding-left:1.2rem}
+.rite{display:grid;grid-template-columns:4.5rem 1fr;gap:0 1.5rem;margin-bottom:2.8rem}
+.rite .mark{font-family:Cinzel,serif;font-size:1.9rem;color:var(--blood);text-align:right;line-height:1.1;padding:.1rem 1rem 0 0;border-right:1px solid var(--rule)}
+.rite h3{font-size:1.4rem;margin-bottom:.6rem}
+.row{display:grid;grid-template-columns:6.5rem 1fr;gap:.2rem 1rem;padding:.55rem 0;border-top:1px dashed var(--rule)}
+.row>.k{font-style:italic;color:var(--brass)}
+.row p{margin:0}
+.pairs{display:flex;flex-wrap:wrap;gap:.4rem}
+.pairs span{border:1px solid var(--rule);background:var(--page);padding:0 .6rem;font-size:1.02rem}
+.recite{font-size:1.28rem;line-height:1.8;border-left:3px solid var(--blood);padding:.2rem 0 .2rem 1rem;margin:.1rem 0}
+.s{color:var(--blood);font-weight:600}
+.p{color:var(--brass);font-weight:600;padding:0 .2em}
+.weeks{display:grid;gap:2.2rem}
+.week h3{font-size:1.15rem;margin-bottom:.8rem}
+.days{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:.75rem}
+.day{display:grid;grid-template-columns:auto 1fr;gap:.1rem .75rem;border:1px solid var(--rule);background:var(--page);padding:.8rem .9rem;cursor:pointer}
+.day input{width:1.2rem;height:1.2rem;accent-color:var(--blood);margin-top:.35rem;cursor:pointer}
+.dn{font-family:Cinzel,serif;font-size:.88rem;color:var(--brass)}
+.df{font-size:1rem;line-height:1.45}
+.df a{color:var(--ink);text-decoration-color:var(--rule)}
+.dw{font-size:.92rem;color:var(--ink-soft);font-style:italic}
+.day.done{border-color:var(--blood);opacity:.62}
+.progress{height:6px;background:var(--rule);margin:.4rem 0 .5rem}
+.progress i{display:block;height:100%;background:var(--blood);width:0;transition:width .4s}
+.ptext{color:var(--ink-soft);font-style:italic;margin-bottom:1.8rem}
+.tools{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center;margin-bottom:1.3rem}
+input[type=search]{font:inherit;padding:.6rem .8rem;background:var(--page);color:var(--ink);border:1px solid var(--rule);min-width:220px;flex:1;max-width:420px}
+.deck{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.card{background:var(--page);border:1px solid var(--rule);padding:1.2rem 1.15rem 1.1rem;position:relative;box-shadow:inset 0 0 0 5px var(--page),inset 0 0 0 6px var(--rule);scroll-margin-top:5rem}
+.card .n{position:absolute;top:.7rem;right:.9rem;font-family:Cinzel,serif;font-size:.8rem;color:var(--brass)}
+.card h4{font-size:1.18rem;padding-right:2rem}
+.card .pr{color:var(--blood);font-size:.98rem;margin:.1rem 0 .35rem}
+.card .m{font-style:italic;color:var(--ink-soft);margin:0 0 .55rem;font-size:1rem}
+.card .l{margin:0;font-size:1.06rem}
+.card.drawn{box-shadow:inset 0 0 0 5px var(--page),inset 0 0 0 7px var(--blood),0 0 40px -8px var(--moon)}
+.scen{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1rem}
+.scen h3{font-size:1.02rem;color:var(--brass);margin-bottom:.4rem}
+.scen blockquote{margin:.3rem 0 .6rem;font-size:1.12rem}
+.cue{font-size:.95rem;color:var(--ink-soft);font-style:italic;margin:0}
+.chunks{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.6rem}
+.chunks span{border:1px solid var(--rule);padding:.2rem .7rem;background:var(--page);font-size:1.02rem}
+.chamber{text-align:center;padding:2.4rem 1.4rem}
+.clock{font-family:Cinzel,serif;font-size:clamp(3.4rem,12vw,6rem);color:var(--blood);line-height:1;margin:.5rem 0}
+.prompt{font-size:clamp(1.3rem,3vw,1.65rem);max-width:34ch;margin:1rem auto .4rem}
+.use{color:var(--ink-soft);font-style:italic;margin-bottom:1.4rem}
+h3.sub{font-size:1.2rem;margin:2.2rem 0 1rem}
+footer{max-width:1120px;margin:3rem auto 0;padding:2rem 1.5rem 3rem;border-top:1px solid var(--rule);color:var(--ink-soft);font-style:italic}
+@media (max-width:640px){.rite{grid-template-columns:1fr}.rite .mark{text-align:left;border:0;padding:0;font-size:1.4rem}.row{grid-template-columns:1fr}.moon{opacity:.55;right:-12%;top:4%}.sec-h p{grid-column:1/-1}}
+@media (prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Sections">
+<ul>
+<li><a href="#gaps">Gaps</a></li>
+<li><a href="#ritual">Ritual</a></li>
+<li><a href="#path">28 Days</a></li>
+<li><a href="#voice">Voice</a></li>
+<li><a href="#sounds">Sounds</a></li>
+<li><a href="#command">Command</a></li>
+<li><a href="#fluency">Fluency</a></li>
+<li><a href="#polish">Polish</a></li>
+<li><a href="#scenarios">Scenarios</a></li>
+<li><a href="#lexicon">Lexicon</a></li>
+<li><a href="#chamber">Drill Chamber</a></li>
+</ul>
+</nav>
+
+<main>
+<header class="hero">
+<div class="moon" aria-hidden="true"></div>
+<div class="hero-inner">
+<h1>The Orator's Grimoire</h1>
+<p class="tag">Twenty-eight days. Twenty minutes a night. Voice, accent, fluency and command, for the Indian speaker who means to lead.</p>
+<ol class="begin">
+<li>Record yourself reading the benchmark passage. Keep that file.</li>
+<li>Run the Daily Ritual every day. It never changes.</li>
+<li>Tick off the day in the 28-Day Path. Its links take you to that day's drills.</li>
+</ol>
+<div>
+<a class="btn primary" href="#path">Begin Day 1</a>
+<a class="btn" href="#chamber">Open the drill chamber</a>
+</div>
+</div>
+</header>
+
+<section id="gaps">
+<div class="sec-h"><span class="num">I</span><h2>The Gap Map</h2><p>Seven reasons an accent and a hesitant voice persist. Every drill in this grimoire attacks one of them.</p></div>
+<div class="scroll page">
+<table>
+<thead><tr><th>Gap</th><th>What is happening</th><th>The fix</th></tr></thead>
+<tbody>
+<tr><td>Hearing</td><td>Your brain merges sounds your first language does not separate: v and w, ship and sheep. You cannot say what you cannot hear.</td><td>Listen to minimal pairs before you say them.</td></tr>
+<tr><td>Motor</td><td>Tongue and lips run on 20+ years of habit. Knowing a rule does not move a muscle.</td><td>Slow, exaggerated reps. Then speed.</td></tr>
+<tr><td>Self-hearing</td><td>You hear yourself partly through bone, so you sound deeper and clearer to you than to anyone else.</td><td>Record daily. Judge only the recording.</td></tr>
+<tr><td>Rhythm</td><td>Indian languages give each syllable equal time. English crushes weak syllables and stretches strong ones.</td><td>Stress tapping, schwa, shadowing.</td></tr>
+<tr><td>Retrieval</td><td>Translating in real time eats working memory, so fillers leak out.</td><td>Prebuilt phrases and speaking frameworks.</td></tr>
+<tr><td>Pressure</td><td>Stress shortens breath, speeds you up, and the old accent returns.</td><td>Exhale first. Pause. Hold 150 words a minute.</td></tr>
+<tr><td>Authority</td><td>Rising or flat sentence endings sound unsure, even with strong content.</td><td>Falling intonation on every statement.</td></tr>
+</tbody>
+</table>
+</div>
+<p class="prose" style="margin-top:1.2rem"><b>Your target accent:</b> clear global English that any listener understands on first hearing. Not a borrowed American or British voice. Pick one reference speaker you admire and stay consistent. Check any doubtful word with the audio button on the Cambridge Dictionary site, and hear it in real speech on YouGlish.</p>
+</section>
+
+<section id="ritual">
+<div class="sec-h"><span class="num">II</span><h2>The Daily Ritual</h2><p>Twenty minutes, same order, every day. Only step 4 changes, as the 28-Day Path tells you.</p></div>
+<div class="scroll page">
+<table>
+<thead><tr><th>Time</th><th>Step</th><th>What you do</th></tr></thead>
+<tbody>
+<tr><td>2 min</td><td>Breath and posture</td><td>Voice rites 1 and 2. <a href="#voice">Go</a></td></tr>
+<tr><td>4 min</td><td>Resonance warm-up</td><td>Voice rites 3 to 8: yawn-sigh, lip trills, straw hum, chest hum, pitch finder.</td></tr>
+<tr><td>3 min</td><td>Articulation</td><td>Pen drill on today's passage, then two tongue twisters. <a href="#tools">Go</a></td></tr>
+<tr><td>5 min</td><td>Today's rite</td><td>Pairs slow x5, passage slow x3, passage natural x2.</td></tr>
+<tr><td>4 min</td><td>Shadowing</td><td>Same 60-second clip for 3 days. <a href="#shadow">Protocol</a></td></tr>
+<tr><td>2 min</td><td>Speak and record</td><td>One prompt in the <a href="#chamber">Drill Chamber</a>, using today's two words. Listen back once. Note one fix.</td></tr>
+</tbody>
+</table>
+</div>
+<p class="prose" style="margin-top:1.1rem"><b>After Day 28:</b> keep 10 minutes daily. Warm-up 3, shadowing 4, drill chamber 3.</p>
+</section>
+
+<section id="path">
+<div class="sec-h"><span class="num">III</span><h2>The 28-Day Path</h2><p>Tick a day when the full ritual is done. Progress stays in this browser.</p></div>
+<div class="page" style="margin-bottom:2rem">
+<p style="margin-top:0"><i style="color:var(--brass)">Benchmark passage.</i> Record on Day 1, Day 14 and Day 28. 58 words: aim for 24 to 28 seconds with clean pauses.</p>
+<p class="recite">Every Wednesday, three thoughtful leaders gather in a quiet room to review the vision. They weigh the data, they think through the risks, and they choose a clear path. Victory is never an accident. It is the result of patient work, sharp questions, and the courage to say, with calm conviction: this is what we will do next.</p>
+</div>
+<div class="progress" aria-hidden="true"><i id="bar"></i></div>
+<p class="ptext" id="ptext">0 of 28 days complete</p>
+<div class="weeks" id="weeks"></div>
+</section>
+
+<section id="voice">
+<div class="sec-h"><span class="num">IV</span><h2>Voice and Resonance</h2><p>A voice that sounds deep and calm is built from breath, open throat and chest resonance.</p></div>
+<div class="grid2">
+<div class="page">
+<ol class="steps">
+<li><div><b>Posture anchor</b> <span class="dur">30 sec</span><br>Feet flat, crown lifted, shoulders dropped, jaw loose, tongue resting behind lower teeth.</div></li>
+<li><div><b>Belly breath</b> <span class="dur">90 sec</span><br>Hand on belly. Inhale through the nose for 4, belly moves out, shoulders stay still. Exhale on a steady "sssss". Aim for 20 seconds now, 40 by Day 28.</div></li>
+<li><div><b>Yawn-sigh</b> <span class="dur">5 reps</span><br>Start a yawn, feel the throat open wide, then sigh from high to low on "haaah". This relaxed, lowered throat is where natural depth lives.</div></li>
+<li><div><b>Lip trill sirens</b> <span class="dur">60 sec</span><br>Blow through loose lips like a motorboat, add voice, slide low to high to low. Lips will not flutter? Press a fingertip into each cheek.</div></li>
+<li><div><b>Straw hum</b> <span class="dur">60 sec</span><br>Hum a tune through a drinking straw, gliding up and down. It trains an easy, efficient voice without strain.</div></li>
+<li><div><b>Chest hum</b> <span class="dur">60 sec</span><br>Hand on your breastbone. Hum "mmm" on a comfortable low note until you feel buzz under the hand. Open into words: "mmm-one, mmm-two, mmm-morning, mmm-many".</div></li>
+<li><div><b>Tongue trill</b> <span class="dur">30 sec, optional</span><br>Rolled "trrrr" sliding up and down. Loosens the tongue for crisp consonants.</div></li>
+<li><div><b>Pitch finder</b> <span class="dur">3 reps</span><br>Say "mm-hmm" the way you agree with a friend. That comfortable pitch is your speaking home. Say your first sentence of the day from there.</div></li>
+</ol>
+</div>
+<div>
+<div class="page">
+<h3 style="font-size:1.15rem;margin-bottom:.4rem">The laws of depth</h3>
+<div class="warn" style="margin:.4rem 0 0">
+<ul>
+<li>Depth comes from resonance, breath support, slower pace and falling endings. Never from pressing your pitch down.</li>
+<li>A forced low voice turns gravelly, strains the vocal folds, and sounds fake.</li>
+<li>Speak on the exhale. Never squeeze out words on empty lungs.</li>
+<li>End statements low and slow. That single habit adds more authority than any exercise.</li>
+<li>Sip water through the day. Scratchy voice: stop, rest, hum gently.</li>
+<li>Hoarseness lasting over two weeks: see an ENT doctor.</li>
+</ul>
+</div>
+</div>
+<div class="page" id="tools" style="margin-top:1.1rem">
+<h3 style="font-size:1.15rem;margin-bottom:.4rem">Articulation tools</h3>
+<ol class="steps">
+<li><div><b>Pen drill.</b> Place a clean pen or a cork horizontally between your teeth, just behind the canines. Hold lightly. Read today's passage for 60 seconds, fighting to be understood. Remove it and read again. Speech feels lighter and crisper.</div></li>
+<li><div><b>Jaw drop.</b> Most mumbling is a tight jaw. Read one paragraph opening your mouth twice as wide as feels normal.</div></li>
+<li><div><b>Whisper-clear.</b> Whisper the passage so someone four metres away catches every word. Consonants sharpen instantly.</div></li>
+<li><div><b>Three speeds.</b> Read at half speed, exaggerated. Then normal. Then fast. Keep every sound intact at each speed.</div></li>
+<li><div><b>Tongue twisters</b>, slow to fast, 3 reps each:<br>"Very well, very well, very well." (v, w)<br>"Which wristwatches are Swiss wristwatches?" (w, s)<br>"Three thin thinkers thinking thick thoughts." (th)<br>"Red lorry, yellow lorry." (r, l)<br>"Toy boat, toy boat, toy boat." (glides)</div></li>
+</ol>
+</div>
+</div>
+</div>
+</section>
+
+<section id="sounds">
+<div class="sec-h"><span class="num">V</span><h2>The Sound Rites</h2><p>The ten sounds and patterns that most mark an Indian accent. Listen to the pairs first, then speak.</p></div>
+
+<article class="rite" id="rite-vw">
+<div class="mark">1</div>
+<div>
+<h3>V and W</h3>
+<div class="row"><span class="k">Mouth</span><p><b>V:</b> upper teeth rest on the lower lip, voice buzzes. <b>W:</b> lips round like "oo", no teeth, then open.</p></div>
+<div class="row"><span class="k">Trick</span><p>Use a mirror. For W, begin with "oo": "oo-ine" becomes wine. For V, buzz for a second before the word: "vvvv-ine".</p></div>
+<div class="row"><span class="k">Pairs</span><div class="pairs"><span>vine / wine</span><span>vest / west</span><span>veil / whale</span><span>verse / worse</span><span>vent / went</span><span>V / we</span></div></div>
+<div class="row"><span class="k">Recite</span><p class="recite">We welcome every visitor with a warm voice. Victory went to the wise woman who waited, weighed every view, and never wavered. On Wednesday, we will review whether our vision was worth the investment.</p></div>
+</div>
+</article>
+
+<article class="rite" id="rite-th">
+<div class="mark">2</div>
+<div>
+<h3>TH, soft and buzzing</h3>
+<div class="row"><span class="k">Mouth</span><p>Tongue tip lightly between the teeth, push air past it. "Think" is air only. "This" adds voice. Never "tink" or "dis".</p></div>
+<div class="row"><span class="k">Trick</span><p>Hold a finger vertically against your lips and touch it with your tongue tip while saying "th". Remove the finger, keep the tongue there.</p></div>
+<div class="row"><span class="k">Pairs</span><div class="pairs"><span>thank / tank</span><span>three / tree</span><span>thin / tin</span><span>those / doze</span><span>then / den</span><span>breathe / breed</span></div></div>
+<div class="row"><span class="k">Recite</span><p class="recite">I think these three things matter: the thought behind the method, the depth of the research, and the rhythm of the team. Thank them both, then gather the others together. Nothing worthwhile happens without that.</p></div>
+</div>
+</article>
+
+<article class="rite" id="rite-td">
+<div class="mark">3</div>
+<div>
+<h3>T and D, off the ridge</h3>
+<div class="row"><span class="k">Mouth</span><p>Tongue tip taps the hard ridge just behind the upper front teeth. Do not curl the tongue back (that is the Indian retroflex ट). Do not touch the teeth (that is त).</p></div>
+<div class="row"><span class="k">Trick</span><p>Say "n". Your tongue is now in the right spot. Hold it there and release: "n-t-t-t", "n-d-d-d".</p></div>
+<div class="row"><span class="k">Words</span><div class="pairs"><span>today</span><span>total</span><span>data</span><span>detail</span><span>deadline</span><span>team</span><span>tender</span><span>dinner</span></div></div>
+<div class="row"><span class="k">Recite</span><p class="recite">Today the team delivered the data two days ahead of the deadline. Put the details on paper, take ten minutes to test it, and tell me the total at two.</p></div>
+</div>
+</article>
+
+<article class="rite" id="rite-asp">
+<div class="mark">4</div>
+<div>
+<h3>The breath behind P, T, K</h3>
+<div class="row"><span class="k">Mouth</span><p>At the start of a stressed syllable, release a small puff of air: pin, top, key. After "s" there is no puff: spin, stop, ski. English P sits between प and फ.</p></div>
+<div class="row"><span class="k">Trick</span><p>Tissue test. Hold a tissue a few centimetres from your lips. It flutters on "pin", stays still on "spin".</p></div>
+<div class="row"><span class="k">Pairs</span><div class="pairs"><span>pin / spin</span><span>top / stop</span><span>kill / skill</span><span>pair / spare</span><span>team / steam</span><span>cool / school</span></div></div>
+<div class="row"><span class="k">Recite</span><p class="recite">People take pride in keeping promises. Tell the client the plan is complete, the timeline is tight, and the cost is capped. Keep it calm, keep it clear, and take the call.</p></div>
+</div>
+</article>
+
+<article class="rite" id="rite-sz">
+<div class="mark">5</div>
+<div>
+<h3>S and Z</h3>
+<div class="row"><span class="k">Mouth</span><p>Same tongue position. Z adds a buzz. Many endings spelled "s" are really Z: is, was, does, because, plans, ideas, reasons.</p></div>
+<div class="row"><span class="k">Trick</span><p>Fingers on your throat. "sssss" is silent, "zzzzz" buzzes. Every Z word must buzz under your fingers.</p></div>
+<div class="row"><span class="k">Pairs</span><div class="pairs"><span>price / prize</span><span>rice / rise</span><span>bus / buzz</span><span>peace / peas</span><span>loose / lose</span><span>place / plays</span></div></div>
+<div class="row"><span class="k">Recite</span><p class="recite">His ideas always raise the prize. The results show dozens of reasons, so he says yes and closes the deals. Is it easy? No. But the numbers prove his plans were wise.</p></div>
+</div>
+</article>
+
+<article class="rite" id="rite-cl">
+<div class="mark">6</div>
+<div>
+<h3>Clusters without extra vowels</h3>
+<div class="row"><span class="k">Mouth</span><p>No vowel before an S cluster ("school", not "iskool") and none between consonants ("film", not "filam"). Glide straight through.</p></div>
+<div class="row"><span class="k">Trick</span><p>Hiss start. Hold "sssss" then land on the rest: "sssss-chool". Shorten the hiss each rep until it is normal.</p></div>
+<div class="row"><span class="k">Words</span><div class="pairs"><span>school</span><span>strategy</span><span>stakeholder</span><span>specific</span><span>structure</span><span>script</span><span>film</span><span>twelfth</span><span>asked</span><span>texts</span></div></div>
+<div class="row"><span class="k">Recite</span><p class="recite">Strategic planning starts with small, specific steps. Spend the spring studying the structure, script the speech, and speak to every stakeholder straight.</p></div>
+</div>
+</article>
+
+<article class="rite" id="rite-vowel">
+<div class="mark">7</div>
+<div>
+<h3>Long and short vowels</h3>
+<div class="row"><span class="k">Mouth</span><p><b>Sheep:</b> wide smile, held long. <b>Ship:</b> short and relaxed. <b>Fool:</b> tight round lips, long. <b>Full:</b> loose lips, short.</p></div>
+<div class="row"><span class="k">Trick</span><p>Rubber band. Stretch it between your hands on every long vowel. Keep it still on short ones.</p></div>
+<div class="row"><span class="k">Pairs</span><div class="pairs"><span>sheep / ship</span><span>leave / live</span><span>seat / sit</span><span>fool / full</span><span>pool / pull</span><span>feel / fill</span></div></div>
+<div class="row"><span class="k">Recite</span><p class="recite">Keep the team lean, but fill the gaps quickly. This week we will seek the full picture, not a feel of it. Look, the book is good, so choose the new route soon.</p></div>
+</div>
+</article>
+
+<article class="rite" id="rite-diph">
+<div class="mark">8</div>
+<div>
+<h3>Gliding vowels</h3>
+<div class="row"><span class="k">Mouth</span><p>"Go" moves from o to u. "Late" moves from e to i. Indian English often freezes them into "goh" and "leht".</p></div>
+<div class="row"><span class="k">Trick</span><p>Slow motion. Stretch each word to two seconds and feel your mouth travel: "gooo-oo", "laaay-ee". Speed up, keep the movement.</p></div>
+<div class="row"><span class="k">Words</span><div class="pairs"><span>go</span><span>know</span><span>phone</span><span>only</span><span>don't</span><span>late</span><span>make</span><span>stay</span><span>change</span><span>okay</span></div></div>
+<div class="row"><span class="k">Recite</span><p class="recite">Go slow, and don't phone before you know. Make the case, state the aim, and stay on the same page. Only change the plan if the data says so.</p></div>
+</div>
+</article>
+
+<article class="rite" id="rite-stress">
+<div class="mark">9</div>
+<div>
+<h3>Word stress</h3>
+<div class="row"><span class="k">Rule</span><p>One syllable is louder, longer and higher. The rest shrink. Wrong stress confuses listeners more than a wrong sound.</p></div>
+<div class="row"><span class="k">Trick</span><p>Tap the table on the stressed syllable only. Say each word 3 times.</p></div>
+<div class="row"><span class="k">Fix these</span><div class="pairs"><span>de-<span class="s">VEL</span>-op-ment</span><span>ho-<span class="s">TEL</span></span><span>e-<span class="s">VENT</span></span><span><span class="s">CAT</span>-e-go-ry</span><span>com-<span class="s">MIT</span>-tee</span><span>de-<span class="s">TER</span>-mine</span><span>ca-<span class="s">REER</span></span><span><span class="s">PUR</span>-pose</span><span><span class="s">COL</span>-league</span><span>e-<span class="s">CON</span>-o-my</span><span>ec-o-<span class="s">NOM</span>-ic</span><span><span class="s">PHO</span>-to-graph</span><span>pho-<span class="s">TOG</span>-ra-pher</span><span><span class="s">IN</span>-ter-est-ing</span><span>a-<span class="s">NAL</span>-y-sis</span><span>ex-per-<span class="s">TISE</span></span><span>suc-<span class="s">CESS</span></span></div></div>
+<div class="row"><span class="k">Noun, verb</span><div class="pairs"><span><span class="s">PRE</span>-sent / pre-<span class="s">SENT</span></span><span><span class="s">RE</span>-cord / re-<span class="s">CORD</span></span><span><span class="s">OB</span>-ject / ob-<span class="s">JECT</span></span><span><span class="s">CON</span>-duct / con-<span class="s">DUCT</span></span><span><span class="s">PRO</span>-gress / pro-<span class="s">GRESS</span></span></div></div>
+<div class="row"><span class="k">Silent traps</span><div class="pairs"><span>often: OF-en</span><span>debt: det</span><span>receipt: ri-SEET</span><span>Wednesday: WENZ-day</span><span>comfortable: KUMF-ter-bul</span><span>vehicle: VEE-ih-kul</span><span>suite: sweet</span><span>island: EYE-lund</span><span>subtle: SUT-ul</span><span>genre: ZHON-ruh</span></div></div>
+</div>
+</article>
+
+<article class="rite" id="rite-schwa">
+<div class="mark">10</div>
+<div>
+<h3>The lazy vowel and weak words</h3>
+<div class="row"><span class="k">Rule</span><p>Unstressed vowels collapse to a quick "uh": a-BOUT is uh-BOUT. Small words shrink: to becomes tuh, for becomes fer, and becomes un, of becomes uv, can becomes kun. Use contractions: I'm, we'll, it's, don't, let's. Full "I am, we will" everywhere sounds stiff.</p></div>
+<div class="row"><span class="k">Trick</span><p>Drum it. "i <span class="s">WANT</span> tuh <span class="s">TALK</span> tuh you" is da DUM da DUM da da. Tap only the DUMs.</p></div>
+<div class="row"><span class="k">Recite</span><p class="recite">I want to <span class="s">talk</span> to you for a <span class="s">minute</span> about the <span class="s">plan</span>. We can <span class="s">do</span> it, and we'll do it <span class="s">well</span>, but it's going to take a <span class="s">lot</span> of <span class="s">focus</span> from <span class="s">all</span> of us.</p></div>
+</div>
+</article>
+</section>
+
+<section id="command">
+<div class="sec-h"><span class="num">VI</span><h2>Rhythm and Command</h2><p>Accent makes you understood. Rhythm and intonation make you followed. <span class="p">/</span> short pause, <span class="p">//</span> full pause, red words carry stress.</p></div>
+
+<article class="rite" id="cmd-groups">
+<div class="mark">A</div>
+<div>
+<h3>Thought groups</h3>
+<div class="row"><span class="k">Rule</span><p>Speak in chunks of 4 to 7 words. Breathe at the pauses. One idea per breath.</p></div>
+<div class="row"><span class="k">Recite</span><p class="recite">When we <span class="s">started</span> this project <span class="p">/</span> we had no <span class="s">data</span>, <span class="p">/</span> no <span class="s">team</span>, <span class="p">/</span> and no <span class="s">deadline</span>. <span class="p">//</span> Today <span class="p">/</span> we have all <span class="s">three</span>. <span class="p">//</span> The question now <span class="p">/</span> is not <span class="s">whether</span> we deliver. <span class="p">/</span> It's how <span class="s">well</span>.</p></div>
+</div>
+</article>
+
+<article class="rite" id="cmd-fall">
+<div class="mark">B</div>
+<div>
+<h3>The falling close</h3>
+<div class="row"><span class="k">Rule</span><p>Statements fall ↘. Yes or no questions rise ↗. Wh-questions fall ↘. Lists rise, rise, fall: speed ↗, quality ↗, and trust ↘. A rising statement sounds like asking permission.</p></div>
+<div class="row"><span class="k">Trick</span><p>Hand drop. Drop your hand onto the table on the last stressed word, and let your voice fall with it.</p></div>
+<div class="row"><span class="k">Drill</span><p>Say "We launch on Monday" twice: rising (unsure), then falling (decided). Hear the difference on your recording. Then do "I recommend option B" and "That's not acceptable".</p></div>
+<div class="row"><span class="k">Recite</span><p class="recite">Here's what we <span class="s">know</span>. <span class="p">/</span> Revenue is <span class="s">down</span> <span class="p">/</span> by twelve <span class="s">percent</span>. <span class="p">//</span> Not because the market <span class="s">moved</span>, <span class="p">/</span> but because <span class="s">we</span> did not. <span class="p">//</span> So this <span class="s">quarter</span>, <span class="p">/</span> we fix <span class="s">three</span> things: <span class="p">/</span> <span class="s">speed</span> ↗, <span class="p">/</span> <span class="s">quality</span> ↗, <span class="p">/</span> and <span class="s">trust</span> ↘. <span class="p">//</span> I'll own the <span class="s">first</span>. <span class="p">/</span> I need <span class="s">you</span> <span class="p">/</span> on the other <span class="s">two</span>.</p></div>
+</div>
+</article>
+
+<article class="rite" id="cmd-emph">
+<div class="mark">C</div>
+<div>
+<h3>Emphasis moves meaning</h3>
+<div class="row"><span class="k">Drill</span><p>Say this sentence 7 times, stressing a different word each time. Feel the meaning change: <i>"I didn't say she broke the build."</i></p></div>
+<div class="row"><span class="k">Apply</span><p>In every real sentence, choose the one word that matters and hit it. "We need this <span class="s">today</span>" is urgency. "<span class="s">We</span> need this today" is ownership.</p></div>
+</div>
+</article>
+
+<article class="rite" id="cmd-pace">
+<div class="mark">D</div>
+<div>
+<h3>Pace and the power pause</h3>
+<div class="row"><span class="k">Rule</span><p>Indian speakers under pressure often race past 180 words a minute. Hold 140 to 160. Leaders pause for two full seconds before and after the key point.</p></div>
+<div class="row"><span class="k">Drill</span><p>"The answer is <span class="p">(two seconds)</span> no. <span class="p">(two seconds)</span> And here's why." The silence feels long to you. To the room, it sounds certain.</p></div>
+</div>
+</article>
+
+<article class="rite" id="monologue">
+<div class="mark">E</div>
+<div>
+<h3>The leader's address</h3>
+<div class="row"><span class="k">Use</span><p>Day 28 capstone. Stand. Chest hum first. Record it, then compare with your Day 1 benchmark.</p></div>
+<div class="row"><span class="k">Recite</span><p class="recite">Good morning, everyone. <span class="p">//</span> Three months ago, <span class="p">/</span> we set a target <span class="p">/</span> that many of us <span class="p">/</span> thought was <span class="s">impossible</span>. <span class="p">//</span> Today, <span class="p">/</span> we are <span class="s">two weeks</span> <span class="p">/</span> <span class="s">ahead</span> of it. <span class="p">//</span> That didn't happen by <span class="s">luck</span>. <span class="p">/</span> It happened because <span class="p">/</span> this team chose <span class="s">rigor</span> <span class="p">/</span> over comfort, <span class="p">/</span> and <span class="s">clarity</span> <span class="p">/</span> over noise. <span class="p">//</span> But I want to be <span class="s">candid</span>. <span class="p">/</span> The next phase <span class="p">/</span> is <span class="s">harder</span>. <span class="p">//</span> The market is <span class="s">shifting</span>, <span class="p">/</span> our competitors are <span class="s">watching</span>, <span class="p">/</span> and our margin for error <span class="p">/</span> is <span class="s">thin</span>. <span class="p">//</span> So here's what I'm asking. <span class="p">/</span> Keep the <span class="s">cadence</span>. <span class="p">/</span> Protect the <span class="s">quality</span>. <span class="p">/</span> And when something breaks, <span class="p">/</span> say it <span class="s">early</span>. <span class="p">//</span> We've built <span class="s">momentum</span>. <span class="p">//</span> Now <span class="p">/</span> let's make it <span class="s">count</span>.</p></div>
+</div>
+</article>
+</section>
+
+<section id="fluency">
+<div class="sec-h"><span class="num">VII</span><h2>The Fluency Engine</h2><p>Fluency is not speed. It is never getting stuck.</p></div>
+<div class="grid2">
+<div class="page" id="flu-pause">
+<h3 style="font-size:1.12rem">Pause, never fill</h3>
+<p>When you feel "umm", "basically" or "actually" coming, close your mouth and pause instead. Record 60 seconds, count fillers. Target: under 3 per minute by Day 25.</p>
+</div>
+<div class="page">
+<h3 style="font-size:1.12rem">PREP, for any opinion</h3>
+<p><b>Point:</b> We should move reviews to Thursday.<br><b>Reason:</b> Monday reviews get rushed while everyone catches up.<br><b>Example:</b> Last month, three of four ran out of time.<br><b>Point:</b> Thursday gives us room to actually think.</p>
+</div>
+<div class="page">
+<h3 style="font-size:1.12rem">What, so what, now what</h3>
+<p>For any status update.<br><b>What:</b> API latency doubled this week.<br><b>So what:</b> mobile users are timing out.<br><b>Now what:</b> we roll back the cache change today and profile it tomorrow.</p>
+</div>
+<div class="page">
+<h3 style="font-size:1.12rem">Rule of three</h3>
+<p>Group everything in threes. "Three things matter: the cost, the timeline, and the risk." The brain remembers three and trusts three.</p>
+</div>
+<div class="page">
+<h3 style="font-size:1.12rem">Narration drill</h3>
+<p>Five minutes a day during chores or a walk, describe out loud, in English, what you are doing and thinking. This kills the translate-in-your-head delay faster than anything else.</p>
+</div>
+<div class="page" id="shadow">
+<h3 style="font-size:1.12rem">Shadowing protocol</h3>
+<ol class="steps">
+<li><div>Pick a 60-second clip with a transcript, from a speaker you want to sound like.</div></li>
+<li><div>Listen twice. Then listen while reading the transcript.</div></li>
+<li><div>Mumble along quietly, matching only the rhythm.</div></li>
+<li><div>Shadow full voice at 0.75x speed, a half-second behind.</div></li>
+<li><div>Shadow at 1x. Record, and compare against the original.</div></li>
+</ol>
+</div>
+</div>
+<h3 class="sub">Chunk bank: phrases that buy you thinking time</h3>
+<div class="chunks">
+<span>Here's the thing.</span><span>Let me be direct.</span><span>To put it simply,</span><span>The real question is,</span><span>Two things stand out.</span><span>Let me build on that.</span><span>Here's where I land.</span><span>Let's zoom out for a second.</span><span>What I'm hearing is,</span><span>To bring this together,</span><span>The short answer is yes.</span><span>I'd push back on one point.</span><span>Let's park that for now.</span><span>Where does that leave us?</span><span>Here's my recommendation.</span>
+</div>
+</section>
+
+<section id="polish">
+<div class="sec-h"><span class="num">VIII</span><h2>Speech Polish</h2><p>Phrases that instantly mark speech as non-native in a global room, and their clean replacements.</p></div>
+<div class="scroll page">
+<table>
+<thead><tr><th>Instead of</th><th>Say</th></tr></thead>
+<tbody>
+<tr><td>Do the needful</td><td>Please take care of this</td></tr>
+<tr><td>Revert back to me</td><td>Get back to me / Reply</td></tr>
+<tr><td>Prepone the meeting</td><td>Bring the meeting forward</td></tr>
+<tr><td>Discuss about</td><td>Discuss</td></tr>
+<tr><td>I have a doubt</td><td>I have a question</td></tr>
+<tr><td>Out of station</td><td>Out of town / Traveling</td></tr>
+<tr><td>Myself Harsh</td><td>I'm Harsh</td></tr>
+<tr><td>Passed out from college</td><td>Graduated from</td></tr>
+<tr><td>Cope up with</td><td>Cope with</td></tr>
+<tr><td>Updation</td><td>Update</td></tr>
+<tr><td>He is having two cars</td><td>He has two cars</td></tr>
+<tr><td>Same to same</td><td>Exactly the same</td></tr>
+<tr><td>What is your good name?</td><td>May I have your name?</td></tr>
+<tr><td>Kindly do this</td><td>Could you do this?</td></tr>
+<tr><td>"Isn't it?" after every sentence</td><td>"Right?" or the correct tag</td></tr>
+<tr><td>Basically, actually, only, itself as fillers</td><td>A silent pause</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="scenarios">
+<div class="sec-h"><span class="num">IX</span><h2>Scenarios</h2><p>Say each line 3 times out loud, falling close, then once to the camera. Swap brackets for your real situation.</p></div>
+<div class="scen" id="scenList"></div>
+</section>
+
+<section id="lexicon">
+<div class="sec-h"><span class="num">X</span><h2>The Lexicon</h2><p>Fifty words leaders use without sounding inflated. Two per day. Say the stress, then the line, then use the word once in the drill chamber.</p></div>
+<div class="tools">
+<input type="search" id="q" placeholder="Search a word or meaning" aria-label="Search the lexicon">
+<button class="btn" id="draw" type="button">Draw a card</button>
+</div>
+<div class="deck" id="deck"></div>
+</section>
+
+<section id="chamber">
+<div class="sec-h"><span class="num">XI</span><h2>The Drill Chamber</h2><p>Start your phone recorder. Draw a prompt. Speak for 60 seconds using PREP and the two words shown.</p></div>
+<div class="page chamber">
+<p class="prompt" id="prompt">Draw a prompt to begin.</p>
+<p class="use" id="use">&nbsp;</p>
+<div class="clock" id="clock" aria-live="polite">1:00</div>
+<div style="margin-top:1.2rem">
+<button class="btn" id="newPrompt" type="button">Draw a prompt</button>
+<button class="btn primary" id="start" type="button">Start 60 seconds</button>
+<button class="btn" id="reset" type="button">Reset</button>
+</div>
+</div>
+</section>
+</main>
+
+<footer>Every day: breathe low, speak slow, end down. The voice follows the habit.</footer>
+
+<script>
+const KEY="orators-grimoire-v1";
+const DAYS=[
+["The Foundation",[
+[1,"Rite 1: V and W. Record the benchmark.","rite-vw"],
+[2,"Rite 1: V and W","rite-vw"],
+[3,"Rite 1 at full speed, pen drill x2","rite-vw"],
+[4,"Rite 2: TH","rite-th"],
+[5,"Rite 2: TH","rite-th"],
+[6,"Rites 1 and 2 mixed","rite-th"],
+[7,"Review week one. Speak 60s with PREP.","fluency"]]],
+["The Consonants",[
+[8,"Rite 3: T and D","rite-td"],
+[9,"Rite 3: T and D","rite-td"],
+[10,"Rite 4: Breath behind P, T, K","rite-asp"],
+[11,"Rite 4: Breath behind P, T, K","rite-asp"],
+[12,"Rite 5: S and Z","rite-sz"],
+[13,"Rite 6: Clusters","rite-cl"],
+[14,"Record benchmark #2. Compare with Day 1.","path"]]],
+["The Vowels and Stress",[
+[15,"Rite 7: Long and short vowels","rite-vowel"],
+[16,"Rite 7: Long and short vowels","rite-vowel"],
+[17,"Rite 8: Gliding vowels","rite-diph"],
+[18,"Rite 9: Word stress","rite-stress"],
+[19,"Rite 9: Noun, verb and silent traps","rite-stress"],
+[20,"Rite 10: Lazy vowel and weak words","rite-schwa"],
+[21,"Review all ten rites, one passage each","sounds"]]],
+["The Command",[
+[22,"A: Thought groups","cmd-groups"],
+[23,"B: The falling close","cmd-fall"],
+[24,"C and D: Emphasis, pace, power pause","cmd-emph"],
+[25,"Pause, never fill. Filler count test.","flu-pause"],
+[26,"Scenarios 1 to 6","scenarios"],
+[27,"Scenarios 7 to 12","scenarios"],
+[28,"The leader's address. Final benchmark.","monologue"]]]
+];
+
+const LEX=[
+["Candid","KAN-did","Honest and direct.","Let me be candid: the timeline is not realistic."],
+["Pragmatic","prag-MAT-ik","Focused on what actually works.","Let's take the pragmatic route and ship the smaller version first."],
+["Nuance","NOO-ahns","A subtle difference.","There's a nuance here we shouldn't miss."],
+["Leverage","LEV-er-ij","Use something for maximum advantage.","We can leverage the existing pipeline instead of building a new one."],
+["Cadence","KAY-dns","A regular rhythm or pace.","Let's set a weekly cadence for reviews."],
+["Galvanize","GAL-vuh-nize","Stir people into action.","One clear win will galvanize the team."],
+["Mitigate","MIT-ih-gate","Reduce how severe something is.","Here's how we mitigate that risk."],
+["Salient","SAY-lee-ent","Most important or noticeable.","The salient point is cost, not speed."],
+["Prudent","PROO-dnt","Wise and careful.","It would be prudent to test this before we scale."],
+["Cogent","KOH-jent","Clear, logical and convincing.","That's a cogent argument, and it changed my mind."],
+["Judicious","joo-DISH-us","Showing sound judgment.","We need to be judicious with the budget this quarter."],
+["Consensus","kun-SEN-sus","General agreement.","We don't need consensus. We need a decision."],
+["Delineate","dih-LIN-ee-ate","Describe or mark out precisely.","Let's delineate who owns what."],
+["Substantiate","sub-STAN-shee-ate","Back up with evidence.","Can you substantiate that with data?"],
+["Catalyst","KAT-uh-list","Something that triggers change.","This outage can be the catalyst we needed."],
+["Resilient","rih-ZIL-yent","Recovers quickly from setbacks.","Resilient teams don't avoid failure. They recover fast."],
+["Unequivocal","un-ih-KWIV-uh-kul","Leaving no doubt.","My answer is an unequivocal yes."],
+["Trajectory","truh-JEK-tuh-ree","The path something is on.","The numbers are small, but the trajectory is right."],
+["Bandwidth","BAND-width","Capacity to take on work.","Do you have the bandwidth to take this on?"],
+["Accountability","uh-kown-tuh-BIL-ih-tee","Owning the results.","Accountability starts with me."],
+["Preempt","pree-EMPT","Act early to prevent something.","Let's preempt the obvious questions in the deck."],
+["Iterate","IT-uh-rate","Repeat with improvements.","Ship it, measure it, iterate."],
+["Crux","kruks","The decisive point.","The crux of the problem is ownership."],
+["Paradigm","PAIR-uh-dime","A model or way of thinking.","This isn't a small fix. It's a paradigm shift."],
+["Holistic","hoh-LIS-tik","Looking at the whole.","We need a holistic view, not another patch."],
+["Tangible","TAN-juh-bul","Real and measurable.","Give me one tangible result by Friday."],
+["Inflection point","in-FLEK-shun","A moment of major change.","We're at an inflection point, and what we do now matters."],
+["Calibrate","KAL-ih-brate","Adjust precisely.","Let's calibrate expectations before the launch."],
+["Cohesive","koh-HEE-siv","United, working as one.","A cohesive team beats a talented crowd."],
+["Ambiguity","am-bih-GYOO-ih-tee","Uncertainty, open to many readings.","I'm fine with ambiguity, but not with confusion."],
+["Deliberate","dih-LIB-er-it","Intentional and careful.","Every hire this year must be deliberate."],
+["Magnanimous","mag-NAN-ih-mus","Generous, especially to rivals.","Be magnanimous when you win. They may be partners tomorrow."],
+["Rigor","RIG-er","Thoroughness and precision.","I want the same rigor on small features as big ones."],
+["Synthesize","SIN-thuh-size","Combine into one clear whole.","Let me synthesize what I've heard."],
+["Tenable","TEN-uh-bul","Able to be defended.","That position isn't tenable anymore."],
+["Expedite","EK-spuh-dite","Speed something up.","Can we expedite the approval?"],
+["Reconcile","REK-un-sile","Make two things fit together.","We need to reconcile speed with quality."],
+["Steward","STOO-erd","A responsible caretaker.","We are stewards of this product, not owners of it."],
+["Scrutinize","SKROO-tuh-nize","Examine closely.","Scrutinize the assumptions, not the people."],
+["Conviction","kun-VIK-shun","Firm, visible belief.","Say it with conviction, or don't say it at all."],
+["Latitude","LAT-ih-tood","Freedom to act.","You have full latitude on how you solve it."],
+["Momentum","moh-MEN-tum","The force of progress.","Let's not lose momentum after the launch."],
+["Discretion","dih-SKRESH-un","Freedom to decide, or keeping things private.","Use your discretion on the details."],
+["Foresight","FOR-site","Planning well for the future.","That decision showed real foresight."],
+["Equanimity","ee-kwuh-NIM-ih-tee","Calm under pressure.","Handle the crisis with equanimity. The team copies your tone."],
+["Obviate","OB-vee-ate","Remove the need for something.","Good documentation will obviate most of these meetings."],
+["Articulate","ar-TIK-yuh-late","Express clearly.","Can you articulate the problem in one sentence?"],
+["Tenacity","tuh-NAS-ih-tee","Stubborn persistence.","Talent opened the door. Tenacity kept it open."],
+["Discerning","dih-SUR-ning","Having sharp judgment.","Our users are discerning. They notice the details."],
+["Integrity","in-TEG-rih-tee","Doing right when no one is checking.","Integrity is what holds when the pressure rises."]
+];
+
+const SCEN=[
+["Opening a meeting","Thanks for making the time. By the end of this hour, we need one decision: [X]. Let's start with the facts.","Slow first sentence. Pause before the decision."],
+["Disagreeing with a senior","I see it a little differently, and I'd like to lay out why. If we go this way, my concern is [risk]. Can we test that first?","Warm tone, falling close. No apology."],
+["Pushing back on a deadline","I can deliver [A] by Friday, or [A and B] by next Wednesday. I can't do both well by Friday. Which matters more?","Give options, not complaints."],
+["Giving feedback","What worked was [specific]. What would make it stronger is [specific]. Can you take another pass by Thursday?","Specific praise first, then the ask."],
+["When you don't know","I don't want to guess on that. I'll confirm and get back to you by four.","Say it calmly. It builds trust."],
+["Handling an interruption","Let me finish this thought, and then I really want your view.","Keep volume steady. Don't speed up."],
+["Delivering bad news","I'll be direct: we missed the target. Here's why, here's what we're changing, and here's when you'll see results.","Rule of three. Power pause after the news."],
+["Pitching an idea","Here's the problem, here's what it costs us, and here's a fix we can test in two weeks.","Hit the stress on cost and two weeks."],
+["Closing with clarity","So, to be clear: we're doing [X], [name] owns it, and we review on [date]. Anything I've missed?","List rhythm: rise, rise, fall."],
+["Tell me about yourself","I'm a backend engineer. I work mostly in Rust and C++, building EDA automation and simulation tooling where speed and correctness both matter. What I bring is [strength], and what I'm looking for next is [goal].","Three thought groups. Smile on the last line."],
+["A hostile question","That's a fair challenge. Here's the part I agree with, and here's where the data points the other way.","Pause two seconds before answering."],
+["Crediting the team","This didn't happen by accident. [Name] stayed on the problem when it would have been easy to stop. Thank you.","Look up. Slow down on the name."]
+];
+
+const PROMPTS=["Why should your team trust you with a hard deadline?","Explain your current project to someone who isn't an engineer.","Convince me to adopt a tool you love.","Describe a mistake you made and what it taught you.","You run the company for one week. What do you fix first?","Give feedback on a presentation that ran too long.","Say no to a request from your manager, politely.","Pitch a small idea that saves an hour a week.","Argue that speed and quality are not enemies.","Introduce yourself at a conference.","Defend a decision people disagreed with.","Announce a two-week delay to a client.","Why does clear speaking matter for leaders?","Describe the best leader you have worked with.","Your team missed a target. Address them.","Explain a technical trade-off you made recently.","What does accountability look like on a great team?","Welcome a new hire on their first day.","Make the case for fewer meetings.","Close a meeting with clear next steps."];
+
+function loadState(){try{return JSON.parse(localStorage.getItem(KEY))||{}}catch(e){return {}}}
+function saveState(s){try{localStorage.setItem(KEY,JSON.stringify(s))}catch(e){}}
+const state=loadState();
+
+function renderPath(){
+  const wrap=document.getElementById("weeks");
+  DAYS.forEach(([title,days],wi)=>{
+    const w=document.createElement("div");w.className="week";
+    w.innerHTML=`<h3>Week ${wi+1}: ${title}</h3>`;
+    const grid=document.createElement("div");grid.className="days";
+    days.forEach(([n,focus,anchor])=>{
+      const a=(n-1)*2+1,b=a+1;
+      const words=n<=25?`Words ${a} and ${b}: ${LEX[a-1][0]}, ${LEX[b-1][0]}`:"Review all fifty words";
+      const d=document.createElement("label");d.className="day";
+      d.innerHTML=`<input type="checkbox" data-day="${n}"><div><div class="dn">Day ${n}</div><div class="df"><a href="#${anchor}">${focus}</a></div><div class="dw">${words}</div></div>`;
+      const cb=d.querySelector("input");
+      cb.checked=!!state[n];d.classList.toggle("done",cb.checked);
+      cb.addEventListener("change",()=>{state[n]=cb.checked;d.classList.toggle("done",cb.checked);saveState(state);updateProgress()});
+      grid.appendChild(d);
+    });
+    w.appendChild(grid);wrap.appendChild(w);
+  });
+  updateProgress();
+}
+function updateProgress(){
+  const done=Object.values(state).filter(Boolean).length;
+  document.getElementById("bar").style.width=(done/28*100)+"%";
+  document.getElementById("ptext").textContent=`${done} of 28 days complete`;
+}
+
+function renderLex(filter=""){
+  const deck=document.getElementById("deck");deck.innerHTML="";
+  const f=filter.trim().toLowerCase();
+  LEX.forEach(([w,pr,m,l],i)=>{
+    if(f&&!(w+" "+m).toLowerCase().includes(f))return;
+    const c=document.createElement("article");c.className="card";c.id="w"+(i+1);
+    c.innerHTML=`<span class="n">${i+1}</span><h4>${w}</h4><div class="pr">${pr}</div><p class="m">${m}</p><p class="l">"${l}"</p>`;
+    deck.appendChild(c);
+  });
+}
+
+function renderScen(){
+  const box=document.getElementById("scenList");
+  SCEN.forEach(([t,line,cue],i)=>{
+    const s=document.createElement("div");s.className="page";
+    s.innerHTML=`<h3>${i+1}. ${t}</h3><blockquote>"${line}"</blockquote><p class="cue">${cue}</p>`;
+    box.appendChild(s);
+  });
+}
+
+const rand=n=>Math.floor(Math.random()*n);
+document.getElementById("q").addEventListener("input",e=>renderLex(e.target.value));
+document.getElementById("draw").addEventListener("click",()=>{
+  document.getElementById("q").value="";renderLex();
+  const i=rand(LEX.length)+1;const el=document.getElementById("w"+i);
+  document.querySelectorAll(".card.drawn").forEach(c=>c.classList.remove("drawn"));
+  el.classList.add("drawn");el.scrollIntoView({behavior:"smooth",block:"center"});
+});
+
+let timer=null,left=60;
+const clock=document.getElementById("clock");
+function paint(){clock.textContent=Math.floor(left/60)+":"+String(left%60).padStart(2,"0")}
+function drawPrompt(){
+  document.getElementById("prompt").textContent=PROMPTS[rand(PROMPTS.length)];
+  let a=rand(LEX.length),b=rand(LEX.length);while(b===a)b=rand(LEX.length);
+  document.getElementById("use").textContent=`Use these words: ${LEX[a][0].toLowerCase()} and ${LEX[b][0].toLowerCase()}`;
+}
+document.getElementById("newPrompt").addEventListener("click",drawPrompt);
+document.getElementById("start").addEventListener("click",()=>{
+  if(document.getElementById("prompt").textContent.startsWith("Draw"))drawPrompt();
+  clearInterval(timer);left=60;paint();
+  timer=setInterval(()=>{left--;paint();if(left<=0){clearInterval(timer);clock.textContent="Time";document.getElementById("use").textContent="Play back your recording. Count fillers. Note one fix."}},1000);
+});
+document.getElementById("reset").addEventListener("click",()=>{clearInterval(timer);left=60;paint()});
+
+renderPath();renderLex();renderScen();
+</script>
+</body>
+</html>
