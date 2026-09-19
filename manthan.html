@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Manthan: The Founder's Codex</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@500;700;800&family=Alegreya+Sans:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF1F5;--paper:#FFFFFF;--ink:#16213A;--muted:#566079;--line:#D3DAE5;
+  --lapis:#2B4C9B;--lapis-bg:#E3E9F7;
+  --nectar:#9A6405;--nectar-bg:#FBF0D8;--nectar-hi:#D9A21B;
+  --poison:#A3352A;--poison-bg:#F8E3DF;
+  --jade:#256E5B;--jade-bg:#DDF0EA;
+  --side:#15203A;--side-ink:#D6DDEA;--side-mute:#8D99B3;
+  --serif:"Alegreya",Georgia,"Times New Roman",serif;
+  --sans:"Alegreya Sans","Segoe UI",system-ui,-apple-system,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1628;--paper:#17203A;--ink:#E4E9F2;--muted:#9EA9C0;--line:#2A3656;
+  --lapis:#8EA8EA;--lapis-bg:#1E2B4E;--nectar:#E8B44A;--nectar-bg:#2F2714;--nectar-hi:#E8B44A;
+  --poison:#EE8A7E;--poison-bg:#3A2020;--jade:#63C7A8;--jade-bg:#15342D;
+  --side:#0A1122;--side-ink:#D6DDEA;--side-mute:#7F8AA3;}}
+:root[data-theme="dark"]{
+  --bg:#0F1628;--paper:#17203A;--ink:#E4E9F2;--muted:#9EA9C0;--line:#2A3656;
+  --lapis:#8EA8EA;--lapis-bg:#1E2B4E;--nectar:#E8B44A;--nectar-bg:#2F2714;--nectar-hi:#E8B44A;
+  --poison:#EE8A7E;--poison-bg:#3A2020;--jade:#63C7A8;--jade-bg:#15342D;
+  --side:#0A1122;--side-ink:#D6DDEA;--side-mute:#7F8AA3;}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:16px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 var(--sans)}
+a{color:var(--lapis)}
+:focus-visible{outline:3px solid var(--nectar-hi);outline-offset:2px;border-radius:3px}
+img,svg{max-width:100%}
+.layout{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:100vh}
+/* sidebar */
+.side{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--side);color:var(--side-ink);padding:22px 18px 40px}
+.brand{font:800 26px/1.05 var(--serif);letter-spacing:.3px;color:#fff;margin:0}
+.brand small{display:block;font:400 14px/1.3 var(--sans);color:var(--side-mute);margin-top:4px}
+.search{margin:18px 0 6px;width:100%;padding:9px 12px;border-radius:8px;border:1px solid #33405F;background:#0E1730;color:#fff;font:15px var(--sans)}
+.search::placeholder{color:var(--side-mute)}
+.hits{font-size:13px;color:var(--side-mute);min-height:18px}
+.side nav ol{list-style:none;margin:10px 0 0;padding:0;counter-reset:n}
+.side nav li:not(.part){counter-increment:n}
+.side nav li.part{font:700 12.5px var(--sans);color:var(--nectar-hi);margin:14px 8px 2px;letter-spacing:.3px}
+.side nav a{display:flex;gap:10px;align-items:baseline;padding:6px 8px;border-radius:6px;color:var(--side-ink);text-decoration:none;font-size:15px;line-height:1.3}
+.side nav a::before{content:counter(n);font:700 12px var(--serif);color:var(--side-mute);min-width:18px;text-align:right}
+.side nav a:hover{background:#1F2B4A}
+.side nav a.on{background:#24335A;color:#fff}
+.side nav a.on::before{color:var(--nectar-hi)}
+.side nav li.hide{display:none}
+.side nav.searching li.part{display:none}
+.side .tools{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.side button{background:#1F2B4A;color:var(--side-ink);border:1px solid #33405F;border-radius:6px;padding:6px 10px;font:14px var(--sans);cursor:pointer}
+.side button:hover{background:#2A3A62}
+.navtoggle{display:none}
+/* main */
+main{padding:0 clamp(18px,3vw,56px) 120px;min-width:0}
+.col{max-width:none;width:100%}
+section{padding:56px 0 8px;border-bottom:1px solid var(--line)}
+section:last-of-type{border-bottom:0}
+main{counter-reset:sec}
+section{counter-increment:sec}
+h2{font:800 34px/1.12 var(--serif);margin:0 0 6px}
+h2::before{content:counter(sec);color:var(--nectar);margin-right:12px}
+.partlabel{font:700 15px var(--sans);color:var(--muted);margin:64px 0 -36px;letter-spacing:.2px}
+h2 .num{color:var(--nectar);margin-right:10px}
+h3{font:700 22px/1.25 var(--serif);margin:34px 0 8px}
+h4{font:700 17px/1.3 var(--sans);margin:22px 0 6px}
+.lede{font-size:19px;color:var(--muted);margin:0 0 18px;max-width:110ch}
+p,li{max-width:110ch}
+.panel p,.panel li,.tw p{max-width:none}
+ul.tight{padding-left:20px;margin:8px 0}ul.tight li{margin:4px 0}
+/* tags */
+.t{display:inline-block;font:700 12px/1 var(--sans);letter-spacing:.2px;padding:4px 7px 3px;border-radius:4px;vertical-align:2px;margin-right:4px;white-space:nowrap}
+.t-a{background:var(--nectar-bg);color:var(--nectar)}
+.t-v{background:var(--poison-bg);color:var(--poison)}
+.t-c{background:var(--lapis-bg);color:var(--lapis)}
+.t-ok{background:var(--jade-bg);color:var(--jade)}
+/* callouts */
+.call{border-left:4px solid var(--lapis);background:var(--paper);padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0}
+.call.a{border-color:var(--nectar-hi);background:var(--nectar-bg)}
+.call.v{border-color:var(--poison);background:var(--poison-bg)}
+.call.ok{border-color:var(--jade);background:var(--jade-bg)}
+.call > b:first-child{display:block;font:700 16px var(--serif);margin-bottom:2px}
+.call p{margin:4px 0}
+/* tables */
+.tw{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:10px;background:var(--paper)}
+table{border-collapse:collapse;width:100%;min-width:560px;font-size:15px;line-height:1.45}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:700 14px var(--sans);background:var(--lapis-bg);color:var(--ink);position:sticky;top:0}
+tr:last-child td{border-bottom:0}
+td.n{white-space:nowrap}
+/* grids and panels */
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:14px;margin:14px 0}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin:14px 0}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.panel h4{margin-top:0}
+.panel p{margin:6px 0}
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(280px,.6fr);gap:24px;align-items:center;padding:48px 0 30px;border-bottom:1px solid var(--line)}
+.hero h1{font:800 clamp(40px,6vw,74px)/.95 var(--serif);margin:0;letter-spacing:-.5px}
+.hero .sub{font:500 23px/1.4 var(--serif);color:var(--muted);margin:14px 0 18px;max-width:46ch}
+.hero .meta{font-size:15px;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-size:15px}
+.pillar{width:100%;height:auto;max-height:470px}
+.pillar .node{cursor:pointer}
+.pillar .node:hover circle,.pillar .node:focus circle{fill:var(--nectar-hi)}
+.pillar text{font-family:var(--sans)}
+/* tabs / chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
+.chip{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 14px;font:500 15px var(--sans);cursor:pointer}
+.chip[aria-pressed="true"],.chip[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tabpanel[hidden]{display:none}
+/* details */
+details{background:var(--paper);border:1px solid var(--line);border-radius:10px;margin:10px 0}
+summary{cursor:pointer;padding:12px 16px;font:700 17px var(--serif);list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:700 20px var(--sans);color:var(--muted)}
+details[open] summary::after{content:"\2212"}
+details .body{padding:0 16px 14px}
+/* checklist */
+.ck{list-style:none;padding:0;margin:8px 0}
+.ck li{display:flex;gap:10px;align-items:flex-start;padding:6px 0;border-bottom:1px dashed var(--line)}
+.ck li:last-child{border-bottom:0}
+.ck input{margin-top:5px;width:17px;height:17px;accent-color:var(--jade);flex:none}
+.ck label{cursor:pointer}
+.ck .when{display:block;font-size:13.5px;color:var(--muted)}
+.prog{height:8px;background:var(--line);border-radius:6px;overflow:hidden;margin:6px 0 2px}
+.prog i{display:block;height:100%;background:var(--jade);width:0;transition:width .3s}
+.progt{font-size:13px;color:var(--muted)}
+/* calculators */
+.calc{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:16px 0}
+.calc .row{display:flex;flex-wrap:wrap;gap:12px;margin:8px 0}
+.calc label.f{display:flex;flex-direction:column;font-size:14px;color:var(--muted);gap:3px;min-width:130px;flex:1}
+.calc select{max-width:120px}
+.calc input[type=number],.calc select{font:16px var(--sans);padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:100%}
+.out{font:700 18px var(--serif);margin:10px 0 4px}
+.out span{color:var(--jade)}
+.small{font-size:14px;color:var(--muted)}
+.chart{width:100%;height:auto;display:block;max-height:460px}
+.chart text{font-family:var(--sans);fill:var(--muted);font-size:12px}
+#taxyears{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+#taxyears label.f{min-width:0!important}
+@media (max-width:560px){#taxyears{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.eqgrid{display:grid;gap:6px;align-items:center;font-size:14px}
+.eqgrid input[type=range]{width:100%;accent-color:var(--lapis)}
+/* month cards */
+.months{display:grid;grid-template-columns:repeat(auto-fit,minmax(460px,1fr));gap:12px;margin:16px 0}
+.month{display:grid;grid-template-columns:84px minmax(0,1fr);gap:14px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.month .m{font:800 30px/1 var(--serif);color:var(--lapis)}
+.month .m small{display:block;font:500 13px var(--sans);color:var(--muted);margin-top:4px}
+.month h4{margin:0 0 4px}
+.month ul{margin:4px 0 0;padding-left:18px}
+.month .gate{margin-top:8px;font-size:14.5px;color:var(--jade)}
+.month .gate b{color:var(--ink)}
+.bar{display:inline-block;height:10px;border-radius:3px;background:var(--lapis);vertical-align:middle}
+.odds{display:grid;grid-template-columns:minmax(0,1fr) minmax(170px,40%) 48px;gap:8px 12px;align-items:center;font-size:15px;margin:10px 0}
+.odds .track{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.odds .track i{display:block;height:100%}
+.startgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:22px 0 0}
+.startgrid a{text-decoration:none;color:var(--ink)}
+.startgrid a:hover{border-color:var(--lapis)}
+.startgrid h4{margin:0;font:700 17px var(--serif)}
+.startgrid p{margin:2px 0 0;font-size:14px;color:var(--muted)}
+.hackgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin:14px 0}
+.hackgrid .panel[hidden]{display:none}
+.drill{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 6px}
+.drill span{padding:7px 12px;border-radius:6px;font:700 14px var(--sans);color:#fff;position:relative}
+.d0{background:#A3352A}.d1{background:#2B4C9B}.d2{background:#3D63B8}.d3{background:#256E5B}.d4{background:#9A6405}.d5{background:#B7860F}.d6{background:#5B2C6F}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(420px,1fr));gap:14px;margin:14px 0}
+.pcard{background:var(--paper);border:1px solid var(--line);border-top:5px solid #A3352A;border-radius:10px;padding:14px 16px}
+.pcard[hidden]{display:none}
+.pcard header{display:flex;gap:8px;align-items:center}
+.pcard h4{margin:0;font:700 19px var(--serif)}
+.pprob{margin:6px 0 10px;color:var(--muted);font-style:italic}
+.pcard dl{display:grid;grid-template-columns:128px minmax(0,1fr);gap:6px 12px;margin:0;font-size:15px}
+.pcard dt{font-weight:700;padding-left:8px;border-left:4px solid}
+.pcard dd{margin:0}
+dt.d1{border-color:#2B4C9B;background:none}dt.d2{border-color:#3D63B8;background:none}dt.d3{border-color:#256E5B;background:none}dt.d4{border-color:#9A6405;background:none}dt.d5{border-color:#B7860F;background:none}dt.d6{border-color:#5B2C6F;background:none}
+@media (max-width:560px){.pgrid{grid-template-columns:1fr}.pcard dl{grid-template-columns:1fr}}
+.casegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px;margin:14px 0}
+.case{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--jade);border-radius:10px;padding:14px 16px}
+.case.warn{border-left-color:var(--poison)}
+.case[hidden]{display:none}
+.case h4{margin:0;font:700 20px var(--serif)}
+.case p{margin:6px 0;font-size:15.5px}
+.cmeta{color:var(--muted);font-size:14px!important}
+.case .copy{background:var(--nectar-bg);padding:6px 10px;border-radius:6px}
+.quotegrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin:14px 0}
+.q{margin:0;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column}
+.q blockquote{margin:0;font:700 20px/1.3 var(--serif);flex:1}
+.q blockquote::before{content:"\201C";color:var(--nectar-hi);font-size:34px;line-height:0;vertical-align:-12px;margin-right:4px}
+.q figcaption{margin-top:10px;font-size:14.5px;color:var(--ink);font-weight:700}
+.q .use{margin:4px 0 0;font-size:14px;color:var(--muted)}
+.ex{font-size:15px;margin:8px 0}
+.footer{margin-top:40px;font-size:14px;color:var(--muted)}
+@media (max-width:980px){
+  .months{grid-template-columns:1fr}
+  .layout{grid-template-columns:1fr}
+  .side{position:fixed;inset:0 auto 0 0;width:290px;transform:translateX(-100%);transition:transform .25s;z-index:20}
+  .side.open{transform:none;box-shadow:0 0 0 100vmax rgba(0,0,0,.45)}
+  .navtoggle{display:inline-flex;position:fixed;right:14px;bottom:14px;z-index:21;background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:12px 18px;font:700 15px var(--sans);cursor:pointer}
+  main{padding:0 18px 100px}
+  .hero{grid-template-columns:1fr}
+  .g2,.g3{grid-template-columns:1fr}
+  .month{grid-template-columns:1fr}
+  .odds{grid-template-columns:1fr 90px 42px}
+}
+@media print{
+  .side,.navtoggle,.tools{display:none!important}
+  .layout{display:block}
+  details{break-inside:avoid}
+  body{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<button class="navtoggle" id="navtoggle" aria-controls="side" aria-expanded="false">Index</button>
+<div class="layout">
+<aside class="side" id="side">
+  <p class="brand">Manthan<small>The Founder's Codex, India edition. Churn the ocean, keep the nectar.</small></p>
+  <input class="search" id="q" type="search" placeholder="Search the codex (e.g. ESOP, GST, patent)" aria-label="Search the codex">
+  <div class="hits" id="hits" aria-live="polite"></div>
+  <nav aria-label="Index"><ol id="navlist">
+    <li class="part">Plan</li>
+    <li><a href="#s-roadmap">The 6-month churn</a></li>
+    <li><a href="#s-variants">Roadmap variants</a></li>
+    <li class="part">Foundation</li>
+    <li><a href="#s-day0">Day 0: entity, name, setup</a></li>
+    <li><a href="#s-docs">Founder documents</a></li>
+    <li><a href="#s-compliance">Compliance calendar</a></li>
+    <li><a href="#s-cofounders">Co-founders, equity, ESOPs</a></li>
+    <li class="part">Team</li>
+    <li><a href="#s-hiring">Hiring the first 10</a></li>
+    <li><a href="#s-finance">Finance function</a></li>
+    <li><a href="#s-hr">HR and people ops</a></li>
+    <li class="part">Money</li>
+    <li><a href="#s-money">Zero-funding playbook</a></li>
+    <li><a href="#s-schemes">Govt schemes and timelines</a></li>
+    <li><a href="#s-private">Private capital</a></li>
+    <li><a href="#s-tax">Tax holiday strategy</a></li>
+    <li><a href="#s-where">Office, state, HQ abroad</a></li>
+    <li class="part">Build and grow</li>
+    <li><a href="#s-eng">Engineering and security</a></li>
+    <li><a href="#s-growth">Marketing and attention</a></li>
+    <li><a href="#s-hacks">Underrated hacks</a></li>
+    <li><a href="#s-sectors">Sector playbooks</a></li>
+    <li><a href="#s-gaps">Opportunity gaps 2026</a></li>
+    <li><a href="#s-ip">Patents and IP</a></li>
+    <li class="part">Survive</li>
+    <li><a href="#s-problems">Problem navigator</a></li>
+    <li><a href="#s-risk">Risks, odds, failsafes</a></li>
+    <li><a href="#s-law">Law and disputes</a></li>
+    <li class="part">Learn</li>
+    <li><a href="#s-cases">Case studies</a></li>
+    <li><a href="#s-quotes">Founder wisdom</a></li>
+    <li class="part">Reference</li>
+    <li><a href="#s-verify">Verification ledger</a></li>
+    <li><a href="#s-glossary">Glossary</a></li>
+  </ol></nav>
+  <div class="tools">
+    <button id="theme" type="button">Toggle theme</button>
+    <button id="expand" type="button">Expand all</button>
+    <button id="print" type="button">Print</button>
+  </div>
+</aside>
+<main>
+<div class="col">
+<header class="hero">
+  <div>
+    <h1>Manthan</h1>
+    <p class="sub">The founder's codex for building an Indian startup from almost nothing to a real business in six months.</p>
+    <p class="meta"><i>Manthan</i> is the churning of the ocean: poison surfaced first, nectar after. Written for two founders, one of them an engineer, with money only for tools. Law and scheme facts checked in September 2026. Anything that moves often carries a Verify tag and a place to check it.</p>
+    <div class="legend">
+      <span><span class="t t-a">Amrit</span> nectar: an advantage to grab</span>
+      <span><span class="t t-v">Visha</span> poison: a trap or risk</span>
+      <span><span class="t t-c">Verify</span> changes often, check before acting</span>
+      <span><span class="t t-ok">Done</span> tick boxes save in this browser</span>
+    </div>
+  </div>
+  <svg class="pillar" viewBox="0 0 340 430" role="img" aria-labelledby="pt">
+    <title id="pt">The churning pillar: seven stages from month 0 to month 6. Select a stage to jump to it.</title>
+    <rect x="152" y="18" width="16" height="352" rx="8" fill="var(--lapis)" opacity=".85"/>
+    <path d="M90 44 C160 44 160 92 250 92 C160 92 160 140 90 140 C160 140 160 188 250 188 C160 188 160 236 90 236 C160 236 160 284 250 284 C160 284 160 332 90 332" fill="none" stroke="var(--nectar-hi)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M0 385 Q 42 365 85 385 T 170 385 T 255 385 T 340 385" fill="none" stroke="var(--lapis)" stroke-width="3" opacity=".6"/>
+    <path d="M0 405 Q 42 385 85 405 T 170 405 T 255 405 T 340 405" fill="none" stroke="var(--lapis)" stroke-width="3" opacity=".35"/>
+    <path d="M0 425 Q 42 405 85 425 T 170 425 T 255 425 T 340 425" fill="none" stroke="var(--lapis)" stroke-width="3" opacity=".2"/>
+    <g font-size="14" fill="var(--ink)">
+      <a class="node" href="#m0"><circle cx="90" cy="44" r="13" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="90" y="49" text-anchor="middle" font-weight="700" font-size="12">M0</text><text x="70" y="49" text-anchor="end">Validate</text></a>
+      <a class="node" href="#m1"><circle cx="250" cy="92" r="13" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="250" y="97" text-anchor="middle" font-weight="700" font-size="12">M1</text><text x="270" y="97">Form</text></a>
+      <a class="node" href="#m2"><circle cx="90" cy="140" r="13" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="90" y="145" text-anchor="middle" font-weight="700" font-size="12">M2</text><text x="70" y="145" text-anchor="end">Ship</text></a>
+      <a class="node" href="#m3"><circle cx="250" cy="188" r="13" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="250" y="193" text-anchor="middle" font-weight="700" font-size="12">M3</text><text x="270" y="193">Prove</text></a>
+      <a class="node" href="#m4"><circle cx="90" cy="236" r="13" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="90" y="241" text-anchor="middle" font-weight="700" font-size="12">M4</text><text x="70" y="241" text-anchor="end">Scale</text></a>
+      <a class="node" href="#m5"><circle cx="250" cy="284" r="13" fill="var(--paper)" stroke="var(--ink)" stroke-width="2"/><text x="250" y="289" text-anchor="middle" font-weight="700" font-size="12">M5</text><text x="270" y="289">Fuel</text></a>
+      <a class="node" href="#m6"><circle cx="90" cy="332" r="13" fill="var(--nectar-hi)" stroke="var(--ink)" stroke-width="2"/><text x="90" y="337" text-anchor="middle" font-weight="700" font-size="12">M6</text><text x="70" y="337" text-anchor="end">Decide</text></a>
+    </g>
+  </svg>
+</header>
+
+<div class="startgrid" aria-label="Start where you are">
+ <a class="panel" href="#s-roadmap"><h4>Only an idea</h4><p>Roadmap, Day 0, Co-founders</p></a>
+ <a class="panel" href="#s-docs"><h4>Incorporated, no revenue</h4><p>Documents, Zero-funding, Govt schemes</p></a>
+ <a class="panel" href="#s-growth"><h4>First paying users</h4><p>Marketing, Hacks, Hiring</p></a>
+ <a class="panel" href="#s-private"><h4>Ready to raise</h4><p>Private capital, Co-founders, Tax</p></a>
+ <a class="panel" href="#s-problems"><h4>Something broke</h4><p>Problem navigator, Law</p></a>
+ <a class="panel" href="#s-cases"><h4>Need proof it works</h4><p>Case studies, Quotes</p></a>
+</div>
+<p class="partlabel">Part I. Plan</p>
+<section id="s-roadmap">
+<h2>The 6-month churn</h2>
+<p class="lede">In the myth, poison rises before nectar. Same here: months 0 to 2 surface the hard truths, months 3 to 6 compound what survives. Every month ends in a gate. Fail a gate twice and you pivot, not push.</p>
+
+<div class="call a"><b>The one rule that makes 6 months possible</b><p>Charge money from the first working version. Paid users give honest signal, fund your tools, and are the single strongest line in any grant or investor pitch.</p></div>
+
+<h3>Six months on one page</h3>
+<div class="tw" style="padding:10px">
+<svg class="chart" viewBox="0 0 780 330" role="img" aria-labelledby="gt">
+<title id="gt">Gantt chart of 26 weeks: validation, legal setup, MVP build, pilots, launch, growth, grants, hiring, fundraising and the month 6 decision.</title>
+<g id="gantt"></g>
+</svg>
+</div>
+<p class="small">Blue: product. Gold: money and legal. Green: growth. Red: decision gates.</p>
+
+<div class="months">
+ <div class="month" id="m0"><div class="m">M0<small>Weeks 0 to 3</small></div><div>
+  <h4>Validate the problem, not the idea</h4>
+  <ul>
+   <li>20 to 30 problem interviews. Ask about the last time the pain happened and what they paid to fix it. Never pitch in these calls.</li>
+   <li>One-page landing site with a price on it. Collect waitlist sign-ups and, ideally, refundable pre-orders or LOIs.</li>
+   <li>Sign the founders' agreement before anyone writes code. Equity, vesting, roles, IP, exit. See <a href="#s-cofounders">Co-founders</a>.</li>
+   <li>Run name, trademark and domain checks (<a href="#s-day0">Day 0</a>).</li>
+  </ul>
+  <p class="ex"><span class="t t-ok">Real example</span>Dropbox validated demand with a short demo video and a waitlist before the product was broadly available (<a href="#s-cases">Case studies</a>).</p>
+  <p class="gate"><b>Gate:</b> at least 5 people say yes to a price, or 3 pre-pay. If not, change the segment or problem, not the pitch.</p>
+ </div></div>
+ <div class="month" id="m1"><div class="m">M1<small>Weeks 4 to 8</small></div><div>
+  <h4>Form the company, build the thinnest MVP</h4>
+  <ul>
+   <li>Incorporate a Private Limited company via SPICe+ (7 to 15 working days). Open current account, appoint auditor within 30 days.</li>
+   <li>Apply for DPIIT recognition right after incorporation. It unlocks almost every scheme.</li>
+   <li>File trademark for name and logo (startup fee applies).</li>
+   <li>Build one core workflow end to end. AI coding tools make 3 to 4 week MVPs realistic for a strong engineer.</li>
+   <li>Line up 5 design partners who agreed to use it weekly.</li>
+  </ul>
+  <p class="ex"><span class="t t-ok">Real example</span>Stripe's founders set the product up for early users in person. Do the same for your 5 design partners.</p>
+  <p class="gate"><b>Gate:</b> a design partner completes the core job without you on the call.</p>
+ </div></div>
+ <div class="month" id="m2"><div class="m">M2<small>Weeks 9 to 13</small></div><div>
+  <h4>Ship to real users and charge</h4>
+  <ul>
+   <li>Paid pilots, even small (₹999 or a monthly retainer). Discounts, not free.</li>
+   <li>Instrument activation, retention and time-to-value from day one.</li>
+   <li>Register GST when required or when B2B buyers need your GSTIN.</li>
+   <li>Stack cloud and tool credits, apply to 2 or 3 incubators.</li>
+   <li>Start founder-led content: one useful post per weekday.</li>
+  </ul>
+  <p class="gate"><b>Gate:</b> 40% of active users would be "very disappointed" without it, or week-4 retention is flattening, not falling to zero.</p>
+ </div></div>
+ <div class="month" id="m3"><div class="m">M3<small>Weeks 14 to 17</small></div><div>
+  <h4>Prove it, then launch loudly</h4>
+  <ul>
+   <li>Public launch week (<a href="#s-growth">Marketing</a>): one launch per day across channels.</li>
+   <li>Turn the 3 best customers into case studies with numbers.</li>
+   <li>Apply to grants and state programmes with that traction (<a href="#s-schemes">Govt schemes</a>).</li>
+   <li>Fix the top 3 reasons people drop off. Ignore feature requests from non-payers.</li>
+  </ul>
+  <p class="gate"><b>Gate:</b> 10+ paying customers or a repeatable weekly sign-up curve.</p>
+ </div></div>
+ <div class="month" id="m4"><div class="m">M4<small>Weeks 18 to 22</small></div><div>
+  <h4>Scale exactly one channel</h4>
+  <ul>
+   <li>Pick the channel that produced the cheapest paying customer and double effort there. Park the rest.</li>
+   <li>First helpers: interns, freelancers or a part-timer on contracts with IP assignment. Process in <a href="#s-hiring">Hiring</a>.</li>
+   <li>Board-approve an ESOP pool (10 to 15%) before offering anyone equity.</li>
+   <li>Tighten compliance: TDS, GST returns, board minutes. Set up the controls in <a href="#s-finance">Finance function</a>.</li>
+  </ul>
+  <p class="gate"><b>Gate:</b> customer acquisition cost recovered within 3 to 6 months of revenue from that customer.</p>
+ </div></div>
+ <div class="month" id="m5"><div class="m">M5<small>Weeks 23 to 25</small></div><div>
+  <h4>Fuel: raise, or compound without raising</h4>
+  <ul>
+   <li>Build the data room and a 10-slide deck anchored on real metrics.</li>
+   <li>Talk to 30+ angels and micro VCs in a 3 to 4 week burst. Parallel, not serial.</li>
+   <li>If not raising: annual prepaid plans, services add-ons, revenue-based financing once revenue is steady.</li>
+  </ul>
+  <p class="gate"><b>Gate:</b> either a term sheet in motion or 3+ months of runway from revenue.</p>
+ </div></div>
+ <div class="month" id="m6"><div class="m">M6<small>Week 26</small></div><div>
+  <h4>Decide with data</h4>
+  <ul>
+   <li><b>Scale:</b> growth above 15% month on month and retention holding.</li>
+   <li><b>Raise:</b> investors engaged and money buys faster growth, not survival.</li>
+   <li><b>Pivot:</b> users love one piece but not the whole. Rebuild around that piece.</li>
+   <li><b>Stop:</b> no gate passed twice in a row. Close cleanly (exit kit in <a href="#s-risk">Risks</a>).</li>
+  </ul>
+ </div></div>
+</div>
+</section>
+<section id="s-variants">
+<h2>Roadmap variants</h2>
+<p class="lede">Same six gates, different shapes. Pick the variant closest to your model. Targets are month-6 benchmarks for a two-founder, near-zero-capital team.</p>
+<div class="chips" role="tablist" aria-label="Roadmap variants" data-tabs="var">
+ <button class="chip" role="tab" aria-selected="true" aria-controls="v1" id="tv1">B2B SaaS or AI tool</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="v2" id="tv2">Services to product</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="v3" id="tv3">Consumer app</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="v4" id="tv4">Marketplace or community</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="v5" id="tv5">Deep tech or IP-led</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="v6" id="tv6">Bharat impact (health, edu, agri)</button>
+</div>
+<div class="tabpanel" role="tabpanel" id="v1" aria-labelledby="tv1">
+ <div class="g2">
+  <div class="panel"><h4>Shape</h4><p>Narrow vertical workflow, sold to teams who already pay for a worse tool or for manual labour. Price in INR for India, USD for global.</p><p><b>M6 target:</b> 20 to 50 paying accounts, ₹1 to 3 lakh MRR, logo retention above 85%.</p></div>
+  <div class="panel"><h4>Moves that matter</h4><ul class="tight"><li>Sell before building beyond the core workflow.</li><li>Founder-led sales to the first 20 customers.</li><li>Annual plans with a 15 to 20% discount fund the runway.</li><li>Integrations with what buyers already use (Tally, Zoho, WhatsApp, Google Workspace).</li></ul></div>
+ </div>
+ <p><span class="t t-v">Visha</span>Horizontal "AI for everyone" tools get cloned in weeks. Own a workflow, a dataset, or a distribution channel.</p>
+</div>
+<div class="tabpanel" role="tabpanel" id="v2" aria-labelledby="tv2" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Shape</h4><p>The engineer founder sells automation, integrations or consulting to fund the company, then productises the most repeated job.</p><p><b>M6 target:</b> ₹2 to 5 lakh a month in service revenue, one productised offering with 5+ buyers.</p></div>
+  <div class="panel"><h4>Moves that matter</h4><ul class="tight"><li>Fixed-scope, fixed-price packages, never open hourly.</li><li>Keep IP ownership of reusable code in every contract; client gets a licence.</li><li>Cap services at 50% of founder time by month 4 or the product never ships.</li></ul></div>
+ </div>
+ <p><span class="t t-a">Amrit</span>Services profit and product losses sit in the same company, so one offsets the other for tax, and services can make you "default alive" by day 60.</p><p class="ex"><span class="t t-ok">Real example</span>Infosys and Zoho both began by selling expertise and compounded that into products and institutions.</p>
+</div>
+<div class="tabpanel" role="tabpanel" id="v3" aria-labelledby="tv3" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Shape</h4><p>Fitness, social, career or creator apps. Retention decides everything; monetisation comes after a habit forms.</p><p><b>M6 target:</b> 5k to 20k monthly actives in one niche, day-30 retention above 15%, first revenue from subscriptions or brand deals.</p></div>
+  <div class="panel"><h4>Moves that matter</h4><ul class="tight"><li>Start with one tight community (one city, one college, one sport).</li><li>Seed with WhatsApp or Telegram groups you run yourself.</li><li>Weekly rituals: challenges, streaks, live sessions.</li><li>Ship Android first; most Indian users are there.</li></ul></div>
+ </div>
+ <p><span class="t t-v">Visha</span>Paid ads before retention is proven burns money fast. Fix the leaky bucket first.</p><p class="ex"><span class="t t-ok">Real example</span>Meesho grew by riding WhatsApp groups that resellers already ran, not ads.</p>
+</div>
+<div class="tabpanel" role="tabpanel" id="v4" aria-labelledby="tv4" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Shape</h4><p>Two-sided: supply and demand. Liquidity in one small area beats thin coverage everywhere.</p><p><b>M6 target:</b> in one city or niche, 30%+ of listings get a transaction every month; repeat buyers above 25%.</p></div>
+  <div class="panel"><h4>Moves that matter</h4><ul class="tight"><li>Do the supply side manually first (concierge).</li><li>Take payment on-platform early to prevent leakage.</li><li>Check if you are an "e-commerce operator" under GST (TCS collection) and Consumer Protection (E-Commerce) Rules.</li></ul></div>
+ </div>
+</div>
+<div class="tabpanel" role="tabpanel" id="v5" aria-labelledby="tv5" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Shape</h4><p>Hardware, EDA, biotech, space, defence, novel algorithms with physical effect. Slower revenue, more grants, IP matters.</p><p><b>M6 target:</b> working prototype, provisional patent filed, 2 paid pilots or LOIs, 2+ grant applications in review.</p></div>
+  <div class="panel"><h4>Moves that matter</h4><ul class="tight"><li>File a provisional patent before any public demo or paper.</li><li>Apply for DPIIT Deep Tech recognition (20-year window, ₹300 crore turnover cap).</li><li>Grants: BIRAC, NIDHI-PRAYAS, iDEX, TDB, state deep-tech funds.</li><li>Sell a paid pilot or feasibility study to fund development.</li></ul></div>
+ </div>
+</div>
+<div class="tabpanel" role="tabpanel" id="v6" aria-labelledby="tv6" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Shape</h4><p>Serving Bharat through NGOs, state bodies, CSR budgets or low-price B2C. Long sales cycles, large scale once in.</p><p><b>M6 target:</b> 1 to 2 funded pilots (CSR, state or NGO), measurable outcome data, 1 impact investor or foundation conversation.</p></div>
+  <div class="panel"><h4>Moves that matter</h4><ul class="tight"><li>CSR money flows through Section 8 or approved incubators; partner with one.</li><li>Vernacular voice-first UX.</li><li>Publish outcome data; it is your sales deck.</li><li>Use GeM (Government e-Marketplace) where startups get relaxed prior-experience norms.</li></ul></div>
+ </div>
+</div>
+</section>
+
+<p class="partlabel">Part II. Foundation</p>
+<section id="s-day0">
+<h2>Day 0: entity, name, setup</h2>
+<p class="lede">If you plan to raise money or give equity to anyone, incorporate a Private Limited company. Everything else is a detour you will pay to undo.</p>
+<div class="tw"><table>
+<thead><tr><th>Entity</th><th>VC-ready</th><th>ESOPs</th><th>Tax holiday</th><th>Yearly compliance cost</th><th>Use when</th></tr></thead>
+<tbody>
+<tr><td><b>Private Limited</b></td><td>Yes</td><td>Yes</td><td>Yes</td><td class="n">₹25k to 60k (CA + audit)</td><td>Default for any startup that may raise or hire with equity</td></tr>
+<tr><td><b>LLP</b></td><td>Rarely</td><td>No</td><td>Yes (AMT applies)</td><td class="n">₹15k to 35k</td><td>Services firm, no outside equity planned</td></tr>
+<tr><td><b>OPC</b></td><td>No</td><td>No</td><td>No</td><td class="n">₹20k to 40k</td><td>Solo founder testing; convert later</td></tr>
+<tr><td><b>Partnership / proprietorship</b></td><td>No</td><td>No</td><td>No</td><td class="n">Low</td><td>Only for a quick paid test; personal liability is unlimited</td></tr>
+</tbody></table></div>
+<p class="small">Cost ranges are typical market rates for CA services, not fixed fees. <span class="t t-c">Verify</span> quotes from 2 or 3 CAs.</p>
+
+<h3>Incorporation sequence</h3>
+<ul class="ck" data-group="inc">
+ <li><input type="checkbox" id="inc1"><label for="inc1">Founders' agreement signed (before incorporation)<span class="when">Week 1 to 2. Clauses listed in <a href="#s-cofounders">Co-founders</a>.</span></label></li>
+ <li><input type="checkbox" id="inc2"><label for="inc2">DSC for each director, name reserved via SPICe+ Part A<span class="when">Pick 2 names; avoid generic words (they get rejected).</span></label></li>
+ <li><input type="checkbox" id="inc3"><label for="inc3">SPICe+ Part B with MoA, AoA, AGILE-PRO (GST, EPFO, ESIC, bank)<span class="when">Govt fee is nil for authorised capital up to ₹15 lakh; state stamp duty still applies. <span class="t t-c">Verify</span> on mca.gov.in.</span></label></li>
+ <li><input type="checkbox" id="inc4"><label for="inc4">Certificate of Incorporation, PAN, TAN received<span class="when">Usually 7 to 15 working days total.</span></label></li>
+ <li><input type="checkbox" id="inc5"><label for="inc5">Bank current account; founders deposit subscription money<span class="when">Keep proof. Needed for INC-20A.</span></label></li>
+ <li><input type="checkbox" id="inc6"><label for="inc6">First board meeting and auditor appointment (ADT-1)<span class="when">Within 30 days of incorporation.</span></label></li>
+ <li><input type="checkbox" id="inc7"><label for="inc7">Share certificates issued<span class="when">Within 60 days of incorporation.</span></label></li>
+ <li><input type="checkbox" id="inc8"><label for="inc8">INC-20A commencement of business filed<span class="when">Within 180 days. Missing it blocks the company and fines directors.</span></label></li>
+ <li><input type="checkbox" id="inc9"><label for="inc9">DPIIT recognition on startupindia.gov.in<span class="when">Right after incorporation. Free, usually a few days to weeks.</span></label></li>
+ <li><input type="checkbox" id="inc10"><label for="inc10">Udyam (MSME) registration<span class="when">Free. Unlocks 45-day payment protection from buyers and MSME schemes.</span></label></li>
+ <li><input type="checkbox" id="inc11"><label for="inc11">Shops and Establishments registration (state) and Professional Tax<span class="when">Within the state deadline once you have a place of business or employees.</span></label></li>
+</ul>
+<div class="prog"><i data-bar="inc"></i></div><div class="progt" data-count="inc"></div>
+
+<h3>Name check in 20 minutes</h3>
+<div class="g3">
+ <div class="panel"><h4>Legal</h4><p>MCA name availability, then trademark public search on ipindia.gov.in in your classes: 9 and 42 (software), 35 (business services), 41 (education, fitness), 44 (health).</p></div>
+ <div class="panel"><h4>Digital</h4><p>.com and .in domains, Instagram, X, LinkedIn, YouTube handles. Buy the domain the day you decide.</p></div>
+ <div class="panel"><h4>Say it</h4><p>Can a customer spell it after hearing it once on a call? Does it mean something odd in Hindi or other major Indian languages?</p></div>
+</div>
+<p><span class="t t-v">Visha</span>Descriptive names ("Best Fitness App") cannot be trademarked. Invented or suggestive words can.</p>
+<p><span class="t t-a">Amrit</span>Registered office can be a founder's home with an owner NOC and a utility bill. No rent needed.</p>
+</section>
+<section id="s-docs">
+<h2>Founder documents</h2>
+<p class="lede">Must-haves protect ownership and let you get paid. Good-to-haves earn their keep at a specific moment; the "when" line tells you which moment.</p>
+
+<h3>Must-have</h3>
+<ul class="ck" data-group="doc">
+ <li><input type="checkbox" id="d1"><label for="d1">Founders' agreement<span class="when">Before incorporation. Equity, vesting, roles, decision rights, IP, exit, deadlock.</span></label></li>
+ <li><input type="checkbox" id="d2"><label for="d2">IP assignment deed from each founder to the company<span class="when">At incorporation. Covers code and designs made before the company existed.</span></label></li>
+ <li><input type="checkbox" id="d3"><label for="d3">MoA and AoA with transfer restrictions and right of first refusal<span class="when">At incorporation. Standard templates lack these.</span></label></li>
+ <li><input type="checkbox" id="d4"><label for="d4">Statutory registers, board minutes, cap table<span class="when">From day 1. Update the cap table on every allotment or transfer.</span></label></li>
+ <li><input type="checkbox" id="d5"><label for="d5">Offer letter and employment agreement with confidentiality and IP assignment<span class="when">Before the first hire or intern starts.</span></label></li>
+ <li><input type="checkbox" id="d6"><label for="d6">Consultant and freelancer agreement with IP assignment<span class="when">Before any outside person touches code, design or content. Without assignment they own the copyright.</span></label></li>
+ <li><input type="checkbox" id="d7"><label for="d7">Mutual NDA template<span class="when">Before sharing anything non-public with partners. Investors usually will not sign one; that is normal.</span></label></li>
+ <li><input type="checkbox" id="d8"><label for="d8">Terms of Service, Privacy Notice (DPDP-aligned), Refund and Cancellation policy<span class="when">Before launch. Payment gateways ask for these during onboarding.</span></label></li>
+ <li><input type="checkbox" id="d9"><label for="d9">B2B MSA plus order form or SOW<span class="when">Before the first paid B2B customer. Cap liability, fix payment terms, choose arbitration seat.</span></label></li>
+ <li><input type="checkbox" id="d10"><label for="d10">GST-compliant invoice format<span class="when">From the first invoice after GST registration.</span></label></li>
+</ul>
+<div class="prog"><i data-bar="doc"></i></div><div class="progt" data-count="doc"></div>
+
+<h3>Good-to-have, and when they pay off</h3>
+<div class="tw"><table>
+<thead><tr><th>Document</th><th>Useful when</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Shareholders' agreement (SHA)</td><td>First outside investor, or to enforce founder reverse vesting</td><td>Holds vesting, leaver terms, board seats, investor rights</td></tr>
+<tr><td>ESOP scheme and policy</td><td>Before promising equity to any employee</td><td>Needs board plus special resolution; promises without it are unenforceable</td></tr>
+<tr><td>Advisor agreement</td><td>Adding advisors</td><td>0.1 to 1% vesting over 2 years with 3-month cliff, tied to specific help</td></tr>
+<tr><td>Data Processing Agreement (DPA)</td><td>B2B customers send you personal data</td><td>DPDP puts duties on the fiduciary; they will push them to you in writing</td></tr>
+<tr><td>SLA</td><td>Enterprise deals</td><td>Define uptime and credits so disputes have a formula</td></tr>
+<tr><td>Pilot or LOI template</td><td>Months 1 to 3</td><td>Paid pilots with success criteria convert far better than free trials</td></tr>
+<tr><td>Pitch deck, one-pager, 3-year model</td><td>Grants, incubators, angels</td><td>One source of truth; reuse across all applications</td></tr>
+<tr><td>Data room</td><td>Month 5 or any diligence</td><td>Incorporation docs, cap table, board minutes, contracts, financials, IP</td></tr>
+<tr><td>Information security policy and incident plan</td><td>Handling personal data at scale or selling to enterprises</td><td>CERT-In 6-hour reporting and buyer security questionnaires</td></tr>
+<tr><td>POSH policy and Internal Committee</td><td>10 or more employees</td><td>Mandatory at that size; small fines, large reputational hit</td></tr>
+<tr><td>Brand guide and trademark certificates</td><td>Public launch</td><td>Consistency and enforceability against copycats</td></tr>
+<tr><td>Insurance: cyber, professional indemnity, D&O</td><td>Enterprise contracts or first priced round</td><td>Big buyers and lead investors often require them</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="s-compliance">
+<h2>Compliance calendar</h2>
+<p class="lede">Missed filings cost more than money: three years of non-filing disqualifies directors from every company for five years. Put these in a shared calendar now.</p>
+<div class="tw"><table>
+<thead><tr><th>When</th><th>What</th><th>Applies if</th></tr></thead>
+<tbody>
+<tr><td class="n">7th monthly</td><td>Deposit TDS deducted last month</td><td>You pay salaries, rent, contractors above limits</td></tr>
+<tr><td class="n">11th / 13th</td><td>GSTR-1 (monthly, or quarterly under QRMP)</td><td>GST registered</td></tr>
+<tr><td class="n">20th / 22nd-24th</td><td>GSTR-3B and tax payment</td><td>GST registered</td></tr>
+<tr><td class="n">15th monthly</td><td>PF and ESI payments</td><td>PF at 20+ employees, ESI at 10+ (voluntary earlier)</td></tr>
+<tr><td class="n">Quarterly</td><td>TDS returns (24Q, 26Q); advance tax on 15 Jun, 15 Sep, 15 Dec, 15 Mar</td><td>TDS deducted; tax liability above ₹10,000</td></tr>
+<tr><td class="n">Each quarter</td><td>Board meeting (small companies: 1 per half-year, 90+ days apart)</td><td>All companies</td></tr>
+<tr><td class="n">By 30 Sep</td><td>AGM; tax audit report if applicable</td><td>All companies</td></tr>
+<tr><td class="n">30 days after AGM</td><td>AOC-4 (financial statements)</td><td>All companies</td></tr>
+<tr><td class="n">60 days after AGM</td><td>MGT-7A / MGT-7 (annual return)</td><td>All companies</td></tr>
+<tr><td class="n">31 Oct</td><td>Income tax return (ITR-6)</td><td>Audited companies</td></tr>
+<tr><td class="n">Periodic</td><td>DIR-3 KYC for each director <span class="t t-c">Verify</span> current frequency on mca.gov.in</td><td>All directors</td></tr>
+<tr><td class="n">30 days after allotment</td><td>PAS-3 (and FC-GPR for foreign money)</td><td>Any share issue</td></tr>
+</tbody></table></div>
+<p><span class="t t-a">Amrit</span>A monthly CA retainer of ₹3k to 8k in year one usually costs less than a single late-fee penalty cycle. <span class="t t-c">Verify</span> exact due dates each year; CBIC and CBDT extend them often.</p>
+</section>
+<section id="s-cofounders">
+<h2>Co-founders, equity, ESOPs</h2>
+<p class="lede">Co-founder conflict is among the most common reasons early startups die. Write the hard conversations down while you still like each other.</p>
+
+<h3>Equity split calculator</h3>
+<div class="calc" id="eqcalc">
+ <p class="small">Score each founder 0 to 10 per factor. Weights reflect what drives value in the first 3 years. It is a starting point for the conversation, not a verdict.</p>
+ <div class="row">
+  <label class="f">Founders<select id="eqn"><option>2</option><option>3</option><option>4</option></select></label>
+ </div>
+ <div id="eqrows"></div>
+ <div id="eqout" class="out"></div>
+ <svg class="chart" id="eqbar" viewBox="0 0 600 44" role="img" aria-label="Equity split bar"></svg>
+ <p class="small" id="eqwarn"></p>
+</div>
+
+<h3>Non-negotiables in the founders' agreement</h3>
+<div class="g2">
+ <div class="panel"><h4>Vesting</h4><p>4 years, 1-year cliff, monthly after. In India, founders hold shares from day one, so vesting works as <b>reverse vesting</b>: the SHA lets the company or other founders buy unvested shares at face value when someone leaves.</p></div>
+ <div class="panel"><h4>Leaver terms</h4><p><b>Good leaver</b> (health, mutual exit): keeps vested shares. <b>Bad leaver</b> (fraud, breach, joining a competitor): vested shares bought back at face value or a discount.</p></div>
+ <div class="panel"><h4>Decision rights</h4><p>Name who decides what: product, hiring, spending above ₹X, fundraising. CEO gets a casting vote on operations; equity and fundraise decisions stay unanimous.</p></div>
+ <div class="panel"><h4>Deadlock</h4><p>48-hour cooling period, then a named mentor as mediator, then a buy-sell clause as last resort. Avoid a pure 50/50 with no tie-breaker.</p></div>
+ <div class="panel"><h4>Commitment</h4><p>Full-time start dates, allowed side income, salary deferral terms. Mismatched commitment is the most common trigger of a split.</p></div>
+ <div class="panel"><h4>Restrictions</h4><p>Post-exit non-competes are generally unenforceable in India (Section 27, Contract Act). Confidentiality and non-solicitation of staff and customers are the protections that hold.</p></div>
+</div>
+
+<h3>Conflict playbook</h3>
+<div class="tw"><table>
+<thead><tr><th>Trigger</th><th>Early sign</th><th>Fix</th></tr></thead>
+<tbody>
+<tr><td>Uneven effort</td><td>Missed commitments, silence in standups</td><td>Weekly written commitments; revisit vesting if one founder goes part-time</td></tr>
+<tr><td>Money stress</td><td>One founder needs salary sooner</td><td>Agree a founder salary trigger (e.g. after ₹X MRR) in advance</td></tr>
+<tr><td>Direction</td><td>Repeated re-litigation of settled decisions</td><td>Decision log; "disagree and commit" with a review date</td></tr>
+<tr><td>Credit and titles</td><td>Tension over who faces press or investors</td><td>Assign external roles explicitly; rotate visibility</td></tr>
+<tr><td>Trust breach</td><td>Side deals, hidden spending</td><td>Two-signatory banking above a limit; monthly shared P&amp;L</td></tr>
+</tbody></table></div>
+<p><span class="t t-a">Amrit</span>A 30-minute founder 1:1 every week and a half-day retro every quarter prevent most breakups.</p>
+
+<h3>ESOPs and dilution</h3>
+<ul class="tight">
+ <li>Pool of 10 to 15% before seed; investors will ask for it anyway, better on your terms.</li>
+ <li>Minimum 1-year vesting is mandatory under the Companies Act rules. Board resolution plus shareholders' special resolution.</li>
+ <li>DPIIT startups may grant ESOPs to promoter-directors within 10 years of incorporation, which other companies cannot.</li>
+ <li>Tax: perquisite at exercise, capital gains at sale. For eligible startups, employees can defer the exercise tax until the earliest of 48 months, sale, or leaving. <span class="t t-c">Verify</span> section numbering under the Income-tax Act 2025.</li>
+ <li>Sweat equity lets you pay advisors or early staff in shares for know-how; startups get relaxed limits.</li>
+</ul>
+<div class="tw" style="padding:10px">
+<svg class="chart" viewBox="0 0 760 210" role="img" aria-labelledby="dil">
+<title id="dil">Typical founder dilution: 100% at start, about 80% after pre-seed with a 10% ESOP pool, about 62% after seed, about 47% after Series A.</title>
+<g id="dilution"></g>
+</svg>
+</div>
+<p class="small">Illustrative: pre-seed sells 10% and creates a 10% pool; seed sells about 20% and keeps the pool at 10%; Series A sells about 20% with the pool at 12%. Real terms vary with traction and market.</p>
+
+<h3>Instruments you will see</h3>
+<div class="tw"><table>
+<thead><tr><th>Instrument</th><th>Used by</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td>Equity shares</td><td>Founders, some angels</td><td>Simple; voting rights attach</td></tr>
+<tr><td>CCPS</td><td>Most VCs and angels</td><td>Converts to equity; carries liquidation preference and investor rights</td></tr>
+<tr><td>CCD</td><td>Bridge rounds</td><td>Debt that converts; FEMA pricing rules for foreign investors</td></tr>
+<tr><td>Convertible note</td><td>DPIIT startups only</td><td>Min ₹25 lakh per investor in one tranche; converts or repays within 10 years</td></tr>
+<tr><td>iSAFE</td><td>100X.VC and some angels</td><td>India's SAFE-style note, legally structured as CCPS</td></tr>
+<tr><td>US SAFE</td><td>US investors</td><td>Needs a US parent; not usable directly in an Indian company</td></tr>
+</tbody></table></div>
+<p><span class="t t-v">Visha</span>Every allotment needs private placement paperwork (PAS-4 offer, separate bank account, PAS-3 within 30 days). Informal "I will give you 2%" promises create cap table debt that kills rounds.</p>
+</section>
+<p class="partlabel">Part III. Team</p>
+<section id="s-hiring">
+<h2>Hiring the first 10</h2>
+<p class="lede">Your first ten people set the culture that the next hundred copy. Hire slowly for fit, pay fairly, and move fast once you are sure.</p>
+
+<div class="g3">
+ <div class="panel"><h4>Hire when</h4><ul class="tight"><li>A founder spends over half their week on a repeatable task someone else could own.</li><li>Revenue or runway covers 6 months of that salary.</li><li>You can write the role's 90-day outcome in two sentences.</li></ul></div>
+ <div class="panel"><h4>Do not hire when</h4><ul class="tight"><li>You are hoping a hire will find product-market fit for you.</li><li>The work is a one-off (use a freelancer).</li><li>You cannot give them a clear owner and weekly check-in.</li></ul></div>
+ <div class="panel"><h4>Employee, contractor or intern?</h4><ul class="tight"><li><b>Employee:</b> ongoing core work, equity-worthy.</li><li><b>Contractor:</b> defined deliverable, independent schedule.</li><li><b>Intern:</b> learning role, fixed term, stipend, mentor assigned.</li></ul></div>
+</div>
+
+<h3>Order of first hires</h3>
+<div class="tw"><table>
+<thead><tr><th>Model</th><th>Hire 1</th><th>Hire 2</th><th>Hire 3 to 5</th></tr></thead>
+<tbody>
+<tr><td>B2B SaaS</td><td>Full-stack engineer</td><td>Founder-led sales support (SDR or customer success)</td><td>Second engineer, designer, content marketer</td></tr>
+<tr><td>Consumer app</td><td>Mobile engineer</td><td>Community or growth lead</td><td>Designer, content creator, support</td></tr>
+<tr><td>Marketplace</td><td>Operations lead (supply side)</td><td>Engineer</td><td>City or category managers</td></tr>
+<tr><td>Deep tech</td><td>Domain specialist or researcher</td><td>Embedded or systems engineer</td><td>Grants and partnerships lead</td></tr>
+</tbody></table></div>
+
+<h3>Scorecard (use for every role)</h3>
+<div class="tw"><table>
+<thead><tr><th>Criterion</th><th>Weight</th><th>What a strong signal looks like</th></tr></thead>
+<tbody>
+<tr><td>Ownership</td><td>25%</td><td>Talks about outcomes they drove, not tasks they were given</td></tr>
+<tr><td>Craft</td><td>25%</td><td>Paid work trial is good without hand-holding</td></tr>
+<tr><td>Learning speed</td><td>20%</td><td>Picked up a new tool or domain fast, with evidence</td></tr>
+<tr><td>Communication</td><td>15%</td><td>Clear written updates; asks precise questions</td></tr>
+<tr><td>Values fit</td><td>15%</td><td>Honest about failures; comfortable with ambiguity and frugality</td></tr>
+</tbody></table></div>
+
+<h3>Process: 10 working days, end to end</h3>
+<ol class="tight">
+ <li><b>Role doc</b> with 90-day outcome, salary band, ESOP range. Post it publicly; it doubles as marketing.</li>
+ <li><b>20-minute screen</b> by a founder: motivation, notice period, salary expectation.</li>
+ <li><b>Paid work trial</b> of 4 to 8 hours on a real, scoped problem. Pay for it; it attracts better people and protects your IP.</li>
+ <li><b>Deep interview</b> walking through their trial and one past project.</li>
+ <li><b>Values conversation</b> with the other founder.</li>
+ <li><b>Two backchannel references</b> from people they did not list.</li>
+ <li><b>Offer within 48 hours</b> of the last interview.</li>
+</ol>
+
+<h3>India-specific realities</h3>
+<ul class="tight">
+ <li><span class="t t-v">Visha</span>Notice periods of 60 to 90 days are common and offer drop-outs are frequent. Keep the second-best candidate warm and stay in weekly contact until joining day.</li>
+ <li><span class="t t-a">Amrit</span>Tier-2 and tier-3 engineering colleges have strong students ignored by big recruiters. Placement cells respond to startups that visit in person.</li>
+ <li><span class="t t-a">Amrit</span>Open-source contributors to your stack are pre-vetted: you can read their code before the first call.</li>
+ <li>Explain ESOPs in rupees: "At a ₹100 crore exit, your vested options are worth about ₹X". Most candidates have never been shown the maths.</li>
+ <li>Every offer letter carries IP assignment, confidentiality, and notice terms before day 1.</li>
+</ul>
+
+<h3>First 90 days of every hire</h3>
+<div class="g3">
+ <div class="panel"><h4>Days 1 to 30</h4><p>Ship something small in week 1. Shadow customer calls. Written onboarding doc, named buddy.</p></div>
+ <div class="panel"><h4>Days 31 to 60</h4><p>Owns one area end to end. Weekly 1:1 with a founder, written feedback both ways.</p></div>
+ <div class="panel"><h4>Days 61 to 90</h4><p>Review against the 90-day outcome. Confirm, extend with a clear gap list, or part ways.</p></div>
+</div>
+<p><span class="t t-v">Visha</span>When a hire is not working, decide by day 90. Part ways with dignity, written reasons, full and final settlement on time (the Code on Wages sets a short deadline; <span class="t t-c">Verify</span> current rule), and a fair reference for what they did well.</p>
+</section>
+
+<section id="s-finance">
+<h2>Finance function</h2>
+<p class="lede">Finance at a startup has three jobs: never run out of cash by surprise, never miss a filing, and give founders numbers they can decide with.</p>
+<div class="tw"><table>
+<thead><tr><th>Stage</th><th>Who does finance</th><th>Trigger to move up</th><th>Monthly cost (approx)</th></tr></thead>
+<tbody>
+<tr><td><b>0. Pre-revenue</b></td><td>One founder owns it, with a CA on retainer for filings</td><td>First GST registration or first employee</td><td class="n">₹3k to 8k</td></tr>
+<tr><td><b>1. Early revenue</b></td><td>Part-time bookkeeper, payroll tool, CA for compliance</td><td>₹5 lakh+ monthly revenue or 10+ people</td><td class="n">₹10k to 25k</td></tr>
+<tr><td><b>2. Post-seed</b></td><td>Fractional CFO for MIS, board packs, fundraising models</td><td>Board with investors, multiple revenue lines</td><td class="n">₹40k to 1.5 lakh</td></tr>
+<tr><td><b>3. Series A</b></td><td>In-house finance manager, FP&amp;A, internal audit</td><td>50+ people or multi-entity setup</td><td class="n">Full-time salaries</td></tr>
+</tbody></table></div>
+
+<h3>Controls from month 1</h3>
+<ul class="ck" data-group="fin">
+ <li><input type="checkbox" id="f1"><label for="f1">Company bank account only; no business spend on personal cards</label></li>
+ <li><input type="checkbox" id="f2"><label for="f2">Two approvers for payments above an agreed limit</label></li>
+ <li><input type="checkbox" id="f3"><label for="f3">Monthly close by the 10th: bank reconciliation, GST purchase-credit match, TDS check</label></li>
+ <li><input type="checkbox" id="f4"><label for="f4">Written expense policy (one page) with receipts for everything</label></li>
+ <li><input type="checkbox" id="f5"><label for="f5">Contract register: every customer, vendor and employee agreement in one folder</label></li>
+ <li><input type="checkbox" id="f6"><label for="f6">13-week cash flow forecast updated every Monday</label></li>
+ <li><input type="checkbox" id="f7"><label for="f7">One-page monthly MIS shared between founders</label></li>
+</ul>
+<div class="prog"><i data-bar="fin"></i></div><div class="progt" data-count="fin"></div>
+
+<h3>The one-page MIS</h3>
+<div class="g3">
+ <div class="panel"><h4>Cash</h4><p>Balance, monthly burn, runway in months, receivables older than 30 days.</p></div>
+ <div class="panel"><h4>Revenue</h4><p>MRR or monthly revenue, growth %, new vs expansion vs churned.</p></div>
+ <div class="panel"><h4>Unit economics</h4><p>Gross margin, CAC, CAC payback in months, revenue retention.</p></div>
+</div>
+<p class="small">Healthy direction of travel, not rules: SaaS gross margin 70 to 85%, CAC payback under 12 months; D2C contribution margin positive after marketing by the second order; marketplaces take rate stable while repeat rate rises.</p>
+
+<h3>Hidden costs founders forget</h3>
+<ul class="tight">
+ <li>Payment gateway fees of about 2% on every transaction, plus GST on those fees.</li>
+ <li>TDS on payments to contractors, rent and professionals, deposited monthly.</li>
+ <li>GST input credit lost when vendors do not file their returns.</li>
+ <li>Annual audit, ROC filing and director KYC costs.</li>
+ <li>Foreign exchange spread on USD income; compare bank rates against specialist remittance platforms.</li>
+</ul>
+<p><span class="t t-a">Amrit</span>Founders who do the books themselves for the first 6 months understand their margins better than those who outsource on day one. Hand it over once you know what the numbers mean.</p>
+</section>
+
+<section id="s-hr">
+<h2>HR and people ops</h2>
+<p class="lede">HR is the operating system for people. Install the basics before you need them; it is cheaper than repairing trust later.</p>
+<div class="tw"><table>
+<thead><tr><th>Team size</th><th>Who runs HR</th><th>What to have in place</th></tr></thead>
+<tbody>
+<tr><td><b>1 to 10</b></td><td>A founder, using templates and a payroll tool</td><td>Offer letters, handbook, leave policy, payroll, IP and confidentiality terms</td></tr>
+<tr><td><b>10 to 25</b></td><td>Founder plus part-time HR consultant</td><td>POSH Internal Committee, PF and ESI where required, appraisal cycle, onboarding checklist</td></tr>
+<tr><td><b>25 to 60</b></td><td>HR generalist</td><td>Compensation bands, career levels, engagement surveys, learning budget</td></tr>
+<tr><td><b>60+</b></td><td>HR manager plus HR business partners</td><td>Leadership training, succession plans, HR analytics</td></tr>
+</tbody></table></div>
+
+<h3>Policy stack</h3>
+<div class="g3">
+ <div class="panel"><h4>Handbook (5 pages max)</h4><p>Working hours, remote rules, leave, expenses, devices, code of conduct, how decisions are made.</p></div>
+ <div class="panel"><h4>Leave</h4><p>A simple, generous, written policy beats an unwritten one. Include sick leave, earned leave, holidays, and statutory maternity benefit (26 weeks for eligible employees).</p></div>
+ <div class="panel"><h4>Performance</h4><p>Quarterly check-ins against written goals. One annual compensation review, never ad hoc raises for whoever complains loudest.</p></div>
+ <div class="panel"><h4>POSH</h4><p>Policy, Internal Committee with an external member, and annual awareness session once you reach 10 employees.</p></div>
+ <div class="panel"><h4>Exit</h4><p>Handover checklist, access revoked the same day, full and final settlement on time, exit interview.</p></div>
+ <div class="panel"><h4>Remote work</h4><p>Written weekly updates, core overlap hours, one in-person meet-up per quarter if the team is distributed.</p></div>
+</div>
+
+<h3>Statutory points to design around</h3>
+<ul class="tight">
+ <li>Labour Codes (in force from November 2025): "wages" for PF and gratuity must be at least half of total pay, so salary structures with tiny basic pay no longer work. <span class="t t-c">Verify</span> with your payroll provider.</li>
+ <li>PF from 20 employees, ESI from 10 in notified areas, gratuity after 5 years (shorter for fixed-term staff under the new codes; <span class="t t-c">Verify</span>).</li>
+ <li>Shops and Establishments registration and professional tax per state.</li>
+</ul>
+
+<h3>Culture you can write down</h3>
+<ul class="tight">
+ <li>Three to five values phrased as behaviours ("we write it down", "customers before comfort"), not adjectives.</li>
+ <li>Weekly all-hands: numbers, wins, one failure and what was learned.</li>
+ <li>Founders take feedback publicly and act on it visibly. Nothing builds trust faster.</li>
+</ul>
+</section>
+
+<p class="partlabel">Part IV. Money</p>
+<section id="s-money">
+<h2>Zero-funding playbook</h2>
+<p class="lede">With almost no capital, your runway is founder patience plus revenue. Stretch the first, accelerate the second.</p>
+
+<h3>Runway calculator</h3>
+<div class="calc">
+ <div class="row">
+  <label class="f">Cash in bank (₹)<input type="number" id="rc" value="200000" min="0" step="10000"></label>
+  <label class="f">Monthly burn (₹)<input type="number" id="rb" value="40000" min="0" step="5000"></label>
+  <label class="f">Revenue now (₹/month)<input type="number" id="rr" value="0" min="0" step="5000"></label>
+  <label class="f">Revenue growth (%/month)<input type="number" id="rg" value="20" min="0" max="200"></label>
+  <label class="f">First revenue in month<input type="number" id="rs" value="2" min="0" max="12"></label>
+ </div>
+ <div class="out" id="rout"></div>
+ <svg class="chart" id="rchart" viewBox="0 0 700 220" role="img" aria-label="Cash balance over 18 months"></svg>
+ <p class="small">Revenue starts at ₹10,000 in the chosen month if "Revenue now" is 0, then grows at the rate set. Default alive means revenue overtakes burn before cash runs out.</p>
+</div>
+
+<h3>Lean tool stack (per month)</h3>
+<div class="tw"><table>
+<thead><tr><th>Need</th><th>Free or near-free option</th><th>Approx cost</th></tr></thead>
+<tbody>
+<tr><td>AI coding and writing</td><td>One paid assistant per founder, free tiers for the rest</td><td class="n">₹1.5k to 4k each</td></tr>
+<tr><td>Hosting, DB, auth</td><td>Free tiers of managed Postgres, serverless hosting, CDN</td><td class="n">₹0 to 2k</td></tr>
+<tr><td>Email and docs</td><td>Zoho Workplace or Google Workspace starter</td><td class="n">₹100 to 250 per user</td></tr>
+<tr><td>Accounting and invoicing</td><td>Zoho Books free tier or similar</td><td class="n">₹0 to 1k</td></tr>
+<tr><td>Payments</td><td>Razorpay, Cashfree (per-transaction fee only)</td><td class="n">~2% per txn</td></tr>
+<tr><td>Design and content</td><td>Figma and Canva free tiers</td><td class="n">₹0</td></tr>
+<tr><td>Domain</td><td>.com or .in</td><td class="n">₹800 to 1.5k per year</td></tr>
+</tbody></table></div>
+<p><b>Target:</b> keep tools under ₹10k to 15k a month for two founders until revenue passes ₹1 lakh a month. <span class="t t-c">Verify</span> live pricing; it shifts quarterly.</p>
+
+<h3>Free credits to stack</h3>
+<p>AWS Activate, Google for Startups Cloud Program, Microsoft for Startups, NVIDIA Inception, Zoho for Startups, Razorpay Rize, plus the IndiaAI Mission's subsidised GPU compute for AI builders. Incubators and accelerators often unlock the higher credit tiers. <span class="t t-c">Verify</span> amounts on each programme page; tiers change often.</p>
+
+<h3>Revenue before the product is finished</h3>
+<p class="ex"><span class="t t-ok">Real example</span>Airbnb's founders funded themselves by selling novelty cereal boxes in 2008 when investors passed. Resourcefulness counts.</p>
+<div class="g3">
+ <div class="panel"><h4>Paid pilots</h4><p>30 to 90 days, fixed fee, written success criteria, converts to annual contract.</p></div>
+ <div class="panel"><h4>Services wedge</h4><p>Do the job manually or semi-automated for a fee. You learn the workflow and fund the build.</p></div>
+ <div class="panel"><h4>Pre-sales</h4><p>Founding-member pricing: lifetime discount for paying now. Offer refunds to keep trust.</p></div>
+ <div class="panel"><h4>Workshops</h4><p>Teach what you know to your target buyers. Every attendee is a lead.</p></div>
+ <div class="panel"><h4>Templates and tools</h4><p>Sell the spreadsheet, script or checklist that your product will eventually automate.</p></div>
+ <div class="panel"><h4>Grants and prizes</h4><p>Non-dilutive. Slow, so apply early and in parallel (next section).</p></div>
+</div>
+
+<h3>The funding ladder</h3>
+<div class="tw" style="padding:10px">
+<svg class="chart" viewBox="0 0 760 250" role="img" aria-labelledby="lad">
+<title id="lad">Funding ladder: bootstrapping and grants, then angels and micro VCs, then seed, then Series A and venture debt, with typical ticket sizes.</title>
+<g id="ladder"></g>
+</svg>
+</div>
+<p class="small">Ticket ranges are indicative for India in 2025 to 2026 and swing with the market.</p>
+</section>
+
+<section id="s-schemes">
+<h2>Govt schemes and timelines</h2>
+<p class="lede">DPIIT recognition is the master key. Get it in month 1, then apply to several schemes in parallel because each takes 1 to 4 months to decide.</p>
+<div class="call v"><b>Status alert, September 2026</b><p>The Startup India Seed Fund Scheme (SISFS: ₹20 lakh grant plus up to ₹50 lakh debt through incubators) stopped taking startup applications on 31 May 2026, and no successor round had been announced when this was checked. Watch seedfund.startupindia.gov.in for a new cycle.</p></div>
+<div class="chips" data-filter="sch" role="group" aria-label="Filter schemes">
+ <button class="chip" aria-pressed="true" data-f="all">All</button>
+ <button class="chip" aria-pressed="false" data-f="grant">Grants</button>
+ <button class="chip" aria-pressed="false" data-f="debt">Debt</button>
+ <button class="chip" aria-pressed="false" data-f="equity">Equity</button>
+ <button class="chip" aria-pressed="false" data-f="deep">Deep tech</button>
+ <button class="chip" aria-pressed="false" data-f="state">State</button>
+</div>
+<div class="tw"><table id="schtable">
+<thead><tr><th>Scheme</th><th>What you get</th><th>Who fits</th><th>Timing and status</th></tr></thead>
+<tbody>
+<tr data-k="grant"><td><b>DPIIT recognition</b></td><td>Gateway to tax holiday, CGSS, fast patents, 80% patent fee rebate, self-certification under labour and environment laws, relaxed public procurement norms</td><td>Pvt Ltd, LLP, partnership (and now co-operatives) within 10 years, turnover up to ₹200 crore</td><td>Rolling. Revised framework notified Feb 2026.</td></tr>
+<tr data-k="deep"><td><b>DPIIT Deep Tech Startup</b></td><td>Recognition for 20 years, turnover cap ₹300 crore</td><td>R&amp;D-heavy, IP-owning startups</td><td>New since Feb 2026. <span class="t t-c">Verify</span> documentation parameters.</td></tr>
+<tr data-k="grant"><td><b>Startup India Seed Fund (SISFS)</b></td><td>Up to ₹20 lakh grant; up to ₹50 lakh debt or convertible</td><td>DPIIT startups under 2 years old</td><td><span class="t t-v">Closed</span> 31 May 2026. Watch for successor.</td></tr>
+<tr data-k="debt"><td><b>Credit Guarantee Scheme for Startups (CGSS)</b></td><td>Collateral-free loans guaranteed up to ₹20 crore per borrower</td><td>DPIIT startups with revenue that can service debt</td><td>Open via banks, NBFCs and venture debt funds (NCGTC).</td></tr>
+<tr data-k="equity"><td><b>Fund of Funds for Startups 1.0 and 2.0</b></td><td>Indirect equity via SIDBI-backed AIFs; 2.0 added ₹10,000 crore</td><td>Startups raising institutional rounds</td><td>Open. You pitch the AIFs, not SIDBI.</td></tr>
+<tr data-k="debt"><td><b>MUDRA (up to Tarun Plus)</b></td><td>Loans up to ₹20 lakh, no DPIIT needed (Tarun Plus needs a repaid earlier Tarun loan)</td><td>Small businesses with cash flow</td><td>Open at banks.</td></tr>
+<tr data-k="debt"><td><b>Stand-Up India</b></td><td>Bank loans ₹10 lakh to ₹1 crore</td><td>Women or SC/ST founders, greenfield ventures</td><td>Open.</td></tr>
+<tr data-k="debt"><td><b>CGTMSE</b></td><td>Collateral-free credit guarantee for micro and small enterprises</td><td>Udyam-registered MSEs</td><td>Open. <span class="t t-c">Verify</span> current ceiling (raised in 2025).</td></tr>
+<tr data-k="grant deep"><td><b>BIRAC BIG</b></td><td>Grant up to ₹50 lakh</td><td>Biotech, medtech, agritech, health</td><td>Usually two calls a year. <span class="t t-c">Verify</span> on birac.nic.in.</td></tr>
+<tr data-k="grant deep"><td><b>NIDHI-PRAYAS</b></td><td>Prototype grant up to ₹10 lakh</td><td>Hardware and physical products</td><td>Rolling via DST PRAYAS centres.</td></tr>
+<tr data-k="grant"><td><b>NIDHI-EIR</b></td><td>Monthly fellowship for a founder for up to 12 months</td><td>Graduates building a tech venture in an incubator</td><td>Via DST incubators. <span class="t t-c">Verify</span> amount.</td></tr>
+<tr data-k="grant"><td><b>MeitY TIDE 2.0, SAMRIDH, GENESIS</b></td><td>Grants and matching funds via MeitY-supported incubators and accelerators</td><td>ICT, AI, software product startups; GENESIS targets tier-2 and tier-3</td><td>Cohort calls. <span class="t t-c">Verify</span> on msh.meity.gov.in.</td></tr>
+<tr data-k="grant deep"><td><b>Atal Innovation Mission (AIC, ANIC)</b></td><td>Incubation plus challenge grants (ANIC up to ₹1 crore)</td><td>Solutions to national problem statements</td><td>Challenge-based calls.</td></tr>
+<tr data-k="grant deep"><td><b>iDEX (defence)</b></td><td>Grants up to ₹1.5 crore (SPARK), up to ₹25 crore under ADITI</td><td>Defence and dual-use tech</td><td>Challenge rounds several times a year.</td></tr>
+<tr data-k="debt equity deep"><td><b>Technology Development Board</b></td><td>Soft loans and equity for commercialising Indian tech</td><td>Tech ready to scale</td><td>Rolling.</td></tr>
+<tr data-k="debt deep"><td><b>RDI scheme (₹1 lakh crore)</b></td><td>Long-term low or zero interest finance for private R&amp;D</td><td>Deep tech and sunrise sectors</td><td>Rolling out via second-level fund managers. <span class="t t-c">Verify</span> current calls.</td></tr>
+<tr data-k="grant deep"><td><b>IndiaAI Mission compute</b></td><td>Subsidised GPU access; innovation challenges</td><td>AI builders</td><td>Open portal. <span class="t t-c">Verify</span> rates.</td></tr>
+<tr data-k="state grant"><td><b>Kerala Startup Mission</b></td><td>Idea, productisation and scale-up grants; strong incubator network</td><td>Kerala-registered startups</td><td>Periodic calls.</td></tr>
+<tr data-k="state grant"><td><b>Karnataka Elevate</b></td><td>Grant-in-aid for early startups</td><td>Karnataka-registered startups</td><td>Annual call.</td></tr>
+<tr data-k="state grant equity"><td><b>StartupTN (TANSEED)</b></td><td>Seed support for early startups</td><td>Tamil Nadu startups</td><td>Periodic calls.</td></tr>
+<tr data-k="state grant"><td><b>Maharashtra MSInS Startup Week</b></td><td>Winners get government pilot work orders</td><td>Startups solving public problems</td><td>Annual.</td></tr>
+<tr data-k="state grant"><td><b>Gujarat SSIP, Telangana T-Hub and T-Works, Odisha, UP, Rajasthan iStart</b></td><td>Sustenance allowances, rent support, patent reimbursement, grants</td><td>State-registered startups</td><td>Varies. Read your state's startup policy PDF.</td></tr>
+</tbody></table></div>
+<p class="small">Amounts are headline maximums; most awards are smaller and milestone-linked. Every row changes; confirm on the official portal before you plan cash around it.</p>
+
+<h3>Annual rhythm worth planning around</h3>
+<div class="tw"><table>
+<thead><tr><th>When (typical)</th><th>What</th><th>Why it matters</th></tr></thead>
+<tbody>
+<tr><td class="n">1 Feb</td><td>Union Budget</td><td>Tax holiday dates, fund corpuses and scheme changes land here</td></tr>
+<tr><td class="n">16 January</td><td>National Startup Day</td><td>Awards announcements, press attention</td></tr>
+<tr><td class="n">Jan to Mar</td><td>IIT and IIM E-Summits, B-plan contests</td><td>Prize money, investor rooms, student talent</td></tr>
+<tr><td class="n">Spring</td><td>Startup Mahakumbh (New Delhi)</td><td>Largest govt-backed startup expo</td></tr>
+<tr><td class="n">Mid-year</td><td>National Startup Awards applications</td><td>Credibility badge for grants and govt buyers</td></tr>
+<tr><td class="n">Nov</td><td>Bengaluru Tech Summit</td><td>Karnataka grant winners, investor density</td></tr>
+<tr><td class="n">Rolling</td><td>State policy calls, BIRAC, iDEX challenges</td><td>Most non-dilutive money comes through these</td></tr>
+</tbody></table></div>
+<p class="small"><span class="t t-c">Verify</span> each year's dates on the organiser sites.</p>
+</section>
+
+<section id="s-private">
+<h2>Private capital</h2>
+<p class="lede">Raise when money buys speed you have already proven. Raising to find product-market fit is the most expensive money you will ever take.</p>
+<div class="g2">
+ <div class="panel"><h4>Pre-seed and angels</h4><p>Angel networks (Indian Angel Network, Mumbai Angels, LetsVenture, Venture Catalysts, Inflection Point Ventures), operator angels, micro VCs (100X.VC, Antler India, First Cheque, Titan Capital, Better Capital and similar).</p></div>
+ <div class="panel"><h4>Accelerators</h4><p>Google for Startups Accelerator, Peak XV Surge, Nasscom programmes, NSRCEL (IIM Bangalore), CIIE.CO (IIM Ahmedabad), T-Hub. Y Combinator usually needs a US, Singapore or similar parent. <span class="t t-c">Verify</span> current rules.</p></div>
+ <div class="panel"><h4>Non-dilutive private money</h4><p>Revenue-based financing once revenue is steady (Klub, GetVantage, Velocity and others), CSR grants through incubators, foundation grants (Villgro, Social Alpha for impact).</p></div>
+ <div class="panel"><h4>Debt after equity</h4><p>Venture debt (Alteria, Stride, InnoVen, Trifecta) typically sizes to 20 to 40% of your last equity round.</p></div>
+</div>
+<p><span class="t t-v">Visha</span>Public equity crowdfunding is not legal in India. Donation crowdfunding suits social causes only.</p>
+<h3>Fundraise in 6 weeks</h3>
+<ul class="tight">
+ <li><b>Week 0:</b> deck, metrics dashboard, data room, target list of 50 investors ranked by fit.</li>
+ <li><b>Weeks 1 to 2:</b> warm intros via founders they backed. Book all first calls within 10 days.</li>
+ <li><b>Weeks 3 to 4:</b> second meetings, customer references, create a close date.</li>
+ <li><b>Weeks 5 to 6:</b> term sheet, lawyer review of liquidation preference, board seats, anti-dilution, founder vesting reset.</li>
+</ul>
+<p><span class="t t-v">Visha</span>What kills Indian rounds in diligence: missing INC-20A or ROC filings, informal equity promises, IP not assigned to the company, cash in personal accounts.</p>
+</section>
+<section id="s-tax">
+<h2>Tax holiday strategy</h2>
+<div class="call v"><b>Correction to a common belief</b><p>The startup tax holiday is <b>3 consecutive years</b> of 100% profit deduction, chosen by you, inside the first <b>10 years</b> from incorporation. It is not 2 years. From 1 April 2026 it lives in <b>Section 140 of the Income-tax Act 2025</b> (formerly 80-IAC). Incorporation must be before 1 April 2030.</p></div>
+
+<h3>Two gates, not one</h3>
+<div class="g2">
+ <div class="panel"><h4>Gate 1: DPIIT recognition</h4><p>Easy, free, fast. Over 2 lakh startups hold it.</p></div>
+ <div class="panel"><h4>Gate 2: IMB certificate</h4><p>Separate application to the Inter-Ministerial Board proving real innovation, scalability and employment potential. Only a few thousand startups hold it. Apply once you have audited accounts and traction; strong evidence beats early filing.</p></div>
+</div>
+<p><span class="t t-v">Visha</span>Other conditions: Pvt Ltd or LLP only, not formed by splitting an existing business, not more than 20% used plant and machinery, audited accounts, turnover under the cap in the claim year. <span class="t t-c">Verify</span> the turnover cap for the deduction itself; the DPIIT recognition cap rose to ₹200 crore in 2026, while several tax sources still show ₹100 crore for the holiday.</p>
+
+<h3>The regime trap</h3>
+<div class="tw"><table>
+<thead><tr><th>Option (company)</th><th>Headline rate</th><th>Tax holiday?</th><th>MAT?</th></tr></thead>
+<tbody>
+<tr><td>Normal regime (turnover up to ₹400 crore)</td><td>25% + surcharge + 4% cess</td><td>Yes</td><td>Yes, 15% of book profit in holiday years; creates MAT credit usable later</td></tr>
+<tr><td>Concessional regime (formerly 115BAA)</td><td>22% + 10% surcharge + 4% cess (about 25.2%)</td><td><b>No</b></td><td>No</td></tr>
+<tr><td>LLP</td><td>30% + surcharge + cess</td><td>Yes</td><td>Alternate Minimum Tax 18.5% applies instead</td></tr>
+</tbody></table></div>
+<p><span class="t t-v">Visha</span>Opting into the concessional regime is a one-way door. If you choose it, you give up the holiday forever. Stay in the normal regime until your holiday years are done, then compare.</p>
+
+<h3>Pick your best three years</h3>
+<div class="calc">
+ <p class="small">Enter projected profit (₹ lakh) for each year from incorporation. Losses as negative numbers. The calculator finds the 3-consecutive-year window with the highest total profit.</p>
+ <div class="row" id="taxyears"></div>
+ <div class="row">
+  <label class="f">Normal tax rate %<input type="number" id="tn" value="26" step="0.1"></label>
+  <label class="f">MAT rate % (holiday years)<input type="number" id="tm" value="15.6" step="0.1"></label>
+ </div>
+ <div class="out" id="tout"></div>
+ <svg class="chart" id="tchart" viewBox="0 0 700 220" role="img" aria-label="Projected profit by year with the chosen holiday window highlighted"></svg>
+ <p class="small">Rates shown exclude surcharge. MAT credit can be set off against normal tax in later years if you stay in the normal regime, so long-run savings can approach the full normal rate. Get a CA to model your real numbers.</p>
+</div>
+
+<h3>Timing tactics (legal ones)</h3>
+<ul class="tight">
+ <li><span class="t t-a">Amrit</span>Do not "spend" holiday years on small profits. Most startups should claim somewhere in years 4 to 8.</li>
+ <li><span class="t t-a">Amrit</span>Schedule big discretionary spends (hiring bursts, brand campaigns, capex) in non-holiday years, where they reduce taxable profit. In holiday years the profit is exempt anyway.</li>
+ <li><span class="t t-a">Amrit</span>Early losses carry forward for 8 years. Eligible startups get relief from the usual rule that a 51% shareholding change wipes out old losses, as long as the original shareholders continue. <span class="t t-c">Verify</span> the exact condition under the new Act before each round.</li>
+ <li><span class="t t-v">Visha</span>Related-party deals that shift profit into holiday years can be recomputed by the tax officer. Keep transfer prices at market rates.</li>
+</ul>
+
+<h3>Other tax wins and traps</h3>
+<div class="g2">
+ <div class="panel"><h4>Angel tax is gone</h4><p>The tax on share premium above fair value was abolished from 1 April 2025, for all investors. Valuation reports are still needed for FEMA and ESOPs.</p></div>
+ <div class="panel"><h4>GST</h4><p>Registration mandatory above ₹20 lakh turnover for services (₹40 lakh goods; lower in special-category states), and for inter-state goods supply or selling goods via e-commerce platforms. SaaS is typically 18%.</p></div>
+ <div class="panel"><h4>Exporting services</h4><p>File a Letter of Undertaking (LUT) and invoice foreign clients without GST (zero-rated). Collect the foreign inward remittance proof for each payment. <span class="t t-c">Verify</span> the RBI deadline to realise export proceeds.</p></div>
+ <div class="panel"><h4>Founder pay</h4><p>Salary is a deductible expense for the company; dividends are taxed in your hands at slab rates. In loss years, keep salaries low and defer.</p></div>
+</div>
+</section>
+<section id="s-where">
+<h2>Office, state, HQ abroad</h2>
+<p class="lede">Location is a lever you pull in phases. Move only when a trigger fires, never for prestige.</p>
+<div class="tw"><table>
+<thead><tr><th>Phase</th><th>Where to sit</th><th>Move to the next phase when</th></tr></thead>
+<tbody>
+<tr><td><b>A. Months 0 to 9</b></td><td>Home as registered office, remote work, coworking day passes for client meetings. Incubator desk if one accepts you (often free).</td><td>5+ people in one city, or clients expect to visit</td></tr>
+<tr><td><b>B. Team of 6 to 20</b></td><td>Dedicated coworking desks. Choose a state whose policy reimburses rent or gives grants.</td><td>20+ people, security or hardware needs, Series A money</td></tr>
+<tr><td><b>C. 20+ people</b></td><td>Leased office. Consider a tier-2 city for cost and retention; keep a small sales hub in a metro.</td><td>Multi-city hiring or regulatory need for a local presence</td></tr>
+</tbody></table></div>
+<p><span class="t t-a">Amrit</span>A physical office starts paying for itself when (a) collaboration speed matters more than rent, (b) enterprise or government buyers want site visits, (c) a state subsidy needs a registered place of business there, or (d) you handle hardware or sensitive data. Before that, rent is pure burn.</p>
+
+<h3>Which state to register in</h3>
+<p>You can incorporate in one state and operate everywhere, but state benefits usually need registered office or operations there. Shortlist by what you need most:</p>
+<div class="g3">
+ <div class="panel"><h4>Grants early</h4><p>Kerala (KSUM), Karnataka (Elevate), Tamil Nadu (StartupTN)</p></div>
+ <div class="panel"><h4>Hardware and prototyping</h4><p>Telangana (T-Works), Karnataka, Gujarat</p></div>
+ <div class="panel"><h4>Government pilots</h4><p>Maharashtra (MSInS), Odisha, Uttar Pradesh</p></div>
+</div>
+<p class="small"><span class="t t-c">Verify</span> the current state policy PDF; most are revised every 3 to 5 years.</p>
+
+<h3>HQ outside India: decision matrix</h3>
+<div class="tw"><table>
+<thead><tr><th>Setup</th><th>Choose it when</th><th>Cost and traps</th></tr></thead>
+<tbody>
+<tr><td><b>Indian company only</b></td><td>Indian customers, Indian investors, plan for an Indian IPO</td><td>Simplest. The strong Indian IPO market of 2024 to 2026 made this the default for many.</td></tr>
+<tr><td><b>Indian parent + US subsidiary</b></td><td>You sell to US customers and need a US bank, Stripe, US contracts</td><td>Best middle path. Keeps IP and cap table in India. Transfer pricing and ODI filings needed.</td></tr>
+<tr><td><b>Flip: US (Delaware) parent</b></td><td>Majority revenue from the US and a US lead investor insists, or a US accelerator requires it</td><td>USD 15k to 40k+ a year in dual compliance. FEMA ODI rules, POEM risk (a foreign company run from India can be taxed in India). Reversing later is expensive: several large Indian startups paid very large tax bills to move home before listing.</td></tr>
+<tr><td><b>Singapore or UAE parent</b></td><td>South-east Asia or Middle East is the main market</td><td>Similar traps to a US flip; substance requirements abroad.</td></tr>
+<tr><td><b>GIFT City IFSC unit</b></td><td>Fintech, cross-border finance, funds, global treasury or leasing</td><td>IFSC units get a 100% tax deduction for 10 consecutive years out of 15, plus offshore-style regulation from inside India. <span class="t t-c">Verify</span> which activities qualify.</td></tr>
+</tbody></table></div>
+<p class="ex"><span class="t t-ok">Real example</span>Zoho runs offices in small towns such as Tenkasi, keeping costs low and talent loyal. Several large Indian startups later moved their holding companies back to India before listing, at significant tax cost.</p>
+<p><span class="t t-v">Visha</span>Flipping in the first 6 months is almost always premature. It costs money and months you need for customers. Revisit at the first priced round.</p>
+</section>
+
+<p class="partlabel">Part V. Build and grow</p>
+<section id="s-eng">
+<h2>Engineering and security</h2>
+<p class="lede">An engineer founder is the biggest advantage in the zero-capital game. Protect it by building boring, shipping weekly and never losing data.</p>
+<div class="g2">
+ <div class="panel"><h4>Build principles</h4><ul class="tight"><li>One monolith, one Postgres, one deploy pipeline.</li><li>Use AI coding agents for scaffolding and tests; review every diff that touches money, auth or data.</li><li>Feature flags so you can ship daily and turn things off.</li><li>Analytics events on day one: sign-up, activation, core action, payment.</li></ul></div>
+ <div class="panel"><h4>Ship cadence</h4><ul class="tight"><li>Weekly release with a public changelog.</li><li>Friday demo to design partners.</li><li>Kill any feature under 10% usage after 30 days.</li><li>Keep a "not doing" list to protect focus.</li></ul></div>
+</div>
+<h3>Security baseline (week 1)</h3>
+<ul class="ck" data-group="sec">
+ <li><input type="checkbox" id="s1"><label for="s1">MFA on email, cloud, code host, bank, domain registrar</label></li>
+ <li><input type="checkbox" id="s2"><label for="s2">Domain, cloud, app store and payment accounts owned by the company, not a personal email</label></li>
+ <li><input type="checkbox" id="s3"><label for="s3">Secrets in a manager, never in code; rotate on any departure</label></li>
+ <li><input type="checkbox" id="s4"><label for="s4">Automated daily backups with a restore actually tested</label></li>
+ <li><input type="checkbox" id="s5"><label for="s5">Logs kept 180 days; incidents reportable to CERT-In within 6 hours<span class="when">CERT-In directions apply to all service providers.</span></label></li>
+ <li><input type="checkbox" id="s6"><label for="s6">Dependency scanning and OWASP Top 10 review before launch</label></li>
+ <li><input type="checkbox" id="s7"><label for="s7">Least-privilege access; no production data on laptops</label></li>
+ <li><input type="checkbox" id="s8"><label for="s8">Two people can access every critical system (bus factor 2)</label></li>
+</ul>
+<div class="prog"><i data-bar="sec"></i></div><div class="progt" data-count="sec"></div>
+
+<h3>DPDP Act readiness</h3>
+<p>The Digital Personal Data Protection Rules were notified in November 2025 with phased timelines; most duties bite around mid-2027. <span class="t t-c">Verify</span> on meity.gov.in. Build for it now, retrofitting is costly.</p>
+<ul class="tight">
+ <li>Plain-language notice and specific consent for each purpose; easy withdrawal.</li>
+ <li>Collect only what you use; delete when the purpose ends.</li>
+ <li>Children under 18: verifiable parental consent, no tracking or targeted ads.</li>
+ <li>Breach: notify the Data Protection Board and affected users.</li>
+ <li>Penalties reach ₹250 crore per breach category. Security safeguards are the one to fear most.</li>
+</ul>
+<p><span class="t t-a">Amrit</span>Enterprise buyers will ask for SOC 2 or ISO 27001. Do not buy either before a deal needs it; keep a security questionnaire answer bank instead.</p>
+</section>
+<section id="s-growth">
+<h2>Marketing and attention</h2>
+<p class="lede">With no ad budget, attention is earned through usefulness, spectacle or community. Pick one primary channel per quarter.</p>
+
+<div class="call"><b>Positioning in one line</b><p>For <i>[specific buyer]</i> who <i>[painful situation]</i>, we <i>[outcome in their words]</i>, unlike <i>[what they use today]</i>. If you cannot fill every bracket, you are not ready to market.</p></div>
+
+<p class="ex"><span class="t t-ok">Real example</span>Freshworks was sparked by forum complaints about a rival's price hike. Watch where your buyers complain.</p>
+<h3>Best first channel by model</h3>
+<div class="tw"><table>
+<thead><tr><th>Model</th><th>Primary</th><th>Secondary</th></tr></thead>
+<tbody>
+<tr><td>B2B SaaS, India</td><td>Founder-led outbound on LinkedIn and WhatsApp to a list of 200 named accounts</td><td>Industry association events, CA and consultant partners</td></tr>
+<tr><td>B2B SaaS, global</td><td>Communities where buyers ask questions, SEO on problem keywords</td><td>Product Hunt and Hacker News launches, integration marketplaces</td></tr>
+<tr><td>Consumer app</td><td>Short-form video by founders and early users</td><td>Campus ambassadors, creator collaborations</td></tr>
+<tr><td>Education or career</td><td>Free live sessions and cohort challenges</td><td>College placement cells, YouTube tutorials</td></tr>
+<tr><td>Health or fitness</td><td>Practitioner partnerships (doctors, trainers)</td><td>Challenges with public leaderboards</td></tr>
+<tr><td>Marketplace</td><td>Supply-side outreach by hand, one area</td><td>Referral credits on both sides</td></tr>
+</tbody></table></div>
+
+<h3>Launch week sequence</h3>
+<div class="tw" style="padding:10px">
+<svg class="chart" viewBox="0 0 760 150" role="img" aria-labelledby="lw">
+<title id="lw">Launch timeline from 30 days before to 14 days after: waitlist, beta, teaser content, launch day, daily launches, case study, retro.</title>
+<g id="launch"></g>
+</svg>
+</div>
+
+<h3>Attention engines</h3>
+<p class="small">Each idea has a cost (₹ low, ₹₹ medium) and the audience it pulls. Pick two that fit your buyer.</p>
+<div class="g2">
+ <div class="panel"><h4>State of X in India, 2026 (₹)</h4><p>Survey 200 target users, publish a data report. Journalists and LinkedIn love original Indian data.</p></div>
+ <div class="panel"><h4>30-day build in public (₹)</h4><p>Daily progress posts with real numbers. Builds trust and a waitlist at the same time.</p></div>
+ <div class="panel"><h4>Free tool as lead magnet (₹)</h4><p>A calculator, checker or template generator that ranks on search and solves a slice of the problem.</p></div>
+ <div class="panel"><h4>Open-source a core module (₹)</h4><p>Developer credibility and inbound talent. License carefully (<a href="#s-ip">Patents and IP</a>).</p></div>
+ <div class="panel"><h4>Public challenge (₹)</h4><p>21-day fitness, coding or study challenge with a live leaderboard and small prizes.</p></div>
+ <div class="panel"><h4>Free audits or office hours (₹)</h4><p>"We review your X in 20 minutes." Each call is discovery and a sales lead.</p></div>
+ <div class="panel"><h4>Campus mini-hackathon (₹₹)</h4><p>Partner with a college club, use your API as the theme. Talent pipeline plus users.</p></div>
+ <div class="panel"><h4>Reverse pitch night (₹₹)</h4><p>Invite buyers to pitch their problems to builders. You host, you own the room.</p></div>
+ <div class="panel"><h4>Tier-2 city meetups (₹₹)</h4><p>Less noise than metros; local press often covers them.</p></div>
+ <div class="panel"><h4>Co-marketing swaps (₹)</h4><p>Newsletter and webinar swaps with non-competing startups serving the same buyer.</p></div>
+ <div class="panel"><h4>Vernacular content (₹)</h4><p>Hindi, Tamil, Telugu, Marathi, Bengali explainers. Far less competition than English.</p></div>
+ <div class="panel"><h4>Competition circuit (₹)</h4><p>Govt challenges, E-Summits and awards give prize money plus press you can reuse.</p></div>
+</div>
+
+<h3>Making a mark</h3>
+<ul class="tight">
+ <li>Name the category you want to own and use the phrase everywhere, consistently.</li>
+ <li>Founder faces over logos. Indian buyers trust people first.</li>
+ <li>Trust signals on the site: DPIIT recognition, customer logos with permission, real numbers, a physical address.</li>
+ <li>One signature visual (colour, shape or mascot) repeated until people recognise it without the name.</li>
+</ul>
+<p><span class="t t-v">Visha</span>Marketing law bites small startups too: CCPA guidelines on misleading ads and 13 listed dark patterns (fake urgency, hidden costs, forced subscriptions), ASCI rules requiring influencer disclosure, and no "guaranteed" results claims.</p>
+</section>
+<section id="s-hacks">
+<h2>Underrated hacks</h2>
+<p class="lede">Small, legal, mostly free moves that niche startups use to punch above their size. Each one lists why it works; pick the ones that match your buyer.</p>
+<div class="chips" data-filter="hk" role="group" aria-label="Filter hacks">
+ <button class="chip" aria-pressed="true" data-f="all">All</button>
+ <button class="chip" aria-pressed="false" data-f="cash">Cash and profit</button>
+ <button class="chip" aria-pressed="false" data-f="sales">Sales</button>
+ <button class="chip" aria-pressed="false" data-f="mkt">Marketing</button>
+ <button class="chip" aria-pressed="false" data-f="prod">Product and engineering</button>
+ <button class="chip" aria-pressed="false" data-f="gov">Government</button>
+ <button class="chip" aria-pressed="false" data-f="team">Team</button>
+</div>
+<div class="hackgrid" id="hackgrid">
+ <div class="panel" data-k="cash"><h4>Annual prepay at a discount</h4><p>Offer 2 months free for paying 12 upfront. Many B2B buyers prefer one invoice a year, and you get a year of runway per customer.</p></div>
+ <div class="panel" data-k="cash"><h4>TReDS for big-buyer invoices</h4><p>MSMEs can discount invoices raised on large companies through RBI-licensed TReDS platforms and get paid in days instead of months.</p></div>
+ <div class="panel" data-k="cash"><h4>Udyam in every contract</h4><p>State your MSME status on invoices and contracts. The 45-day payment rule and the buyer's tax deduction rules make large customers pay on time.</p></div>
+ <div class="panel" data-k="cash"><h4>Pause instead of cancel</h4><p>A "pause for 1 to 3 months" option recovers a meaningful share of subscribers who would otherwise churn.</p></div>
+ <div class="panel" data-k="cash"><h4>Price by value, localise by region</h4><p>Charge USD abroad and INR at home for the same product. Price on the buyer's saved hours or rupees, not your cost.</p></div>
+ <div class="panel" data-k="cash"><h4>Ask for startup discounts</h4><p>Most SaaS vendors have unadvertised startup pricing. One email asking often cuts 30 to 90% for the first year.</p></div>
+ <div class="panel" data-k="sales"><h4>Sell to the recently funded</h4><p>Companies that just raised have budget and pressure to spend. Funding news on Inc42 and Entrackr is a free lead list.</p></div>
+ <div class="panel" data-k="sales"><h4>Job changers are buyers</h4><p>A manager who moved companies in the last 90 days is rebuilding their tool stack and wants quick wins.</p></div>
+ <div class="panel" data-k="sales"><h4>CAs and consultants as channel</h4><p>One chartered accountant serves dozens of SMBs. A 15 to 20% referral share turns them into your sales team.</p></div>
+ <div class="panel" data-k="sales"><h4>Do the install yourself</h4><p>Stripe's founders installed their product on users' laptops on the spot. Onboarding by hand converts far better than a sign-up link.</p></div>
+ <div class="panel" data-k="sales"><h4>Customer advisory board</h4><p>Invite 5 target customers to a monthly call to shape the roadmap. Advisors tend to become your first paying accounts and references.</p></div>
+ <div class="panel" data-k="sales"><h4>Paid pilot with a conversion clause</h4><p>Write "converts to annual plan at ₹X if these 3 metrics are met" into the pilot. It removes the second negotiation.</p></div>
+ <div class="panel" data-k="mkt"><h4>Programmatic SEO</h4><p>Generate useful pages for every city, exam, product or template your buyers search for. Zomato's early restaurant pages grew this way.</p></div>
+ <div class="panel" data-k="mkt"><h4>Education as marketing</h4><p>Zerodha's free Varsity lessons built trust with first-time investors without ad spend. Teach your buyer's job better than anyone.</p></div>
+ <div class="panel" data-k="mkt"><h4>Waitlist with a position</h4><p>Show people their place in line and move them up for referrals. Robinhood reportedly gathered about a million sign-ups before launch this way.</p></div>
+ <div class="panel" data-k="mkt"><h4>Job posts as ads</h4><p>A well-written public role description reaches your market for free and signals momentum.</p></div>
+ <div class="panel" data-k="mkt"><h4>Founder story to Indian startup media</h4><p>YourStory, Inc42 and regional outlets accept founder-submitted stories. One piece becomes a trust link in every sales email.</p></div>
+ <div class="panel" data-k="mkt"><h4>Video testimonials on WhatsApp</h4><p>Ask happy customers for a 30-second phone video. It outperforms written reviews in Indian sales conversations.</p></div>
+ <div class="panel" data-k="prod"><h4>Concierge first, code second</h4><p>Deliver the outcome manually behind a simple form before automating it. You build only the steps that proved valuable.</p></div>
+ <div class="panel" data-k="prod"><h4>Boring stack, managed services</h4><p>One database, one app, managed hosting. Skip microservices and self-managed clusters until a real scaling pain appears.</p></div>
+ <div class="panel" data-k="prod"><h4>Reverse trial</h4><p>Give full premium features for 14 days, then downgrade to free. Users feel the loss and upgrade more often than with a plain free tier.</p></div>
+ <div class="panel" data-k="prod"><h4>Open-core funnel</h4><p>Open-source the developer piece, sell hosting, security and team features. Postman grew from a free tool into a company this way.</p></div>
+ <div class="panel" data-k="prod"><h4>WhatsApp as your interface</h4><p>For Indian SMBs and Bharat users, a WhatsApp flow can replace an app entirely in the first version.</p></div>
+ <div class="panel" data-k="gov"><h4>GeM for government sales</h4><p>DPIIT startups get relaxed prior-turnover and experience conditions in many public tenders. Register on GeM early.</p></div>
+ <div class="panel" data-k="gov"><h4>State startup weeks</h4><p>Maharashtra's Startup Week and similar events award government pilot orders. A pilot is a reference other states copy.</p></div>
+ <div class="panel" data-k="gov"><h4>Patent fee rebate and fast-track</h4><p>DPIIT startups pay 20% of standard patent fees and can request expedited examination.</p></div>
+ <div class="panel" data-k="gov"><h4>Self-certification</h4><p>DPIIT recognition allows self-certification under several labour and environment laws for early years, reducing inspections.</p></div>
+ <div class="panel" data-k="team"><h4>Paid work trials</h4><p>A paid 1-day trial predicts performance better than interviews and filters out people who only interview well.</p></div>
+ <div class="panel" data-k="team"><h4>AICTE internship portal</h4><p>Colleges push students to credit-bearing internships. Post there for motivated interns with academic accountability.</p></div>
+ <div class="panel" data-k="team"><h4>Hire from your users</h4><p>Power users already understand the product and customer. Many community-led companies hired their first support and growth staff this way.</p></div>
+ <div class="panel" data-k="team"><h4>Advisors on 2-year vesting</h4><p>Give small equity only against specific help (intros, hiring, regulation) with a 3-month cliff. Real advisors accept.</p></div>
+</div>
+</section>
+
+<section id="s-sectors">
+<h2>Sector playbooks</h2>
+<p class="lede">Each domain has one regulator that can shut you down and one wedge that gets you in fast. Know both before you build.</p>
+<div class="chips" role="tablist" aria-label="Sectors" data-tabs="sec">
+ <button class="chip" role="tab" aria-selected="true" aria-controls="x1" id="tx1">Healthcare</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="x2" id="tx2">Education</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="x3" id="tx3">Software and SaaS</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="x4" id="tx4">Career support</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="x5" id="tx5">Fitness</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="x6" id="tx6">Social media</button>
+ <button class="chip" role="tab" aria-selected="false" aria-controls="x7" id="tx7">Fintech</button>
+</div>
+
+<div class="tabpanel" role="tabpanel" id="x1" aria-labelledby="tx1">
+ <div class="g2">
+  <div class="panel"><h4>Rules that apply</h4><ul class="tight"><li>Telemedicine Practice Guidelines 2020: only registered practitioners consult.</li><li>Medical Device Rules 2017: software that diagnoses or treats can be a regulated medical device (CDSCO licence).</li><li>ABDM integration (ABHA, health facility registry) opens hospital and government channels.</li><li>Health data is personal data under DPDP; treat it with the highest care.</li><li>Drugs and Magic Remedies Act limits health claims in ads.</li></ul></div>
+  <div class="panel"><h4>Fast wedges</h4><ul class="tight"><li>Clinic operations: appointments, WhatsApp reminders, billing for small clinics.</li><li>Post-discharge follow-up and adherence.</li><li>Diagnostic sample logistics in tier-2 cities.</li><li>Vernacular symptom intake for doctors (assistive, not diagnostic).</li></ul><p><b>Money:</b> BIRAC BIG, C-CAMP, Villgro, hospital innovation programmes.</p></div>
+ </div>
+ <p><span class="t t-v">Visha</span>Crossing from "assistive" to "diagnostic" changes your regulatory class overnight. Decide the claim before you write the landing page.</p>
+</div>
+
+<div class="tabpanel" role="tabpanel" id="x2" aria-labelledby="tx2" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Rules that apply</h4><ul class="tight"><li>DPDP: users under 18 need verifiable parental consent; no behavioural tracking or targeted ads to them.</li><li>2024 coaching centre guidelines restrict enrolment of very young students and misleading result claims. <span class="t t-c">Verify</span> your state's adoption.</li><li>Consumer courts are active on edtech refunds; publish a clear refund policy.</li><li>Loan-linked course sales must follow RBI digital lending rules through the lender.</li></ul></div>
+  <div class="panel"><h4>Fast wedges</h4><ul class="tight"><li>Teacher tools for affordable private schools (grading, parent updates in local language).</li><li>AI tutors in Indian languages for specific exams.</li><li>Skilling with verified outcomes (portfolio or job placement proof).</li><li>B2B: colleges pay for placement readiness.</li></ul><p><b>Money:</b> CSR, state skilling missions, education-focused impact funds.</p></div>
+ </div>
+ <p><span class="t t-v">Visha</span>Aggressive sales to parents with pay-later loans destroyed trust in the sector. Win on outcomes.</p>
+</div>
+
+<div class="tabpanel" role="tabpanel" id="x3" aria-labelledby="tx3" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Rules that apply</h4><ul class="tight"><li>Export of services: zero-rated under GST with an LUT; keep proof of foreign payments.</li><li>Foreign clients will ask for tax forms (e.g. W-8BEN-E for US) and security questionnaires.</li><li>Contracts: liability caps, IP ownership, governing law; offer arbitration seated in India.</li><li>CERT-In incident reporting and log retention.</li></ul></div>
+  <div class="panel"><h4>Fast wedges</h4><ul class="tight"><li>Vertical AI agents for Indian SMB workflows: GST reconciliation, Tally data, WhatsApp order handling.</li><li>Niche engineering tools (EDA, simulation, manufacturing) where incumbents are expensive and slow.</li><li>Developer tools priced in USD, built at Indian cost.</li><li>Compliance tooling (DPDP consent, audit trails).</li></ul><p><b>Money:</b> MeitY programmes, cloud credits, micro VCs.</p></div>
+ </div>
+ <p><span class="t t-a">Amrit</span>A USD-priced global SaaS built from India with 2 founders can be profitable at a few dozen customers.</p>
+</div>
+
+<div class="tabpanel" role="tabpanel" id="x4" aria-labelledby="tx4" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Rules that apply</h4><ul class="tight"><li>"Guaranteed placement" claims fall under CCPA misleading-advertisement rules.</li><li>Overseas job placement requires a recruiting agent licence under the Emigration Act.</li><li>Income share agreements are legally untested for enforcement; structure carefully with a lawyer.</li><li>Resumes and assessments are personal data under DPDP.</li></ul></div>
+  <div class="panel"><h4>Fast wedges</h4><ul class="tight"><li>AI mock interviews in local languages for tier-2 and tier-3 graduates.</li><li>Verified skill proofs employers trust more than certificates.</li><li>Voice-first blue-collar job matching.</li><li>Career switch programmes into AI-adjacent roles.</li></ul><p><b>Money:</b> employer-paid hiring fees, college contracts, state skilling missions.</p></div>
+ </div>
+</div>
+
+<div class="tabpanel" role="tabpanel" id="x5" aria-labelledby="tx5" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Rules that apply</h4><ul class="tight"><li>Supplements and nutraceuticals need FSSAI licensing; no disease-cure claims.</li><li>Waivers and clear health disclaimers for workouts; screen users for risk conditions.</li><li>Heart rate, weight and body data are personal data; handle with DPDP care.</li><li>Influencer promotions need ASCI disclosure.</li></ul></div>
+  <div class="panel"><h4>Fast wedges</h4><ul class="tight"><li>Corporate wellness sold to HR (budget exists, B2B pays).</li><li>Community challenges with streaks and leaderboards.</li><li>Vernacular home workouts for tier-2 users.</li><li>Tools for independent trainers (clients, payments, plans).</li></ul><p><b>Money:</b> brand partnerships, B2B wellness contracts, subscriptions.</p></div>
+ </div>
+ <p><span class="t t-v">Visha</span>Pure consumer fitness has high churn after month 2. Build the social loop or sell to employers.</p>
+</div>
+
+<div class="tabpanel" role="tabpanel" id="x6" aria-labelledby="tx6" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Rules that apply</h4><ul class="tight"><li>IT Rules 2021: publish rules, appoint a grievance officer, act on takedown orders within the set hours.</li><li>Above 50 lakh registered users you become a significant social media intermediary: resident compliance officer, monthly reports and more.</li><li>Rules on AI-generated and synthetic content labelling tightened in 2025 to 2026. <span class="t t-c">Verify</span> the current version on meity.gov.in.</li><li>Child safety and DPDP children's data duties.</li></ul></div>
+  <div class="panel"><h4>Fast wedges</h4><ul class="tight"><li>Niche communities with a shared activity (a sport, a profession, an exam).</li><li>Regional-language creator communities.</li><li>Private, invite-only groups with utility (events, marketplaces inside).</li></ul><p><b>Money:</b> creator subscriptions, brand deals, community-led commerce.</p></div>
+ </div>
+ <p><span class="t t-v">Visha</span>Moderation cost scales faster than revenue. Budget for it from the first 10k users.</p>
+</div>
+
+<div class="tabpanel" role="tabpanel" id="x7" aria-labelledby="tx7" hidden>
+ <div class="g2">
+  <div class="panel"><h4>Rules that apply</h4><ul class="tight"><li>Lending, payments and deposits need RBI licences; early startups partner with a regulated entity.</li><li>RBI digital lending directions: money flows directly between borrower and lender, full fee disclosure.</li><li>Payment aggregators need RBI authorisation.</li><li>Account Aggregator framework enables consent-based financial data.</li></ul></div>
+  <div class="panel"><h4>Fast wedges</h4><ul class="tight"><li>Tools for CAs and accountants.</li><li>SMB cash-flow and GST analytics.</li><li>AA-based underwriting tools sold to lenders.</li></ul><p><b>Money:</b> fintech-focused VCs, GIFT City structures for cross-border.</p></div>
+ </div>
+ <p><span class="t t-v">Visha</span>Real-money online gaming was banned under the Promotion and Regulation of Online Gaming Act 2025. Avoid anything that resembles it.</p>
+</div>
+</section>
+<section id="s-gaps">
+<h2>Opportunity gaps 2026</h2>
+<p class="lede">An instant hit usually sits where a new public rail, a new rule or a cost collapse meets a buyer who is still doing things by hand.</p>
+<div class="tw"><table>
+<thead><tr><th>Gap</th><th>Why now</th><th>Wedge</th><th>Speed</th><th>Capital</th></tr></thead>
+<tbody>
+<tr><td>SMB back-office AI agents</td><td>LLM costs fell sharply; GST, UPI and e-invoicing digitised the data</td><td>Automate one painful monthly task for accountants</td><td>Fast</td><td>Low</td></tr>
+<tr><td>DPDP compliance tooling</td><td>Rules notified Nov 2025, obligations phase in through 2027</td><td>Consent notices, data maps, deletion workflows for mid-size firms</td><td>Fast</td><td>Low</td></tr>
+<tr><td>Voice-first Bharat apps</td><td>Indian-language speech models and Bhashini APIs matured</td><td>Voice ordering, voice job search, voice customer support</td><td>Medium</td><td>Low</td></tr>
+<tr><td>ONDC seller tooling</td><td>Open commerce network needs catalogue and order tools</td><td>Catalogue AI for small sellers</td><td>Medium</td><td>Low</td></tr>
+<tr><td>Clinic digitisation on ABDM</td><td>Government health IDs and registries are live</td><td>Small-clinic software with ABHA linking</td><td>Medium</td><td>Low</td></tr>
+<tr><td>Indian-language AI data and evaluation</td><td>Model builders need local data, evals and safety testing</td><td>Labelled datasets and eval services</td><td>Fast</td><td>Low</td></tr>
+<tr><td>Elder care tech</td><td>Ageing parents, children in other cities</td><td>Remote check-ins, medicine management, caregiver marketplaces</td><td>Medium</td><td>Medium</td></tr>
+<tr><td>Carbon and ESG measurement</td><td>India's carbon credit trading scheme and export buyers' disclosure demands</td><td>Emissions tracking for exporters and MSMEs</td><td>Medium</td><td>Medium</td></tr>
+<tr><td>Semiconductor and EDA tooling</td><td>India Semiconductor Mission fabs and design centres need tools and talent</td><td>Niche design automation, test and verification services</td><td>Slow</td><td>Medium</td></tr>
+<tr><td>Defence and space</td><td>iDEX challenges and IN-SPACe opening to private players</td><td>Solve a published problem statement</td><td>Slow</td><td>Medium</td></tr>
+<tr><td>AI skilling with proof</td><td>Employers want AI-literate staff, degrees lag</td><td>Project-based cohorts with hiring partners</td><td>Fast</td><td>Low</td></tr>
+</tbody></table></div>
+<p><span class="t t-a">Amrit</span>Your best gap is where your own expertise meets a buyer you can reach this week. Domain depth is the moat that AI tools cannot copy overnight.</p>
+</section>
+
+<section id="s-ip">
+<h2>Patents and IP</h2>
+<p class="lede">Trademark first, always. Patent only when the invention is technical, visible to competitors once sold, and central to the business or the fundraise.</p>
+<div class="g2">
+ <div class="panel"><h4>Patent if</h4><ul class="tight"><li>It is a technical method or device with a measurable technical effect.</li><li>Competitors could copy it after seeing your product.</li><li>It supports licensing, a deep-tech raise or a government grant.</li></ul></div>
+ <div class="panel"><h4>Do not patent</h4><ul class="tight"><li>Software "per se", algorithms, business methods (excluded in India).</li><li>UI and branding (use design registration and trademarks).</li><li>Things you can keep secret, like a model's training recipe (trade secret).</li></ul></div>
+</div>
+<div class="call v"><b>Timing rule</b><p>File a provisional application <b>before</b> any public demo, paper, pitch video or open-source release of the invention. Public disclosure can destroy novelty, and many countries give no grace period. The provisional gives you 12 months to file the complete specification.</p></div>
+
+<h3>Costs for DPIIT startups (approx)</h3>
+<div class="tw"><table>
+<thead><tr><th>Item</th><th>Official fee</th><th>With a patent agent</th></tr></thead>
+<tbody>
+<tr><td>Trademark application, per class (e-filing)</td><td class="n">₹4,500</td><td class="n">₹7k to 12k per class</td></tr>
+<tr><td>Copyright registration of software</td><td class="n">₹500 per work</td><td class="n">₹3k to 8k</td></tr>
+<tr><td>Indian patent: provisional plus complete, with expedited exam</td><td class="n">~₹10k to 15k total (80% startup rebate)</td><td class="n">₹50k to 1.5 lakh</td></tr>
+<tr><td>International PCT filing</td><td class="n">Reduced fees via India as receiving office</td><td class="n">₹1 to 3 lakh</td></tr>
+<tr><td>National phase per country (US, EU etc.)</td><td class="n">Varies</td><td class="n">USD 5k to 15k each</td></tr>
+</tbody></table></div>
+<p class="small">The SIPP scheme reimburses facilitator fees for startups using empanelled agents. Expedited examination can bring a decision within about a year. <span class="t t-c">Verify</span> the fee schedule on ipindia.gov.in.</p>
+
+<h3>Price versus profit</h3>
+<ul class="tight">
+ <li>A patent is worth filing if it plausibly protects or earns 10 times its lifetime cost (filing, prosecution, renewals, and enforcement).</li>
+ <li>Enforcement is the expensive part. A patent you cannot afford to defend is mainly a signal to investors and grant panels, which can still be worth it.</li>
+ <li>Licensing income works in deep tech, medtech and hardware; rarely in apps.</li>
+</ul>
+<h3>IP failsafes</h3>
+<ul class="ck" data-group="ip">
+ <li><input type="checkbox" id="ip1"><label for="ip1">Every founder, employee and freelancer has signed IP assignment</label></li>
+ <li><input type="checkbox" id="ip2"><label for="ip2">Trademark filed for name and logo in core classes</label></li>
+ <li><input type="checkbox" id="ip3"><label for="ip3">Invention disclosure log with dates (supports patent and trade secret claims)</label></li>
+ <li><input type="checkbox" id="ip4"><label for="ip4">Open-source licence reviewed: permissive (Apache 2.0, MIT) for adoption, copyleft (AGPL) if you want to stop cloud clones</label></li>
+ <li><input type="checkbox" id="ip5"><label for="ip5">No GPL code mixed into proprietary product without review</label></li>
+</ul>
+<div class="prog"><i data-bar="ip"></i></div><div class="progt" data-count="ip"></div>
+</section>
+
+<p class="partlabel">Part VI. Survive</p>
+<section id="s-problems">
+<h2>Problem navigator</h2>
+<p class="lede">Every serious problem, run through the same seven-step drill. Read it before the problem arrives; when it does, you execute instead of panicking.</p>
+<div class="drill" aria-label="The seven-step drill">
+ <span class="d0">Problem</span><span class="d1">Solution</span><span class="d2">Approach</span><span class="d3">Expected outcome</span><span class="d4">Failsafe</span><span class="d5">Backup plan</span><span class="d6">If it all goes sideways</span>
+</div>
+<p class="small">Failsafe is set up in advance so the problem hurts less. Backup plan is what you switch to if the approach fails. Sideways is the orderly retreat that protects people, money and your reputation.</p>
+<div class="chips" data-filter="pb" role="group" aria-label="Filter problems">
+ <button class="chip" aria-pressed="true" data-f="all">All</button>
+ <button class="chip" aria-pressed="false" data-f="market">Market</button>
+ <button class="chip" aria-pressed="false" data-f="money">Money</button>
+ <button class="chip" aria-pressed="false" data-f="people">People</button>
+ <button class="chip" aria-pressed="false" data-f="legal">Legal</button>
+ <button class="chip" aria-pressed="false" data-f="tech">Tech</button>
+ <button class="chip" aria-pressed="false" data-f="personal">Personal</button>
+</div>
+<div class="pgrid" id="pgrid">
+<article class="pcard" data-k="market"><header><span class="t t-c">Market</span><h4>Nobody pays</h4></header><p class="pprob">Users say it is useful but will not pay, or pilots never convert.</p><dl><dt class="d1">Solution</dt><dd>Find the buyer who owns the budget and feels the pain weekly; price on the outcome they get.</dd><dt class="d2">Approach</dt><dd>Call 10 engaged free users and 5 who declined. Offer a paid pilot to the top 5. Test three price points in parallel.</dd><dt class="d3">Expected outcome</dt><dd>2 to 3 paying customers within 4 weeks, or a clear no that saves months.</dd><dt class="d4">Failsafe</dt><dd>Sell the same outcome as a service to keep cash coming in.</dd><dt class="d5">Backup plan</dt><dd>Switch to the adjacent payer: employer instead of employee, clinic instead of patient, school instead of parent.</dd><dt class="d6">If it all goes sideways</dt><dd>Honour your written stop date. Refund pre-orders, keep the code and learnings, close the company cleanly and restart with the next problem.</dd></dl></article>
+<article class="pcard" data-k="market"><header><span class="t t-c">Market</span><h4>Sign-ups but no retention</h4></header><p class="pprob">Users try once and vanish; week-4 retention trends to zero.</p><dl><dt class="d1">Solution</dt><dd>Find the moment of first value and get every new user there faster.</dd><dt class="d2">Approach</dt><dd>Compare retained vs churned users: what did the retained do in their first session? Remove every step before that action.</dd><dt class="d3">Expected outcome</dt><dd>Retention curve flattens within 2 to 3 releases.</dd><dt class="d4">Failsafe</dt><dd>Founders onboard every new user by hand until the product can.</dd><dt class="d5">Backup plan</dt><dd>Narrow the product to the one segment that does retain.</dd><dt class="d6">If it all goes sideways</dt><dd>Rebuild around the single feature retained users love; announce it as a new product to the same list.</dd></dl></article>
+<article class="pcard" data-k="market"><header><span class="t t-c">Market</span><h4>Well-funded competitor enters</h4></header><p class="pprob">A rival raises big money and copies your headline feature.</p><dl><dt class="d1">Solution</dt><dd>Do not fight head-on. Go deeper into the niche they will treat as a side market.</dd><dt class="d2">Approach</dt><dd>Interview their unhappy users. Ship the integrations, language support and service quality they skip.</dd><dt class="d3">Expected outcome</dt><dd>Higher win rate and lower churn in your niche even as they win the broad market.</dd><dt class="d4">Failsafe</dt><dd>Lock key customers into annual contracts with a price guarantee.</dd><dt class="d5">Backup plan</dt><dd>Position as the specialist, or as a white-label partner to larger players.</dd><dt class="d6">If it all goes sideways</dt><dd>Explore a sale or acqui-hire while your customer base still has value; many rivals prefer to buy than to compete.</dd></dl></article>
+<article class="pcard" data-k="money"><header><span class="t t-c">Money</span><h4>Runway below 4 months</h4></header><p class="pprob">Cash will not last until the next milestone.</p><dl><dt class="d1">Solution</dt><dd>Cut burn and pull cash forward at the same time.</dd><dt class="d2">Approach</dt><dd>Pause non-core tools, founders to minimum salary, offer annual prepay to top customers, chase every receivable.</dd><dt class="d3">Expected outcome</dt><dd>3 to 6 extra months of runway within 30 days.</dd><dt class="d4">Failsafe</dt><dd>Services revenue from existing skills; CGSS-backed or revenue-based loan if revenue exists.</dd><dt class="d5">Backup plan</dt><dd>Bridge from existing angels via a convertible note or iSAFE.</dd><dt class="d6">If it all goes sideways</dt><dd>Keep the company alive in low-cost mode (filings only), founders take paid work, relaunch when ready, or wind down with debts paid.</dd></dl></article>
+<article class="pcard" data-k="money"><header><span class="t t-c">Money</span><h4>Customer will not pay</h4></header><p class="pprob">An invoice is 30+ days overdue with vague excuses.</p><dl><dt class="d1">Solution</dt><dd>Escalate on a fixed, polite schedule.</dd><dt class="d2">Approach</dt><dd>Day 1 reminder, day 7 call, day 15 service suspension notice, day 30 legal notice citing MSME rules, then Samadhaan filing.</dd><dt class="d3">Expected outcome</dt><dd>Most customers pay after the formal notice.</dd><dt class="d4">Failsafe</dt><dd>Advance billing and deposits in every new contract.</dd><dt class="d5">Backup plan</dt><dd>TReDS discounting for future invoices to that buyer.</dd><dt class="d6">If it all goes sideways</dt><dd>Arbitration or commercial court, and ask your CA how to treat the GST already paid on the unpaid invoice.</dd></dl></article>
+<article class="pcard" data-k="money"><header><span class="t t-c">Money</span><h4>Fundraise fails</h4></header><p class="pprob">Weeks of meetings, no term sheet.</p><dl><dt class="d1">Solution</dt><dd>Stop pitching and switch to a revenue-funded plan.</dd><dt class="d2">Approach</dt><dd>Collect every investor objection, fix the top two with evidence, return in 3 to 6 months with new numbers.</dd><dt class="d3">Expected outcome</dt><dd>Default-alive plan within 60 days and a stronger second attempt.</dd><dt class="d4">Failsafe</dt><dd>Grants, state programmes and competitions for non-dilutive cash.</dd><dt class="d5">Backup plan</dt><dd>Smaller angel round, or a strategic investment from a customer or partner.</dd><dt class="d6">If it all goes sideways</dt><dd>Founders only, product on minimum cost, keep serving paying users until the numbers speak for themselves.</dd></dl></article>
+<article class="pcard" data-k="money"><header><span class="t t-c">Money</span><h4>Investor pressure or harsh terms</h4></header><p class="pprob">A term sheet with heavy liquidation preference, veto rights or founder re-vesting.</p><dl><dt class="d1">Solution</dt><dd>Negotiate on the terms that matter most; price matters less than control and preference.</dd><dt class="d2">Approach</dt><dd>Get a startup lawyer, compare with market-standard terms, trade valuation for cleaner terms if needed.</dd><dt class="d3">Expected outcome</dt><dd>1x non-participating preference, reasonable vetoes, fair vesting credit.</dd><dt class="d4">Failsafe</dt><dd>Keep one parallel investor conversation alive for leverage.</dd><dt class="d5">Backup plan</dt><dd>Take a smaller round now on clean terms.</dd><dt class="d6">If it all goes sideways</dt><dd>Walk away. Bad terms compound for every future round.</dd></dl></article>
+<article class="pcard" data-k="people"><header><span class="t t-c">People</span><h4>Co-founder conflict</h4></header><p class="pprob">Repeated arguments, silent disagreements, decisions reopened.</p><dl><dt class="d1">Solution</dt><dd>Separate the issue from the relationship and use the agreed process.</dd><dt class="d2">Approach</dt><dd>48-hour cooling rule, write both positions down, decide by the decision-rights matrix, review date on the calendar.</dd><dt class="d3">Expected outcome</dt><dd>Decision made within a week, relationship intact.</dd><dt class="d4">Failsafe</dt><dd>Named mentor mediates within 2 weeks.</dd><dt class="d5">Backup plan</dt><dd>Restructure roles so each founder owns a clear domain.</dd><dt class="d6">If it all goes sideways</dt><dd>Use the buy-sell and leaver clauses in the founders&#x27; agreement; separate cleanly, protect customers and staff.</dd></dl></article>
+<article class="pcard" data-k="people"><header><span class="t t-c">People</span><h4>Co-founder leaves</h4></header><p class="pprob">One founder wants out or stops showing up.</p><dl><dt class="d1">Solution</dt><dd>Execute the leaver terms calmly and transfer ownership of their work.</dd><dt class="d2">Approach</dt><dd>Classify good or bad leaver, buy back unvested shares at face value, hand over accounts, code and customer relationships within a week.</dd><dt class="d3">Expected outcome</dt><dd>Cap table cleaned, company continues without legal cloud.</dd><dt class="d4">Failsafe</dt><dd>Access and documentation that make any single person replaceable (bus factor 2).</dd><dt class="d5">Backup plan</dt><dd>Bring in a senior early hire with meaningful equity for the gap.</dd><dt class="d6">If it all goes sideways</dt><dd>If the remaining founder cannot continue alone, sell or wind down while the company still has value.</dd></dl></article>
+<article class="pcard" data-k="people"><header><span class="t t-c">People</span><h4>Cannot hire good engineers</h4></header><p class="pprob">Roles stay open for months, offers are declined.</p><dl><dt class="d1">Solution</dt><dd>Compete on what big firms cannot: ownership, learning, equity, flexibility.</dd><dt class="d2">Approach</dt><dd>Public role doc, paid trials, tier-2 college outreach, open-source contributors, remote hiring beyond metros.</dd><dt class="d3">Expected outcome</dt><dd>One strong hire within 6 to 8 weeks.</dd><dt class="d4">Failsafe</dt><dd>Senior freelancers on defined modules with IP assignment.</dd><dt class="d5">Backup plan</dt><dd>Reduce scope so the founding engineer plus AI tools can carry it longer.</dd><dt class="d6">If it all goes sideways</dt><dd>Partner with a small dev agency on a fixed-scope contract while you keep hiring.</dd></dl></article>
+<article class="pcard" data-k="people"><header><span class="t t-c">People</span><h4>Bad hire</h4></header><p class="pprob">Missed commitments, team friction, quality problems.</p><dl><dt class="d1">Solution</dt><dd>Act by day 90; the rest of the team is watching.</dd><dt class="d2">Approach</dt><dd>Written feedback with specific gaps, 3 to 4 weeks to improve, weekly check-ins.</dd><dt class="d3">Expected outcome</dt><dd>Either real improvement or a clear, fair exit.</dd><dt class="d4">Failsafe</dt><dd>Probation clause in every offer letter.</dd><dt class="d5">Backup plan</dt><dd>Move them to a role that fits their strengths if one genuinely exists.</dd><dt class="d6">If it all goes sideways</dt><dd>Separate with dignity, pay dues on time, revoke access the same day, document the reasons.</dd></dl></article>
+<article class="pcard" data-k="people"><header><span class="t t-c">People</span><h4>Key employee quits</h4></header><p class="pprob">The only person who knows a system gives notice.</p><dl><dt class="d1">Solution</dt><dd>Turn the notice period into a knowledge transfer project.</dd><dt class="d2">Approach</dt><dd>Written runbooks, recorded walkthroughs, paired work with a successor, access audit.</dd><dt class="d3">Expected outcome</dt><dd>No loss of service or customer trust.</dd><dt class="d4">Failsafe</dt><dd>Documentation and shared access as a standing habit, not an emergency.</dd><dt class="d5">Backup plan</dt><dd>Short consulting contract with the leaver for questions after exit.</dd><dt class="d6">If it all goes sideways</dt><dd>Founder takes over temporarily and hires with the gap written into the role.</dd></dl></article>
+<article class="pcard" data-k="legal"><header><span class="t t-c">Legal</span><h4>Tax or GST notice</h4></header><p class="pprob">A notice arrives on the portal with a deadline.</p><dl><dt class="d1">Solution</dt><dd>Respond on time with documents; most notices are data mismatches.</dd><dt class="d2">Approach</dt><dd>Read the section cited, note the deadline, share with your CA the same day, reply through the portal.</dd><dt class="d3">Expected outcome</dt><dd>Closed with documents in most cases.</dd><dt class="d4">Failsafe</dt><dd>Monthly reconciliations that prevent mismatches.</dd><dt class="d5">Backup plan</dt><dd>Appeal before the appellate authority within the time limit.</dd><dt class="d6">If it all goes sideways</dt><dd>Pay under protest if required to stop interest, and continue the appeal.</dd></dl></article>
+<article class="pcard" data-k="legal"><header><span class="t t-c">Legal</span><h4>Regulation changes the model</h4></header><p class="pprob">A new rule bans or restricts your core activity (real-money gaming in 2025 is the example).</p><dl><dt class="d1">Solution</dt><dd>Treat regulation as a product requirement, not a surprise.</dd><dt class="d2">Approach</dt><dd>Track the regulator&#x27;s site monthly, join the industry association, submit comments on draft rules.</dd><dt class="d3">Expected outcome</dt><dd>Early warning and time to adapt.</dd><dt class="d4">Failsafe</dt><dd>Keep a compliant version of the product in the roadmap.</dd><dt class="d5">Backup plan</dt><dd>Pivot to the adjacent activity that stays permitted.</dd><dt class="d6">If it all goes sideways</dt><dd>Refund users fairly, wind down that line, and redeploy the team and tech on a new problem.</dd></dl></article>
+<article class="pcard" data-k="legal"><header><span class="t t-c">Legal</span><h4>Ex-employer claims your IP</h4></header><p class="pprob">Your former employer says the startup&#x27;s code or idea belongs to them.</p><dl><dt class="d1">Solution</dt><dd>Show a clean timeline: built after exit, on own devices, outside their field.</dd><dt class="d2">Approach</dt><dd>Keep commit history and dates, avoid their code and documents, get a lawyer to reply formally.</dd><dt class="d3">Expected outcome</dt><dd>Claim dropped or narrowed.</dd><dt class="d4">Failsafe</dt><dd>Before resigning, read your employment IP clause and do not build on company time or equipment.</dd><dt class="d5">Backup plan</dt><dd>Rewrite contested modules cleanly (clean-room) with a separate engineer.</dd><dt class="d6">If it all goes sideways</dt><dd>Negotiate a licence or settlement rather than a long court fight.</dd></dl></article>
+<article class="pcard" data-k="legal"><header><span class="t t-c">Legal</span><h4>Missed filings or penalties</h4></header><p class="pprob">An ROC, GST or TDS deadline was missed; late fees are running.</p><dl><dt class="d1">Solution</dt><dd>File immediately; late fees usually grow by the day.</dd><dt class="d2">Approach</dt><dd>List every pending filing with your CA, file oldest first, pay interest and late fees, update the compliance calendar.</dd><dt class="d3">Expected outcome</dt><dd>Back in compliance within 2 to 4 weeks, with no director disqualification.</dd><dt class="d4">Failsafe</dt><dd>Shared compliance calendar and CA retainer with named deadlines.</dd><dt class="d5">Backup plan</dt><dd>Use government condonation or amnesty schemes when announced.</dd><dt class="d6">If it all goes sideways</dt><dd>If filings lapsed for years, get a company secretary to regularise before any fundraise or sale; investors will find it.</dd></dl></article>
+<article class="pcard" data-k="tech"><header><span class="t t-c">Tech</span><h4>Data breach</h4></header><p class="pprob">Unauthorised access to user data.</p><dl><dt class="d1">Solution</dt><dd>Contain, assess, notify, fix.</dd><dt class="d2">Approach</dt><dd>Revoke keys, isolate systems, preserve logs, report to CERT-In within 6 hours, notify users and the Data Protection Board.</dd><dt class="d3">Expected outcome</dt><dd>Contained within hours; trust kept through transparency.</dd><dt class="d4">Failsafe</dt><dd>Security baseline, least privilege, encrypted backups.</dd><dt class="d5">Backup plan</dt><dd>External incident-response firm on call.</dd><dt class="d6">If it all goes sideways</dt><dd>Public post-mortem, free protective measures for affected users, independent audit before relaunch.</dd></dl></article>
+<article class="pcard" data-k="tech"><header><span class="t t-c">Tech</span><h4>Outage or data loss</h4></header><p class="pprob">Production is down or data is corrupted.</p><dl><dt class="d1">Solution</dt><dd>Restore service first, investigate second.</dd><dt class="d2">Approach</dt><dd>Status page update, roll back last deploy, restore from backup, communicate every 30 minutes.</dd><dt class="d3">Expected outcome</dt><dd>Service restored within hours with no permanent data loss.</dd><dt class="d4">Failsafe</dt><dd>Tested backups and one-click rollback.</dd><dt class="d5">Backup plan</dt><dd>Secondary region or provider for critical data.</dd><dt class="d6">If it all goes sideways</dt><dd>Manual workaround for customers, service credits, honest root-cause report.</dd></dl></article>
+<article class="pcard" data-k="tech"><header><span class="t t-c">Tech</span><h4>Platform ban or freeze</h4></header><p class="pprob">App store removal, WhatsApp API block, payment gateway freezes funds.</p><dl><dt class="d1">Solution</dt><dd>Know the platform&#x27;s policy better than their reviewer does.</dd><dt class="d2">Approach</dt><dd>Appeal with evidence through official channels, fix the flagged issue, escalate via partner managers.</dd><dt class="d3">Expected outcome</dt><dd>Reinstated within days to weeks.</dd><dt class="d4">Failsafe</dt><dd>Own customer contact details (email, phone) outside the platform.</dd><dt class="d5">Backup plan</dt><dd>Second payment gateway and a web version of the app.</dd><dt class="d6">If it all goes sideways</dt><dd>Move users to the alternative channel you already maintain.</dd></dl></article>
+<article class="pcard" data-k="personal"><header><span class="t t-c">Personal</span><h4>Burnout</h4></header><p class="pprob">Constant exhaustion, poor decisions, irritability.</p><dl><dt class="d1">Solution</dt><dd>Treat founder energy as the company&#x27;s scarcest resource.</dd><dt class="d2">Approach</dt><dd>One full day off each week, sleep protected, split roles clearly, drop low-value work.</dd><dt class="d3">Expected outcome</dt><dd>Clearer decisions within 2 to 3 weeks.</dd><dt class="d4">Failsafe</dt><dd>Co-founder covers for a planned week off each quarter.</dd><dt class="d5">Backup plan</dt><dd>Reduce scope; delay the less critical milestone.</dd><dt class="d6">If it all goes sideways</dt><dd>Take a real break and seek professional support. A founder who recovers beats one who collapses.</dd></dl></article>
+<article class="pcard" data-k="personal"><header><span class="t t-c">Personal</span><h4>Family pressure to take a job</h4></header><p class="pprob">Parents or spouse worry about income and stability.</p><dl><dt class="d1">Solution</dt><dd>Replace anxiety with a written plan and dates.</dd><dt class="d2">Approach</dt><dd>Share the stop date, the numbers that would extend it, the personal runway, and a fallback job plan.</dd><dt class="d3">Expected outcome</dt><dd>Support for a defined period instead of daily conflict.</dd><dt class="d4">Failsafe</dt><dd>Six months of personal expenses saved before going full-time.</dd><dt class="d5">Backup plan</dt><dd>One founder takes part-time or contract work while the other builds.</dd><dt class="d6">If it all goes sideways</dt><dd>Take the job, keep the company alive in low-cost mode, return when revenue supports you.</dd></dl></article>
+</div>
+</section>
+<section id="s-risk">
+<h2>Risks, odds, failsafes</h2>
+<p class="lede">Most startups fail. The job is to fail small and early on bad bets, and to stay alive long enough for good ones to compound.</p>
+
+<h3>Month-6 scenarios</h3>
+<div class="tw" style="padding:10px">
+<svg class="chart" viewBox="0 0 760 280" role="img" aria-labelledby="sc">
+<title id="sc">Monthly recurring revenue over six months for three scenarios: bear stays under 25 thousand rupees, base reaches about 1.5 lakh, bull reaches about 5 lakh.</title>
+<g id="scen"></g>
+</svg>
+</div>
+<div class="odds">
+ <span>Bear: under ₹25k MRR, pivot or restart</span><span class="track"><i style="width:35%;background:var(--poison)"></i></span><b>35%</b>
+ <span>Base: ₹50k to 2 lakh MRR, 10 to 40 paying customers</span><span class="track"><i style="width:45%;background:var(--lapis)"></i></span><b>45%</b>
+ <span>Bull: ₹3 lakh+ MRR, investors reaching out</span><span class="track"><i style="width:20%;background:var(--jade)"></i></span><b>20%</b>
+</div>
+<p class="small">Author estimates for a focused two-founder team with an engineer, charging from month 2 and following the gates. Directional only; there is no reliable public dataset for 6-month outcomes in India.</p>
+
+<h3>Big bets: risk, reward, odds</h3>
+<div class="tw"><table>
+<thead><tr><th>Bet</th><th>Risk</th><th>Reward</th><th>Odds it pays off</th></tr></thead>
+<tbody>
+<tr><td>Both founders full-time from month 0</td><td>Personal savings drain</td><td>Speed; investors expect it</td><td class="n">60%, if 6+ months personal runway</td></tr>
+<tr><td>Charge from first version</td><td>Fewer early users</td><td>Real signal, cash, better pitch</td><td class="n">80%</td></tr>
+<tr><td>Services-first to fund product</td><td>Product delayed</td><td>Default alive in 60 days</td><td class="n">65%, if time capped at 50%</td></tr>
+<tr><td>Raise before revenue</td><td>Months lost pitching</td><td>Runway to hire</td><td class="n">15 to 25%</td></tr>
+<tr><td>Hire before product-market fit</td><td>Burn doubles</td><td>Slightly faster building</td><td class="n">20%</td></tr>
+<tr><td>Flip abroad in year 1</td><td>Cost, tax traps, distraction</td><td>Access to some US investors</td><td class="n">25%</td></tr>
+<tr><td>Patent before launch (deep tech)</td><td>₹50k to 1.5 lakh</td><td>Novelty kept, investor signal</td><td class="n">70% worth it for deep tech; low for apps</td></tr>
+</tbody></table></div>
+<p class="small">Odds are judgement-based estimates to frame decisions, not measured probabilities.</p>
+
+<h3>Risk heatmap</h3>
+<div class="tw" style="padding:10px">
+<svg class="chart" viewBox="0 0 760 330" role="img" aria-labelledby="hm">
+<title id="hm">Risk heatmap of likelihood against impact for ten common startup risks, each matching a card in the Problem navigator.</title>
+<g id="heat"></g>
+</svg>
+</div>
+
+<div class="call"><b>Risk register</b><p>Each risk on the heatmap has a full drill (solution, approach, expected outcome, failsafe, backup plan, sideways plan) in the <a href="#s-problems">Problem navigator</a>.</p></div>
+
+<h3>Personal failsafes</h3>
+<ul class="tight">
+ <li>Six months of personal living costs saved, or one founder with part-time income until MRR covers basic salaries.</li>
+ <li>Company money never mixes with personal money.</li>
+ <li>Health insurance for both founders before quitting jobs.</li>
+ <li>A written "stop date" and the numbers that would move it.</li>
+</ul>
+
+<h3>Exit kit if you stop</h3>
+<p>Refund or migrate customers with 30 days' notice, settle vendor dues, delete personal data you no longer need, then close the company via Strike Off (form STK-2), available once liabilities are cleared and the company never started business or has done none for 2 financial years. Closing cleanly keeps your director record clean for the next venture.</p>
+</section>
+<section id="s-law">
+<h2>Law and disputes</h2>
+<p class="lede">Most legal pain in the first two years comes from five places: contracts, unpaid invoices, employees, data and filings.</p>
+<details><summary>Contracts that protect you</summary><div class="body"><ul class="tight">
+ <li>Limit liability to fees paid in the last 12 months; exclude indirect losses.</li>
+ <li>Indemnity only for your own IP infringement and gross negligence.</li>
+ <li>Payment in 15 to 30 days, interest on late payment, right to suspend service.</li>
+ <li>Arbitration clause with a named seat in your city and a sole arbitrator.</li>
+ <li>You own your platform and reusable code; client owns their data and deliverables made only for them.</li>
+</ul></div></details>
+<details><summary>Getting paid</summary><div class="body"><ul class="tight">
+ <li>Udyam registration lets you claim payment within 45 days from buyers, with compound interest at 3 times the RBI bank rate on delay.</li>
+ <li>MSME Samadhaan portal for delayed-payment cases; buyers also lose tax deductions on unpaid MSME dues beyond the limit.</li>
+ <li>Escalation path: reminder, formal notice, Samadhaan, then arbitration or commercial court.</li>
+ <li>Cheque bounce is a criminal offence under Section 138 of the Negotiable Instruments Act; send notice within 30 days of the bounce.</li>
+</ul></div></details>
+<details><summary>People and employment</summary><div class="body"><ul class="tight">
+ <li>The four Labour Codes took effect in November 2025, replacing older labour laws. <span class="t t-c">Verify</span> state rules that implement them.</li>
+ <li>PF from 20 employees, ESI from 10 (in notified areas), gratuity after 5 years of service.</li>
+ <li>POSH Internal Committee once you have 10 or more employees.</li>
+ <li>Interns need written terms, a stipend record and IP assignment.</li>
+ <li>Use consultants for genuinely independent work only; misclassification creates PF and tax exposure.</li>
+</ul></div></details>
+<details><summary>Consumers and platforms</summary><div class="body"><ul class="tight">
+ <li>Consumer complaints can be filed online (e-Daakhil). Clear refund terms and fast responses keep you out of forums.</li>
+ <li>E-commerce entities must show seller details, grievance officer and return terms under the Consumer Protection (E-Commerce) Rules.</li>
+</ul></div></details>
+<details><summary>Directors' personal exposure</summary><div class="body"><ul class="tight">
+ <li>Non-filing of financial statements or annual returns for 3 years disqualifies directors for 5 years (Section 164).</li>
+ <li>Unpaid TDS and GST collected from customers can lead to personal liability and prosecution in serious cases.</li>
+ <li>Foreign money without FEMA filings (FC-GPR within 30 days) attracts compounding penalties.</li>
+</ul></div></details>
+</section>
+
+<p class="partlabel">Part VII. Learn</p>
+<section id="s-cases">
+<h2>Case studies</h2>
+<p class="lede">Real companies, the move that mattered, and how to copy it with almost no money. Cautionary tales included; they teach faster.</p>
+<div class="chips" data-filter="cs" role="group" aria-label="Filter case studies">
+ <button class="chip" aria-pressed="true" data-f="all">All</button>
+ <button class="chip" aria-pressed="false" data-f="boot">Bootstrapped</button>
+ <button class="chip" aria-pressed="false" data-f="india">Indian scale-ups</button>
+ <button class="chip" aria-pressed="false" data-f="global">Global</button>
+ <button class="chip" aria-pressed="false" data-f="warn">Cautionary</button>
+</div>
+<div class="casegrid" id="casegrid">
+ <article class="case" data-k="boot india"><h4>Zerodha</h4><p class="cmeta">Founded 2010, bootstrapped, no VC money</p><p><b>Move:</b> undercut brokerage pricing radically, then built trust with free investor education (Varsity) instead of ads.</p><p><b>Lesson:</b> profitable from early on, a price disruption plus trust content can beat funded rivals.</p><p class="copy"><b>Copy it:</b> publish the best free course on your buyer's job; price visibly simpler than incumbents.</p></article>
+ <article class="case" data-k="boot india global"><h4>Zoho</h4><p class="cmeta">Started 1996 as AdventNet, never raised VC</p><p><b>Move:</b> built dozens of business apps at Indian cost, sold globally, opened rural offices such as Tenkasi.</p><p><b>Lesson:</b> patience and cost discipline create a moat funded competitors cannot match.</p><p class="copy"><b>Copy it:</b> hire and train talent in smaller towns; price in USD abroad.</p></article>
+ <article class="case" data-k="india global"><h4>Freshworks</h4><p class="cmeta">Chennai, 2010; Nasdaq listing 2021</p><p><b>Move:</b> the founder spotted a Hacker News thread about a big rival's price hike and built a cheaper, simpler helpdesk.</p><p><b>Lesson:</b> incumbents' price increases are market openings.</p><p class="copy"><b>Copy it:</b> track complaints about incumbents on forums and review sites; build for the unhappy.</p></article>
+ <article class="case" data-k="india global"><h4>Postman</h4><p class="cmeta">Side project 2012, company 2014</p><p><b>Move:</b> a free Chrome extension solving the founder's own API testing pain spread through developers.</p><p><b>Lesson:</b> a free tool for your own problem can be a distribution engine.</p><p class="copy"><b>Copy it:</b> release the internal tool you wish existed; charge for team features later.</p></article>
+ <article class="case" data-k="boot india global"><h4>BrowserStack</h4><p class="cmeta">Founded 2011, bootstrapped for years before first funding in 2018</p><p><b>Move:</b> solved one painful developer job (cross-browser testing) and grew through self-serve sign-ups.</p><p><b>Lesson:</b> a narrow, painful problem sold self-serve can scale without a sales team.</p><p class="copy"><b>Copy it:</b> pick one job developers hate; free trial, card on file, done.</p></article>
+ <article class="case" data-k="india"><h4>Flipkart</h4><p class="cmeta">2007, books first; Walmart bought a majority stake in 2018</p><p><b>Move:</b> cash on delivery solved Indians' distrust of online payment.</p><p><b>Lesson:</b> the local trust barrier, not the technology, is often the real product.</p><p class="copy"><b>Copy it:</b> ask what makes your buyer hesitate to pay, and design that fear away.</p></article>
+ <article class="case" data-k="india"><h4>Nykaa</h4><p class="cmeta">Founded 2012 by Falguni Nayar at about 50; profitable at IPO in 2021</p><p><b>Move:</b> content and trust in a category where fakes were common.</p><p><b>Lesson:</b> starting later in life with deep domain knowledge is an advantage, not a handicap.</p><p class="copy"><b>Copy it:</b> use your professional years as the moat; sell trust where the market has none.</p></article>
+ <article class="case" data-k="india"><h4>boAt</h4><p class="cmeta">Founded 2016</p><p><b>Move:</b> sold through Amazon and Flipkart first, built brand through youth culture and cricket rather than own stores.</p><p><b>Lesson:</b> borrow existing distribution before building your own.</p><p class="copy"><b>Copy it:</b> list on marketplaces from day one; spend on brand where your buyer already spends time.</p></article>
+ <article class="case" data-k="india"><h4>Meesho</h4><p class="cmeta">Y Combinator 2016</p><p><b>Move:</b> enabled home-based resellers to sell over WhatsApp to their own networks.</p><p><b>Lesson:</b> build on the channel Bharat already uses daily.</p><p class="copy"><b>Copy it:</b> design your first version as a WhatsApp flow.</p></article>
+ <article class="case" data-k="india"><h4>Razorpay</h4><p class="cmeta">Y Combinator 2015</p><p><b>Move:</b> founders struggled to accept online payments themselves and fixed onboarding for developers.</p><p><b>Lesson:</b> your own painful setup experience is a product spec.</p><p class="copy"><b>Copy it:</b> write down every friction you hit while starting up; one of them is a business.</p></article>
+ <article class="case" data-k="india"><h4>Zomato</h4><p class="cmeta">Started 2008 as Foodiebay</p><p><b>Move:</b> scanned restaurant menus and put them online; search traffic compounded.</p><p><b>Lesson:</b> unglamorous data collection can create a durable moat.</p><p class="copy"><b>Copy it:</b> collect the information your market lacks, by hand if necessary.</p></article>
+ <article class="case" data-k="india"><h4>Paytm</h4><p class="cmeta">Demonetisation, November 2016</p><p><b>Move:</b> was ready when cash vanished overnight and pushed QR payments to small shops.</p><p><b>Lesson:</b> policy shocks create sudden demand for whoever is prepared.</p><p class="copy"><b>Copy it:</b> follow draft regulations and budget announcements; build for the rule before it lands.</p></article>
+ <article class="case" data-k="global"><h4>Airbnb</h4><p class="cmeta">2008</p><p><b>Move:</b> sold novelty election-themed cereal boxes to fund the company when investors said no.</p><p><b>Lesson:</b> resourcefulness is a signal investors later reward.</p><p class="copy"><b>Copy it:</b> find one creative, legal way to fund the next 3 months without asking permission.</p></article>
+ <article class="case" data-k="global"><h4>Dropbox</h4><p class="cmeta">2008</p><p><b>Move:</b> a simple demo video grew the waitlist from thousands to tens of thousands overnight, before the product was widely available.</p><p><b>Lesson:</b> you can validate demand before building the full product.</p><p class="copy"><b>Copy it:</b> a 2-minute screen recording plus a waitlist page, shared where your buyers hang out.</p></article>
+ <article class="case" data-k="global"><h4>Stripe</h4><p class="cmeta">2010</p><p><b>Move:</b> founders installed the product on users' computers on the spot.</p><p><b>Lesson:</b> doing things that do not scale wins the first customers.</p><p class="copy"><b>Copy it:</b> offer to set everything up yourself on a call.</p></article>
+ <article class="case" data-k="global"><h4>Slack and Instagram</h4><p class="cmeta">Pivots from a game (Glitch) and a check-in app (Burbn)</p><p><b>Move:</b> noticed the one internal tool or feature people loved, and rebuilt around it.</p><p><b>Lesson:</b> a pivot keeps the team and the insight; only the wrapper changes.</p><p class="copy"><b>Copy it:</b> list which feature your most active users actually use. That may be the company.</p></article>
+ <article class="case" data-k="global"><h4>NVIDIA</h4><p class="cmeta">Near-failure in the mid-1990s</p><p><b>Move:</b> after its first chip missed the market, bet the company on the next one; its CEO later said it was about 30 days from going out of business.</p><p><b>Lesson:</b> survival through the first failure is the entry ticket.</p><p class="copy"><b>Copy it:</b> keep enough runway for one full product mistake.</p></article>
+ <article class="case" data-k="global"><h4>WhatsApp</h4><p class="cmeta">About 55 employees at its 2014 acquisition</p><p><b>Move:</b> ruthless focus on one job (reliable messaging) with a tiny engineering team.</p><p><b>Lesson:</b> a small team with sharp focus can serve hundreds of millions.</p><p class="copy"><b>Copy it:</b> refuse features that do not serve the core job.</p></article>
+ <article class="case" data-k="india boot"><h4>Infosys</h4><p class="cmeta">1981, seed capital of ₹10,000</p><p><b>Move:</b> seven founders, tiny capital, sold services to global clients and compounded for decades.</p><p><b>Lesson:</b> services-first, globally sold, can build an institution.</p><p class="copy"><b>Copy it:</b> sell expertise abroad early; reinvest profit into capability.</p></article>
+ <article class="case warn" data-k="warn india"><h4>Byju's</h4><p class="cmeta">From India's most valued startup to insolvency proceedings in 2024</p><p><b>What went wrong:</b> growth funded by aggressive sales, large debt-funded acquisitions and governance gaps.</p><p><b>Lesson:</b> governance and unit economics catch up with every valuation.</p><p class="copy"><b>Avoid it:</b> board with real oversight, audited numbers on time, no sales practices you would hide.</p></article>
+ <article class="case warn" data-k="warn india"><h4>GoMechanic</h4><p class="cmeta">2023</p><p><b>What went wrong:</b> founders admitted serious financial reporting errors while chasing growth.</p><p><b>Lesson:</b> misreported numbers end companies faster than bad numbers.</p><p class="copy"><b>Avoid it:</b> one source of truth for metrics, reviewed by someone who is not selling them.</p></article>
+ <article class="case warn" data-k="warn india"><h4>Dunzo</h4><p class="cmeta">Well funded, operations collapsed around 2024</p><p><b>What went wrong:</b> expensive quick-commerce race with thin margins and heavy cash burn.</p><p><b>Lesson:</b> a better-funded race is not a strategy.</p><p class="copy"><b>Avoid it:</b> only enter capital races if you can outlast the richest competitor.</p></article>
+</div>
+<p class="small">Summaries are based on widely reported public accounts; details simplified for the lesson.</p>
+</section>
+
+<section id="s-quotes">
+<h2>Founder wisdom</h2>
+<p class="lede">Only quotes with a documented source or a long-standing attribution are kept. Each has the moment it is most useful.</p>
+<div class="quotegrid">
+ <figure class="q"><blockquote>Make something people want.</blockquote><figcaption>Paul Graham, Y Combinator motto</figcaption><p class="use">Use when: you are building features nobody asked for.</p></figure>
+ <figure class="q"><blockquote>Do things that don't scale.</blockquote><figcaption>Paul Graham, essay title, 2013</figcaption><p class="use">Use when: you are automating before anyone uses it.</p></figure>
+ <figure class="q"><blockquote>Real artists ship.</blockquote><figcaption>Steve Jobs, to the Macintosh team, 1983</figcaption><p class="use">Use when: perfectionism delays launch.</p></figure>
+ <figure class="q"><blockquote>Focusing is about saying no.</blockquote><figcaption>Steve Jobs, WWDC 1997</figcaption><p class="use">Use when: the roadmap has more than three priorities.</p></figure>
+ <figure class="q"><blockquote>Stay hungry. Stay foolish.</blockquote><figcaption>Steve Jobs, Stanford 2005, quoting the Whole Earth Catalog</figcaption><p class="use">Use when: early success makes you comfortable.</p></figure>
+ <figure class="q"><blockquote>If you are not embarrassed by the first version of your product, you've launched too late.</blockquote><figcaption>Reid Hoffman, LinkedIn co-founder</figcaption><p class="use">Use when: you want one more month before launch.</p></figure>
+ <figure class="q"><blockquote>Great execution is at least 10 times more important and 100 times harder than a great idea.</blockquote><figcaption>Sam Altman, Startup Playbook, 2015</figcaption><p class="use">Use when: you are guarding an idea instead of executing it.</p></figure>
+ <figure class="q"><blockquote>The first principle is that you must not fool yourself, and you are the easiest person to fool.</blockquote><figcaption>Richard Feynman, Caltech address, 1974</figcaption><p class="use">Use when: reading your own metrics.</p></figure>
+ <figure class="q"><blockquote>Price is what you pay; value is what you get.</blockquote><figcaption>Warren Buffett, 2008 shareholder letter, crediting Benjamin Graham</figcaption><p class="use">Use when: setting prices or valuing an offer.</p></figure>
+ <figure class="q"><blockquote>Rule No. 1: Never lose money. Rule No. 2: Never forget rule No. 1.</blockquote><figcaption>Warren Buffett</figcaption><p class="use">Use when: tempted by a risky bet with company cash.</p></figure>
+ <figure class="q"><blockquote>Show me the incentive and I will show you the outcome.</blockquote><figcaption>Charlie Munger</figcaption><p class="use">Use when: designing sales commissions, ESOPs or partner deals.</p></figure>
+ <figure class="q"><blockquote>In the short run, the market is a voting machine but in the long run, it is a weighing machine.</blockquote><figcaption>Benjamin Graham, as relayed by Warren Buffett</figcaption><p class="use">Use when: a competitor's hype outpaces your fundamentals.</p></figure>
+ <figure class="q"><blockquote>It's always Day 1.</blockquote><figcaption>Jeff Bezos, 2016 letter to shareholders</figcaption><p class="use">Use when: the team starts acting like a big company.</p></figure>
+ <figure class="q"><blockquote>We are stubborn on vision. We are flexible on details.</blockquote><figcaption>Jeff Bezos</figcaption><p class="use">Use when: deciding whether to pivot or persist.</p></figure>
+ <figure class="q"><blockquote>Only the paranoid survive.</blockquote><figcaption>Andy Grove, Intel, book title 1996</figcaption><p class="use">Use when: things are going well.</p></figure>
+ <figure class="q"><blockquote>There is surely nothing quite so useless as doing with great efficiency what should not be done at all.</blockquote><figcaption>Peter Drucker, Harvard Business Review, 1963</figcaption><p class="use">Use when: optimising a process nobody needs.</p></figure>
+ <figure class="q"><blockquote>The best part is no part.</blockquote><figcaption>Elon Musk, on engineering design</figcaption><p class="use">Use when: architecture or features keep growing.</p></figure>
+ <figure class="q"><blockquote>In a great market, the market pulls product out of the startup.</blockquote><figcaption>Marc Andreessen, "The only thing that matters", 2007 (trimmed)</figcaption><p class="use">Use when: choosing between markets.</p></figure>
+ <figure class="q"><blockquote>It's better to have 100 people who love you than a million people who sort of like you.</blockquote><figcaption>Paul Graham's advice to Airbnb, as retold by Brian Chesky</figcaption><p class="use">Use when: chasing vanity user counts.</p></figure>
+ <figure class="q"><blockquote>I don't believe in taking right decisions. I take decisions and then make them right.</blockquote><figcaption>Ratan Tata (widely attributed)</figcaption><p class="use">Use when: stuck between two reasonable options.</p></figure>
+ <figure class="q"><blockquote>Nothing in life is to be feared, it is only to be understood.</blockquote><figcaption>Marie Curie (widely attributed)</figcaption><p class="use">Use when: facing a legal, tax or technical unknown.</p></figure>
+</div>
+</section>
+
+<p class="partlabel">Part VIII. Reference</p>
+<section id="s-verify">
+<h2>Verification ledger</h2>
+<p class="lede">What was checked for this edition, what is still moving, and where to check it yourself. Official sites beat blogs, including this one.</p>
+<div class="tw"><table>
+<thead><tr><th>Fact</th><th>Status (Sep 2026)</th><th>Check at</th></tr></thead>
+<tbody>
+<tr><td>Tax holiday: 3 of first 10 years, incorporation before 1 Apr 2030, now Section 140</td><td><span class="t t-ok">Confirmed</span></td><td>incometaxindia.gov.in</td></tr>
+<tr><td>Tax holiday turnover cap (₹100 crore vs higher)</td><td><span class="t t-c">Sources differ</span></td><td>Act text, your CA</td></tr>
+<tr><td>DPIIT definition: ₹200 crore cap, Deep Tech 20 years and ₹300 crore</td><td><span class="t t-ok">Confirmed</span> (G.S.R. 108(E), Feb 2026)</td><td>startupindia.gov.in</td></tr>
+<tr><td>SISFS closed for applications 31 May 2026</td><td><span class="t t-ok">Confirmed</span>, successor not yet announced</td><td>seedfund.startupindia.gov.in</td></tr>
+<tr><td>CGSS guarantee ceiling ₹20 crore</td><td><span class="t t-ok">Confirmed</span></td><td>ncgtc.in</td></tr>
+<tr><td>Fund of Funds 2.0, ₹10,000 crore</td><td><span class="t t-ok">Confirmed</span></td><td>sidbi.in</td></tr>
+<tr><td>Angel tax abolished from 1 Apr 2025</td><td><span class="t t-ok">Confirmed</span></td><td>incometaxindia.gov.in</td></tr>
+<tr><td>DPDP Rules phase-in dates</td><td><span class="t t-c">Check before building</span></td><td>meity.gov.in</td></tr>
+<tr><td>Labour Codes in force</td><td><span class="t t-c">State rules vary</span></td><td>labour.gov.in, state labour department</td></tr>
+<tr><td>IT Rules on synthetic media and takedown timelines</td><td><span class="t t-c">Recently amended</span></td><td>meity.gov.in</td></tr>
+<tr><td>Patent and trademark startup fees</td><td><span class="t t-c">Check fee schedule</span></td><td>ipindia.gov.in</td></tr>
+<tr><td>DIR-3 KYC frequency, MCA forms and fees</td><td><span class="t t-c">Changed recently</span></td><td>mca.gov.in</td></tr>
+<tr><td>GST rates and due dates</td><td><span class="t t-c">Revised in 2025</span></td><td>cbic-gst.gov.in</td></tr>
+<tr><td>Export proceeds realisation period</td><td><span class="t t-c">Check RBI master direction</span></td><td>rbi.org.in</td></tr>
+<tr><td>State startup policy benefits</td><td><span class="t t-c">Revised every few years</span></td><td>Your state startup mission site</td></tr>
+<tr><td>Full and final settlement deadline, fixed-term gratuity, wage definition (Labour Codes)</td><td><span class="t t-c">State rules vary</span></td><td>labour.gov.in, payroll provider</td></tr>
+<tr><td>Case study details</td><td><span class="t t-ok">Widely reported</span>, simplified</td><td>Company filings and reputable news archives</td></tr>
+<tr><td>Quotes</td><td><span class="t t-ok">Sourced</span> or marked "widely attributed"</td><td>Original speech, letter or book cited</td></tr>
+<tr><td>Cloud and AI credit amounts</td><td><span class="t t-c">Change quarterly</span></td><td>Each programme's page</td></tr>
+</tbody></table></div>
+<p class="small">Probabilities, cost ranges and ticket sizes in this codex are informed estimates. This is not legal, tax or investment advice; use a CA and a startup lawyer for decisions that move money or equity.</p>
+</section>
+
+<section id="s-glossary">
+<h2>Glossary</h2>
+<div class="tw"><table>
+<tbody>
+<tr><td><b>AIF</b></td><td>Alternative Investment Fund: SEBI-registered pool, the legal form of most Indian VC funds</td></tr>
+<tr><td><b>CAC / LTV</b></td><td>Cost to acquire a customer / total gross profit a customer brings over their life</td></tr>
+<tr><td><b>CCPS / CCD</b></td><td>Compulsorily convertible preference shares / debentures</td></tr>
+<tr><td><b>Cliff</b></td><td>Period before any shares vest (usually 12 months)</td></tr>
+<tr><td><b>Default alive</b></td><td>On current growth and burn, revenue covers costs before cash runs out</td></tr>
+<tr><td><b>DPIIT</b></td><td>Department for Promotion of Industry and Internal Trade; grants startup recognition</td></tr>
+<tr><td><b>IMB</b></td><td>Inter-Ministerial Board that certifies startups for the tax holiday</td></tr>
+<tr><td><b>Liquidation preference</b></td><td>Investor gets their money back (1x usually) before others on a sale</td></tr>
+<tr><td><b>LUT</b></td><td>Letter of Undertaking for exporting services without paying GST</td></tr>
+<tr><td><b>MAT / AMT</b></td><td>Minimum Alternate Tax (companies) / Alternate Minimum Tax (LLPs)</td></tr>
+<tr><td><b>MRR</b></td><td>Monthly recurring revenue</td></tr>
+<tr><td><b>ODI</b></td><td>Overseas Direct Investment: Indian residents investing in foreign entities</td></tr>
+<tr><td><b>POEM</b></td><td>Place of Effective Management: where a company is really run; decides tax residence</td></tr>
+<tr><td><b>Pre-money / post-money</b></td><td>Valuation before / after new money comes in</td></tr>
+<tr><td><b>RBF</b></td><td>Revenue-based financing: repaid as a share of monthly revenue</td></tr>
+<tr><td><b>SHA</b></td><td>Shareholders' agreement</td></tr>
+<tr><td><b>SPICe+</b></td><td>MCA's single web form for incorporation</td></tr>
+<tr><td><b>Udyam</b></td><td>Free MSME registration</td></tr>
+<tr><td><b>CAC payback</b></td><td>Months of gross profit from a customer needed to recover what it cost to acquire them</td></tr>
+<tr><td><b>Fractional CFO</b></td><td>Experienced finance head hired part-time for a few days a month</td></tr>
+<tr><td><b>GeM</b></td><td>Government e-Marketplace, the portal for public procurement</td></tr>
+<tr><td><b>MIS</b></td><td>Monthly management report: cash, revenue, margins, key metrics</td></tr>
+<tr><td><b>Reverse vesting</b></td><td>Founders own shares upfront; unvested ones can be bought back if they leave early</td></tr>
+<tr><td><b>TReDS</b></td><td>RBI-licensed platforms where MSMEs sell invoices on large buyers for early payment</td></tr>
+</tbody></table></div>
+<p class="footer">Manthan, the founder's codex. Edition of September 2026, revision 2. Churn honestly, drink only the nectar you have tested.</p>
+</section>
+</div>
+</main>
+</div>
+<script>
+(function(){
+const NS="http://www.w3.org/2000/svg";
+function el(t,a,txt){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;return e;}
+const C={lapis:"var(--lapis)",nectar:"var(--nectar-hi)",jade:"var(--jade)",poison:"var(--poison)",line:"var(--line)",ink:"var(--ink)",muted:"var(--muted)"};
+const store={get(){try{return JSON.parse(localStorage.getItem("manthan-v1")||"{}")}catch(e){return {}}},set(o){try{localStorage.setItem("manthan-v1",JSON.stringify(o))}catch(e){}}};
+const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+
+/* Gantt */
+(function(){const g=document.getElementById("gantt");if(!g)return;
+ const x0=180,W=585,wk=W/26,x=w=>x0+w*wk;
+ const marks=[[0,"M0"],[4,"M1"],[9,"M2"],[14,"M3"],[18,"M4"],[23,"M5"],[26,"M6"]];
+ marks.forEach(([w,l])=>{g.append(el("line",{x1:x(w),x2:x(w),y1:22,y2:322,stroke:C.line,"stroke-dasharray":"3 4"}));g.append(el("text",{x:x(w),y:15,"text-anchor":"middle","font-weight":"700"},l));});
+ const rows=[["Problem interviews",0,4,"lapis"],["Founders' agreement",1,3,"nectar"],["Incorporate, bank",3,7,"nectar"],["DPIIT, trademark, GST",5,10,"nectar"],["Build MVP",3,9,"lapis"],["Paid pilots",8,14,"lapis"],["Launch week",14,15,"jade"],["One growth channel",15,26,"jade"],["Grants and credits",6,22,"nectar"],["Helpers, ESOP pool",17,22,"lapis"],["Raise or compound",21,26,"nectar"]];
+ rows.forEach((r,i)=>{const y=30+i*24;g.append(el("text",{x:x0-8,y:y+12,"text-anchor":"end",style:"fill:var(--ink);font-size:12.5px"},r[0]));g.append(el("rect",{x:x(r[1]),y:y,width:Math.max(6,(r[2]-r[1])*wk),height:15,rx:4,fill:C[r[3]]}));});
+ const gy=30+rows.length*24;g.append(el("text",{x:x0-8,y:gy+12,"text-anchor":"end",style:"fill:var(--ink);font-size:12.5px"},"Gate reviews"));
+ [4,9,14,18,23,26].forEach(w=>{const cx=x(w)-(w===26?6:0);g.append(el("path",{d:`M${cx} ${gy} l7 8 l-7 8 l-7 -8z`,fill:C.poison}));});
+})();
+
+/* Dilution */
+(function(){const g=document.getElementById("dilution");if(!g)return;
+ const d=[["Start",100,0,0],["Pre-seed",80,10,10],["Seed",62,10,28],["Series A",47,12,41]];
+ const x0=90,W=640;
+ d.forEach((r,i)=>{const y=14+i*44;let x=x0;g.append(el("text",{x:x0-10,y:y+19,"text-anchor":"end",style:"fill:var(--ink);font-size:13px"},r[0]));
+  [[r[1],C.lapis,"Founders"],[r[2],C.nectar,"ESOP"],[r[3],C.jade,"Investors"]].forEach(([v,c,n])=>{if(!v)return;const w=W*v/100;g.append(el("rect",{x:x,y:y,width:w,height:28,fill:c}));if(w>40)g.append(el("text",{x:x+w/2,y:y+19,"text-anchor":"middle",style:"fill:#fff;font-size:12.5px;font-weight:700"},v+"%"));x+=w;});});
+ const ly=196;[["Founders",C.lapis],["ESOP pool",C.nectar],["Investors",C.jade]].forEach(([n,c],i)=>{g.append(el("rect",{x:x0+i*130,y:ly-10,width:12,height:12,fill:c}));g.append(el("text",{x:x0+i*130+18,y:ly},n));});
+})();
+
+/* Ladder */
+(function(){const g=document.getElementById("ladder");if(!g)return;
+ const s=[["Bootstrap, grants","₹0 to 50 lakh","Months 0 to 9","#B7860F"],["Angels, micro VCs","₹25 lakh to 2 crore","After first revenue","#2B4C9B"],["Seed","₹3 to 15 crore","Repeatable growth","#256E5B"],["Series A, debt","₹25 crore and up","Proven unit economics","#6A4C93"]];
+ s.forEach((r,i)=>{const w=175,h=66+i*48,x=10+i*187,y=240-h;g.append(el("rect",{x:x,y:y,width:w,height:h,rx:6,fill:r[3],opacity:.9}));
+  g.append(el("text",{x:x+10,y:y+20,style:"fill:#fff;font-size:13px;font-weight:700"},r[0]));g.append(el("text",{x:x+10,y:y+37,style:"fill:#fff;font-size:12.5px"},r[1]));g.append(el("text",{x:x+10,y:y+53,style:"fill:#fff;font-size:12px;opacity:.9"},r[2]));});
+})();
+
+/* Launch */
+(function(){const g=document.getElementById("launch");if(!g)return;
+ const x0=40,W=680,x=d=>x0+(d+30)*W/44;
+ g.append(el("line",{x1:x0,x2:x0+W,y1:70,y2:70,stroke:C.muted,"stroke-width":2}));
+ const ev=[[-30,"Waitlist opens",0],[-14,"Private beta",1],[-7,"Teaser posts",0],[0,"Launch day",1],[3,"Daily channel launches",0],[7,"Case study",1],[14,"Retro, next bet",0]];
+ ev.forEach(([d,l,up])=>{const cx=x(d);g.append(el("circle",{cx:cx,cy:70,r:d===0?9:6,fill:d===0?C.nectar:C.lapis}));
+  g.append(el("text",{x:cx,y:up?42:105,"text-anchor":"middle",style:"fill:var(--ink);font-size:12.5px;font-weight:"+(d===0?700:500)},l));
+  g.append(el("text",{x:cx,y:up?26:122,"text-anchor":"middle"},(d>0?"+":"")+d+" d"));});
+})();
+
+/* Scenarios */
+(function(){const g=document.getElementById("scen");if(!g)return;
+ const x0=70,y0=240,W=640,H=210,max=500,x=m=>x0+m*W/6,y=v=>y0-v*H/max;
+ [0,100,200,300,400,500].forEach(v=>{g.append(el("line",{x1:x0,x2:x0+W,y1:y(v),y2:y(v),stroke:C.line}));g.append(el("text",{x:x0-8,y:y(v)+4,"text-anchor":"end"},v?("₹"+v+"k"):"0"));});
+ for(let m=0;m<=6;m++)g.append(el("text",{x:x(m),y:y0+18,"text-anchor":"middle"},"M"+m));
+ const S=[["Bull 20%",[0,5,25,70,140,280,500],C.jade],["Base 45%",[0,0,10,30,60,100,150],C.lapis],["Bear 35%",[0,0,3,8,12,18,22],C.poison]];
+ S.forEach(([n,v,c],i)=>{g.append(el("polyline",{points:v.map((a,m)=>x(m)+","+y(a)).join(" "),fill:"none",stroke:c,"stroke-width":3,"stroke-linejoin":"round"}));
+  g.append(el("rect",{x:x0+10+i*110,y:12,width:12,height:12,fill:c}));g.append(el("text",{x:x0+28+i*110,y:22,style:"fill:var(--ink)"},n));});
+ g.append(el("text",{x:14,y:130,transform:"rotate(-90 14 130)","text-anchor":"middle"},"MRR"));
+})();
+
+/* Heatmap */
+(function(){const g=document.getElementById("heat");if(!g)return;
+ const x0=120,y0=20,cw=200,ch=90,L=["Low","Medium","High"];
+ const risks=[["Nobody pays",2,2],["Runway below 4 months",2,2],["Co-founder leaves",1,2],["Data breach",0,2],["Missed filings",1,1],["Funded competitor",1,1],["Platform ban",1,1],["Customer will not pay",2,1],["Regulation changes",0,1],["Burnout",2,1]];
+ for(let li=0;li<3;li++)for(let im=0;im<3;im++){const sc=(li+1)*(im+1);const col=sc>=6?"#A3352A":sc>=3?"#E0B040":"#9CCBBE";
+  g.append(el("rect",{x:x0+li*cw,y:y0+(2-im)*ch,width:cw-4,height:ch-4,rx:6,fill:col,opacity:1}));}
+ const cnt={};risks.forEach(([n,li,im])=>{const k=li+"-"+im;cnt[k]=(cnt[k]||0)+1;const sc=(li+1)*(im+1);g.append(el("text",{x:x0+li*cw+12,y:y0+(2-im)*ch+cnt[k]*20,style:"fill:"+(sc>=6?"#fff":"#16213A")+";font-size:13px;font-weight:700"},n));});
+ L.forEach((l,i)=>{g.append(el("text",{x:x0+i*cw+cw/2,y:y0+3*ch+16,"text-anchor":"middle"},l));g.append(el("text",{x:x0-10,y:y0+(2-i)*ch+ch/2,"text-anchor":"end"},l));});
+ g.append(el("text",{x:x0+1.5*cw,y:y0+3*ch+34,"text-anchor":"middle",style:"fill:var(--ink);font-weight:700"},"Likelihood"));
+ g.append(el("text",{x:22,y:y0+1.5*ch,transform:`rotate(-90 22 ${y0+1.5*ch})`,"text-anchor":"middle",style:"fill:var(--ink);font-weight:700"},"Impact"));
+})();
+
+/* Equity calculator */
+(function(){const n=document.getElementById("eqn");if(!n)return;
+ const F=[["Full-time commitment",25],["Building the product",20],["Sales and distribution",20],["Risk taken (salary forgone)",15],["Idea and domain insight",10],["Cash put in",10]];
+ const rows=document.getElementById("eqrows"),out=document.getElementById("eqout"),bar=document.getElementById("eqbar"),warn=document.getElementById("eqwarn");
+ const cols=[C.lapis,C.nectar,C.jade,C.poison];
+ function build(){const k=+n.value;rows.innerHTML="";const grid=document.createElement("div");grid.className="eqgrid";grid.style.gridTemplateColumns=`minmax(140px,1.4fr) 44px repeat(${k},minmax(70px,1fr))`;
+  grid.innerHTML="<b>Factor</b><b>Wt</b>"+Array.from({length:k},(_,i)=>`<b>Founder ${String.fromCharCode(65+i)}</b>`).join("");
+  F.forEach(([f,w],fi)=>{grid.insertAdjacentHTML("beforeend",`<span>${f}</span><span class="small">${w}</span>`);for(let i=0;i<k;i++)grid.insertAdjacentHTML("beforeend",`<input type="range" min="0" max="10" value="${fi===5?(i===0?5:5):5}" data-f="${fi}" data-p="${i}" aria-label="${f}, founder ${String.fromCharCode(65+i)}">`);});
+  rows.append(grid);grid.addEventListener("input",calc);calc();}
+ function calc(){const k=+n.value,s=Array(k).fill(0);rows.querySelectorAll("input").forEach(r=>{s[+r.dataset.p]+=F[+r.dataset.f][1]*(+r.value);});
+  const tot=s.reduce((a,b)=>a+b,0)||1,p=s.map(v=>v*100/tot);
+  out.innerHTML=p.map((v,i)=>`Founder ${String.fromCharCode(65+i)}: <span>${v.toFixed(1)}%</span>`).join("&nbsp;&nbsp; ");
+  bar.innerHTML="";let x=0;p.forEach((v,i)=>{const w=6*v;bar.append(el("rect",{x:x,y:4,width:w,height:36,fill:cols[i]}));if(w>50)bar.append(el("text",{x:x+w/2,y:27,"text-anchor":"middle",style:"fill:#fff;font-weight:700;font-size:14px"},String.fromCharCode(65+i)+" "+v.toFixed(0)+"%"));x+=w;});
+  const msgs=[];const sorted=[...p].sort((a,b)=>b-a);if(k>=2&&sorted[0]-sorted[1]<2)msgs.push("Top two founders are near equal: write a tie-breaker into the agreement.");
+  if(p.some(v=>v<10))msgs.push("Someone is under 10%: check whether they are a co-founder or an early employee with ESOPs.");
+  msgs.push("Whatever the split, put every founder on 4-year reverse vesting.");warn.textContent=msgs.join(" ");}
+ n.addEventListener("change",build);build();
+})();
+
+/* Runway */
+(function(){const ids=["rc","rb","rr","rg","rs"];if(!document.getElementById("rc"))return;
+ function calc(){const [c,b,r,g,s]=ids.map(i=>+document.getElementById(i).value||0);const gr=g/100;const cash=[c],rev=[];let dead=-1,alive=-1;
+  for(let m=0;m<=18;m++){const rv=r>0?r*Math.pow(1+gr,m):(m>=s?10000*Math.pow(1+gr,m-s):0);rev.push(rv);if(m>0){cash.push(cash[m-1]-b+rv);}
+   if(alive<0&&rv>=b&&dead<0)alive=m;if(dead<0&&cash[m]<0)dead=m;}
+  const o=document.getElementById("rout");
+  o.innerHTML=alive>=0?`Default alive: revenue covers burn in month <span>${alive}</span>, lowest cash ${fmt(Math.min(...cash))}.`:(dead>=0?`Cash runs out in month <span style="color:var(--poison)">${dead}</span>. Cut burn, charge sooner, or add services revenue.`:`Survives 18 months; revenue has not yet covered burn.`);
+  const svg=document.getElementById("rchart");svg.innerHTML="";const x0=70,y0=190,W=610,H=170;const mx=Math.max(...cash,1),mn=Math.min(...cash,0);const y=v=>y0-(v-mn)*H/(mx-mn||1),x=m=>x0+m*W/18;
+  svg.append(el("line",{x1:x0,x2:x0+W,y1:y(0),y2:y(0),stroke:C.poison,"stroke-dasharray":"4 4"}));
+  [...new Set([mn,0,mx])].forEach(v=>svg.append(el("text",{x:x0-6,y:y(v)+4,"text-anchor":"end"},(v/100000).toFixed(1)+"L")));
+  for(let m=0;m<=18;m+=3)svg.append(el("text",{x:x(m),y:y0+20,"text-anchor":"middle"},"M"+m));
+  svg.append(el("polyline",{points:cash.map((v,m)=>x(m)+","+y(v)).join(" "),fill:"none",stroke:C.lapis,"stroke-width":3}));
+  svg.append(el("polyline",{points:rev.map((v,m)=>x(m)+","+y(v)).join(" "),fill:"none",stroke:C.jade,"stroke-width":2,"stroke-dasharray":"6 4"}));
+  svg.append(el("text",{x:x0+8,y:14,style:"fill:var(--lapis);font-weight:700"},"Cash"));svg.append(el("text",{x:x0+60,y:14,style:"fill:var(--jade);font-weight:700"},"Monthly revenue"));}
+ ids.forEach(i=>document.getElementById(i).addEventListener("input",calc));calc();
+})();
+
+/* Tax window */
+(function(){const box=document.getElementById("taxyears");if(!box)return;
+ const def=[-8,-4,5,20,45,70,90,110,120,130];
+ def.forEach((v,i)=>box.insertAdjacentHTML("beforeend",`<label class="f" style="min-width:70px">Year ${i+1}<input type="number" data-y="${i}" value="${v}"></label>`));
+ function calc(){const p=[...box.querySelectorAll("input")].map(i=>+i.value||0);const tn=+document.getElementById("tn").value/100,tm=+document.getElementById("tm").value/100;
+  let best=0,bs=-1e18;for(let i=0;i<=7;i++){const s=p[i]+p[i+1]+p[i+2];if(s>bs){bs=s;best=i;}}
+  let early=p.findIndex(v=>v>0);if(early<0||early>7)early=best;const es=p[early]+p[early+1]+p[early+2];
+  const save=Math.max(0,bs)*(tn-tm),credit=Math.max(0,bs)*tm,esave=Math.max(0,es)*(tn-tm);
+  document.getElementById("tout").innerHTML=`Best window: years <span>${best+1} to ${best+3}</span>, profit ₹${bs.toFixed(0)} lakh. Cash tax saved in those years about <span>₹${save.toFixed(1)} lakh</span>, plus MAT credit of ₹${credit.toFixed(1)} lakh to use later.<div class="small" style="font-family:var(--sans);font-weight:400;margin-top:4px">Claiming the first profitable years (${early+1} to ${early+3}) instead would save about ₹${esave.toFixed(1)} lakh. Confirm you will still be under the turnover cap in your chosen years.</div>`;
+  const svg=document.getElementById("tchart");svg.innerHTML="";const x0=60,y0=180,W=620,H=160,mx=Math.max(...p,1),mn=Math.min(...p,0),y=v=>y0-(v-mn)*H/(mx-mn||1),bw=W/10;
+  svg.append(el("rect",{x:x0+best*bw,y:10,width:bw*3,height:y0-6,fill:"var(--nectar-bg)",stroke:C.nectar,"stroke-dasharray":"4 3"}));
+  svg.append(el("line",{x1:x0,x2:x0+W,y1:y(0),y2:y(0),stroke:C.muted}));
+  p.forEach((v,i)=>{const top=Math.min(y(v),y(0)),h=Math.abs(y(v)-y(0));svg.append(el("rect",{x:x0+i*bw+8,y:top,width:bw-16,height:Math.max(h,1),rx:3,fill:v<0?C.poison:(i>=best&&i<best+3?C.nectar:C.lapis)}));
+   svg.append(el("text",{x:x0+i*bw+bw/2,y:y0+18,"text-anchor":"middle"},"Y"+(i+1)));});
+  svg.append(el("text",{x:x0+best*bw+6,y:26,style:"fill:var(--nectar);font-weight:700"},"Holiday window"));}
+ box.addEventListener("input",calc);["tn","tm"].forEach(i=>document.getElementById(i).addEventListener("input",calc));calc();
+})();
+
+/* Tabs */
+document.querySelectorAll("[data-tabs]").forEach(list=>{const tabs=[...list.querySelectorAll('[role="tab"]')];
+ function sel(t){tabs.forEach(b=>{const on=b===t;b.setAttribute("aria-selected",on);b.tabIndex=on?0:-1;document.getElementById(b.getAttribute("aria-controls")).hidden=!on;});}
+ tabs.forEach((t,i)=>{t.tabIndex=i?-1:0;t.addEventListener("click",()=>sel(t));t.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){const n=tabs[(i+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length];sel(n);n.focus();}});});});
+
+/* Scheme filter */
+document.querySelectorAll('[data-filter="sch"] .chip').forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll('[data-filter="sch"] .chip').forEach(c=>c.setAttribute("aria-pressed",c===b));const f=b.dataset.f;
+ document.querySelectorAll("#schtable tbody tr").forEach(r=>{r.hidden=!(f==="all"||r.dataset.k.split(" ").includes(f));});}));
+
+document.querySelectorAll('[data-filter="hk"] .chip').forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll('[data-filter="hk"] .chip').forEach(c=>c.setAttribute("aria-pressed",c===b));const f=b.dataset.f;
+ document.querySelectorAll("#hackgrid .panel").forEach(r=>{r.hidden=!(f==="all"||r.dataset.k===f);});}));
+document.querySelectorAll('[data-filter="pb"] .chip').forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll('[data-filter="pb"] .chip').forEach(c=>c.setAttribute("aria-pressed",c===b));const f=b.dataset.f;
+ document.querySelectorAll("#pgrid .pcard").forEach(r=>{r.hidden=!(f==="all"||r.dataset.k===f);});}));
+document.querySelectorAll('[data-filter="cs"] .chip').forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll('[data-filter="cs"] .chip').forEach(c=>c.setAttribute("aria-pressed",c===b));const f=b.dataset.f;
+ document.querySelectorAll("#casegrid .case").forEach(r=>{r.hidden=!(f==="all"||r.dataset.k.split(" ").includes(f));});}));
+/* Checklists */
+const st=store.get();
+function prog(){document.querySelectorAll("[data-group]").forEach(gp=>{const k=gp.dataset.group,all=gp.querySelectorAll("input"),on=[...all].filter(i=>i.checked).length;
+ const b=document.querySelector(`[data-bar="${k}"]`),c=document.querySelector(`[data-count="${k}"]`);if(b)b.style.width=(on*100/all.length)+"%";if(c)c.textContent=`${on} of ${all.length} done`;});}
+document.querySelectorAll(".ck input").forEach(i=>{i.checked=!!st[i.id];i.addEventListener("change",()=>{const s=store.get();s[i.id]=i.checked;store.set(s);prog();});});prog();
+
+/* Search */
+const q=document.getElementById("q"),hits=document.getElementById("hits");
+const links=[...document.querySelectorAll("#navlist a")];
+q.addEventListener("input",()=>{const v=q.value.trim().toLowerCase();document.querySelector(".side nav").classList.toggle("searching",!!v);let n=0;links.forEach(a=>{const s=document.querySelector(a.getAttribute("href"));const m=!v||(s&&s.textContent.toLowerCase().includes(v));a.parentElement.classList.toggle("hide",!m);if(m&&v)n++;});hits.textContent=v?(n?`${n} section${n>1?"s":""} mention "${q.value.trim()}"`:"No matches. Try a shorter word."):"";});
+q.addEventListener("keydown",e=>{if(e.key==="Enter"){const a=links.find(l=>!l.parentElement.classList.contains("hide"));if(a){location.hash=a.getAttribute("href");closeNav();}}});
+
+/* Active nav */
+const secs=links.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
+if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){links.forEach(l=>l.classList.toggle("on",l.getAttribute("href")==="#"+e.target.id));}});},{rootMargin:"-20% 0px -70% 0px"});secs.forEach(s=>io.observe(s));}
+
+/* Theme, expand, print, mobile nav */
+const root=document.documentElement;try{const t=localStorage.getItem("manthan-theme");if(t)root.dataset.theme=t;}catch(e){}
+document.getElementById("theme").addEventListener("click",()=>{const dark=root.dataset.theme?root.dataset.theme==="dark":matchMedia("(prefers-color-scheme: dark)").matches;root.dataset.theme=dark?"light":"dark";try{localStorage.setItem("manthan-theme",root.dataset.theme)}catch(e){}});
+const ex=document.getElementById("expand");ex.addEventListener("click",()=>{const open=ex.textContent==="Expand all";document.querySelectorAll("details").forEach(d=>d.open=open);ex.textContent=open?"Collapse all":"Expand all";});
+document.getElementById("print").addEventListener("click",()=>window.print());
+window.addEventListener("beforeprint",()=>document.querySelectorAll("details").forEach(d=>d.open=true));
+const side=document.getElementById("side"),nt=document.getElementById("navtoggle");
+function closeNav(){side.classList.remove("open");nt.setAttribute("aria-expanded","false");}
+nt.addEventListener("click",()=>{const o=side.classList.toggle("open");nt.setAttribute("aria-expanded",o);});
+links.forEach(a=>a.addEventListener("click",closeNav));
+})();
+</script>
+</body>
+</html>
