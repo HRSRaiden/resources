@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Malaysia, 22&ndash;29 Sep 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#132420; --ink-soft:#4d5f5a;
+  --paper:#f3f6f1; --raised:#ffffff;
+  --canopy:#1f5c4f; --canopy-deep:#123b33;
+  --saffron:#c47f16; --saffron-soft:#f3e6cd;
+  --andaman:#2f6c86; --andaman-soft:#e2eef1;
+  --brick:#9c4231; --brick-soft:#f5e6e2;
+  --line:#d7ddd1; --shadow:rgba(18,40,34,0.12);
+  --focus:#1f5c4f;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ink:#e7ede9; --ink-soft:#a9b6ae;
+    --paper:#101613; --raised:#1a211d;
+    --canopy:#5fb39f; --canopy-deep:#3e8c7a;
+    --saffron:#e0a94a; --saffron-soft:#332711;
+    --andaman:#7cb7cc; --andaman-soft:#132a30;
+    --brick:#e0897a; --brick-soft:#33201c;
+    --line:#2b332d; --shadow:rgba(0,0,0,0.4);
+    --focus:#5fb39f;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#e7ede9; --ink-soft:#a9b6ae;
+  --paper:#101613; --raised:#1a211d;
+  --canopy:#5fb39f; --canopy-deep:#3e8c7a;
+  --saffron:#e0a94a; --saffron-soft:#332711;
+  --andaman:#7cb7cc; --andaman-soft:#132a30;
+  --brick:#e0897a; --brick-soft:#33201c;
+  --line:#2b332d; --shadow:rgba(0,0,0,0.4);
+  --focus:#5fb39f;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth; scroll-padding-top: env(safe-area-inset-top,0px);}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Karla",-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+h1,h2,h3,.slab{font-family:"Zilla Slab",Georgia,"Times New Roman",serif;}
+a{color:var(--andaman);}
+button{font-family:inherit;}
+
+/* ---------- Layout shell ---------- */
+.shell{display:flex; min-height:100vh;}
+.route-nav{
+  width:236px; flex-shrink:0; background:var(--canopy-deep); color:#fff;
+  padding:22px 0 18px; position:sticky; top:0; height:100vh; overflow-y:auto;
+}
+.route-nav .brand{padding:0 20px 16px; border-bottom:1px solid rgba(255,255,255,0.15); margin-bottom:8px;}
+.route-nav .brand .k{font-size:11px; letter-spacing:.3px; color:#cfe6df; margin:0 0 3px;}
+.route-nav .brand h1{font-size:19px; margin:0; line-height:1.25; color:#fff;}
+.route-nav .brand .r{font-size:11.5px; color:#bcdcd2; margin-top:6px; line-height:1.5;}
+
+.stations{position:relative; padding:14px 0 4px;}
+.stations::before{
+  content:""; position:absolute; left:29px; top:6px; bottom:6px; width:2px;
+  background:rgba(255,255,255,0.22);
+}
+.station{
+  display:flex; align-items:center; gap:12px; width:100%; text-align:left;
+  background:none; border:none; color:#dcece6; cursor:pointer;
+  padding:8px 20px; position:relative; font-size:13.5px; line-height:1.3;
+}
+.station .dot{
+  width:11px; height:11px; border-radius:50%; background:var(--canopy-deep);
+  border:2px solid #a9d3c7; flex-shrink:0; position:relative; z-index:1;
+}
+.station.active .dot{background:var(--saffron); border-color:var(--saffron);}
+.station.active{color:#fff; font-weight:600;}
+.station:hover{color:#fff;}
+.station .n{opacity:.75; font-variant-numeric: tabular-nums; font-size:12px; width:16px; flex-shrink:0;}
+.station.done .dot{background:#7fd0c6; border-color:#7fd0c6;}
+
+.main{flex:1; min-width:0; display:flex; flex-direction:column;}
+.topbar{
+  display:none; position:sticky; top:0; z-index:20; background:var(--paper);
+  border-bottom:1px solid var(--line); padding-top:env(safe-area-inset-top,0px);
+}
+.topbar-inner{display:flex; overflow-x:auto; gap:4px; padding:10px 12px; -webkit-overflow-scrolling:touch;}
+.topbar-inner::-webkit-scrollbar{display:none;}
+.pill{
+  flex-shrink:0; border:1px solid var(--line); background:var(--raised); color:var(--ink-soft);
+  border-radius:999px; padding:6px 13px; font-size:12.5px; cursor:pointer; white-space:nowrap;
+}
+.pill.active{background:var(--canopy); color:#fff; border-color:var(--canopy);}
+
+.content{flex:1; padding:38px 28px 120px; max-width:760px; width:100%; margin:0 auto;}
+.panel{display:none;}
+.panel.active{display:block; animation:fade .28s ease;}
+@keyframes fade{from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);}}
+@media (prefers-reduced-motion: reduce){.panel.active{animation:none;}}
+
+/* ---------- Overview / hero ---------- */
+.hero-route{margin-bottom:6px;}
+.hero-route svg{width:100%; height:auto; display:block;}
+.hero-route .city{font-size:12px; fill:var(--ink-soft); font-family:"Karla",sans-serif;}
+.hero-route .dateline{font-size:10.5px; fill:var(--ink-soft); font-family:"Karla",sans-serif;}
+.hero-route .node{fill:var(--saffron);}
+.hero-route .track{stroke:var(--line); stroke-width:2; fill:none;}
+.hero-route .track-draw{stroke:var(--canopy); stroke-width:2; fill:none; stroke-dasharray:900; stroke-dashoffset:900; animation:draw 1.6s ease forwards .2s;}
+@media (prefers-reduced-motion: reduce){.hero-route .track-draw{animation:none; stroke-dashoffset:0;}}
+@keyframes draw{to{stroke-dashoffset:0;}}
+
+h2.page-title{font-size:27px; margin:0 0 4px; color:var(--canopy-deep);}
+:root[data-theme="dark"] h2.page-title{color:var(--canopy);}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) h2.page-title{color:var(--canopy);}}
+.page-sub{color:var(--ink-soft); font-size:14px; margin:0 0 22px;}
+
+.tags{display:flex; flex-wrap:wrap; gap:7px; margin-bottom:26px;}
+.tag{border:1px solid var(--line); color:var(--ink-soft); background:var(--raised); padding:4px 11px; border-radius:999px; font-size:12px;}
+
+table.dat{width:100%; border-collapse:collapse; margin-bottom:22px; font-size:13.5px;}
+table.dat th{
+  text-align:left; background:var(--canopy); color:#fff; padding:8px 10px; font-weight:600; font-size:12.5px;
+}
+table.dat td{padding:8px 10px; border-bottom:1px solid var(--line);}
+table.dat tr:nth-child(even) td{background:var(--raised);}
+
+h3.sec{font-size:15.5px; color:var(--canopy-deep); margin:26px 0 10px;}
+:root[data-theme="dark"] h3.sec{color:var(--canopy);}
+ul.plain{margin:0 0 4px; padding-left:20px;}
+ul.plain li{margin-bottom:7px; line-height:1.55; font-size:14px;}
+
+.callout{border:1px solid var(--line); border-radius:4px; padding:12px 14px; margin:14px 0; font-size:13.5px; line-height:1.55;}
+.callout b.lbl{display:block; margin-bottom:3px; font-weight:700;}
+.callout.food{background:var(--saffron-soft); border-color:var(--saffron);}
+.callout.food b.lbl{color:var(--saffron);}
+.callout.area{background:var(--andaman-soft); border-color:var(--andaman);}
+.callout.area b.lbl{color:var(--andaman);}
+.callout.warn{background:var(--brick-soft); border-color:var(--brick);}
+.callout.warn b.lbl{color:var(--brick);}
+
+/* ---------- Day panels ---------- */
+.day-head{margin-bottom:6px;}
+.day-kicker{font-size:12.5px; color:var(--saffron); font-weight:700; margin:0 0 2px;}
+.day-head h2{font-size:25px; margin:0 0 3px; color:var(--canopy-deep);}
+:root[data-theme="dark"] .day-head h2{color:var(--canopy);}
+.day-head .sub{color:var(--ink-soft); font-size:13.5px; margin:0 0 16px;}
+
+.progress-row{display:flex; align-items:center; gap:10px; margin-bottom:18px;}
+.progress-track{flex:1; height:5px; background:var(--line); border-radius:3px; overflow:hidden;}
+.progress-fill{height:100%; background:var(--canopy); width:0%; transition:width .25s ease;}
+.progress-label{font-size:11.5px; color:var(--ink-soft); white-space:nowrap;}
+
+.block{margin-bottom:20px;}
+.block .time{
+  font-weight:700; font-size:13.5px; color:var(--canopy-deep); margin-bottom:8px;
+  padding-left:12px; border-left:3px solid var(--saffron);
+}
+:root[data-theme="dark"] .block .time{color:var(--canopy);}
+.item{display:flex; align-items:flex-start; gap:9px; margin-bottom:8px; padding-left:12px;}
+.item input[type=checkbox]{
+  margin-top:3px; width:15px; height:15px; accent-color:var(--canopy); flex-shrink:0; cursor:pointer;
+}
+.item label{font-size:14px; line-height:1.55; cursor:pointer;}
+.item.checked label{color:var(--ink-soft); text-decoration:line-through; text-decoration-color:var(--line);}
+.alt-line{font-size:12.8px; color:var(--ink-soft); font-style:italic; padding-left:33px; margin:-3px 0 9px; line-height:1.5;}
+
+.reset-day{border:none; background:none; color:var(--ink-soft); font-size:12px; text-decoration:underline; cursor:pointer; padding:0; margin-top:6px;}
+
+/* ---------- Extras / Food ---------- */
+.extra-card{border:1px solid var(--line); border-radius:4px; padding:13px 15px; margin-bottom:12px; background:var(--raised);}
+.extra-card h4{margin:0 0 5px; font-size:14.5px; color:var(--canopy-deep);}
+:root[data-theme="dark"] .extra-card h4{color:var(--canopy);}
+.extra-card p{margin:0; font-size:13.5px; line-height:1.55; color:var(--ink);}
+
+.food-city{font-size:16px; margin:22px 0 10px; color:var(--canopy-deep);}
+:root[data-theme="dark"] .food-city{color:var(--canopy);}
+.food-item{margin-bottom:9px; font-size:13.8px; line-height:1.55;}
+.food-item b{display:block;}
+
+/* ---------- Bottom sequential nav ---------- */
+.seqnav{
+  position:sticky; bottom:0; background:var(--raised); border-top:1px solid var(--line);
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  max-width:760px; margin:0 auto; width:100%;
+}
+.seqbtn{
+  display:flex; flex-direction:column; border:none; background:none; cursor:pointer;
+  color:var(--ink); padding:4px 8px; max-width:46%; text-align:left;
+}
+.seqbtn.next{text-align:right; align-items:flex-end;}
+.seqbtn .k{font-size:10.5px; color:var(--ink-soft);}
+.seqbtn .v{font-size:13.5px; font-weight:700; color:var(--canopy-deep);}
+:root[data-theme="dark"] .seqbtn .v{color:var(--canopy);}
+.seqbtn:disabled{opacity:0; pointer-events:none;}
+.seqdot{font-size:11.5px; color:var(--ink-soft); flex-shrink:0;}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 860px){
+  .route-nav{display:none;}
+  .topbar{display:block;}
+  .content{padding:22px 16px 110px;}
+}
+</style>
+</head>
+<body>
+
+<div class="shell">
+  <nav class="route-nav" id="routeNav" aria-label="Trip sections">
+    <div class="brand">
+      <p class="k">MALAYSIA TRIP</p>
+      <h1>22&ndash;29 Sep 2026</h1>
+      <p class="r">Delhi &rarr; KL &rarr; Penang &rarr; Langkawi &rarr; KL &rarr; Delhi</p>
+    </div>
+    <div class="stations" id="stationsDesktop"></div>
+  </nav>
+
+  <div class="main">
+    <div class="topbar"><div class="topbar-inner" id="pillsMobile"></div></div>
+    <div class="content" id="content"></div>
+    <div class="seqnav">
+      <button class="seqbtn prev" id="prevBtn"><span class="k">Back</span><span class="v" id="prevLabel"></span></button>
+      <span class="seqdot" id="seqPos"></span>
+      <button class="seqbtn next" id="nextBtn"><span class="k">Next</span><span class="v" id="nextLabel"></span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =================== DATA =================== */
+const PANELS = [
+{id:"overview", kind:"overview", nav:"Overview"},
+{id:"practical", kind:"practical", nav:"Before you go"},
+{id:"day1", kind:"day", nav:"Day 1 \u00b7 KL", num:1, title:"Kuala Lumpur", dateLabel:"Tue, 22 Sep", sub:"Landing day. Batu Caves in the morning, Brickfields and Thean Hou after, KLCC and Bukit Bintang at night.",
+  area:"Three moves: Brickfields (breakfast, south) is on your way in from the airport train, so do it first. Then Batu Caves (north) and back down to Brickfields again for lunch and Thean Hou, since both are worth the detour. Evening stays central at KLCC and Bukit Bintang.",
+  blocks:[
+    {time:"6:00 AM to 7:30 AM &nbsp;\u00b7&nbsp; Touchdown", items:[
+      "Land KLIA Terminal 1. Immigration and baggage claim, roughly 45 minutes.",
+      "Exchange or withdraw some Ringgit at the arrivals hall before you head out, you'll want cash for today.",
+      "KLIA Ekspres train to KL Sentral, about 28 to 30 minutes. Trains run from early morning."
+    ]},
+    {time:"7:30 AM to 8:15 AM &nbsp;\u00b7&nbsp; Breakfast, Brickfields", items:[
+      "Brickfields (Little India) is a 5 minute walk from KL Sentral. Pick any of the busy South Indian breakfast stalls along Jalan Tun Sambanthan for dosa, idli or vada. Cheap, quick, and they open early for the working crowd."
+    ]},
+    {time:"8:30 AM to 9:00 AM &nbsp;\u00b7&nbsp; Drop your bags", items:[
+      "Grab to citizenM Bukit Bintang, about 15 minutes.",
+      "The room won't be ready till 2 to 3 PM. Leave your luggage with the front desk, they hold it for free, and freshen up in the lobby restroom."
+    ]},
+    {time:"9:15 AM to 12:30 PM &nbsp;\u00b7&nbsp; Batu Caves", items:[
+      "Grab or KTM Komuter to Batu Caves, 35 to 45 minutes depending on traffic.",
+      "<b>Batu Caves and the Lord Murugan statue.</b> Free entry, 272 painted steps. Cover shoulders and knees, sarongs available at the entrance if you need one. Keep your bag zipped and away from the macaques.",
+      "<b>Dark Cave</b>, partway down the steps, easy to miss on purpose since most people do. A guided 45 minute eco-tour through an unlit conservation cave, bats, cave crickets, the rare Batu Caves trapdoor spider, and a stretch where every torch goes dark. Reviewers rate it above the main cave. Around RM35, hard hat and torch included, groups only, no booking needed but worth checking it's running that day."
+    ]},
+    {time:"1:00 PM to 3:30 PM &nbsp;\u00b7&nbsp; Back to Brickfields", items:[
+      "Grab back down, about 35 to 40 minutes.",
+      "<b>Lunch at Annalakshmi.</b> Pure vegetarian South Indian, pay-as-you-feel: you eat, then decide what it was worth. A KL institution, and a proper meal rather than a stopgap. Closed Mondays.",
+      "<b>Thean Hou Temple</b>, about 10 minutes away. Six-tier Chinese temple on a hill, free entry, red lanterns, real skyline views, and usually uncrowded."
+    ], alt:["Alt lunch: Vege Chat, Brickfields. Punjabi, pure veg, no egg, a more ordinary sit-down meal."]},
+    {time:"4:00 PM to 5:00 PM &nbsp;\u00b7&nbsp; Check in properly", items:[
+      "Grab back to citizenM, about 20 minutes. Your room should be ready now. Rest for an hour, you've been up since a red-eye flight."
+    ]},
+    {time:"5:30 PM to 7:00 PM &nbsp;\u00b7&nbsp; KLCC", items:[
+      "<b>Petronas Twin Towers and KLCC Park.</b> Walk the park at golden hour. The Lake Symphony fountain show runs after dark, and the towers light up. Best photo angle is from the lake side of the park."
+    ]},
+    {time:"7:15 PM onward &nbsp;\u00b7&nbsp; Jalan Alor and dinner", items:[
+      "Walk or one Grab back to Bukit Bintang, about 10 minutes.",
+      "<b>Jalan Alor food street</b>, a short walk from the hotel. Mostly meat and seafood, so treat it as an atmosphere walk plus snacks: grilled corn, cut fruit, coconut water.",
+      "<b>Dinner: Blue Boy Vegetarian Food Centre</b>, Jalan Tong Shin, a few minutes from Jalan Alor. Fully vegetarian hawker centre, so it's street food without the guesswork. Famous for its vegan char kway teow."
+    ], alt:["Alt dinner: Simple Life Vegetarian, Bukit Bintang. Sit-down, air-conditioned, Malaysian vegetarian classics."]}
+  ],
+  headsUp:"You're on the move most of the day, roughly 2.5 hours of total Grab time. Annalakshmi is closed Mondays, fine since today is Tuesday. Do Jalan Alor before Blue Boy so you're not eating dinner too late."
+},
+{id:"day2", kind:"day", nav:"Day 2 \u00b7 KL", num:2, title:"Kuala Lumpur", dateLabel:"Wed, 23 Sep", sub:"One line west to east: colonial core, Chinatown, KL Tower, back to Bukit Bintang.",
+  area:"A clean single sweep. Merdeka Square and Central Market are two minutes apart, Chinatown is next door, KL Tower is on the way back toward Bukit Bintang. Almost no backtracking today.",
+  blocks:[
+    {time:"9:30 AM to 12:30 PM &nbsp;\u00b7&nbsp; Old colonial core", items:[
+      "Grab to Merdeka Square, about 15 minutes.",
+      "<b>Merdeka Square.</b> The Sultan Abdul Samad Building with its copper domes is the backdrop. Best light in the morning, free.",
+      "Walk to <b>Masjid Jamek</b> at the river confluence where KL was founded, and the <b>River of Life</b> waterfront beside it, five minutes on foot.",
+      "<b>Central Market</b>, five minutes further. Art-deco heritage building, batik, crafts, a cool break from the sun.",
+      "Petaling Street (Chinatown) is immediately next door."
+    ]},
+    {time:"12:45 PM to 2:00 PM &nbsp;\u00b7&nbsp; Lunch, Chinatown", items:[
+      "<b>The Hungry Tapir.</b> Fully plant-based, set in a restored heritage shophouse, Western and fusion leaning. Two minutes from Central Market."
+    ], alt:["Alt: Tian Yian. Taiwanese-style Buddhist vegetarian, noodles and rice bowls, no pungent roots."]},
+    {time:"2:30 PM to 5:30 PM &nbsp;\u00b7&nbsp; KL Tower", items:[
+      "<b>KL Tower Sky Deck.</b> The open-air glass Sky Box sits 300 metres up, inside the Bukit Nanas forest reserve, so the walk in is through actual rainforest in the middle of the city. Higher than the Petronas bridge and usually shorter queues.",
+      "It sits between Chinatown and Bukit Bintang, so this is on your way back, not a detour.",
+      "Optional: the free Bukit Nanas canopy walk at the base, about 30 minutes."
+    ]},
+    {time:"6:30 PM onward &nbsp;\u00b7&nbsp; Bukit Bintang", items:[
+      "Free time, Pavilion KL and Berjaya Times Square are both a short walk from the hotel.",
+      "<b>Dinner: Simple Life Vegetarian.</b> Malaysian classics done vegetarian, laksa, rendang, nasi lemak. Worth getting the local flavour profile safely at least once."
+    ], alt:["Alt: Bombay Talkies, Brickfields. 100% vegetarian and vegan, Bollywood-themed, strong Jain menu. Closed Mondays."]}
+  ],
+  headsUp:"Pack tonight, not tomorrow morning. Day 3 is a travel day and a rushed checkout is how things get left behind."
+},
+{id:"day3", kind:"day", nav:"Day 3 \u00b7 KL\u2192Penang", num:3, title:"Kuala Lumpur \u2192 Penang", dateLabel:"Thu, 24 Sep", sub:"Fly 2:10 to 3:10 PM, then George Town's heritage core in one walking loop.",
+  area:"The Penang evening is one tight cluster on foot: Cheah Kongsi, the street art, Chew Jetty and Chulia Street are all within about ten minutes of each other.",
+  blocks:[
+    {time:"Morning &nbsp;\u00b7&nbsp; Checkout and transfer", items:[
+      "Keep it light, no new sightseeing. Check out of citizenM by 11 AM.",
+      "Leave for the airport by about 11:30 AM, KLIA is roughly an hour from Bukit Bintang by Grab, or take the KLIA Ekspres from KL Sentral.",
+      "Firefly moved its jet routes, including KL to Penang, from Subang to KLIA Terminal 1 in August 2025, so MH4741 should depart T1. Confirm on your e-ticket, since this changes the transfer entirely if it's wrong.",
+      "Eat a proper lunch before boarding. KLIA T1 has food-court options landside with vegetable rice and noodle dishes, ask for no shrimp paste. There's no good food window again until evening otherwise."
+    ]},
+    {time:"3:10 PM to 4:30 PM &nbsp;\u00b7&nbsp; Arrive Penang", items:[
+      "Land Penang International. Grab to George Town, 30 to 40 minutes.",
+      "Check in at Le Dream Boutique Hotel.",
+      "At check-in, confirm whether breakfast is actually included and running. Recent reviews flag it being dropped after a management change, worth asking rather than assuming."
+    ]},
+    {time:"4:45 PM to 7:00 PM &nbsp;\u00b7&nbsp; Heritage walking loop", items:[
+      "<b>Cheah Kongsi</b>, Armenian Street, 5 minutes on foot. One of George Town's five great clan houses, restored to its 1873 form, noticeably quieter than Khoo Kongsi and pleasant for it. Around RM10, closes late afternoon, so go here first.",
+      "<b>Penang street art</b>, same street. The famous 'Kids on a Bicycle' mural and the wrought-iron caricatures along Armenian Street and Lebuh Ah Quee. Late light is best for photos.",
+      "<b>Chew Jetty</b>, 8 minutes on foot. A stilt-house village still lived in, with a boardwalk over the water. Go for sunset, and be mindful that people actually live here."
+    ]},
+    {time:"7:30 PM onward &nbsp;\u00b7&nbsp; Chulia Street dinner", items:[
+      "<b>Chulia Street Night Hawker</b> (mostly along Carnarvon Street now, everyone still calls it Chulia Street), 10 minutes on foot from Chew Jetty.",
+      "Vegetarian-safe: <b>popiah</b>, the fresh spring roll with yam bean, tofu and spring onion, about RM4 and the best cheap thing there, <b>apom</b> the sweet coconut pancake, and <b>muah chee</b>, warm glutinous rice in ground peanut.",
+      "Skip the wantan mee, char kway teow, oyster omelette and lok lok. All meat, seafood or egg."
+    ], alt:["Alt full dinner: Pinxin, fully vegan, does Malaysian classics properly. Book ahead, it's small."]}
+  ],
+  headsUp:"Carry cash tonight, hawker stalls don't take cards."
+},
+{id:"day4", kind:"day", nav:"Day 4 \u00b7 Penang", num:4, title:"Penang", dateLabel:"Fri, 25 Sep", sub:"Air Itam hills in the morning, George Town's heritage core after a fixed 3:30 PM mansion tour.",
+  area:"Morning is the Air Itam cluster, Kek Lok Si and Penang Hill are ten minutes apart. Afternoon returns to central George Town, where the mansion and Khoo Kongsi are a short walk apart, but the mansion tour time is fixed, so today is built around that clock.",
+  blocks:[
+    {time:"8:30 AM to 10:30 AM &nbsp;\u00b7&nbsp; Kek Lok Si", items:[
+      "Grab to Kek Lok Si, about 25 minutes. Go early, mornings are clearest before afternoon cloud builds.",
+      "<b>Kek Lok Si Temple.</b> The largest Buddhist temple complex in Malaysia. Seven-storey Pagoda of Ten Thousand Buddhas, and an inclined lift to the 30 metre bronze Kuan Yin statue. Free to enter, small charges for the pagoda and lift."
+    ]},
+    {time:"10:45 AM to 11:45 AM &nbsp;\u00b7&nbsp; Lunch, on site", items:[
+      "<b>Kek Lok Si Vegetarian Restaurant</b>, inside the temple complex on the lower level. Chinese vegetarian buffet and set meals, genuinely good, famous locally for its vegetarian roast duck. No extra travel needed, and a Buddhist temple kitchen is meat-free by definition, so it's one of the safest meals of the trip."
+    ]},
+    {time:"12:00 PM to 1:30 PM &nbsp;\u00b7&nbsp; Penang Hill", items:[
+      "10 minutes from Kek Lok Si. The funicular climbs to 800 metres for island-wide views, noticeably cooler air at the top.",
+      "At the summit: colonial-era bungalows, a mosque and Hindu temple, and The Habitat nature walk if you want another hour among the trees."
+    ]},
+    {time:"2:00 PM to 3:15 PM &nbsp;\u00b7&nbsp; Move to George Town", items:[
+      "Grab back to central George Town, 25 to 30 minutes. Position yourself near the mansion by 3:15, the next step is time-locked."
+    ]},
+    {time:"3:30 PM to 4:15 PM &nbsp;\u00b7&nbsp; The Blue Mansion", items:[
+      "<b>Cheong Fatt Tze, the Blue Mansion.</b> Guided tours only, and only twice a day, 11 AM and 3:30 PM sharp, 45 minutes, no other slots. Arrive by 3:15, tours fill up and there is no later one to fall back on. The indigo lime-wash courtyard, and the guide's telling of Cheong Fatt Tze's life, are what make it land."
+    ]},
+    {time:"4:30 PM to 5:30 PM &nbsp;\u00b7&nbsp; Khoo Kongsi", items:[
+      "<b>Leong San Tong Khoo Kongsi</b>, 8 minutes on foot. The grandest of the clan houses, carved stone, gilded beams, an opera stage facing the square. Around RM15. Pairs naturally with yesterday's Cheah Kongsi, seeing both is what makes the clan-house system click."
+    ]},
+    {time:"7:30 PM onward &nbsp;\u00b7&nbsp; Dinner", items:[
+      "<b>Evergreen Vegetarian</b>, Burma Road. Buddhist buffet, no onion or garlic either. Cash only, closed Wednesdays, fine today."
+    ], alt:["Alt: Zen Xin, Cantonese vegetarian, kung pao aubergine and a tofu 'fish' curry. Or Annalakshmi Penang, inside the Temple of Fine Arts."]}
+  ],
+  headsUp:"The mansion tour is the anchor of this whole day: 11 AM and 3:30 PM only, nothing in between, nothing after. If Kek Lok Si or Penang Hill overruns, protect the 3:15 arrival time over everything else."
+},
+{id:"day5", kind:"day", nav:"Day 5 \u00b7 Penang\u2192Langkawi", num:5, title:"Penang \u2192 Langkawi", dateLabel:"Sat, 26 Sep", sub:"North coast in the morning if you're out the door on time, fly 3:50 to 4:30 PM.",
+  area:"Pack and settle the bill before you leave for the morning excursion, so the return trip is just picking up bags, not a fresh checkout.",
+  blocks:[
+    {time:"8:00 AM &nbsp;\u00b7&nbsp; Check out before you leave", items:[
+      "Pack, settle the hotel bill, and leave your bags with reception now, not when you get back. This is what makes the tight midday turnaround work."
+    ]},
+    {time:"8:15 AM to 12:00 PM &nbsp;\u00b7&nbsp; North coast (optional)", items:[
+      "Grab to Teluk Bahang, 35 to 40 minutes along the coast road.",
+      "<b>Tropical Spice Garden</b>, opens 9 AM. Eight acres of rainforest terraces on a former rubber plantation, over 500 species, between a forested hill and the Strait of Malacca. Self-guided audio tour, a cafe with sea views. Genuinely peaceful, and most people doing the standard George Town loop miss it entirely. Allow 60 to 90 minutes.",
+      "<b>Masjid Terapung, the Floating Mosque</b>, Tanjung Bungah, on the way back. At high tide the stilts vanish and it reads as floating. Quick stop, 15 to 20 minutes, cover arms, legs and head to enter."
+    ], alt:["If you'd rather not rush: skip the coast, have a slow morning in the heritage lanes instead, Wheelers is a good vegan cafe to sit in."]},
+    {time:"12:15 PM to 1:45 PM &nbsp;\u00b7&nbsp; Lunch and airport", items:[
+      "Back at the hotel by about 12:15, collect your already-checked-out bags.",
+      "<b>Lunch: Woodlands Vegetarian or Ee Beng</b>, both central and quick.",
+      "Grab to Penang International, 30 to 40 minutes. Leave by 1:45 at the latest."
+    ]},
+    {time:"3:50 PM to 4:30 PM &nbsp;\u00b7&nbsp; Fly", items:[
+      "MH5486 to Langkawi."
+    ]},
+    {time:"4:30 PM onward &nbsp;\u00b7&nbsp; Arrive Langkawi", items:[
+      "Grab or airport taxi to Mercure Langkawi Pantai Cenang, about 10 minutes. Check in for three nights.",
+      "<b>Sunset on Pantai Cenang beach</b>, directly across from the hotel, around 7:15 PM.",
+      "<b>Night market stalls along the strip.</b> Safe picks: kuih, cucur sayur (confirm no shrimp in the batter), grilled corn, fresh fruit, ais kacang for dessert. Skip roti john and most fried rice or noodles.",
+      "<b>Dinner: Papadam Ria</b>, near Underwater World, walkable from the hotel end of the strip."
+    ], alt:["Alt dinner: Raj Darbar, Pantai Cenang, open late."]}
+  ],
+  headsUp:"The north coast morning only works if you're out by 8:15 AM sharp. If you're running late, drop it without guilt, the slow-morning option costs you nothing."
+},
+{id:"day6", kind:"day", nav:"Day 6 \u00b7 Langkawi", num:6, title:"Langkawi", dateLabel:"Sun, 27 Sep", sub:"The best cluster of the trip: cable car, zipline and waterfall, all within 2 km of each other.",
+  area:"Oriental Village, Skytrex and Seven Wells sit almost on top of each other in the northwest corner, so today is three big things with almost no driving between them.",
+  blocks:[
+    {time:"9:00 AM to 12:30 PM &nbsp;\u00b7&nbsp; Oriental Village", items:[
+      "Grab to Oriental Village, Burau Bay, about 25 minutes. Aim for the 9:30 opening, cloud cover builds through the day and a late arrival can mean no view at all.",
+      "<b>Langkawi SkyCab.</b> One of the steepest cable car ascents in the world, up Gunung Machinchang to 708 metres. Take the glass-floor gondola if it's running.",
+      "<b>Sky Bridge</b>, the curved 125 metre suspension bridge at the top, reached by an inclined lift or stairs. Views to Tarutao in Thailand on a clear day."
+    ]},
+    {time:"12:45 PM to 1:45 PM &nbsp;\u00b7&nbsp; Lunch, on site", items:[
+      "<b>Vegetarian Nasi Campur</b> at the Top Station Cafe, right at the upper cable car station, easiest if you eat before coming back down.",
+      "Or <b>Oriental Caf&eacute;</b> at the base, which does a vegetarian-filled ciabatta and pot pie alongside its Malay and Thai menu."
+    ]},
+    {time:"2:00 PM to 4:00 PM &nbsp;\u00b7&nbsp; Skytrex", items:[
+      "<b>SKYTREX Adventure Langkawi</b>, right by the cable car base. Treetop obstacle and zipline course through the canopy. Harnessed throughout, no swimming involved at any point, closed shoes required."
+    ]},
+    {time:"4:15 PM to 6:00 PM &nbsp;\u00b7&nbsp; Seven Wells Waterfall", items:[
+      "<b>Telaga Tujuh</b>, 5 minutes away. About 600 steps to a series of seven natural rock pools. You can wade the shallow pools at the base without swimming. Bring water, steps get slippery after rain."
+    ]},
+    {time:"7:30 PM onward &nbsp;\u00b7&nbsp; Dinner", items:[
+      "<b>Raj Darbar</b>, Pantai Cenang, open late, useful after a physical day."
+    ], alt:["Alt: The Fat Frog, Asian and Western vegetarian mix, closed Tuesdays and Wednesdays so today's fine. Or Indiana Cafe for something lighter."]}
+  ],
+  headsUp:"This is the most physical day of the trip. If you'd rather trade it down, drop Skytrex and drive up Gunung Raya instead, see Extras."
+},
+{id:"day7", kind:"day", nav:"Day 7 \u00b7 Langkawi", num:7, title:"Langkawi", dateLabel:"Mon, 28 Sep", sub:"Northeast mangroves by day, the Mahsuri legend told twice: once at her tomb, once after dark in the forest.",
+  area:"Kilim and Tanjung Rhu sit minutes apart in the northeast. Makam Mahsuri is on the way back toward Cenang. Dream Forest is a separate 25 to 30 minute drive out to central Langkawi, so tonight involves real backtracking, it's simply the only way to do both halves of the story in one day.",
+  blocks:[
+    {time:"9:00 AM to 12:30 PM &nbsp;\u00b7&nbsp; Kilim Geoforest Park", items:[
+      "Grab to Kilim jetty, about 40 minutes. Book a boat tour at the jetty or in advance.",
+      "<b>Kilim Karst Geoforest Park.</b> A UNESCO Global Geopark: limestone cliffs, mangrove channels, a bat cave, eagle feeding, a floating fish farm. Roughly 3 to 4 hours, life jackets provided, you stay in the boat throughout so none of it requires swimming."
+    ]},
+    {time:"12:45 PM to 2:00 PM &nbsp;\u00b7&nbsp; Tanjung Rhu", items:[
+      "<b>Tanjung Rhu Beach</b>, 10 minutes from the jetty. Wide, quiet, casuarina-lined, far emptier than Cenang. Food options here are thin, carry something or wait for the next stop."
+    ]},
+    {time:"3:00 PM to 4:30 PM &nbsp;\u00b7&nbsp; Makam Mahsuri", items:[
+      "<b>Makam Mahsuri</b>, Kampung Mawat, roughly on the route back toward Cenang. Open 9 AM to 6 PM.",
+      "The real site behind Langkawi's founding legend: a village woman executed in 1819 on a false charge of adultery, whose blood is said to have run white as proof of her innocence, and who cursed the island for seven generations. Locals date the end of the curse to the seventh-generation descendant born in 1985.",
+      "Tomb, a traditional Malay house, a small diorama museum, craft stalls, set among rice paddies. Quiet and rooted in real local history. Allow 1 to 1.5 hours."
+    ]},
+    {time:"5:00 PM to 6:00 PM &nbsp;\u00b7&nbsp; Back to the hotel, early dinner", items:[
+      "Rest and change, then eat earlier than usual, around 6 PM, because tonight's stop involves a real drive and a fixed start time.",
+      "<b>Sagar Restaurant</b> or <b>The Fat Frog</b>, both Cenang area."
+    ]},
+    {time:"6:45 PM to 9:15 PM &nbsp;\u00b7&nbsp; Dream Forest Langkawi", items:[
+      "Grab out to Ulu Melaka, near Gunung Raya, 25 to 30 minutes from Cenang.",
+      "<b>Dream Forest Langkawi.</b> Ticket counter opens 7 PM, but the 1.2 km trail walk itself only starts from 8 PM onward, so there's a wait built in, food and seating are available at the entrance if you arrive early. Langkawi's own myths, told through light, projection and sound, about 30 to 60 minutes to walk.",
+      "Having stood at Mahsuri's tomb this afternoon, the same legend lands very differently tonight, that pairing is the point of today.",
+      "Book ahead online, slots are timed. Closed shoes, the path is uneven and dark, insect repellent helps.",
+      "Grab back to Cenang after, another 25 to 30 minutes."
+    ]}
+  ],
+  headsUp:"Two corrections worth knowing: the walk starts at 8 PM, not earlier, and Dream Forest is a real drive from Cenang, not a quick hop. Budget the evening around both. If the whole day feels like too much, cut Tanjung Rhu and go straight from Kilim to Mahsuri."
+},
+{id:"day8", kind:"day", nav:"Day 8 \u00b7 Departure", num:8, title:"Langkawi \u2192 Kuala Lumpur \u2192 Delhi", dateLabel:"Tue, 29 Sep", sub:"Departure day. Everything is within 15 minutes of the airport, so there's no rushing.",
+  area:"A single short stop, then two flights, both from the same KLIA terminal.",
+  blocks:[
+    {time:"8:30 AM to 10:30 AM &nbsp;\u00b7&nbsp; Last stop", items:[
+      "Check out of Mercure. The airport is 10 to 15 minutes away, which buys you a relaxed morning.",
+      "<b>Field of Burnt Rice, Beras Terbakar</b>, Padang Matsirat, close to the airport, opens 9 AM. The site where villagers are said to have burned their own rice stores rather than let a Siamese invading force take them, with blackened grains still said to surface after rain. A short, fitting last piece of the Mahsuri-era story from yesterday. 30 to 40 minutes.",
+      "At the airport by about 10:30 for the 11:55 flight."
+    ]},
+    {time:"11:55 AM to 6:05 PM &nbsp;\u00b7&nbsp; Transit at KLIA", items:[
+      "Fly OD-2202, landing KLIA Terminal 1 around 1:00 PM.",
+      "The Delhi flight departs the same terminal at 6:05 PM, so there's no inter-terminal transfer and the five hour gap is comfortable rather than tight.",
+      "<b>Lunch at KLIA T1.</b> Food courts landside and airside have vegetarian options, and an Indian counter or two. Eat properly here rather than relying on the flight meal.",
+      "Check in for the international flight from about 3:00 to 4:00 PM."
+    ]},
+    {time:"6:05 PM &nbsp;\u00b7&nbsp; Fly home", items:[
+      "Batik Air to Delhi, landing around 9:05 PM."
+    ]}
+  ],
+  headsUp:"Confirm your Firefly and Batik baggage allowances the night before. Langkawi is duty-free, so it's easy to end up overweight on the way home."
+},
+{id:"extras", kind:"extras", nav:"Extras & swaps"},
+{id:"food", kind:"food", nav:"Food directory"}
+];
+
+const EXTRAS = [
+  {name:"Gunung Raya, Langkawi", desc:"The island's highest peak at 881 metres, reached by a 30 minute drive up a winding forest road, no hike required. Hornbills, dusky leaf monkeys and eagles along the way, 360 degree views at the top with none of the Sky Bridge crowds. Best used as a straight swap for Skytrex on Day 6 if you'd rather have the nature without the exertion. Needs a clear day, fog erases the view entirely."},
+  {name:"Penang National Park", desc:"Jungle trails to quiet beaches on the northwest tip, near the Tropical Spice Garden. Only realistic if you drop the Day 5 flight and add a Penang night, but it sits in the same geographic cluster as that morning."},
+  {name:"The Habitat, Penang Hill", desc:"Canopy walk and nature trail at the top of the funicular. Slots straight into Day 4's morning if Kek Lok Si moves faster than planned."},
+  {name:"Underwater World Langkawi", desc:"Air-conditioned aquarium, a 9 minute walk from your Langkawi hotel. A good wet-weather fallback on Day 6 or 7, no swimming involved."},
+  {name:"Eagle Square and Kuah town", desc:"The giant eagle statue on the waterfront, plus duty-free shopping. Worth it only if you end up in Kuah anyway. Compare prices across two or three shops, some quote inflated tourist rates."}
+];
+
+const FOOD = [
+  {city:"Kuala Lumpur", items:[
+    ["Annalakshmi, Brickfields","Pure veg South Indian, pay-as-you-feel. Closed Mondays."],
+    ["Blue Boy Vegetarian Food Centre","Fully vegetarian hawker centre near Jalan Alor. Famous vegan char kway teow."],
+    ["Simple Life Vegetarian, Bukit Bintang","Malaysian classics done vegetarian, laksa, rendang, nasi lemak."],
+    ["The Hungry Tapir, Chinatown","Fully plant-based, heritage shophouse, Western and fusion leaning."],
+    ["Tian Yian","Taiwanese-style Buddhist vegetarian. Noodles, rice bowls, mock-meat."],
+    ["Bombay Talkies, Brickfields","100% vegetarian and vegan Indian, Bollywood-themed, strong Jain menu. Closed Mondays."],
+    ["Vege Chat, Brickfields","Punjabi, pure veg, no egg."],
+    ["Barat Vegeliciously","Mediterranean and Middle Eastern, falafel, hummus, vegan burgers."]
+  ]},
+  {city:"Penang", items:[
+    ["Kek Lok Si temple restaurant","Inside the temple, meat-free by definition. The safest lunch on Day 4."],
+    ["Evergreen Vegetarian, Burma Road","Buddhist buffet, no onion or garlic. Cash only, closed Wednesdays."],
+    ["Ee Beng Vegetarian","Self-serve veg and vegan buffet, central George Town, very cheap."],
+    ["Woodlands Vegetarian, Lebuh Penang","Pure veg Indian in the heritage core."],
+    ["Pinxin","Fully vegan, does Malaysian classics properly."],
+    ["Zen Xin","Cantonese vegetarian, kung pao aubergine, tofu 'fish' curry."],
+    ["Annalakshmi Penang","Inside the Temple of Fine Arts."],
+    ["Wheelers","Vegan cafe, good coffee."]
+  ]},
+  {city:"Langkawi", items:[
+    ["Papadam Ria, Cenang","North Indian vegetarian, walkable from the hotel end of the strip."],
+    ["Raj Darbar, Cenang","Indian vegetarian, open late."],
+    ["The Fat Frog","Asian and Western vegetarian mix. Closed Tuesdays and Wednesdays."],
+    ["Sagar Restaurant, Cenang","Indian vegetarian, reliable."],
+    ["Indiana Cafe","Vegan and veggie, Western-leaning. Closes mid-afternoon."],
+    ["The Red Tomato, Cenang","Vegan cheese pizza, pastas, grilled vegetables. Closed Mondays."],
+    ["Melior Cafe, Kuah","Vegetarian cafe, useful only if you're in Kuah."]
+  ]}
+];
+
+/* =================== RENDER =================== */
+const content = document.getElementById("content");
+const stationsDesktop = document.getElementById("stationsDesktop");
+const pillsMobile = document.getElementById("pillsMobile");
+let current = 0;
+
+function esc(s){return s;}
+
+function overviewHTML(){
+  return `
+  <div class="hero-route">
+    <svg viewBox="0 0 700 90" preserveAspectRatio="xMidYMid meet">
+      <path class="track" d="M30,45 L670,45"></path>
+      <path class="track-draw" d="M30,45 L670,45"></path>
+      ${[["Delhi","21 Sep",30],["KL","22\u201324",190],["Penang","24\u201326",350],["Langkawi","26\u201329",510],["KL\u2192Delhi","29 Sep",670]]
+        .map(([c,d,x])=>`<circle class="node" cx="${x}" cy="45" r="6"></circle>
+        <text class="city" x="${x}" y="30" text-anchor="middle">${c}</text>
+        <text class="dateline" x="${x}" y="65" text-anchor="middle">${d}</text>`).join("")}
+    </svg>
+  </div>
+  <h2 class="page-title">Malaysia, 22&ndash;29 September 2026</h2>
+  <p class="page-sub">7 nights, 8 days. Pure vegetarian, no egg. Sites grouped by area to cut travel time. No swimming needed anywhere on this trip.</p>
+  <div class="tags">
+    <span class="tag">Solo female</span><span class="tag">Vegetarian</span><span class="tag">Non-smoker</span>
+    <span class="tag">Non-drinker</span><span class="tag">Non-gambler</span><span class="tag">Non-swimmer</span>
+  </div>
+  <h3 class="sec">Flights</h3>
+  <table class="dat"><tr><th>Date</th><th>Route</th><th>Flight</th><th>Time</th></tr>
+    <tr><td>21 Sep (night)</td><td>Delhi &rarr; KL</td><td>Batik Air</td><td>Late eve, arr ~6 AM 22 Sep</td></tr>
+    <tr><td>24 Sep</td><td>KL &rarr; Penang</td><td>MH4741 (Firefly)</td><td>2:10&ndash;3:10 PM</td></tr>
+    <tr><td>26 Sep</td><td>Penang &rarr; Langkawi</td><td>MH5486 (Firefly)</td><td>3:50&ndash;4:30 PM</td></tr>
+    <tr><td>29 Sep</td><td>Langkawi &rarr; KL</td><td>Batik Air OD-2202</td><td>11:55 AM&ndash;1:00 PM</td></tr>
+    <tr><td>29 Sep</td><td>KL &rarr; Delhi</td><td>Batik Air</td><td>6:05&ndash;~9:05 PM</td></tr>
+  </table>
+  <h3 class="sec">Hotels</h3>
+  <table class="dat"><tr><th>Dates</th><th>City</th><th>Hotel</th><th>Nights</th></tr>
+    <tr><td>22&ndash;24 Sep</td><td>Kuala Lumpur</td><td>citizenM Bukit Bintang</td><td>2</td></tr>
+    <tr><td>24&ndash;26 Sep</td><td>Penang</td><td>Le Dream Boutique Hotel</td><td>2</td></tr>
+    <tr><td>26&ndash;29 Sep</td><td>Langkawi</td><td>Mercure Pantai Cenang</td><td>3</td></tr>
+  </table>
+  <div class="callout warn"><b class="lbl">citizenM booking</b>Free cancellation reportedly ends around 20 September. Confirm or pay before then.</div>
+  `;
+}
+
+function practicalHTML(){
+  return `
+  <h2 class="page-title">Before you go</h2>
+  <p class="page-sub">Everything that isn't a place to visit, but will affect your day if you don't know it in advance.</p>
+  <h3 class="sec">Entry and documents</h3>
+  <ul class="plain">
+    <li>Visa-free entry for Indian passport holders, up to 30 days, policy runs through 31 December 2026.</li>
+    <li>Fill the Malaysia Digital Arrival Card (MDAC) online within 3 days before arrival. Free, mandatory.</li>
+    <li>Passport needs 6+ months validity. Immigration may ask for your return ticket and hotel booking, keep them on your phone.</li>
+  </ul>
+  <h3 class="sec">Money and connectivity</h3>
+  <ul class="plain">
+    <li>Currency is the Malaysian Ringgit (MYR). Withdraw or exchange some cash at KLIA on Day 1, street stalls and several vegetarian restaurants (Evergreen among them) are cash only.</li>
+    <li>Get an eSIM before you fly (Airalo, Holafly) or a physical prepaid SIM at KLIA arrivals (Hotlink, Digi, Maxis counters). You'll want data working from the moment you land, for Grab and maps.</li>
+    <li>Grab is the default way to get around in all three cities. Install it and add a payment method before you go.</li>
+  </ul>
+  <h3 class="sec">Practical odds and ends</h3>
+  <ul class="plain">
+    <li>Power sockets are Type G (UK three-pin), 230V. Different from India's sockets, bring a universal or UK-style adapter.</li>
+    <li>Malaysia is GMT+8, two and a half hours ahead of India.</li>
+    <li>Bahasa Malaysia is the official language, English is widely understood, especially anywhere touristed.</li>
+    <li>Emergency number is 999 anywhere in the country, for police, ambulance or fire.</li>
+    <li>Dress code: cover shoulders and knees at any temple or mosque, Batu Caves, Kek Lok Si, and the Floating Mosque all apply. One light scarf covers all three, worth keeping in your day bag the whole trip.</li>
+  </ul>
+  <div class="callout food"><b class="lbl">Ordering vegetarian</b>
+  Malaysian dishes that look meat-free often hide shrimp paste (belacan), fish sauce, or meat stock. Useful line: <b>&ldquo;Saya vegetarian. Tanpa daging, ikan, telur, belacan, sos ikan.&rdquo;</b> (I am vegetarian. No meat, fish, egg, shrimp paste, fish sauce.) A shop displaying a red-and-yellow sign with the Chinese character for &lsquo;zhai&rsquo; is fully meat-free and the safest street-level bet.</div>
+  <div class="callout area"><b class="lbl">Weather</b>
+  September is a wetter month on the west coast, expect short, heavy afternoon downpours rather than all-day rain. Mornings are usually clearest, which is why outdoor sites are front-loaded through this itinerary. Carry a light rain layer.</div>
+  <div class="callout warn"><b class="lbl">Breakfast</b>
+  Self-catered from your own instant noodles for most of the trip, rooms have kettles. Day 1 is the one exception: you land at 6 AM and your bags go straight into hotel storage before check-in, so you won't have access to them, or a kettle, until the afternoon. That day has an actual breakfast stop built in for exactly this reason.</div>
+  `;
+}
+
+function dayHTML(p){
+  const doneKey = p.id;
+  let html = `
+  <p class="day-kicker">${p.dateLabel.toUpperCase()}</p>
+  <div class="day-head"><h2>DAY ${p.num} &middot; ${p.title}</h2><p class="sub">${p.sub}</p></div>
+  <div class="progress-row">
+    <div class="progress-track"><div class="progress-fill" id="fill-${p.id}"></div></div>
+    <span class="progress-label" id="label-${p.id}"></span>
+  </div>
+  <div class="callout area"><b class="lbl">Area plan</b>${p.area}</div>
+  `;
+  p.blocks.forEach((b, bi)=>{
+    html += `<div class="block"><div class="time">${b.time}</div>`;
+    b.items.forEach((it, ii)=>{
+      const id = `${p.id}-${bi}-${ii}`;
+      html += `<div class="item" data-id="${id}">
+        <input type="checkbox" id="chk-${id}">
+        <label for="chk-${id}">${it}</label>
+      </div>`;
+    });
+    if(b.alt){ b.alt.forEach(a=> html += `<div class="alt-line">${a}</div>`); }
+    html += `</div>`;
+  });
+  if(p.headsUp){
+    html += `<div class="callout warn"><b class="lbl">Heads up</b>${p.headsUp}</div>`;
+  }
+  html += `<button class="reset-day" data-reset="${p.id}">Reset today's checklist</button>`;
+  return html;
+}
+
+function extrasHTML(){
+  return `
+  <h2 class="page-title">Extras and swaps</h2>
+  <p class="page-sub">Optional stops if a day runs short, or straight swaps if one feels like too much.</p>
+  ${EXTRAS.map(e=>`<div class="extra-card"><h4>${e.name}</h4><p>${e.desc}</p></div>`).join("")}
+  `;
+}
+
+function foodHTML(){
+  return `
+  <h2 class="page-title">Vegetarian food directory</h2>
+  <p class="page-sub">All pure vegetarian or vegan. Keep this for when a plan changes and you need a fallback nearby.</p>
+  ${FOOD.map(c=>`<h3 class="food-city">${c.city}</h3>${c.items.map(([n,d])=>`<div class="food-item"><b>${n}</b>${d}</div>`).join("")}`).join("")}
+  <div class="callout food" style="margin-top:20px;"><b class="lbl">Street food, safe picks</b>
+  <b>Sweet:</b> kuih, apom, muah chee, ais kacang, cut tropical fruit, coconut water.<br>
+  <b>Savoury:</b> popiah, grilled corn, vegetable fritters (confirm no shrimp in the batter), steamed buns with red bean, black sesame or yam.<br>
+  <b>Avoid:</b> rojak and anything with sambal, char kway teow, wantan mee, oyster omelette, lok lok, roti john, most fried rice or noodles.</div>
+  `;
+}
+
+function renderPanel(p){
+  if(p.kind==="overview") return overviewHTML();
+  if(p.kind==="practical") return practicalHTML();
+  if(p.kind==="day") return dayHTML(p);
+  if(p.kind==="extras") return extrasHTML();
+  if(p.kind==="food") return foodHTML();
+  return "";
+}
+
+/* ---- checklist storage ---- */
+function loadChecks(){
+  try{ return JSON.parse(localStorage.getItem("mys_trip_checks")||"{}"); }catch(e){ return {}; }
+}
+function saveChecks(obj){
+  try{ localStorage.setItem("mys_trip_checks", JSON.stringify(obj)); }catch(e){}
+}
+let CHECKS = loadChecks();
+
+function updateProgress(p){
+  if(p.kind!=="day") return;
+  const total = p.blocks.reduce((s,b)=>s+b.items.length,0);
+  let done = 0;
+  p.blocks.forEach((b,bi)=>b.items.forEach((it,ii)=>{ if(CHECKS[`${p.id}-${bi}-${ii}`]) done++; }));
+  const fill = document.getElementById(`fill-${p.id}`);
+  const label = document.getElementById(`label-${p.id}`);
+  if(fill) fill.style.width = total? (done/total*100)+"%":"0%";
+  if(label) label.textContent = `${done} of ${total} done`;
+}
+
+function wireDay(p){
+  if(p.kind!=="day") return;
+  content.querySelectorAll(".item").forEach(el=>{
+    const id = el.getAttribute("data-id");
+    const box = el.querySelector("input");
+    box.checked = !!CHECKS[id];
+    if(box.checked) el.classList.add("checked");
+    box.addEventListener("change", ()=>{
+      CHECKS[id] = box.checked;
+      saveChecks(CHECKS);
+      el.classList.toggle("checked", box.checked);
+      updateProgress(p);
+      markStationDone();
+    });
+  });
+  updateProgress(p);
+  const resetBtn = content.querySelector(`[data-reset="${p.id}"]`);
+  if(resetBtn){
+    resetBtn.addEventListener("click", ()=>{
+      p.blocks.forEach((b,bi)=>b.items.forEach((it,ii)=>{ delete CHECKS[`${p.id}-${bi}-${ii}`]; }));
+      saveChecks(CHECKS);
+      renderCurrent();
+    });
+  }
+}
+
+function dayProgressFraction(p){
+  if(p.kind!=="day") return null;
+  const total = p.blocks.reduce((s,b)=>s+b.items.length,0);
+  let done = 0;
+  p.blocks.forEach((b,bi)=>b.items.forEach((it,ii)=>{ if(CHECKS[`${p.id}-${bi}-${ii}`]) done++; }));
+  return total? done/total : 0;
+}
+
+function markStationDone(){
+  PANELS.forEach((p,i)=>{
+    if(p.kind==="day"){
+      const frac = dayProgressFraction(p);
+      const els = document.querySelectorAll(`.station[data-idx="${i}"], .pill[data-idx="${i}"]`);
+      els.forEach(el=> el.classList.toggle("done", frac>=1));
+    }
+  });
+}
+
+/* ---- nav build ---- */
+function buildNav(){
+  stationsDesktop.innerHTML = PANELS.map((p,i)=>`
+    <button class="station" data-idx="${i}"><span class="dot"></span>${p.nav}</button>
+  `).join("");
+  pillsMobile.innerHTML = PANELS.map((p,i)=>`
+    <button class="pill" data-idx="${i}">${p.nav}</button>
+  `).join("");
+  document.querySelectorAll(".station, .pill").forEach(btn=>{
+    btn.addEventListener("click", ()=> goTo(parseInt(btn.getAttribute("data-idx"),10)));
+  });
+}
+
+function goTo(i){
+  current = Math.max(0, Math.min(PANELS.length-1, i));
+  renderCurrent();
+  try{ localStorage.setItem("mys_trip_last", String(current)); }catch(e){}
+  content.scrollTop = 0;
+  window.scrollTo(0,0);
+}
+
+function renderCurrent(){
+  const p = PANELS[current];
+  content.innerHTML = `<div class="panel active">${renderPanel(p)}</div>`;
+  wireDay(p);
+  document.querySelectorAll(".station").forEach(el=> el.classList.toggle("active", parseInt(el.getAttribute("data-idx"),10)===current));
+  document.querySelectorAll(".pill").forEach(el=> el.classList.toggle("active", parseInt(el.getAttribute("data-idx"),10)===current));
+  const activePill = document.querySelector(".pill.active");
+  if(activePill) activePill.scrollIntoView({inline:"center", block:"nearest"});
+  markStationDone();
+
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  const prevLabel = document.getElementById("prevLabel");
+  const nextLabel = document.getElementById("nextLabel");
+  const seqPos = document.getElementById("seqPos");
+  if(current<=0){ prevBtn.disabled = true; } else { prevBtn.disabled = false; prevLabel.textContent = PANELS[current-1].nav; }
+  if(current>=PANELS.length-1){ nextBtn.disabled = true; } else { nextBtn.disabled = false; nextLabel.textContent = PANELS[current+1].nav; }
+  seqPos.textContent = `${current+1} / ${PANELS.length}`;
+}
+
+document.getElementById("prevBtn").addEventListener("click", ()=> goTo(current-1));
+document.getElementById("nextBtn").addEventListener("click", ()=> goTo(current+1));
+
+buildNav();
+let start = 0;
+try{ const last = parseInt(localStorage.getItem("mys_trip_last"),10); if(!isNaN(last) && last>=0 && last<PANELS.length) start = last; }catch(e){}
+goTo(start);
+</script>
+</body>
+</html>
