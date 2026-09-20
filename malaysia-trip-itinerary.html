@@ -238,31 +238,30 @@ const PANELS = [
 {id:"overview", kind:"overview", nav:"Overview"},
 {id:"practical", kind:"practical", nav:"Before you go"},
 {id:"day1", kind:"day", nav:"Day 1 \u00b7 KL", num:1, title:"Kuala Lumpur", dateLabel:"Tue, 22 Sep", sub:"Landing day. Batu Caves in the morning, Brickfields and Thean Hou after, KLCC and Bukit Bintang at night.",
-  area:"Three moves: Brickfields (breakfast, south) is on your way in from the airport train, so do it first. Then Batu Caves (north) and back down to Brickfields again for lunch and Thean Hou, since both are worth the detour. Evening stays central at KLCC and Bukit Bintang.",
+  area:"Two moves, not three. Breakfast now happens at the hotel itself, right after your bags are dropped, so there's no detour into Brickfields until lunch. Batu Caves is the one outlier up north; Brickfields, Thean Hou, KLCC and Bukit Bintang all sit south-to-central and flow into each other.",
   blocks:[
-    {time:"6:00 AM to 7:30 AM &nbsp;\u00b7&nbsp; Touchdown", items:[
+    {time:"6:00 AM to 7:15 AM &nbsp;\u00b7&nbsp; Touchdown", items:[
       "Land KLIA Terminal 1. Immigration and baggage claim, roughly 45 minutes.",
       "Exchange or withdraw some Ringgit at the arrivals hall before you head out, you'll want cash for today.",
-      "KLIA Ekspres train to KL Sentral, about 28 to 30 minutes. Trains run from early morning."
+      "<b>KLIA Ekspres to KL Sentral</b>, 28 minutes, non-stop, no other stations in between. Signposted from the arrivals hall, a short walk to the platform. Buy a ticket at the counter or self-service kiosk right there: RM55 one-way, cash or card, no advance booking needed, just walk up. Trains run every 20 minutes from about 5 AM, so there's no wait this early. A contactless Visa, Mastercard or Amex, or a Touch 'n Go card, can also tap directly at the gate without a separate ticket.",
+      "If you'd rather skip the train altogether after a red-eye: Grab direct from KLIA to the hotel works too, it just costs more and takes 45 to 60 minutes depending on traffic, against 28 minutes plus a short local Grab."
     ]},
-    {time:"7:30 AM to 8:15 AM &nbsp;\u00b7&nbsp; Breakfast, Brickfields", items:[
-      "Brickfields (Little India) is a 5 minute walk from KL Sentral. Pick any of the busy South Indian breakfast stalls along Jalan Tun Sambanthan for dosa, idli or vada. Cheap, quick, and they open early for the working crowd."
-    ]},
-    {time:"8:30 AM to 9:00 AM &nbsp;\u00b7&nbsp; Drop your bags", items:[
-      "Grab to citizenM Bukit Bintang, about 15 minutes.",
-      "The room won't be ready till 2 to 3 PM. Leave your luggage with the front desk, they hold it for free, and freshen up in the lobby restroom."
-    ]},
-    {time:"9:15 AM to 12:30 PM &nbsp;\u00b7&nbsp; Batu Caves", items:[
+    {time:"7:15 AM to 8:15 AM &nbsp;\u00b7&nbsp; Bags down, then breakfast", items:[
+      "Grab from KL Sentral to citizenM Bukit Bintang, about 15 minutes.",
+      "<b>Drop your luggage with the front desk straight away</b>, before anything else. The room won't be ready till 2 to 3 PM, but they hold bags for free, so you're not carrying a suitcase through breakfast or up the Batu Caves steps.",
+      "<b>Breakfast: canteenM</b>, the hotel's own 24-hour restaurant, has vegetarian options and costs you zero extra travel on the one morning you're running on no sleep."
+    ], alt:["Want something more local than the hotel restaurant instead: Restoran Al Sarifa, a 24-hour mamak a few minutes' walk away, does vegetable curries and roti canai, and is used to tourists asking about the menu."]},
+    {time:"8:30 AM to 12:30 PM &nbsp;\u00b7&nbsp; Batu Caves", items:[
       "Grab or KTM Komuter to Batu Caves, 35 to 45 minutes depending on traffic.",
       "<b>Batu Caves and the Lord Murugan statue.</b> Free entry, 272 painted steps. Cover shoulders and knees, sarongs available at the entrance if you need one. Keep your bag zipped and away from the macaques.",
       "<b>Dark Cave</b>, partway down the steps, easy to miss on purpose since most people do. A guided 45 minute eco-tour through an unlit conservation cave, bats, cave crickets, the rare Batu Caves trapdoor spider, and a stretch where every torch goes dark. Reviewers rate it above the main cave. Around RM35, hard hat and torch included, groups only, no booking needed but worth checking it's running that day."
     ]},
-    {time:"1:00 PM to 3:30 PM &nbsp;\u00b7&nbsp; Back to Brickfields", items:[
-      "Grab back down, about 35 to 40 minutes.",
+    {time:"12:45 PM to 3:15 PM &nbsp;\u00b7&nbsp; Brickfields and Thean Hou", items:[
+      "Grab to Brickfields, about 35 to 40 minutes.",
       "<b>Lunch at Annalakshmi.</b> Pure vegetarian South Indian, pay-as-you-feel: you eat, then decide what it was worth. A KL institution, and a proper meal rather than a stopgap. Closed Mondays.",
       "<b>Thean Hou Temple</b>, about 10 minutes away. Six-tier Chinese temple on a hill, free entry, red lanterns, real skyline views, and usually uncrowded."
     ], alt:["Alt lunch: Vege Chat, Brickfields. Punjabi, pure veg, no egg, a more ordinary sit-down meal."]},
-    {time:"4:00 PM to 5:00 PM &nbsp;\u00b7&nbsp; Check in properly", items:[
+    {time:"3:45 PM to 5:00 PM &nbsp;\u00b7&nbsp; Check in properly", items:[
       "Grab back to citizenM, about 20 minutes. Your room should be ready now. Rest for an hour, you've been up since a red-eye flight."
     ]},
     {time:"5:30 PM to 7:00 PM &nbsp;\u00b7&nbsp; KLCC", items:[
@@ -274,17 +273,17 @@ const PANELS = [
       "<b>Dinner: Blue Boy Vegetarian Food Centre</b>, Jalan Tong Shin, a few minutes from Jalan Alor. Fully vegetarian hawker centre, so it's street food without the guesswork. Famous for its vegan char kway teow."
     ], alt:["Alt dinner: Simple Life Vegetarian, Bukit Bintang. Sit-down, air-conditioned, Malaysian vegetarian classics."]}
   ],
-  headsUp:"You're on the move most of the day, roughly 2.5 hours of total Grab time. Annalakshmi is closed Mondays, fine since today is Tuesday. Do Jalan Alor before Blue Boy so you're not eating dinner too late."
+  headsUp:"Breakfast now happens at the hotel, so Brickfields is one visit today, for lunch only, not two. Annalakshmi is closed Mondays, fine since today is Tuesday. Do Jalan Alor before Blue Boy so you're not eating dinner too late."
 },
 {id:"day2", kind:"day", nav:"Day 2 \u00b7 KL", num:2, title:"Kuala Lumpur", dateLabel:"Wed, 23 Sep", sub:"One line west to east: colonial core, Chinatown, KL Tower, back to Bukit Bintang.",
   area:"A clean single sweep. Merdeka Square and Central Market are two minutes apart, Chinatown is next door, KL Tower is on the way back toward Bukit Bintang. Almost no backtracking today.",
   blocks:[
     {time:"9:30 AM to 12:30 PM &nbsp;\u00b7&nbsp; Old colonial core", items:[
-      "Grab to Merdeka Square, about 15 minutes.",
-      "<b>Merdeka Square.</b> The Sultan Abdul Samad Building with its copper domes is the backdrop. Best light in the morning, free.",
-      "Walk to <b>Masjid Jamek</b> at the river confluence where KL was founded, and the <b>River of Life</b> waterfront beside it, five minutes on foot.",
-      "<b>Central Market</b>, five minutes further. Art-deco heritage building, batik, crafts, a cool break from the sun.",
-      "Petaling Street (Chinatown) is immediately next door."
+      "<b>MRT, not Grab, for this one.</b> Bukit Bintang station (Kajang Line) is a short walk from citizenM. Ride direct to Pasar Seni, no transfer, about 5 minutes and RM1 to 2, against 15 minutes and far more through morning traffic in a Grab.",
+      "Pasar Seni station exits right by <b>Central Market.</b> Art-deco heritage building, batik, crafts, a cool break from the sun.",
+      "Walk to <b>Merdeka Square</b>, about 10 minutes. The Sultan Abdul Samad Building with its copper domes is the backdrop. Best light in the morning, free.",
+      "<b>Masjid Jamek</b> at the river confluence where KL was founded, and the <b>River of Life</b> waterfront beside it, five minutes on foot from the square.",
+      "Petaling Street (Chinatown) is a few minutes back toward Pasar Seni."
     ]},
     {time:"12:45 PM to 2:00 PM &nbsp;\u00b7&nbsp; Lunch, Chinatown", items:[
       "<b>The Hungry Tapir.</b> Fully plant-based, set in a restored heritage shophouse, Western and fusion leaning. Two minutes from Central Market."
@@ -560,7 +559,8 @@ function practicalHTML(){
   <ul class="plain">
     <li>Currency is the Malaysian Ringgit (MYR). Withdraw or exchange some cash at KLIA on Day 1, street stalls and several vegetarian restaurants (Evergreen among them) are cash only.</li>
     <li>Get an eSIM before you fly (Airalo, Holafly) or a physical prepaid SIM at KLIA arrivals (Hotlink, Digi, Maxis counters). You'll want data working from the moment you land, for Grab and maps.</li>
-    <li>Grab is the default way to get around in all three cities. Install it and add a payment method before you go.</li>
+    <li>Grab is the default way to get around in all three cities, and the right call whenever you're carrying luggage, out after dark, or the route needs more than one change. Install it and add a payment method before you go.</li>
+    <li>In KL specifically, take the train instead of Grab whenever there's a direct line with no transfer and the stop is close to where you're going, it's dramatically cheaper (RM1 to 3 versus RM10 to 30+) and skips traffic entirely. Get a Touch 'n Go card at any station, it works across LRT, MRT and Monorail (not KLIA Ekspres, that's ticketed separately). Day 2's Bukit Bintang to Pasar Seni hop is the clearest example, direct MRT, five minutes. Batu Caves also has its own KTM Komuter station, cheaper than Grab, but those trains only run every 30 to 60 minutes, so on a day with a full schedule Grab stays the more reliable choice there.</li>
   </ul>
   <h3 class="sec">Practical odds and ends</h3>
   <ul class="plain">
@@ -572,8 +572,17 @@ function practicalHTML(){
   </ul>
   <div class="callout food"><b class="lbl">Ordering vegetarian</b>
   Malaysian dishes that look meat-free often hide shrimp paste (belacan), fish sauce, or meat stock. Useful line: <b>&ldquo;Saya vegetarian. Tanpa daging, ikan, telur, belacan, sos ikan.&rdquo;</b> (I am vegetarian. No meat, fish, egg, shrimp paste, fish sauce.) A shop displaying a red-and-yellow sign with the Chinese character for &lsquo;zhai&rsquo; is fully meat-free and the safest street-level bet.</div>
-  <div class="callout area"><b class="lbl">Weather</b>
-  September is a wetter month on the west coast, expect short, heavy afternoon downpours rather than all-day rain. Mornings are usually clearest, which is why outdoor sites are front-loaded through this itinerary. Carry a light rain layer.</div>
+  <h3 class="sec">Climate and precautions, by place</h3>
+  <p class="page-sub" style="margin-bottom:14px;">Hotels, Grabs and the trains are all air-conditioned, so this is really about the hours you're outdoors each day.</p>
+  <ul class="plain">
+    <li><b>Kuala Lumpur (Days 1&ndash;3, 8):</b> Highs around 31&ndash;32&deg;C, lows near 23&ndash;24&deg;C, humidity 75&ndash;85%. September sees short, sharp afternoon thunderstorms rather than all-day rain, mornings are usually clear. UV is high; you'll feel it most on the exposed Batu Caves steps and the walk up to KL Tower. Sunscreen reapplied through the day, and pace the 272 steps rather than rushing them, especially on Day 1 when you're jet-lagged.</li>
+    <li><b>Penang (Days 3&ndash;5):</b> A touch milder, 26&ndash;31&deg;C, humidity around 80%, with a sea breeze off the Strait of Malacca that takes the edge off the heat. Short showers are common but rarely wreck a full day. One specific note: Penang Hill's summit is genuinely several degrees cooler and can feel breezy, worth a light layer for that one stop even though the rest of the day is hot.</li>
+    <li><b>Langkawi (Days 5&ndash;8):</b> 26&ndash;30&deg;C, similar humidity, and this is where the west coast's September monsoon shows up most, the island sees some of its heaviest rain of the year this month. The Kilim mangrove boat tour and the climb to Seven Wells both have zero shade, so sunscreen and a hat matter more here than anywhere else on the trip. Carry a dry pouch for your phone on the boat, afternoon squalls can arrive with little warning.</li>
+  </ul>
+  <div class="callout warn"><b class="lbl">Heat, everywhere</b>
+  Being this close to the equator means real UV exposure even under cloud. Drink water on a schedule rather than waiting to feel thirsty, especially on the physically active days, Batu Caves, Skytrex, Seven Wells, Kilim. Dizziness, unusual fatigue or nausea are early signs of heat exhaustion, if any of that hits, stop, find shade, and rehydrate rather than pushing through.</div>
+  <div class="callout area"><b class="lbl">Rain gear</b>
+  A light rain layer or compact umbrella covers all three cities. Outdoor sites are already front-loaded to the morning through this itinerary for exactly this reason, mornings are consistently the clearest part of the day.</div>
   <div class="callout warn"><b class="lbl">Breakfast</b>
   Self-catered from your own instant noodles for most of the trip, rooms have kettles. Day 1 is the one exception: you land at 6 AM and your bags go straight into hotel storage before check-in, so you won't have access to them, or a kettle, until the afternoon. That day has an actual breakfast stop built in for exactly this reason.</div>
   `;
